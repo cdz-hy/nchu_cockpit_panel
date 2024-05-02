@@ -1,0 +1,68 @@
+# Project: FinalTest
+# Makefile created by Red Panda C++ 2.26.2249
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = FinalTest_private.res
+OBJ      = main.o DrawRMI.o DrawAI.o xplaneConnect.o DrawScrew.o DrawAirspeed.o DrawAlt.o DrawBackground.o DrawRCDI.o DrawCompass.o DrawLight.o DrawFrame.o $(RES)
+LINKOBJ  = main.o DrawRMI.o DrawAI.o xplaneConnect.o DrawScrew.o DrawAirspeed.o DrawAlt.o DrawBackground.o DrawRCDI.o DrawCompass.o DrawLight.o DrawFrame.o FinalTest_private.res
+CLEANOBJ  =  main.o DrawRMI.o DrawAI.o xplaneConnect.o DrawScrew.o DrawAirspeed.o DrawAlt.o DrawBackground.o DrawRCDI.o DrawCompass.o DrawLight.o DrawFrame.o  FinalTest_private.res FinalTest.exe
+LIBS     =  -s -lgraphics64 -lws2_32 -mwindows -lgraphics -luuid -lmsimg32 -lgdi32 -limm32 -lole32 -loleaut32 -lwinmm -lgdiplus   -static
+INCS     =  
+CXXINCS  =  
+BIN      = FinalTest.exe
+CXXFLAGS = $(CXXINCS)  -O2 -pipe -lgraphics64
+CFLAGS   = $(INCS)  -O2 -pipe -lgraphics64
+RM       = del /q /f
+WINDRESFLAGS  = 
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	-$(RM) $(CLEANOBJ) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp DrawAirspeed.h DrawFrame.h DrawAI.h DrawCompass.h DrawScrew.h DrawAlt.h DrawBackground.h xplaneConnect.h DrawRCDI.h G_variable.h DrawLight.h DrawRMI.h
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawRMI.o: DrawRMI.cpp DrawAirspeed.h DrawFrame.h DrawAI.h DrawCompass.h DrawScrew.h DrawAlt.h DrawBackground.h xplaneConnect.h DrawRCDI.h G_variable.h DrawLight.h DrawRMI.h
+	$(CPP) -c DrawRMI.cpp -o DrawRMI.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawAI.o: DrawAI.cpp DrawAirspeed.h DrawFrame.h DrawAI.h DrawCompass.h DrawScrew.h DrawAlt.h DrawBackground.h xplaneConnect.h DrawRCDI.h G_variable.h DrawLight.h DrawRMI.h
+	$(CPP) -c DrawAI.cpp -o DrawAI.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+xplaneConnect.o: xplaneConnect.c DrawAirspeed.h DrawFrame.h DrawAI.h DrawCompass.h DrawScrew.h DrawAlt.h DrawBackground.h xplaneConnect.h DrawRCDI.h G_variable.h DrawLight.h DrawRMI.h
+	$(CC) -c xplaneConnect.c -o xplaneConnect.o $(CFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawScrew.o: DrawScrew.cpp DrawAirspeed.h DrawFrame.h DrawAI.h DrawCompass.h DrawScrew.h DrawAlt.h DrawBackground.h xplaneConnect.h DrawRCDI.h G_variable.h DrawLight.h DrawRMI.h
+	$(CPP) -c DrawScrew.cpp -o DrawScrew.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawAirspeed.o: DrawAirspeed.cpp DrawAirspeed.h DrawFrame.h DrawAI.h DrawCompass.h DrawScrew.h DrawAlt.h DrawBackground.h xplaneConnect.h DrawRCDI.h G_variable.h DrawLight.h DrawRMI.h
+	$(CPP) -c DrawAirspeed.cpp -o DrawAirspeed.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawAlt.o: DrawAlt.cpp DrawAirspeed.h DrawFrame.h DrawAI.h DrawCompass.h DrawScrew.h DrawAlt.h DrawBackground.h xplaneConnect.h DrawRCDI.h G_variable.h DrawLight.h DrawRMI.h
+	$(CPP) -c DrawAlt.cpp -o DrawAlt.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawBackground.o: DrawBackground.cpp DrawAirspeed.h DrawFrame.h DrawAI.h DrawCompass.h DrawScrew.h DrawAlt.h DrawBackground.h xplaneConnect.h DrawRCDI.h G_variable.h DrawLight.h DrawRMI.h
+	$(CPP) -c DrawBackground.cpp -o DrawBackground.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawRCDI.o: DrawRCDI.cpp DrawAirspeed.h DrawFrame.h DrawAI.h DrawCompass.h DrawScrew.h DrawAlt.h DrawBackground.h xplaneConnect.h DrawRCDI.h G_variable.h DrawLight.h DrawRMI.h
+	$(CPP) -c DrawRCDI.cpp -o DrawRCDI.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawCompass.o: DrawCompass.cpp DrawAirspeed.h DrawFrame.h DrawAI.h DrawCompass.h DrawScrew.h DrawAlt.h DrawBackground.h xplaneConnect.h DrawRCDI.h G_variable.h DrawLight.h DrawRMI.h
+	$(CPP) -c DrawCompass.cpp -o DrawCompass.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawLight.o: DrawLight.cpp DrawAirspeed.h DrawFrame.h DrawAI.h DrawCompass.h DrawScrew.h DrawAlt.h DrawBackground.h xplaneConnect.h DrawRCDI.h G_variable.h DrawLight.h DrawRMI.h
+	$(CPP) -c DrawLight.cpp -o DrawLight.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawFrame.o: DrawFrame.cpp DrawAirspeed.h DrawFrame.h DrawAI.h DrawCompass.h DrawScrew.h DrawAlt.h DrawBackground.h xplaneConnect.h DrawRCDI.h G_variable.h DrawLight.h DrawRMI.h
+	$(CPP) -c DrawFrame.cpp -o DrawFrame.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+FinalTest_private.res: FinalTest_private.rc 
+	$(WINDRES) -i FinalTest_private.rc --input-format=rc -o FinalTest_private.res -O coff $(WINDRESFLAGS) 
+
