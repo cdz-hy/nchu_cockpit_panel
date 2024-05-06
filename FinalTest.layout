@@ -1,0 +1,180 @@
+[
+    {
+        "caretX": 7,
+        "caretY": 471,
+        "filename": "D:/小熊猫C++/Program/FinalTest/main.cpp",
+        "focused": true,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 0,
+        "topLine": 217
+    },
+    {
+        "caretX": 1,
+        "caretY": 213,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawRMI.cpp",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 6,
+        "topLine": 178
+    },
+    {
+        "caretX": 77,
+        "caretY": 977,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawAI.cpp",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 27,
+        "order": 3,
+        "topLine": 962
+    },
+    {
+        "caretX": 64,
+        "caretY": 3,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawCompass.h",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 1
+    },
+    {
+        "caretX": 1,
+        "caretY": 1,
+        "filename": "D:/小熊猫C++/Program/FinalTest/xplaneConnect.c",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 1
+    },
+    {
+        "caretX": 1,
+        "caretY": 1,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawScrew.h",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 1
+    },
+    {
+        "caretX": 1,
+        "caretY": 1,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawScrew.cpp",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 7
+    },
+    {
+        "caretX": 1,
+        "caretY": 1,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawAlt.h",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 1
+    },
+    {
+        "caretX": 69,
+        "caretY": 3,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawBackground.h",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 1
+    },
+    {
+        "caretX": 1,
+        "caretY": 1,
+        "filename": "D:/小熊猫C++/Program/FinalTest/xplaneConnect.h",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 1
+    },
+    {
+        "caretX": 2,
+        "caretY": 132,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawAirspeed.cpp",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 36
+    },
+    {
+        "caretX": 35,
+        "caretY": 1234,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawAlt.cpp",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 2,
+        "topLine": 1203
+    },
+    {
+        "caretX": 26,
+        "caretY": 25,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawBackground.cpp",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 1
+    },
+    {
+        "caretX": 34,
+        "caretY": 23,
+        "filename": "D:/小熊猫C++/Program/FinalTest/G_variable.h",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 1,
+        "topLine": 7
+    },
+    {
+        "caretX": 86,
+        "caretY": 563,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawRCDI.cpp",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 475
+    },
+    {
+        "caretX": 1,
+        "caretY": 1,
+        "filename": "D:/小熊猫C++/Program/FinalTest/FinalTest.dev",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 124
+    },
+    {
+        "caretX": 2,
+        "caretY": 645,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawCompass.cpp",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 5,
+        "topLine": 609
+    },
+    {
+        "caretX": 1,
+        "caretY": 10,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawLight.cpp",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 4,
+        "topLine": 1
+    },
+    {
+        "caretX": 1,
+        "caretY": 1,
+        "filename": "D:/小熊猫C++/Program/FinalTest/DrawFrame.cpp",
+        "focused": false,
+        "isOpen": false,
+        "leftChar": 1,
+        "topLine": 1
+    }
+]
