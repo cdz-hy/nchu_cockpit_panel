@@ -7,7 +7,7 @@
 
 double bottenangle = 0;
 double bottenangle2 = 0;
-double triangles = 0;
+double triangles = 90;
 double compass_is_down = 0;
 int compass_mouse_x = 0;
 int compass_mouse_y = 0;
@@ -18,23 +18,9 @@ extern double compass_angle_original_data;
 extern double rotationangle;//整个表盘旋转
 double pointrotationangle = 0;
 double compass_temp_data1 = 0;
+extern double rotationangle;//正上方白色三角形对应的度数，注意，传输数据时要用90-传入的度数，如当前传入角度k=89，则rotationangle = 90 - k；
+extern double compass_angle_original_data;
 
-//画出表盘内框的线条和背景
-void draw_compassInnerframe(int compass_x, int compass_y, int compass_r) {
-	//打开抗锯齿
-	ege_enable_aa(true);
-	
-	//设置表盘内框背景颜色
-	setbkcolor(EGEARGB(0xff, 0x1b, 0x20, 0x25));
-	
-	//设置表盘内框线条的粗细颜色
-	setlinewidth(compass_r * 0.005);
-	setcolor(BLACK);
-	
-	//绘制表盘内框内外线条
-	ege_ellipse(compass_x - compass_r, compass_y - compass_r, 2 * compass_r, 2 * compass_r);
-	ege_ellipse(compass_x - 0.78 * compass_r, compass_y - 0.78 * compass_r, 1.56 * compass_r, 1.56 * compass_r);
-}
 
 //画出表盘下方两个旋钮
 void draw_downbotten(double rotationangle, int compass_x, int compass_y, int compass_r) {
@@ -445,7 +431,7 @@ void draw_toptriangle(int compass_x, int compass_y, int compass_r) {
 }
 
 //画出表盘的指针
-void draw_points(double rotationangle, int compass_x, int compass_y, int compass_r) {
+void draw_points(int compass_x, int compass_y, int compass_r) {
 	static int n = 0;
 	static int m = 1;
 	/*if (GetAsyncKeyState('M') & 0x8000) { // 检测 N 键是否被按下
@@ -465,36 +451,36 @@ void draw_points(double rotationangle, int compass_x, int compass_y, int compass
 	//三段指针
 	setlinewidth(compass_r * 0.015);
 	setcolor(WHITE);
-	ege_line((compass_r * 0.95) * sin((rotationangle + rotationangle) * PI / 180) + compass_x, (-compass_r * 0.95) * cos((rotationangle + rotationangle) * PI / 180) + compass_y, (compass_r * 0.45) * sin((rotationangle + rotationangle) * PI / 180) + compass_x, (-compass_r * 0.45) * cos((rotationangle + rotationangle) * PI / 180) + compass_y);
-	ege_line((compass_r * 0.4) * sin((rotationangle + rotationangle) * PI / 180) + compass_x + n * cos((rotationangle + rotationangle) * PI / 180), (-compass_r * 0.4) * cos((rotationangle + rotationangle) * PI / 180) + compass_y + n * sin(rotationangle * PI / 180), (-compass_r * 0.4) * sin((rotationangle + rotationangle) * PI / 180) + compass_x + n * cos((rotationangle + rotationangle) * PI / 180), (compass_r * 0.4) * cos((rotationangle + rotationangle) * PI / 180) + compass_y + n * sin((rotationangle + rotationangle) * PI / 180));
-	ege_line((-compass_r * 0.95) * sin((rotationangle + rotationangle) * PI / 180) + compass_x, (compass_r * 0.95) * cos((rotationangle + rotationangle) * PI / 180) + compass_y, (-compass_r * 0.45) * sin((rotationangle + rotationangle) * PI / 180) + compass_x, (compass_r * 0.45) * cos((rotationangle + rotationangle) * PI / 180) + compass_y);
+	ege_line((compass_r * 0.95) * sin((pointrotationangle + rotationangle) * PI / 180) + compass_x, (-compass_r * 0.95) * cos((pointrotationangle + rotationangle) * PI / 180) + compass_y, (compass_r * 0.45) * sin((pointrotationangle + rotationangle) * PI / 180) + compass_x, (-compass_r * 0.45) * cos((pointrotationangle + rotationangle) * PI / 180) + compass_y);
+	ege_line((compass_r * 0.4) * sin((pointrotationangle + rotationangle) * PI / 180) + compass_x + n * cos((pointrotationangle + rotationangle) * PI / 180), (-compass_r * 0.4) * cos((pointrotationangle + rotationangle) * PI / 180) + compass_y + n * sin((rotationangle + pointrotationangle) * PI / 180), (-compass_r * 0.4) * sin((pointrotationangle + rotationangle) * PI / 180) + compass_x + n * cos((pointrotationangle + rotationangle) * PI / 180), (compass_r * 0.4) * cos((pointrotationangle + rotationangle) * PI / 180) + compass_y + n * sin((pointrotationangle + rotationangle) * PI / 180));
+	ege_line((-compass_r * 0.95) * sin((pointrotationangle + rotationangle) * PI / 180) + compass_x, (compass_r * 0.95) * cos((pointrotationangle + rotationangle) * PI / 180) + compass_y, (-compass_r * 0.45) * sin((pointrotationangle + rotationangle) * PI / 180) + compass_x, (compass_r * 0.45) * cos((pointrotationangle + rotationangle) * PI / 180) + compass_y);
 	
 	setlinewidth(1.5);
 	ege_point triangle1[4];
-	triangle1[0].x = 0.05 * compass_r * cos((rotationangle + rotationangle) * PI / 180) - (-0.3 * compass_r) * sin((rotationangle + rotationangle) * PI / 180) + compass_x + n * cos((rotationangle + rotationangle) * PI / 180);
-	triangle1[0].y = (-0.3 * compass_r) * cos((rotationangle + rotationangle) * PI / 180) + 0.05 * compass_r * sin((rotationangle + rotationangle) * PI / 180) + compass_y + n * sin((rotationangle + rotationangle) * PI / 180);
+	triangle1[0].x = 0.05 * compass_r * cos((pointrotationangle + rotationangle) * PI / 180) - (-0.3 * compass_r) * sin((pointrotationangle + rotationangle) * PI / 180) + compass_x + n * cos((pointrotationangle + rotationangle) * PI / 180);
+	triangle1[0].y = (-0.3 * compass_r) * cos((pointrotationangle + rotationangle) * PI / 180) + 0.05 * compass_r * sin((pointrotationangle + rotationangle) * PI / 180) + compass_y + n * sin((pointrotationangle + rotationangle) * PI / 180);
 	
-	triangle1[1].x = 0.38 * compass_r * sin((rotationangle + rotationangle) * PI / 180) + compass_x + n * cos((rotationangle + rotationangle) * PI / 180);
-	triangle1[1].y = (-compass_r * 0.38) * cos((rotationangle + rotationangle) * PI / 180) + compass_y + n * sin((rotationangle + rotationangle) * PI / 180);
+	triangle1[1].x = 0.38 * compass_r * sin((pointrotationangle + rotationangle) * PI / 180) + compass_x + n * cos((pointrotationangle + rotationangle) * PI / 180);
+	triangle1[1].y = (-compass_r * 0.38) * cos((pointrotationangle + rotationangle) * PI / 180) + compass_y + n * sin((pointrotationangle + rotationangle) * PI / 180);
 	
-	triangle1[2].x = (-0.05 * compass_r) * cos((rotationangle + rotationangle) * PI / 180) - (-0.3 * compass_r) * sin((rotationangle + rotationangle) * PI / 180) + compass_x + n * cos((rotationangle + rotationangle) * PI / 180);
-	triangle1[2].y = (-0.3 * compass_r) * cos((rotationangle + rotationangle) * PI / 180) - 0.05 * compass_r * sin((rotationangle + rotationangle) * PI / 180) + compass_y + n * sin((rotationangle + rotationangle) * PI / 180);
+	triangle1[2].x = (-0.05 * compass_r) * cos((pointrotationangle + rotationangle) * PI / 180) - (-0.3 * compass_r) * sin((pointrotationangle + rotationangle) * PI / 180) + compass_x + n * cos((pointrotationangle + rotationangle) * PI / 180);
+	triangle1[2].y = (-0.3 * compass_r) * cos((pointrotationangle + rotationangle) * PI / 180) - 0.05 * compass_r * sin((pointrotationangle + rotationangle) * PI / 180) + compass_y + n * sin((pointrotationangle + rotationangle) * PI / 180);
 	
-	triangle1[3].x = 0.05 * compass_r * cos((rotationangle + rotationangle) * PI / 180) - (-0.3 * compass_r) * sin((rotationangle + rotationangle) * PI / 180) + compass_x + n * cos((rotationangle + rotationangle) * PI / 180);
-	triangle1[3].y = (-0.3 * compass_r) * cos((rotationangle + rotationangle) * PI / 180) + 0.05 * compass_r * sin((rotationangle + rotationangle) * PI / 180) + compass_y + n * sin((rotationangle + rotationangle) * PI / 180);
+	triangle1[3].x = 0.05 * compass_r * cos((pointrotationangle + rotationangle) * PI / 180) - (-0.3 * compass_r) * sin((pointrotationangle + rotationangle) * PI / 180) + compass_x + n * cos((pointrotationangle + rotationangle) * PI / 180);
+	triangle1[3].y = (-0.3 * compass_r) * cos((pointrotationangle + rotationangle) * PI / 180) + 0.05 * compass_r * sin((pointrotationangle + rotationangle) * PI / 180) + compass_y + n * sin((pointrotationangle + rotationangle) * PI / 180);
 	
 	ege_drawpoly(4, triangle1);
 	
 	setfillcolor(WHITE);
 	ege_point triangle2[3];
-	triangle2[0].x = 0.05 * compass_r * cos((rotationangle + rotationangle) * PI / 180) - (0.3 * compass_r) * sin((rotationangle + rotationangle) * PI / 180) + compass_x + n * cos((rotationangle + rotationangle) * PI / 180);
-	triangle2[0].y = (0.3 * compass_r) * cos((rotationangle + rotationangle) * PI / 180) + 0.05 * compass_r * sin((rotationangle + rotationangle) * PI / 180) + compass_y + n * sin((rotationangle + rotationangle) * PI / 180);
+	triangle2[0].x = 0.05 * compass_r * cos((pointrotationangle + rotationangle) * PI / 180) - (0.3 * compass_r) * sin((pointrotationangle + rotationangle) * PI / 180) + compass_x + n * cos((pointrotationangle + rotationangle) * PI / 180);
+	triangle2[0].y = (0.3 * compass_r) * cos((pointrotationangle + rotationangle) * PI / 180) + 0.05 * compass_r * sin((pointrotationangle + rotationangle) * PI / 180) + compass_y + n * sin((pointrotationangle + rotationangle) * PI / 180);
 	
-	triangle2[1].x = -0.38 * compass_r * sin((rotationangle + rotationangle) * PI / 180) + compass_x + n * cos((rotationangle + rotationangle) * PI / 180);
-	triangle2[1].y = (compass_r * 0.38) * cos((rotationangle + rotationangle) * PI / 180) + compass_y + n * sin((rotationangle + rotationangle) * PI / 180);
+	triangle2[1].x = -0.38 * compass_r * sin((pointrotationangle + rotationangle) * PI / 180) + compass_x + n * cos((pointrotationangle + rotationangle) * PI / 180);
+	triangle2[1].y = (compass_r * 0.38) * cos((pointrotationangle + rotationangle) * PI / 180) + compass_y + n * sin((pointrotationangle + rotationangle) * PI / 180);
 	
-	triangle2[2].x = (-0.05 * compass_r) * cos((rotationangle + rotationangle) * PI / 180) - (0.3 * compass_r) * sin((rotationangle + rotationangle) * PI / 180) + compass_x + n * cos((rotationangle + rotationangle) * PI / 180);
-	triangle2[2].y = (0.3 * compass_r) * cos((rotationangle + rotationangle) * PI / 180) - 0.05 * compass_r * sin((rotationangle + rotationangle) * PI / 180) + compass_y + n * sin((rotationangle + rotationangle) * PI / 180);
+	triangle2[2].x = (-0.05 * compass_r) * cos((pointrotationangle + rotationangle) * PI / 180) - (0.3 * compass_r) * sin((pointrotationangle + rotationangle) * PI / 180) + compass_x + n * cos((pointrotationangle + rotationangle) * PI / 180);
+	triangle2[2].y = (0.3 * compass_r) * cos((pointrotationangle + rotationangle) * PI / 180) - 0.05 * compass_r * sin((pointrotationangle + rotationangle) * PI / 180) + compass_y + n * sin((pointrotationangle + rotationangle) * PI / 180);
 	ege_fillpoly(3, triangle2);
 }
 
@@ -616,13 +602,13 @@ void draw_compassOuterframe(int compass_x, int compass_y, int compass_r) {
 }
 
 //画出表盘第二部分中的五个小圆（实际五个小圆是五个刻度）
-void draw_compassCricle(double rotationangle, int compass_x, int compass_y, int compass_r) {
+void draw_compassCricle(int compass_x, int compass_y, int compass_r) {
 	setfillcolor(WHITE);
 	ege_fillellipse(compass_x - compass_r * 0.025, compass_y - compass_r * 0.025, compass_r * 0.05, compass_r * 0.05);
-	ege_fillellipse(compass_x + compass_r * 0.3 * cos(-(rotationangle + rotationangle) * PI / 180) - compass_r * 0.025, compass_y - compass_r * 0.025 - compass_r * 0.3 * sin(-(rotationangle + rotationangle) * PI / 180), compass_r * 0.05, compass_r * 0.05);
-	ege_fillellipse(compass_x - compass_r * 0.3 * cos(-(rotationangle + rotationangle) * PI / 180) - compass_r * 0.025, compass_y - compass_r * 0.025 + compass_r * 0.3 * sin(-(rotationangle + rotationangle) * PI / 180), compass_r * 0.05, compass_r * 0.05);
-	ege_fillellipse(compass_x + compass_r * 0.6 * cos(-(rotationangle + rotationangle) * PI / 180) - compass_r * 0.025, compass_y - compass_r * 0.025 - compass_r * 0.6 * sin(-(rotationangle + rotationangle) * PI / 180), compass_r * 0.05, compass_r * 0.05);
-	ege_fillellipse(compass_x - compass_r * 0.6 * cos(-(rotationangle + rotationangle) * PI / 180) - compass_r * 0.025, compass_y - compass_r * 0.025 + compass_r * 0.6 * sin(-(rotationangle + rotationangle) * PI / 180), compass_r * 0.05, compass_r * 0.05);
+	ege_fillellipse(compass_x + compass_r * 0.3 * cos(-(pointrotationangle + rotationangle) * PI / 180) - compass_r * 0.025, compass_y - compass_r * 0.025 - compass_r * 0.3 * sin(-(pointrotationangle + rotationangle) * PI / 180), compass_r * 0.05, compass_r * 0.05);
+	ege_fillellipse(compass_x - compass_r * 0.3 * cos(-(pointrotationangle + rotationangle) * PI / 180) - compass_r * 0.025, compass_y - compass_r * 0.025 + compass_r * 0.3 * sin(-(pointrotationangle + rotationangle) * PI / 180), compass_r * 0.05, compass_r * 0.05);
+	ege_fillellipse(compass_x + compass_r * 0.6 * cos(-(pointrotationangle + rotationangle) * PI / 180) - compass_r * 0.025, compass_y - compass_r * 0.025 - compass_r * 0.6 * sin(-(pointrotationangle + rotationangle) * PI / 180), compass_r * 0.05, compass_r * 0.05);
+	ege_fillellipse(compass_x - compass_r * 0.6 * cos(-(pointrotationangle + rotationangle) * PI / 180) - compass_r * 0.025, compass_y - compass_r * 0.025 + compass_r * 0.6 * sin(-(pointrotationangle + rotationangle) * PI / 180), compass_r * 0.05, compass_r * 0.05);
 }
 
 //画出中心的飞机图案
@@ -634,14 +620,14 @@ void draw_compassPlane(int compass_x, int compass_y, int compass_r) {
 }
 
 //画出三个表盘之间的分割线
-void draw_compassLine(double rotationangle, int compass_x, int compass_y, int compass_r) {
+void draw_compassLine(int compass_x, int compass_y, int compass_r) {
 	//设置线条颜色和粗细
 	setcolor(BLACK);
 	setlinewidth(compass_r * 0.015);
 	
 	//绘制表盘中三个部分的分割线
-	ege_line((-compass_r * 0.85 * 0.78 * cos(-(rotationangle + rotationangle) * PI / 180)) + (-compass_r * 0.25 * sin(-(rotationangle + rotationangle) * PI / 180)) + compass_x, (-compass_r * 0.25 * cos(-(rotationangle + rotationangle) * PI / 180)) - (-compass_r * 0.85 * 0.78 * sin(-(rotationangle + rotationangle) * PI / 180)) + compass_y, (compass_r * 0.85 * 0.78 * cos(-(rotationangle + rotationangle) * PI / 180)) - (compass_r * 0.25 * sin(-(rotationangle + rotationangle) * PI / 180)) + compass_x, (-compass_r * 0.25 * cos(-(rotationangle + rotationangle) * PI / 180)) + (-compass_r * 0.85 * 0.78 * sin(-(rotationangle + rotationangle) * PI / 180)) + compass_y);
-	ege_line((-compass_r * 0.85 * 0.78 * cos(-(rotationangle + rotationangle) * PI / 180)) + (compass_r * 0.25 * sin(-(rotationangle + rotationangle) * PI / 180)) + compass_x, (compass_r * 0.25 * cos(-(rotationangle + rotationangle) * PI / 180)) - (-compass_r * 0.85 * 0.78 * sin(-(rotationangle + rotationangle) * PI / 180)) + compass_y, (compass_r * 0.85 * 0.78 * cos(-(rotationangle + rotationangle) * PI / 180)) + (compass_r * 0.25 * sin(-(rotationangle + rotationangle) * PI / 180)) + compass_x, (compass_r * 0.25 * cos(-(rotationangle + rotationangle) * PI / 180)) - (compass_r * 0.85 * 0.78 * sin(-(rotationangle + rotationangle) * PI / 180)) + compass_y);
+	ege_line((-compass_r * 0.85 * 0.78 * cos(-(pointrotationangle + rotationangle) * PI / 180)) + (-compass_r * 0.25 * sin(-(pointrotationangle + rotationangle) * PI / 180)) + compass_x, (-compass_r * 0.25 * cos(-(pointrotationangle + rotationangle) * PI / 180)) - (-compass_r * 0.85 * 0.78 * sin(-(pointrotationangle + rotationangle) * PI / 180)) + compass_y, (compass_r * 0.85 * 0.78 * cos(-(pointrotationangle + rotationangle) * PI / 180)) - (compass_r * 0.25 * sin(-(pointrotationangle + rotationangle) * PI / 180)) + compass_x, (-compass_r * 0.25 * cos(-(pointrotationangle + rotationangle) * PI / 180)) + (-compass_r * 0.85 * 0.78 * sin(-(pointrotationangle + rotationangle) * PI / 180)) + compass_y);
+	ege_line((-compass_r * 0.85 * 0.78 * cos(-(pointrotationangle + rotationangle) * PI / 180)) + (compass_r * 0.25 * sin(-(pointrotationangle + rotationangle) * PI / 180)) + compass_x, (compass_r * 0.25 * cos(-(pointrotationangle + rotationangle) * PI / 180)) - (-compass_r * 0.85 * 0.78 * sin(-(pointrotationangle + rotationangle) * PI / 180)) + compass_y, (compass_r * 0.85 * 0.78 * cos(-(pointrotationangle + rotationangle) * PI / 180)) + (compass_r * 0.25 * sin(-(pointrotationangle + rotationangle) * PI / 180)) + compass_x, (compass_r * 0.25 * cos(-(pointrotationangle + rotationangle) * PI / 180)) - (compass_r * 0.85 * 0.78 * sin(-(pointrotationangle + rotationangle) * PI / 180)) + compass_y);
 }
 
 //画出表盘内框的线条
@@ -729,7 +715,7 @@ void draw_innerTexts(double rotationangle, int compass_x, int compass_y, int com
 }
 
 //画出刻度
-void draw_scale(double rotationangle, int compass_x, int compass_y, int compass_r) {
+void draw_scale(int compass_x, int compass_y, int compass_r) {
 	for (double i = -rotationangle; i < 360.0 - rotationangle; i += 5.0)
 	{
 		//设置线条颜色和粗细
@@ -772,19 +758,19 @@ void refresh(int compass_x, int compass_y, int compass_r) {
 	draw_toptriangle(compass_x, compass_y, compass_r);
 	
 	//画内表盘的刻度
-	draw_scale(rotationangle, compass_x, compass_y, compass_r);
+	draw_scale(compass_x, compass_y, compass_r);
 	
 	//画内表盘第二部分上的五个白色的小圆
-	draw_compassCricle(pointrotationangle, compass_x, compass_y, compass_r);
+	draw_compassCricle(compass_x, compass_y, compass_r);
 	
 	//画内表盘中心的飞机图标
 	draw_compassPlane(compass_x, compass_y, compass_r);
 	
 	//画指针
-	draw_points(pointrotationangle, compass_x, compass_y, compass_r);
+	draw_points(compass_x, compass_y, compass_r);
 	
 	//画内表盘三个部分之间的分割线
-	draw_compassLine(pointrotationangle, compass_x, compass_y, compass_r);
+	draw_compassLine(compass_x, compass_y, compass_r);
 	
 	//画内表盘内框的线条
 	draw_compassFrameLine(compass_x, compass_y, compass_r);
@@ -797,14 +783,111 @@ void refresh(int compass_x, int compass_y, int compass_r) {
 	
 	//画表盘下方的两个旋钮
 	draw_downbotten(rotationangle, compass_x, compass_y, compass_r);
+	
+	/*if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
+	if (rotationangle < 360) {
+	rotationangle += 0.1;
+	}
+	else {
+	rotationangle = 0.1;
+	}
+	}*/
 }
 
+//void draw_screw(double screw_x, double screw_y, double screw_r, double angle) {
+//
+//	ege_setpattern_lineargradient(
+//		screw_x - screw_r, screw_y - screw_r, EGEARGB(200, 255, 255, 255),
+//		screw_x + screw_r, screw_y + screw_r, EGEARGB(0xff, 0x1b, 0x20, 0x25)
+//	);
+//	ege_fillellipse(
+//		screw_x - screw_r * 0.97, screw_y - screw_r * 1.03, 2 * screw_r * 1, 2 * screw_r * 1
+//	);
+//
+//
+//	ege_setpattern_lineargradient(
+//		screw_x - screw_r, screw_y - screw_r, EGEARGB(200, 0, 0, 0),
+//		screw_x + screw_r, screw_y + screw_r, EGEARGB(0xff, 0x1b, 0x20, 0x25)
+//	);
+//	ege_fillellipse(
+//		screw_x - screw_r * 1.03, screw_y - screw_r * 0.97, 2 * screw_r * 1, 2 * screw_r * 1
+//	);
+//
+//	// 倒数第二层
+//	ege_setpattern_lineargradient(
+//		screw_x - screw_r, screw_y - screw_r, EGEARGB(0XFF, 0X1F, 0X23, 0X2C),
+//		screw_x + screw_r, screw_y + screw_r, EGEARGB(0XFF, 0X17, 0X1A, 0X24)
+//	);
+//	ege_fillellipse(
+//		screw_x - screw_r, screw_y - screw_r, 2 * screw_r, 2 * screw_r
+//	);
+//
+//	// 绘制中间螺丝
+//	angle = -angle;
+//	angle = angle * PI / 180;
+//
+//	double x01 = -screw_r * 0.7, y01 = -screw_r * 0.2;
+//	double x02 = -screw_r * 0.7, y02 = +screw_r * 0.2;
+//	double x03 = +screw_r * 0.7, y03 = +screw_r * 0.2;
+//	double x04 = +screw_r * 0.7, y04 = -screw_r * 0.2;
+//
+//	ege_setpattern_lineargradient(
+//		x01 * cos(angle) - y01 * sin(angle) + screw_x, x01 * sin(angle) + y01 * cos(angle) + screw_y, BLACK,
+//		x03 * cos(angle) - y03 * sin(angle) + screw_x, x03 * sin(angle) + y03 * cos(angle) + screw_y, BLACK
+//	);
+//	ege_point polypoints1[4] = {
+//		{x01 * cos(angle) - y01 * sin(angle) + screw_x,x01 * sin(angle) + y01 * cos(angle) + screw_y},// 左上
+//		{x02 * cos(angle) - y02 * sin(angle) + screw_x,x02 * sin(angle) + y02 * cos(angle) + screw_y},// 右上
+//		{x03 * cos(angle) - y03 * sin(angle) + screw_x,x03 * sin(angle) + y03 * cos(angle) + screw_y},// 右下
+//		{x04 * cos(angle) - y04 * sin(angle) + screw_x,x04 * sin(angle) + y04 * cos(angle) + screw_y} // 左下
+//	};
+//	ege_fillpoly(4, polypoints1);
+//
+//
+//	double x11 = -screw_r * 0.2, y11 = -screw_r * 0.7;
+//	double x12 = -screw_r * 0.2, y12 = +screw_r * 0.7;
+//	double x13 = +screw_r * 0.2, y13 = +screw_r * 0.7;
+//	double x14 = +screw_r * 0.2, y14 = -screw_r * 0.7;
+//
+//	ege_setpattern_lineargradient(
+//		x11 * cos(angle) - y11 * sin(angle) + screw_x, x11 * sin(angle) + y11 * cos(angle) + screw_y, BLACK,
+//		x13 * cos(angle) - y13 * sin(angle) + screw_x, x13 * sin(angle) + y13 * cos(angle) + screw_y, BLACK
+//	);
+//	ege_point polypoints2[4] = {
+//		{x11 * cos(angle) - y11 * sin(angle) + screw_x,x11 * sin(angle) + y11 * cos(angle) + screw_y},// 左上
+//		{x12 * cos(angle) - y12 * sin(angle) + screw_x,x12 * sin(angle) + y12 * cos(angle) + screw_y},// 右上
+//		{x13 * cos(angle) - y13 * sin(angle) + screw_x,x13 * sin(angle) + y13 * cos(angle) + screw_y},// 右下
+//		{x14 * cos(angle) - y14 * sin(angle) + screw_x,x14 * sin(angle) + y14 * cos(angle) + screw_y} // 左下
+//	};
+//	ege_fillpoly(4, polypoints2);
+//
+//
+//	// 螺丝中间菱形
+//	double x21 = -screw_r * 0.53, y21 = 0;
+//	double x22 = 0, y22 = +screw_r * 0.53;
+//	double x23 = +screw_r * 0.53, y23 = 0;
+//	double x24 = 0, y24 = -screw_r * 0.53;
+//	setcolor(BLACK);
+//	ege_setpattern_lineargradient(
+//		x21 * cos(angle) - y21 * sin(angle) + screw_x, x21 * sin(angle) + y21 * cos(angle) + screw_y, BLACK,
+//		x23 * cos(angle) - y23 * sin(angle) + screw_x, x23 * sin(angle) + y23 * cos(angle) + screw_y, BLACK
+//	);
+//	ege_point polypoints5[5] = {
+//		{x21 * cos(angle) - y21 * sin(angle) + screw_x,x21 * sin(angle) + y21 * cos(angle) + screw_y},// 上
+//		{x22 * cos(angle) - y22 * sin(angle) + screw_x,x22 * sin(angle) + y22 * cos(angle) + screw_y},// 右
+//		{x23 * cos(angle) - y23 * sin(angle) + screw_x,x23 * sin(angle) + y23 * cos(angle) + screw_y},// 下
+//		{x24 * cos(angle) - y24 * sin(angle) + screw_x,x24 * sin(angle) + y24 * cos(angle) + screw_y},//左
+//		{x21 * cos(angle) - y21 * sin(angle) + screw_x,x21 * sin(angle) + y21 * cos(angle) + screw_y}
+//	};
+//	ege_fillpoly(5, polypoints5);
+//
+//	ege_setpattern_none();
+//}
 
 void draw_compass(int compass_x, int compass_y, int compass_r)
 {
-	draw_screw(compass_x - 1.02 * compass_r / 2, compass_y - 1.03 * compass_r / 2, compass_r * 1 / 3 * 0.08, 45);
-	draw_screw(compass_x - 1.02 * compass_r / 2, compass_y + 1.03 * compass_r / 2, compass_r * 1 / 3 * 0.08, 45);
-	draw_screw(compass_x + 1.02 * compass_r / 2, compass_y - 1.03 * compass_r / 2, compass_r * 1 / 3 * 0.08, 45);
-	draw_screw(compass_x + 1.02 * compass_r / 2, compass_y + 1.03 * compass_r / 2, compass_r * 1 / 3 * 0.08, 45);
 	refresh(compass_x, compass_y, compass_r * 1 / 3);
+	//draw_screw(compass_x * 0.25, compass_y * 0.15, compass_r * 1 / 3 * 0.05, 45);
+	//draw_screw(compass_x * 1.77, compass_y * 0.15, compass_r * 1 / 3 * 0.05, 45);
+	//draw_screw(compass_x * 1.79, compass_y * 1.85, compass_r * 1 / 3 * 0.05, 45);
 }
