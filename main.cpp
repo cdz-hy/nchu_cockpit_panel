@@ -160,15 +160,6 @@ int main() {
 	double click_time = -1;
 
 
-//	//操作改变大小(尝试用)
-//	unit_side *= 0.8;
-//	center_x += 0 * unit_side_static;
-//	show = 0;
-
-//	InstallMouseHook(getHWnd());
-
-//	XPCSocket sock = aopenUDP("192.168.43.219", 49001, 49001);
-
 	//初始IP和端口
 //	XPCSocket sock = aopenUDP(IP_address, UDP_port, UDP_port);
 
@@ -188,17 +179,57 @@ int main() {
 			const int rows = 18;
 			float data[rows][9] = {0};
 			if (readDATA(sock, data, rows) && data[1][1] > 0) {
-//			pitchAngle = data[1][1] * PI / 180;
-//			rollAngle = -data[1][2] * PI / 180;
 
-//			sideSlipAngle = -data[2][8] * PI / 4 / 16;
-
-//			pointrotationangle = data[8][1];
-
-//			airSpeed = data[14][1];
-//
-//			verticalRate = data[14][2];
-
+//				for(int i = 0; i ++; i < rows){
+//					
+//					if((int)data[i][0] == 17){
+//						pitchAngle = data[i][1];
+//						rollAngle = data[i][2];
+//					}
+//					else if((int)data[i][0] == 18){
+//						sideSlipAngle = -data[i][8] * PI / 4 / 16;
+//					}
+//					else if((int)data[i][0] == 20){
+//						altitude = data[i][6];
+//					}
+//					else if((int)data[i][0] == 7){
+//						INGH_data = data[i][1];
+//						MILLIBARS_data = INGH_data * 33.8639;
+//					}
+//					else if((int)data[i][0] == 3){
+//						airSpeed = data[i][1];
+//					}
+//					else if((int)data[i][0] == 4){
+//						vmo_speed = data[i][1] * 10;
+//					}
+//					
+//				}
+				
+//				for(int i = 0; i ++; i < rows){
+//					
+//					if(fabs(data[i][0] - 17) <= 0.001){
+//						pitchAngle = data[i][1];
+//						rollAngle = data[i][2];
+//					}
+//					else if(fabs(data[i][0] - 18) <= 0.001){
+//						sideSlipAngle = -data[i][8] * PI / 4 / 16;
+//					}
+//					else if(fabs(data[i][0] - 20) <= 0.001){
+//						altitude = data[i][6];
+//					}
+//					else if(fabs(data[i][0] - 7) <= 0.001){
+//						INGH_data = data[i][1];
+//						MILLIBARS_data = INGH_data * 33.8639;
+//					}
+//					else if(fabs(data[i][0] - 3) <= 0.001){
+//						airSpeed = data[i][1];
+//					}
+//					else if(fabs(data[i][0] - 4) <= 0.001){
+//						vmo_speed = data[i][1] * 10;
+//					}
+//					
+//				}
+				
 				pitchAngle = data[3][1] * PI / 180;
 				rollAngle = -data[3][2] * PI / 180;
 
@@ -211,11 +242,11 @@ int main() {
 
 				altitude = data[6][6];
 
-				INGH_data = data[16][1];
+				INGH_data = data[2][1];
 
 				MILLIBARS_data = INGH_data * 33.8639;
 				
-				rotationangle = data[3][3];
+				rotationangle = 90 - data[3][4];
 				compass_angle_original_data = data[10][1];
 			}
 			else{
