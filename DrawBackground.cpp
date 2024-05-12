@@ -15,24 +15,23 @@ extern int alert_autoPilot;
 void draw_back(double center_x, double center_y, double unitLength) {
 	setcolor(BLACK);
 	setlinewidth(unitLength / 10);
-	ege_line(0, center_y - unitLength * 14, center_x - unitLength * 5, center_y - unitLength * 16);
+	ege_line(center_x - unitLength * 24, center_y - unitLength * 14, center_x - unitLength * 5, center_y - unitLength * 16);
 	ege_line(center_x + unitLength * 5, center_y - unitLength * 16, center_x - unitLength * 5, center_y - unitLength * 16);
 	
-	ege_line(center_x + unitLength * 5, center_y - unitLength * 16, center_x * 2, 0 - unitLength / 20 * 10);
+	ege_line(center_x + unitLength * 5, center_y - unitLength * 16, center_x  + unitLength * 24, center_y - unitLength * 20);
 	
-	ege_line(center_x + unitLength * 5, center_y * 2, center_x + unitLength * 5, center_y - unitLength * 16);
-	ege_line(center_x - unitLength * 5, center_y * 2, center_x - unitLength * 5, center_y - unitLength * 16);
+	ege_line(center_x + unitLength * 5, center_y + unitLength * 24, center_x + unitLength * 5, center_y - unitLength * 16);
+	ege_line(center_x - unitLength * 5, center_y + unitLength * 24, center_x - unitLength * 5, center_y - unitLength * 16);
 	setcolor(EGEARGB(0X20, 0XFF, 0XFF, 0XFF));
 	setlinewidth(unitLength / 20);
 	
-	ege_line(0, center_y - unitLength * 14 - unitLength / 20, center_x - unitLength * 5, center_y - unitLength * 16 - unitLength / 20);
+	ege_line(center_x - unitLength * 24, center_y - unitLength * 14 - unitLength / 20, center_x - unitLength * 5, center_y - unitLength * 16 - unitLength / 20);
 	ege_line(center_x + unitLength * 5, center_y - unitLength * 16 - unitLength / 20, center_x - unitLength * 5, center_y - unitLength * 16 - unitLength / 20);
 	
-	ege_line(center_x + unitLength * 5, center_y - unitLength * 16 - unitLength / 20, center_x * 2, 0 - unitLength / 20 * 11);
+	ege_line(center_x + unitLength * 5, center_y - unitLength * 16 - unitLength / 20, center_x + unitLength * 24, center_y - unitLength * 20);
 	
-	ege_line(center_x + unitLength * 5 + unitLength / 20, center_y * 2, center_x + unitLength * 5 + unitLength / 20, center_y - unitLength * 16);
-	ege_line(center_x - unitLength * 5 - unitLength / 20, center_y * 2, center_x - unitLength * 5 - unitLength / 20, center_y - unitLength * 16);
-	
+	ege_line(center_x + unitLength * 5 + unitLength / 20, center_y + unitLength * 24, center_x + unitLength * 5 + unitLength / 20, center_y - unitLength * 16);
+	ege_line(center_x - unitLength * 5 - unitLength / 20, center_y + unitLength * 24, center_x - unitLength * 5 - unitLength / 20, center_y - unitLength * 16);
 	
 	//阴影
 	setfillcolor(BLACK);
@@ -131,62 +130,62 @@ void draw_back(double center_x, double center_y, double unitLength) {
 	
 	int center_pointNums_top = 25;
 	ege_point center_ploypoints_top[25] = {
-		{center_x - unitLength * 3.9, center_y - unitLength * 13.7 - unitLength / 20 * 4},{center_x - unitLength * 3.8, center_y - unitLength * 14.1 - unitLength / 20 * 4},
-		{center_x - unitLength * 3.7, center_y - unitLength * 14.2 - unitLength / 20 * 4},{center_x - unitLength * 3.5, center_y - unitLength * 14.3 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.9, center_y - unitLength * 12.7 - unitLength / 20 * 4},{center_x - unitLength * 3.8, center_y - unitLength * 13.1 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.7, center_y - unitLength * 13.2 - unitLength / 20 * 4},{center_x - unitLength * 3.5, center_y - unitLength * 13.3 - unitLength / 20 * 4},
 		
-		{center_x + unitLength * 3.1, center_y - unitLength * 14.3 - unitLength / 20 * 4},{center_x + unitLength * 3.1, center_y - unitLength * 14.3 - unitLength / 20 * 4},
-		{center_x + unitLength * 3.1, center_y - unitLength * 14.3 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.1, center_y - unitLength * 13.3 - unitLength / 20 * 4},{center_x + unitLength * 3.1, center_y - unitLength * 13.3 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.1, center_y - unitLength * 13.3 - unitLength / 20 * 4},
 		
-		{center_x + unitLength * 3.3, center_y - unitLength * 14.2 - unitLength / 20 * 4},{center_x + unitLength * 3.4, center_y - unitLength * 14.1 - unitLength / 20 * 4},
-		{center_x + unitLength * 3.5, center_y - unitLength * 13.7 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.3, center_y - unitLength * 13.2 - unitLength / 20 * 4},{center_x + unitLength * 3.4, center_y - unitLength * 13.1 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.5, center_y - unitLength * 12.7 - unitLength / 20 * 4},
 		
-		{center_x + unitLength * 3.5, center_y - unitLength * 13.7 - unitLength / 20 * 4},{center_x + unitLength * 3.5, center_y - unitLength * 13.7 - unitLength / 20 * 4},
-		{center_x + unitLength * 3.5, center_y - unitLength * 13.7 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.5, center_y - unitLength * 12.7 - unitLength / 20 * 4},{center_x + unitLength * 3.5, center_y - unitLength * 12.7 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.5, center_y - unitLength * 12.7 - unitLength / 20 * 4},
 		
-		{center_x + unitLength * 3.4, center_y - unitLength * 13.3 - unitLength / 20 * 4},{center_x + unitLength * 3.3, center_y - unitLength * 13.2 - unitLength / 20 * 4},
-		{center_x + unitLength * 3.1, center_y - unitLength * 13.1 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.4, center_y - unitLength * 12.3 - unitLength / 20 * 4},{center_x + unitLength * 3.3, center_y - unitLength * 12.2 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.1, center_y - unitLength * 12.1 - unitLength / 20 * 4},
 		
-		{center_x - unitLength * 3.5, center_y - unitLength * 13.1 - unitLength / 20 * 4},{center_x - unitLength * 3.5, center_y - unitLength * 13.1 - unitLength / 20 * 4},
-		{center_x - unitLength * 3.5, center_y - unitLength * 13.1 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.5, center_y - unitLength * 12.1 - unitLength / 20 * 4},{center_x - unitLength * 3.5, center_y - unitLength * 12.1 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.5, center_y - unitLength * 12.1 - unitLength / 20 * 4},
 		
-		{center_x - unitLength * 3.7, center_y - unitLength * 13.2 - unitLength / 20 * 4},{center_x - unitLength * 3.8, center_y - unitLength * 13.3 - unitLength / 20 * 4},
-		{center_x - unitLength * 3.9, center_y - unitLength * 13.7 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.7, center_y - unitLength * 12.2 - unitLength / 20 * 4},{center_x - unitLength * 3.8, center_y - unitLength * 12.3 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.9, center_y - unitLength * 12.7 - unitLength / 20 * 4},
 		
-		{center_x - unitLength * 3.9, center_y - unitLength * 13.7 - unitLength / 20 * 4},{center_x - unitLength * 3.9, center_y - unitLength * 13.7 - unitLength / 20 * 4},
-		{center_x - unitLength * 3.9, center_y - unitLength * 13.7 - unitLength / 20 * 4}
+		{center_x - unitLength * 3.9, center_y - unitLength * 12.7 - unitLength / 20 * 4},{center_x - unitLength * 3.9, center_y - unitLength * 12.7 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.9, center_y - unitLength * 12.7 - unitLength / 20 * 4}
 		
 	};
 	setfillcolor(EGEARGB(0XFF, 0X00, 0X00, 0X00));
 	ege_bezier(center_pointNums_top, center_ploypoints_top);
-	floodfill(center_x - unitLength * 1.8, center_y - unitLength * 14.2 - unitLength / 20 * 4, EGEARGB(0XFF, 0X00, 0X00, 0X00));
+	floodfill(center_x - unitLength * 1.8, center_y - unitLength * 13.2 - unitLength / 20 * 4, EGEARGB(0XFF, 0X00, 0X00, 0X00));
 	
 	
 	setcolor(EGEARGB(0XFF, 0X10, 0X10, 0X10));
 	int pointsNum_center = 13;
 	ege_point ploypoints_center[13] = {
-		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11},
-		{center_x + unitLength * 5 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 11},
-		{center_x + unitLength * 5 + unitLength / 20 * 2, center_y - unitLength * 11.5 - unitLength / 20 * 11},
-		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 12 - unitLength / 20 * 11},
+		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 9.5 - unitLength / 20 * 11},
+		{center_x + unitLength * 5 + unitLength / 20 * 2, center_y - unitLength * 10 - unitLength / 20 * 11},
+		{center_x + unitLength * 5 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11},
+		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 11},
 		
-		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 12 - unitLength / 20 * 11},
-		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 12 - unitLength / 20 * 11},
-		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 12 - unitLength / 20 * 11},
+		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 11},
+		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 11},
+		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 11},
 		
-		{center_x - unitLength * 5.2 + unitLength / 20 * 2, center_y - unitLength * 11.5 - unitLength / 20 * 11},
-		{center_x - unitLength * 5.2 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 11},
-		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11},
+		{center_x - unitLength * 5.2 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11},
+		{center_x - unitLength * 5.2 + unitLength / 20 * 2, center_y - unitLength * 10 - unitLength / 20 * 11},
+		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 9.5 - unitLength / 20 * 11},
 		
-		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11},
-		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11},
-		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11}
+		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 9.5 - unitLength / 20 * 11},
+		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 9.5 - unitLength / 20 * 11},
+		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 9.5 - unitLength / 20 * 11}
 		
 		
 	};
 	setfillcolor(EGEARGB(0XFF, 0X10, 0X10, 0X10));
 	
 	ege_bezier(pointsNum_center, ploypoints_center);
-	floodfill(center_x - unitLength * 3.2 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 11, EGEARGB(0XFF, 0X10, 0X10, 0X10));
+	floodfill(center_x - unitLength * 3.2 + unitLength / 20 * 2, center_y - unitLength * 10 - unitLength / 20 * 11, EGEARGB(0XFF, 0X10, 0X10, 0X10));
 	
 	
 	
@@ -259,22 +258,22 @@ void draw_back(double center_x, double center_y, double unitLength) {
 	setcolor(EGEARGB(0XFF, 0X00, 0X00, 0X00));
 	int pointsNum_center_1 = 13;
 	ege_point ploypoints_center_1[13] = {
-		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11},
-		{center_x + unitLength * 5 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 11},
-		{center_x + unitLength * 5 + unitLength / 20 * 2, center_y - unitLength * 11.5 - unitLength / 20 * 11},
-		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 12 - unitLength / 20 * 11},
+		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 9.5 - unitLength / 20 * 11},
+		{center_x + unitLength * 5 + unitLength / 20 * 2, center_y - unitLength * 10 - unitLength / 20 * 11},
+		{center_x + unitLength * 5 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11},
+		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 11},
 		
-		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 12 - unitLength / 20 * 11},
-		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 12 - unitLength / 20 * 11},
-		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 12 - unitLength / 20 * 11},
+		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 11},
+		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 11},
+		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 11},
 		
-		{center_x - unitLength * 5.2 + unitLength / 20 * 2, center_y - unitLength * 11.5 - unitLength / 20 * 11},
-		{center_x - unitLength * 5.2 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 11},
-		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11},
+		{center_x - unitLength * 5.2 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11},
+		{center_x - unitLength * 5.2 + unitLength / 20 * 2, center_y - unitLength * 10 - unitLength / 20 * 11},
+		{center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 9.5 - unitLength / 20 * 11},
 		
-		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11},
-		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11},
-		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 10.5 - unitLength / 20 * 11}
+		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 9.5 - unitLength / 20 * 11},
+		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 9.5 - unitLength / 20 * 11},
+		{center_x + unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 9.5 - unitLength / 20 * 11}
 		
 		
 	};
@@ -283,29 +282,29 @@ void draw_back(double center_x, double center_y, double unitLength) {
 	
 	int center_pointNums_top_1 = 25;
 	ege_point center_ploypoints_top_1[25] = {
-		{center_x - unitLength * 3.9, center_y - unitLength * 13.7 - unitLength / 20 * 4},{center_x - unitLength * 3.8, center_y - unitLength * 14.1 - unitLength / 20 * 4},
-		{center_x - unitLength * 3.7, center_y - unitLength * 14.2 - unitLength / 20 * 4},{center_x - unitLength * 3.5, center_y - unitLength * 14.3 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.9, center_y - unitLength * 12.7 - unitLength / 20 * 4},{center_x - unitLength * 3.8, center_y - unitLength * 13.1 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.7, center_y - unitLength * 13.2 - unitLength / 20 * 4},{center_x - unitLength * 3.5, center_y - unitLength * 13.3 - unitLength / 20 * 4},
 		
-		{center_x + unitLength * 3.1, center_y - unitLength * 14.3 - unitLength / 20 * 4},{center_x + unitLength * 3.1, center_y - unitLength * 14.3 - unitLength / 20 * 4},
-		{center_x + unitLength * 3.1, center_y - unitLength * 14.3 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.1, center_y - unitLength * 13.3 - unitLength / 20 * 4},{center_x + unitLength * 3.1, center_y - unitLength * 13.3 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.1, center_y - unitLength * 13.3 - unitLength / 20 * 4},
 		
-		{center_x + unitLength * 3.3, center_y - unitLength * 14.2 - unitLength / 20 * 4},{center_x + unitLength * 3.4, center_y - unitLength * 14.1 - unitLength / 20 * 4},
-		{center_x + unitLength * 3.5, center_y - unitLength * 13.7 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.3, center_y - unitLength * 13.2 - unitLength / 20 * 4},{center_x + unitLength * 3.4, center_y - unitLength * 13.1 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.5, center_y - unitLength * 12.7 - unitLength / 20 * 4},
 		
-		{center_x + unitLength * 3.5, center_y - unitLength * 13.7 - unitLength / 20 * 4},{center_x + unitLength * 3.5, center_y - unitLength * 13.7 - unitLength / 20 * 4},
-		{center_x + unitLength * 3.5, center_y - unitLength * 13.7 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.5, center_y - unitLength * 12.7 - unitLength / 20 * 4},{center_x + unitLength * 3.5, center_y - unitLength * 12.7 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.5, center_y - unitLength * 12.7 - unitLength / 20 * 4},
 		
-		{center_x + unitLength * 3.4, center_y - unitLength * 13.3 - unitLength / 20 * 4},{center_x + unitLength * 3.3, center_y - unitLength * 13.2 - unitLength / 20 * 4},
-		{center_x + unitLength * 3.1, center_y - unitLength * 13.1 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.4, center_y - unitLength * 12.3 - unitLength / 20 * 4},{center_x + unitLength * 3.3, center_y - unitLength * 12.2 - unitLength / 20 * 4},
+		{center_x + unitLength * 3.1, center_y - unitLength * 12.1 - unitLength / 20 * 4},
 		
-		{center_x - unitLength * 3.5, center_y - unitLength * 13.1 - unitLength / 20 * 4},{center_x - unitLength * 3.5, center_y - unitLength * 13.1 - unitLength / 20 * 4},
-		{center_x - unitLength * 3.5, center_y - unitLength * 13.1 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.5, center_y - unitLength * 12.1 - unitLength / 20 * 4},{center_x - unitLength * 3.5, center_y - unitLength * 12.1 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.5, center_y - unitLength * 12.1 - unitLength / 20 * 4},
 		
-		{center_x - unitLength * 3.7, center_y - unitLength * 13.2 - unitLength / 20 * 4},{center_x - unitLength * 3.8, center_y - unitLength * 13.3 - unitLength / 20 * 4},
-		{center_x - unitLength * 3.9, center_y - unitLength * 13.7 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.7, center_y - unitLength * 12.2 - unitLength / 20 * 4},{center_x - unitLength * 3.8, center_y - unitLength * 12.3 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.9, center_y - unitLength * 12.7 - unitLength / 20 * 4},
 		
-		{center_x - unitLength * 3.9, center_y - unitLength * 13.7 - unitLength / 20 * 4},{center_x - unitLength * 3.9, center_y - unitLength * 13.7 - unitLength / 20 * 4},
-		{center_x - unitLength * 3.9, center_y - unitLength * 13.7 - unitLength / 20 * 4}
+		{center_x - unitLength * 3.9, center_y - unitLength * 12.7 - unitLength / 20 * 4},{center_x - unitLength * 3.9, center_y - unitLength * 12.7 - unitLength / 20 * 4},
+		{center_x - unitLength * 3.9, center_y - unitLength * 12.7 - unitLength / 20 * 4}
 		
 	};
 	
@@ -313,25 +312,25 @@ void draw_back(double center_x, double center_y, double unitLength) {
 	
 	
 	setfillcolor(EGEARGB(0XFF, 0X32, 0X15, 0X04));
-	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 2, center_y - unitLength * 12 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
-	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 2.2 + unitLength * 2.16 / 2.2, center_y - unitLength * 12 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
-	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 2.4 + unitLength * 2.16 / 2.2 * 2, center_y - unitLength * 12 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
-	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 2.6 + unitLength * 2.16 / 2.2 * 3, center_y - unitLength * 12 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
-	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 2.8 + unitLength * 2.16 / 2.2 * 4, center_y - unitLength * 12 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
-	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 3 + unitLength * 2.16 / 2.2 * 5, center_y - unitLength * 12 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
-	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 3.2 + unitLength * 2.16 / 2.2 * 6, center_y - unitLength * 12 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
+	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
+	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 2.2 + unitLength * 2.16 / 2.2, center_y - unitLength * 11 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
+	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 2.4 + unitLength * 2.16 / 2.2 * 2, center_y - unitLength * 11 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
+	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 2.6 + unitLength * 2.16 / 2.2 * 3, center_y - unitLength * 11 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
+	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 2.8 + unitLength * 2.16 / 2.2 * 4, center_y - unitLength * 11 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
+	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 3 + unitLength * 2.16 / 2.2 * 5, center_y - unitLength * 11 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
+	ege_fillrect(center_x - unitLength * 3.6 + unitLength / 20 * 3.2 + unitLength * 2.16 / 2.2 * 6, center_y - unitLength * 11 - unitLength / 20 * 7, unitLength * 2.16 / 2.2, unitLength * 2.1 / 2);
 	
 	
 	setcolor(EGEARGB(0XFF, 0X4A, 0X51, 0X52));
 	setfont(unitLength * 0.55, unitLength * 0.18, "微软雅黑", 0, 0, unitLength, 0, 0, 0);
-	xyprintf(center_x - unitLength * 3 + unitLength / 20, center_y - unitLength * 11.7 - unitLength / 20 * 7, "MON");
-	xyprintf(center_x - unitLength * 3 + unitLength / 20, center_y - unitLength * 11.7, "PWR");
-	xyprintf(center_x - unitLength * 2 + unitLength / 20, center_y - unitLength * 11.7 - unitLength / 20 * 2, "HOG");
-	xyprintf(center_x - unitLength * 1 + unitLength / 20, center_y - unitLength * 11.7 - unitLength / 20 * 2, "PLLCH");
-	xyprintf(center_x + unitLength / 20 * 3, center_y - unitLength * 11.7 - unitLength / 20 * 2, "ROLL");
-	xyprintf(center_x + unitLength * 1 + unitLength / 20, center_y - unitLength * 11.7 - unitLength / 20 * 2, "GS");
-	xyprintf(center_x + unitLength * 2 + unitLength / 20, center_y - unitLength * 11.7 - unitLength / 20 * 2, "LGC");
-	xyprintf(center_x + unitLength * 3 + unitLength / 20, center_y - unitLength * 11.7 - unitLength / 20 * 2, "ALT");
+	xyprintf(center_x - unitLength * 3 + unitLength / 20, center_y - unitLength * 10.7 - unitLength / 20 * 7, "MON");
+	xyprintf(center_x - unitLength * 3 + unitLength / 20, center_y - unitLength * 10.7, "PWR");
+	xyprintf(center_x - unitLength * 2 + unitLength / 20, center_y - unitLength * 10.7 - unitLength / 20 * 2, "HOG");
+	xyprintf(center_x - unitLength * 1 + unitLength / 20, center_y - unitLength * 10.7 - unitLength / 20 * 2, "PLLCH");
+	xyprintf(center_x + unitLength / 20 * 3, center_y - unitLength * 10.7 - unitLength / 20 * 2, "ROLL");
+	xyprintf(center_x + unitLength * 1 + unitLength / 20, center_y - unitLength * 10.7 - unitLength / 20 * 2, "GS");
+	xyprintf(center_x + unitLength * 2 + unitLength / 20, center_y - unitLength * 10.7 - unitLength / 20 * 2, "LGC");
+	xyprintf(center_x + unitLength * 3 + unitLength / 20, center_y - unitLength * 10.7 - unitLength / 20 * 2, "ALT");
 	
 	
 	
@@ -339,19 +338,19 @@ void draw_back(double center_x, double center_y, double unitLength) {
 	draw_screw(center_x + unitLength * 8.7, center_y - unitLength * 9 - unitLength / 20 * 4, unitLength / 3, 0);
 	draw_screw(center_x + unitLength * 14, center_y - unitLength * 12.6 - unitLength / 20 * 4, unitLength / 3, 0);
 	draw_screw(center_x + unitLength * 14, center_y - unitLength * 9 - unitLength / 20 * 4, unitLength / 3, 0);
-	draw_screw(center_x - unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 12 + unitLength / 20 * 3, unitLength / 4, 0);
-	draw_screw(center_x - unitLength * 2.3 + unitLength / 20 * 3.2 + unitLength * 2.16 / 2.2 * 6, center_y - unitLength * 12 + unitLength / 20 * 3, unitLength / 4, 0);
+	draw_screw(center_x - unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 11 + unitLength / 20 * 3, unitLength / 4, 0);
+	draw_screw(center_x - unitLength * 2.3 + unitLength / 20 * 3.2 + unitLength * 2.16 / 2.2 * 6, center_y - unitLength * 11 + unitLength / 20 * 3, unitLength / 4, 0);
 	
 	
 	setfillcolor(EGEARGB(0XFF, 0X60, 0X60, 0X60));
-	ege_fillellipse(center_x - unitLength * 4.8 + unitLength / 20 * 3, center_y - unitLength * 12 - unitLength / 20 * 2, unitLength / 3, unitLength / 3);
-	ege_fillellipse(center_x + unitLength * 4.2 + unitLength / 20 * 3, center_y - unitLength * 12 - unitLength / 20 * 2, unitLength / 3, unitLength / 3);
+	ege_fillellipse(center_x - unitLength * 4.8 + unitLength / 20 * 3, center_y - unitLength * 11 - unitLength / 20 * 2, unitLength / 3, unitLength / 3);
+	ege_fillellipse(center_x + unitLength * 4.2 + unitLength / 20 * 3, center_y - unitLength * 11 - unitLength / 20 * 2, unitLength / 3, unitLength / 3);
 	
 	
 	
 	setfillcolor(EGEARGB(0XFF, 0X00, 0X00, 0X00));
-	ege_fillellipse(center_x - unitLength * 4.8 + unitLength / 20 * 2, center_y - unitLength * 12 - unitLength / 20, unitLength / 3, unitLength / 3);
-	ege_fillellipse(center_x + unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 12 - unitLength / 20, unitLength / 3, unitLength / 3);
+	ege_fillellipse(center_x - unitLength * 4.8 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20, unitLength / 3, unitLength / 3);
+	ege_fillellipse(center_x + unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20, unitLength / 3, unitLength / 3);
 	
 	
 	
@@ -415,7 +414,7 @@ void draw_back(double center_x, double center_y, double unitLength) {
 	
 	setcolor(EGEARGB(0XFF, 0X4A, 0X51, 0X52));
 	setfont(unitLength * 0.8, unitLength * 0.25, "微软雅黑", 0, 0, unitLength, 0, 0, 0);
-	xyprintf(center_x - unitLength * 0.2, center_y - unitLength * 13.8 - unitLength / 20 * 2, "INSTRUMENT COMPARATOR");
+	xyprintf(center_x - unitLength * 0.2, center_y - unitLength * 12.8 - unitLength / 20 * 2, "INSTRUMENT COMPARATOR");
 	xyprintf(center_x + unitLength * 11.3, center_y - unitLength * 15 - unitLength / 20 * 12, "APD");
 	xyprintf(center_x + unitLength * 10.3, center_y - unitLength * 15 + unitLength / 20 * 2, "F/D");
 	xyprintf(center_x + unitLength * 12.5, center_y - unitLength * 15 + unitLength / 20 * 2, "A/P");
@@ -446,5 +445,5 @@ void draw_back(double center_x, double center_y, double unitLength) {
 	}
 	
 	setfillcolor(EGEARGB(0X50, 0X60, 0X60, 0X60));
-	ege_fillrect(center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 12 - unitLength / 20 * 13, unitLength * 2.16 / 2.2 * 8.4, unitLength * 2.1 * 0.8);
+	ege_fillrect(center_x - unitLength * 4.2 + unitLength / 20 * 2, center_y - unitLength * 11 - unitLength / 20 * 13, unitLength * 2.16 / 2.2 * 8.4, unitLength * 2.1 * 0.8);
 }
