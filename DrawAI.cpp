@@ -705,6 +705,16 @@ void draw_attitude_indicator_background(double AI_x, double AI_y, double AI_r){
 	ege_setpattern_none();
 	
 	
+//	//光照效果
+//		//优化版
+//		//中间的两个矩形渐变模拟光效
+//	ege_setpattern_lineargradient(AI_x, AI_y, EGEARGB(G_light / 3,0xff,0x9b,0x4b), AI_x - (0.5 + 1.0 * G_light / 700) * AI_r, AI_y, EGEARGB(G_light / 7,0xff,0x60,0x36));
+//	ege_fillrect(AI_x - (0.5 + 1.0 * G_light / 700) * AI_r, AI_y - 1 * AI_r,(0.5 + 1.0 * G_light / 700)  * AI_r, 1.8 * AI_r);
+//	ege_setpattern_lineargradient(AI_x, AI_y, EGEARGB(G_light / 3,0xff,0x9b,0x4b), AI_x + (0.5 + 1.0 * G_light / 700) * AI_r, AI_y, EGEARGB(G_light / 7,0xff,0x60,0x36));
+//	ege_fillrect(AI_x , AI_y - 1 * AI_r,(0.5 + 1.0 * G_light / 700)  * AI_r, 1.8 * AI_r);
+//	ege_setpattern_none();
+	
+	
 	//绘制背景周围黑边
 	
 	ege_enable_aa(false);
@@ -946,7 +956,7 @@ void draw_slip_indicator(double AI_x, double AI_y, double AI_r){
 	
 	//整个指示仪的阴影
 	ege_point AI_points22{AI_x, AI_y + 1 * AI_r};
-	ege_setpattern_ellipsegradient(AI_points21, EGEARGB(0x00,0x00,0x00,0x0) , AI_x - 0.8 * AI_r, AI_y + 0.2 * AI_r ,1.6 * AI_r, 1.6 * AI_r, EGEARGB(0xff,0x00,0x00,0x00));
+	ege_setpattern_ellipsegradient(AI_points21, EGEARGB(0x00,0x00,0x00,0x00) , AI_x - 0.8 * AI_r, AI_y + 0.2 * AI_r ,1.6 * AI_r, 1.6 * AI_r, EGEARGB(0xff,0x00,0x00,0x00));
 	ege_point AI_points23[8] = {
 		{AI_x - 0.37 * AI_r, AI_y + 1.25 * AI_r},
 		{AI_x - 0.37 * AI_r, AI_y + 1.44 * AI_r},
@@ -968,23 +978,49 @@ void darw_AI_light(double AI_x, double AI_y, double AI_r){
 	
 	//光照效果
 	
-	ege_point point_tmp = {AI_x, AI_y};
-	ege_setpattern_ellipsegradient(point_tmp, EGEARGB(0x00,0x00,0x00,0x00), AI_x - 1.4 * AI_r, AI_y - 1.4 * AI_r, 2.8 * AI_r, 2.8 * AI_r, EGEARGB(G_light / 5,0xff,0x87,0x10));
-	ege_fillpie(AI_x - 1.25 * AI_r, AI_y - 1.4 * AI_r, 2.5 * AI_r, 2 * AI_r, -150, 120);
-	ege_fillpie(AI_x - 1.25 * AI_r, AI_y - 0.9 * AI_r, 2.5 * AI_r, 2 * AI_r, 60, 60);
-	ege_setpattern_ellipsegradient(point_tmp, EGEARGB(0x00,0x00,0x00,0x00), AI_x - 1.4 * AI_r, AI_y - 1.4 * AI_r, 2.8 * AI_r, 2.8 * AI_r, EGEARGB(G_light / 7,0xff,0x87,0x10));
-	ege_fillpie(AI_x - 1.25 * AI_r, AI_y - 1.4 * AI_r, 2.5 * AI_r, 2 * AI_r, -180, 180);
-	ege_fillpie(AI_x - 1.25 * AI_r, AI_y - 0.9 * AI_r, 2.5 * AI_r, 2 * AI_r, 30, 120);
-	
-//	ege_setpattern_lineargradient(AI_x, AI_y, EGEARGB(G_light / 5,0xff,0x87,0x10), AI_x - 1.2 * AI_r, AI_y, EGEARGB(0x00,0x00,0x00,0x00));
-//	ege_fillrect(AI_x - 0.8 * AI_r, AI_y - 1.1 * AI_r, 0.8 * AI_r, 2 * AI_r);
+//		//应付检查临时版
+//	ege_point point_tmp = {AI_x, AI_y};
+//	ege_setpattern_ellipsegradient(point_tmp, EGEARGB(0x00,0x00,0x00,0x00), AI_x - 1.4 * AI_r, AI_y - 1.4 * AI_r, 2.8 * AI_r, 2.8 * AI_r, EGEARGB(G_light / 5,0xff,0x87,0x10));
+//	ege_fillpie(AI_x - 1.25 * AI_r, AI_y - 1.4 * AI_r, 2.5 * AI_r, 2 * AI_r, -150, 120);
+//	ege_fillpie(AI_x - 1.25 * AI_r, AI_y - 0.9 * AI_r, 2.5 * AI_r, 2 * AI_r, 60, 60);
+//	ege_setpattern_ellipsegradient(point_tmp, EGEARGB(0x00,0x00,0x00,0x00), AI_x - 1.4 * AI_r, AI_y - 1.4 * AI_r, 2.8 * AI_r, 2.8 * AI_r, EGEARGB(G_light / 7,0xff,0x87,0x10));
+//	ege_fillpie(AI_x - 1.25 * AI_r, AI_y - 1.4 * AI_r, 2.5 * AI_r, 2 * AI_r, -180, 180);
+//	ege_fillpie(AI_x - 1.25 * AI_r, AI_y - 0.9 * AI_r, 2.5 * AI_r, 2 * AI_r, 30, 120);
 //	
-////	ege_setpattern_lineargradient(AI_x, AI_y, EGEARGB(G_light / 5,0xff,0x87,0x10), AI_x + 1.2 * AI_r, AI_y, EGEARGB(0x00,0x00,0x00,0x00));
-//	ege_fillrect(AI_x , AI_y - 1.1 * AI_r, 0.8 * AI_r, 2 * AI_r);
+////	ege_setpattern_lineargradient(AI_x, AI_y, EGEARGB(G_light / 5,0xff,0x87,0x10), AI_x - 1.2 * AI_r, AI_y, EGEARGB(0x00,0x00,0x00,0x00));
+////	ege_fillrect(AI_x - 0.8 * AI_r, AI_y - 1.1 * AI_r, 0.8 * AI_r, 2 * AI_r);
+////	
+//////	ege_setpattern_lineargradient(AI_x, AI_y, EGEARGB(G_light / 5,0xff,0x87,0x10), AI_x + 1.2 * AI_r, AI_y, EGEARGB(0x00,0x00,0x00,0x00));
+////	ege_fillrect(AI_x , AI_y - 1.1 * AI_r, 0.8 * AI_r, 2 * AI_r);
+////	ege_setpattern_none();
+//	
+//	ege_setpattern_ellipsegradient(point_tmp, EGEARGB(0x00,0x00,0x00,0x00), AI_x - AI_r, AI_y - AI_r, 2 * AI_r, 2 * AI_r, EGEARGB(G_light / 6,0xd9,0x6c,0x21)); // EGEARGB(G_light / 4,0xb5,0x5e,0x51)
+//	ege_fillellipse(AI_x - AI_r, AI_y - AI_r, 2 * AI_r, 2 * AI_r);	
 //	ege_setpattern_none();
 	
-	ege_setpattern_ellipsegradient(point_tmp, EGEARGB(0x00,0x00,0x00,0x00), AI_x - AI_r, AI_y - AI_r, 2 * AI_r, 2 * AI_r, EGEARGB(G_light / 6,0xd9,0x6c,0x21)); // EGEARGB(G_light / 4,0xb5,0x5e,0x51)
-	ege_fillellipse(AI_x - AI_r, AI_y - AI_r, 2 * AI_r, 2 * AI_r);	
+		//优化版
+		//上下的两个扇形渐变色模拟光效
+	ege_point point_tmp = {AI_x, AI_y};
+	ege_setpattern_ellipsegradient(point_tmp, EGEARGB(G_light / 6,0xff,0x9b,0x4b), AI_x - 1.4 * AI_r, AI_y - 1.4 * AI_r, 2.8 * AI_r, 2.8 * AI_r, EGEARGB(G_light / 5,0xff,0x60,0x36)); // EGEARGB(G_light / 4,0xb5,0x5e,0x51)
+//	ege_setpattern_lineargradient(AI_x, AI_y, EGEARGB(G_light / 5,0xff,0x9b,0x4b), AI_x - 1.4 * AI_r, AI_y, EGEARGB(G_light / 5,0xff,0x60,0x36));
+	ege_fillpie(AI_x - 1.4 * AI_r, AI_y - 1.4 * AI_r, 2.8 * AI_r, 2.8 * AI_r, -120 - G_light / 8 , 60 + G_light / 4);
+	ege_fillpie(AI_x - 1 * AI_r, AI_y - 1 * AI_r, 2 * AI_r, 2 * AI_r, 60 - G_light / 8 , 60 + G_light / 4);
+	ege_setpattern_none();
+		//中间的两个三角形渐变模拟光效
+	ege_setpattern_lineargradient(AI_x, AI_y, EGEARGB(G_light / 4,0xff,0x9b,0x4b), AI_x - (0.5 + 1.0 * G_light / 600) * AI_r, AI_y, EGEARGB(G_light / 10,0xff,0x60,0x36));
+	ege_point AI_points32[3] = {
+		{AI_x, AI_y},
+		{AI_x - sin(1.0 * (60 + G_light / 4) / 2 / 180 * PI) * AI_r, AI_y - cos(1.0 * (60 + G_light / 4) / 2 / 180 * PI) * AI_r},
+		{AI_x - sin(1.0 * (60 + G_light / 4) / 2 / 180 * PI) * AI_r, AI_y + cos(1.0 * (60 + G_light / 4) / 2 / 180 * PI) * AI_r},
+	};
+	ege_fillpoly(3, AI_points32);
+	ege_setpattern_lineargradient(AI_x, AI_y, EGEARGB(G_light / 4,0xff,0x9b,0x4b), AI_x + (0.5 + 1.0 * G_light / 600) * AI_r, AI_y, EGEARGB(G_light / 10,0xff,0x60,0x36));
+	ege_point AI_points33[3] = {
+		{AI_x, AI_y},
+		{AI_x + sin(1.0 * (60 + G_light / 4) / 2 / 180 * PI) * AI_r, AI_y - cos(1.0 * (60 + G_light / 4) / 2 / 180 * PI) * AI_r},
+		{AI_x + sin(1.0 * (60 + G_light / 4) / 2 / 180 * PI) * AI_r, AI_y + cos(1.0 * (60 + G_light / 4) / 2 / 180 * PI) * AI_r},
+	};
+	ege_fillpoly(3, AI_points33);
 	ege_setpattern_none();
 	
 }
