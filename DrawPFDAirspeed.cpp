@@ -15,9 +15,9 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	if (airSpeed <= 45) {
 		airSpeed = 45;
 	}
-	
-	double length = side / 96 * 67;
-	double width = length / 67 * 11.5;
+	side  = side / 96 * 67;
+	double length = side;
+	double width = side / 67 * 11.5;
 	
 	// 最底层灰色
 	setfillcolor(EGEARGB(0xff, 12, 14, 13));
