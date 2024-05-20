@@ -12,6 +12,10 @@ int num_scale2 = 0;
 
 void draw_PFD_airspeed(double center_x, double center_y, double side)
 {
+	if (airSpeed <= 45) {
+		airSpeed = 45;
+	}
+	
 	double width = side / 67 * 11.5;
 	double length = side * 1;
 	
