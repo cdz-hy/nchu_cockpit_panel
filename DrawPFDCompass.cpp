@@ -4,13 +4,13 @@
 
 extern double rotationangle;//罗盘上数字和刻度线旋转的角度
 extern double pointrotationangle;//罗盘指针旋转的角度
-int course = 60;//罗盘指定的航向
+extern int course;//罗盘指定的航向
 
 //画罗盘的框架
 void draw_compass_frame(double compass_x, double compass_y, double side)
 {
 	double compass_r = side * 30.5 / 96;//罗盘的半径
-	
+
 	ege_enable_aa(false);
 	setcolor(EGEARGB(0Xff, 0X12, 0X14, 0X13));//罗盘外框线的颜色
 	setlinewidth(2);//罗盘外框线的宽度
@@ -18,7 +18,7 @@ void draw_compass_frame(double compass_x, double compass_y, double side)
 	ege_line(compass_x - compass_r * sin(55 * PI / 180), compass_y - compass_r * cos(55 * PI / 180), compass_x + compass_r * sin(55 * PI / 180), compass_y - compass_r * cos(55 * PI / 180));//罗盘的直线部分
 	setfillcolor(EGEARGB(0Xff, 0X12, 0X14, 0X13));//罗盘内部填充颜色
 	floodfill(compass_x, compass_y - compass_r * cos(55 * PI / 180) - 10, EGEARGB(0Xff, 0X12, 0X14, 0X13));//填充罗盘内部
-	
+
 	ege_enable_aa(true);
 }
 
@@ -28,25 +28,25 @@ void draw_course_indication(double compass_x, double compass_y, double side)
 	double compass_r = side * 30.5 / 96;//罗盘的半径
 	setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));//设置线条颜色
 	setlinewidth(compass_r * 0.01);//设置线条宽度
-	
+
 	ege_point triangle[4];//点类型结构体保存三角形个点坐标
-	
+
 	//第一个点
 	triangle[0].x = compass_x;
 	triangle[0].y = compass_y - compass_r;
-	
+
 	//第二个点
 	triangle[1].x = compass_x - side * 2 / 96;
 	triangle[1].y = compass_y - compass_r - side * 3 / 96;
-	
+
 	//第三个点
 	triangle[2].x = compass_x + side * 2 / 96;
 	triangle[2].y = compass_y - compass_r - side * 3 / 96;
-	
+
 	//首尾相接，第一个点
 	triangle[3].x = compass_x;
 	triangle[3].y = compass_y - compass_r;
-	
+
 	ege_drawpoly(4, triangle);//画三角形，指示当前航向
 }
 
@@ -92,7 +92,7 @@ void draw_compass_text(double compass_x, double compass_y, double side)
 		double rad = textAngle * PI / 180.0;
 		double textPosX = compass_x + 0.9 * compass_r * sin(rad);
 		double textPosY = compass_y - 0.9 * compass_r * cos(rad);
-		
+
 		//设置文字的格式
 		LOGFONTW font;
 		setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));
@@ -117,7 +117,7 @@ void draw_compass_text(double compass_x, double compass_y, double side)
 }
 
 //画指针
-void draw_point(double compass_x, double compass_y, double side) {
+void draw_compass_point(double compass_x, double compass_y, double side) {
 	double compass_r = side * 30.5 / 96;//罗盘的半径
 	setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));//设置线条颜色
 	setlinewidth(compass_r * 0.01);//设置线条宽度
@@ -128,7 +128,7 @@ void draw_point(double compass_x, double compass_y, double side) {
 //画选定航向
 void draw_course(double compass_x, double compass_y, double side) {
 	double compass_r = side * 30.5 / 96;//罗盘的半径
-	
+
 	//设置文字的格式
 	LOGFONTW font;
 	setcolor(EGEARGB(0x99, 0xDE, 0x58, 0xC5));
@@ -138,11 +138,11 @@ void draw_course(double compass_x, double compass_y, double side) {
 	font.lfEscapement = 0;
 	font.lfWeight = 500;
 	setfont(&font);
-	
+
 	char strBuffer[64];
 	sprintf_s(strBuffer, "%03d", course);
 	ege_drawtext(strBuffer, compass_x - compass_r * 0.23, compass_y - compass_r * 0.63);
-	
+
 	//设置文字的格式
 	setcolor(EGEARGB(0x99, 0xDE, 0x58, 0xC5));
 	setfont(compass_r * 0.1, 0, "Leelawadee");
@@ -151,14 +151,14 @@ void draw_course(double compass_x, double compass_y, double side) {
 	font.lfEscapement = 0;
 	font.lfWeight = 500;
 	setfont(&font);
-	
+
 	ege_drawtext("H", compass_x - compass_r * 0.1, compass_y - compass_r * 0.625);
 }
 
 //画MAG
 void draw_MAG(double compass_x, double compass_y, double side) {
 	double compass_r = side * 30.5 / 96;//罗盘的半径
-	
+
 	//设置文字的格式
 	LOGFONTW font;
 	setcolor(GREEN);
@@ -169,7 +169,7 @@ void draw_MAG(double compass_x, double compass_y, double side) {
 	font.lfEscapement = 0;
 	font.lfWeight = 500;
 	setfont(&font);
-	
+
 	ege_drawtext("MAG", compass_x + compass_r * 0.35, compass_y - compass_r * 0.62);//画出MAG
 }
 
@@ -177,25 +177,16 @@ void draw_MAG(double compass_x, double compass_y, double side) {
 void draw_PFD_compass(double compass_x, double compass_y, double side)
 {
 	draw_compass_frame(compass_x, compass_y, side);
-	
+
 	draw_course_indication(compass_x, compass_y, side);
-	
+
 	draw_scale(compass_x, compass_y, side);
-	
-	draw_point(compass_x, compass_y, side);
-	
+
+	draw_compass_point(compass_x, compass_y, side);
+
 	draw_course(compass_x, compass_y, side);
-	
+
 	draw_MAG(compass_x, compass_y, side);
-	
+
 	draw_compass_text(compass_x, compass_y, side);
-	
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
-		if (rotationangle < 360) {
-			rotationangle += 0.1;
-		}
-		else {
-			rotationangle = 0;
-		}
-	}
 }
