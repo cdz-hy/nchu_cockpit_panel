@@ -2,10 +2,10 @@
 #include <math.h>
 #include<stdio.h>
 
-extern airSpeed = 0; 
-extern airSpeed_acceleration = 0;// 加上
-extern airSpeed_mach = 0;// 加上
-extern airSpeed_instruction = 0;// 加上 
+extern double airSpeed; 
+extern double airSpeed_acceleration;
+extern double airSpeed_mach;
+extern double airSpeed_instruction;
 
 int num_scale1 = 0;
 int num_scale2 = 0;
