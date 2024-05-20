@@ -16,8 +16,8 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		airSpeed = 45;
 	}
 	
-	double width = side / 67 * 11.5;
-	double length = side * 1;
+	double length = side / 96 * 67;
+	double width = length / 67 * 11.5;
 	
 	// 最底层灰色
 	setfillcolor(EGEARGB(0xff, 12, 14, 13));
@@ -345,7 +345,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		settextjustify(CENTER_TEXT, CENTER_TEXT);
 		setfont(side / 12, 0, "Consolas");
 		char str[100];
-		sprintf(str, "%g", airSpeed_mach);
+		sprintf(str, "%.3f", airSpeed_mach);
 		char str0[99];
 		int i;
 		for (i = 1; str[i] != '\0'; i++) {
