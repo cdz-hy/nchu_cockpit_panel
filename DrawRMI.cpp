@@ -7,6 +7,8 @@
 extern double angle;
 extern double RMI_point_angle_1;
 extern double RMI_point_angle_2;
+extern int RMI_change;//左按钮变化
+extern int RMI_change_1;//右按钮变化
 
 void draw_text(double RMI_x, double RMI_y, double RMI_side) {
 	for (int i = 0; i < 360; i += 30) {
@@ -48,6 +50,9 @@ void draw_RMI(double RMI_x, double RMI_y, double RMI_side) {
 	double lefttop_y = RMI_y - side2 / 2.0;
 	double R2 = side2 / 52.0 * 21;//表盘半径
 	double R1 = side2 / 52.0 * 22;//表盘阴影半径
+	
+	int x, y;
+	mousepos(&x, &y);
 	
 	setcolor(EGEARGB(0X4F, 0X00, 0X00, 0X00));
 	setlinewidth(5);
@@ -109,107 +114,221 @@ void draw_RMI(double RMI_x, double RMI_y, double RMI_side) {
 	
 	ege_enable_aa(false);
 	setcolor(BLACK);
-	
-	int left_pointsNum = 10;
-	ege_point left_ploypoints[10] = {
-		{lefttop_x - side2 / 26 + side2 / 52 * 2,lefttop_y + side2 - side2 / 26 * 3},
-		{lefttop_x - side2 / 26 + side2 / 52 * 5,lefttop_y + side2 - side2 / 52 * 2},
-		{lefttop_x - side2 / 26 + side2 / 52 * 9,lefttop_y + side2 },
-		{lefttop_x - side2 / 26 + side2 / 52 * 10,lefttop_y + side2 - side2 / 26 * 3 },
-		
-		{lefttop_x - side2 / 26 + side2 / 52 * 8,lefttop_y + side2 - side2 / 26 * 6},
-		{lefttop_x - side2 / 26 + side2 / 52 * 6,lefttop_y + side2 - side2 / 26 * 7},
-		{lefttop_x - side2 / 26 + side2 / 52 * 4,lefttop_y + side2 - side2 / 26 * 7},
-		
-		{lefttop_x - side2 / 26 + side2 / 52 * 1,lefttop_y + side2 - side2 / 26 * 5},
-		{lefttop_x - side2 / 26 + side2 / 52 * 3,lefttop_y + side2 - side2 / 26 * 3},
-		{lefttop_x - side2 / 26 + side2 / 52 * 2,lefttop_y + side2 - side2 / 26 * 3}
-		
-	};
-	ege_bezier(left_pointsNum, left_ploypoints);
-	setfillcolor(BLACK);
-	floodfill(lefttop_x - side2 / 26 + side2 / 52 * 3, lefttop_y + side2 - side2 / 52 * 7,BLACK);
-	
-	int right_pointsNum = 10;
-	ege_point right_ploypoints[10] = {
-		{lefttop_x -  side2 / 26 - side2 / 52 * 6 + side2,lefttop_y + side2 - side2 / 26 * 3},
-		{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 1 + side2,lefttop_y + side2 },
-		{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 5 + side2,lefttop_y + side2 - side2 / 52 * 2},
-		{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 8 + side2,lefttop_y + side2 - side2 / 26 * 3 },
-		
-		{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 8 + side2,lefttop_y + side2 - side2 / 26 * 3 },
-		{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 10 + side2,lefttop_y + side2 - side2 / 26 * 8 },
-		{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 7 },
-		
-		{lefttop_x - side2 / 26 - side2 / 52 * 8 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 7 },
-		{lefttop_x - side2 / 26 - side2 / 52 * 13 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 5 },
-		{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2,lefttop_y + side2 - side2 / 26 * 3},
-		
-	};
-	ege_bezier(right_pointsNum, right_ploypoints);
-	setfillcolor(BLACK);
-	floodfill(lefttop_x - side2 / 26 - side2 / 52 * 5 + side2, lefttop_y + side2 - side2 / 26 * 4 , BLACK);
+	if (RMI_change == 0) {
+		int left_pointsNum_1 = 10;
+		ege_point left_ploypoints_1[10] = {
+			{lefttop_x - side2 / 26 + side2 / 52 * 3,lefttop_y + side2 - side2 / 52 * 5},
+			{lefttop_x - side2 / 26 + side2 / 52 * 5,lefttop_y + side2 - side2 / 52 * 2},
+			{lefttop_x - side2 / 26 + side2 / 52 * 9,lefttop_y + side2 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 10,lefttop_y + side2 - side2 / 26 * 3 },
+			
+			{lefttop_x - side2 / 26 + side2 / 52 * 8,lefttop_y + side2 - side2 / 26 * 6},
+			{lefttop_x - side2 / 26 + side2 / 52 * 6,lefttop_y + side2 - side2 / 26 * 7},
+			{lefttop_x - side2 / 26 + side2 / 52 * 4,lefttop_y + side2 - side2 / 26 * 7},
+			
+			{lefttop_x - side2 / 26 + side2 / 52 * 1,lefttop_y + side2 - side2 / 26 * 5},
+			{lefttop_x - side2 / 26 + side2 / 52 * 2,lefttop_y + side2 - side2 / 26 * 3},
+			{lefttop_x - side2 / 26 + side2 / 52 * 3,lefttop_y + side2 - side2 / 52 * 5}
+			
+		};
+		ege_bezier(left_pointsNum_1, left_ploypoints_1);
+		setfillcolor(BLACK);
+		floodfill(lefttop_x - side2 / 26 + side2 / 52 * 3, lefttop_y + side2 - side2 / 52 * 7, BLACK);
+	}
+	else {
+		int left_pointNum_2 = 10;
+		ege_point left_ploypoints_2[10]{
+			{lefttop_x - side2 / 26 + side2 / 52 * 8,lefttop_y + side2 - side2 / 52 * 8},
+			{lefttop_x - side2 / 26 + side2 / 52 * 2,lefttop_y + side2 - side2 / 52 * 8 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 3,lefttop_y + side2 + side2 / 52 * 0 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 9,lefttop_y + side2 - side2 / 52 * 1 },
+			
+			{lefttop_x - side2 / 26 + side2 / 52 * 16,lefttop_y + side2 - side2 / 52 * 1 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 17,lefttop_y + side2 - side2 / 52 * 2 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 16,lefttop_y + side2 - side2 / 52 * 3 },
+			
+			{lefttop_x - side2 / 26 + side2 / 52 * 12,lefttop_y + side2 - side2 / 52 * 7 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 9,lefttop_y + side2 - side2 / 52 * 8 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 8,lefttop_y + side2 - side2 / 52 * 8}
+			
+			
+		};
+		ege_bezier(left_pointNum_2, left_ploypoints_2);
+		setfillcolor(BLACK);
+		floodfill(lefttop_x - side2 / 26 + side2 / 52 * 8, lefttop_y + side2 - side2 / 52 * 7, BLACK);
+	}
+	if (RMI_change_1 == 0) {
+		int right_pointsNum_1 = 10;
+		ege_point right_ploypoints_1[10] = {
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2,lefttop_y + side2 - side2 / 26 * 3},
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 1 + side2,lefttop_y + side2 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 5 + side2,lefttop_y + side2 - side2 / 52 * 2},
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 3 },
+			
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 3 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 10 + side2,lefttop_y + side2 - side2 / 26 * 8 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 7 },
+			
+			{lefttop_x - side2 / 26 - side2 / 52 * 8 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 7 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 13 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 5 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2,lefttop_y + side2 - side2 / 26 * 3}
+			
+		};
+		ege_bezier(right_pointsNum_1, right_ploypoints_1);
+		setfillcolor(BLACK);
+		floodfill(lefttop_x - side2 / 26 - side2 / 52 * 5 + side2, lefttop_y + side2 - side2 / 26 * 4, BLACK);
+	}
+	else {
+		int right_pointsNum_2 = 10;
+		ege_point right_ploypoints_2[10] = {
+			{lefttop_x - side2 / 26 - side2 / 52 * 2 + side2,lefttop_y + side2 - side2 / 52 * 1},
+			{lefttop_x - side2 / 26 - side2 / 52 * 2 + side2,lefttop_y + side2 - side2 / 52 * 1 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 2 + side2 / 52 * 4 + side2,lefttop_y + side2 - side2 / 52 * 5},
+			{lefttop_x - side2 / 26 - side2 / 52 * 4 + side2,lefttop_y + side2 - side2 / 52 * 7 },
+			
+			{lefttop_x - side2 / 26 - side2 / 52 * 4 + side2,lefttop_y + side2 - side2 / 52 * 7 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 10 + side2,lefttop_y + side2 - side2 / 52 * 7 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 13 + side2,lefttop_y + side2 - side2 / 52 * 2 },
+			
+			{lefttop_x - side2 / 26 - side2 / 52 * 13 + side2,lefttop_y + side2  },
+			{lefttop_x - side2 / 26 - side2 / 52 * 10 + side2,lefttop_y + side2 + side2 / 52 * 2 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 2 + side2,lefttop_y + side2 - side2 / 52 * 1 }
+			
+		};
+		ege_bezier(right_pointsNum_2, right_ploypoints_2);
+		setfillcolor(BLACK);
+		floodfill(lefttop_x - side2 / 26 - side2 / 52 * 2 + side2, lefttop_y + side2 - side2 / 52 * 2, BLACK);
+	}
 	ege_enable_aa(true);
 	setcolor(BLACK);
+	if (RMI_change == 0) {
+		int left_pointsNum_1_1 = 10;
+		ege_point left_ploypoints_1_1[10] = {
+			{lefttop_x - side2 / 26 + side2 / 52 * 3,lefttop_y + side2 - side2 / 52 * 5},
+			{lefttop_x - side2 / 26 + side2 / 52 * 5,lefttop_y + side2 - side2 / 52 * 2},
+			{lefttop_x - side2 / 26 + side2 / 52 * 9,lefttop_y + side2 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 10,lefttop_y + side2 - side2 / 26 * 3 },
+			
+			{lefttop_x - side2 / 26 + side2 / 52 * 8,lefttop_y + side2 - side2 / 26 * 6},
+			{lefttop_x - side2 / 26 + side2 / 52 * 6,lefttop_y + side2 - side2 / 26 * 7},
+			{lefttop_x - side2 / 26 + side2 / 52 * 4,lefttop_y + side2 - side2 / 26 * 7},
+			
+			{lefttop_x - side2 / 26 + side2 / 52 * 1,lefttop_y + side2 - side2 / 26 * 5},
+			{lefttop_x - side2 / 26 + side2 / 52 * 2,lefttop_y + side2 - side2 / 26 * 3},
+			{lefttop_x - side2 / 26 + side2 / 52 * 3,lefttop_y + side2 - side2 / 52 * 5}
+			
+		};
+		ege_bezier(left_pointsNum_1_1, left_ploypoints_1_1);
+	}
+	else {
+		int left_pointsNum_2_1 = 10;
+		ege_point left_ploypoints_2_1[10] = {
+			{lefttop_x - side2 / 26 + side2 / 52 * 8,lefttop_y + side2 - side2 / 52 * 8},
+			{lefttop_x - side2 / 26 + side2 / 52 * 2,lefttop_y + side2 - side2 / 52 * 8 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 3,lefttop_y + side2 + side2 / 52 * 0 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 9,lefttop_y + side2 - side2 / 52 * 1 },
+			
+			{lefttop_x - side2 / 26 + side2 / 52 * 16,lefttop_y + side2 - side2 / 52 * 1 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 17,lefttop_y + side2 - side2 / 52 * 2 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 16,lefttop_y + side2 - side2 / 52 * 3 },
+			
+			{lefttop_x - side2 / 26 + side2 / 52 * 12,lefttop_y + side2 - side2 / 52 * 7 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 9,lefttop_y + side2 - side2 / 52 * 8 },
+			{lefttop_x - side2 / 26 + side2 / 52 * 8,lefttop_y + side2 - side2 / 52 * 8}
+			
+		};
+		ege_bezier(left_pointsNum_2_1, left_ploypoints_2_1);
+	}
+	if (RMI_change_1 == 0) {
+		int right_pointsNum_1_1 = 10;
+		ege_point right_ploypoints_1_1[10] = {
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2,lefttop_y + side2 - side2 / 26 * 3},
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 1 + side2,lefttop_y + side2 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 5 + side2,lefttop_y + side2 - side2 / 52 * 2},
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 3 },
+			
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 3 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 10 + side2,lefttop_y + side2 - side2 / 26 * 8 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 7 },
+			
+			{lefttop_x - side2 / 26 - side2 / 52 * 8 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 7 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 13 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 5 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 6 + side2,lefttop_y + side2 - side2 / 26 * 3}
+			
+		};
+		ege_bezier(right_pointsNum_1_1, right_ploypoints_1_1);
+		setcolor(EGEARGB(0XFF, 0X60, 0X60, 0X60));
+		setlinewidth(side2 / 520 * 2);
+		ege_line(lefttop_x - side2 / 26 * 3.5 + side2, lefttop_y + side2 - side2 / 26 * 3, lefttop_x - side2 / 26 * 2.5 + side2, lefttop_y + side2 - side2 / 26 * 5);
+		ege_line(lefttop_x - side2 / 26 * 2.8 + side2, lefttop_y + side2 - side2 / 26 * 5.5, lefttop_x - side2 / 26 * 2.5 + side2, lefttop_y + side2 - side2 / 26 * 5);
+		ege_line(lefttop_x - side2 / 26 * 2.8 + side2, lefttop_y + side2 - side2 / 26 * 5.5, lefttop_x - side2 / 26 * 1 + side2, lefttop_y + side2 - side2 / 26 * 6);
+		
+		
+		ege_line(lefttop_x - side2 / 26 * 2.5 + side2, lefttop_y + side2 - side2 / 26 * 2, lefttop_x - side2 / 26 * 1.5 + side2, lefttop_y + side2 - side2 / 26 * 4);
+		ege_line(lefttop_x - side2 / 26 * 1 + side2, lefttop_y + side2 - side2 / 26 * 3.7, lefttop_x - side2 / 26 * 1.5 + side2, lefttop_y + side2 - side2 / 26 * 4);
+		ege_line(lefttop_x - side2 / 26 * 1 + side2, lefttop_y + side2 - side2 / 26 * 3.7, lefttop_x - side2 / 26 * 1 + side2, lefttop_y + side2 - side2 / 26 * 6);
+	}
+	else {
+		int right_pointsNum_2_1 = 10;
+		ege_point right_ploypoints_2_1[10] = {
+			{lefttop_x - side2 / 26 - side2 / 52 * 2 + side2,lefttop_y + side2 - side2 / 52 * 1},
+			{lefttop_x - side2 / 26 - side2 / 52 * 2 + side2,lefttop_y + side2 - side2 / 52 * 1 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 2 + side2 / 52 * 4 + side2,lefttop_y + side2 - side2 / 52 * 5},
+			{lefttop_x - side2 / 26 - side2 / 52 * 4 + side2,lefttop_y + side2 - side2 / 52 * 7 },
+			
+			{lefttop_x - side2 / 26 - side2 / 52 * 4 + side2,lefttop_y + side2 - side2 / 52 * 7 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 10 + side2,lefttop_y + side2 - side2 / 52 * 7 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 13 + side2,lefttop_y + side2 - side2 / 52 * 2 },
+			
+			{lefttop_x - side2 / 26 - side2 / 52 * 13 + side2,lefttop_y + side2  },
+			{lefttop_x - side2 / 26 - side2 / 52 * 10 + side2,lefttop_y + side2 + side2 / 52 * 2 },
+			{lefttop_x - side2 / 26 - side2 / 52 * 2 + side2,lefttop_y + side2 - side2 / 52 * 1 }
+			
+		};
+		ege_bezier(right_pointsNum_2_1, right_ploypoints_2_1);
+		setcolor(EGEARGB(0XFF, 0X60, 0X60, 0X60));
+		setlinewidth(side2 / 520 * 2);
+		ege_line(lefttop_x - side2 / 26 - side2 / 52 * 2 + side2, lefttop_y + side2 - side2 / 52 * 3, lefttop_x - side2 / 26 - side2 / 52 * 7 + side2, lefttop_y + side2 - side2 / 52 * 2);
+		ege_line(lefttop_x - side2 / 26 - side2 / 52 * 7 + side2, lefttop_y + side2 - side2 / 52 * 2, lefttop_x - side2 / 26 - side2 / 52 * 6.8 + side2, lefttop_y + side2 - side2 / 52 * 1);
+		ege_line(lefttop_x - side2 / 26 - side2 / 52 * 6.8 + side2, lefttop_y + side2 - side2 / 52 * 1, lefttop_x - side2 / 26 - side2 / 52 * 10.8 + side2, lefttop_y + side2 - side2 / 52 * 2);
+		
+		
+		ege_line(lefttop_x - side2 / 26 - side2 / 52 * 3 + side2, lefttop_y + side2 - side2 / 52 * 5, lefttop_x - side2 / 26 - side2 / 52 * 8 + side2, lefttop_y + side2 - side2 / 52 * 4);
+		ege_line(lefttop_x - side2 / 26 - side2 / 52 * 8 + side2, lefttop_y + side2 - side2 / 52 * 4, lefttop_x - side2 / 26 - side2 / 52 * 8.2 + side2, lefttop_y + side2 - side2 / 52 * 5);
+		ege_line(lefttop_x - side2 / 26 - side2 / 52 * 8.2 + side2, lefttop_y + side2 - side2 / 52 * 5, lefttop_x - side2 / 26 - side2 / 52 * 10.8 + side2, lefttop_y + side2 - side2 / 52 * 2);
+	}
 	
-	int left_pointsNum_1= 10;
-	ege_point left_ploypoints_1[10] = {
-		{lefttop_x - side2 / 26 + side2 / 52 * 2,lefttop_y + side2 - side2 / 26 * 3},
-		{lefttop_x - side2 / 26 + side2 / 52 * 5,lefttop_y + side2 - side2 / 52 * 2},
-		{lefttop_x - side2 / 26 + side2 / 52 * 9,lefttop_y + side2 },
-		{lefttop_x - side2 / 26 + side2 / 52 * 10,lefttop_y + side2 - side2 / 26 * 3 },
-		
-		{lefttop_x - side2 / 26 + side2 / 52 * 8,lefttop_y + side2 - side2 / 26 * 6},
-		{lefttop_x - side2 / 26 + side2 / 52 * 6,lefttop_y + side2 - side2 / 26 * 7},
-		{lefttop_x - side2 / 26 + side2 / 52 * 4,lefttop_y + side2 - side2 / 26 * 7},
-		
-		{lefttop_x - side2 / 26 + side2 / 52 * 1,lefttop_y + side2 - side2 / 26 * 5},
-		{lefttop_x - side2 / 26 + side2 / 52 * 3,lefttop_y + side2 - side2 / 26 * 3},
-		{lefttop_x - side2 / 26 + side2 / 52 * 2,lefttop_y + side2 - side2 / 26 * 3}
-		
-	};
-	ege_bezier(left_pointsNum_1, left_ploypoints_1);
-	
-	int right_pointsNum_1 = 10;
-	ege_point right_ploypoints_1[10] = {
-		{lefttop_x - side2 / 26 * 4 + side2,lefttop_y + side2 - side2 / 26 * 3},
-		{lefttop_x - side2 / 26 * 4 + side2 / 52 * 1 + side2,lefttop_y + side2 },
-		{lefttop_x - side2 / 26 * 4 + side2 / 52 * 5 + side2,lefttop_y + side2 - side2 / 52 * 2},
-		{lefttop_x - side2 / 26 * 4 + side2 / 52 * 8 + side2,lefttop_y + side2 - side2 / 26 * 3 },
-		
-		{lefttop_x - side2 / 26 * 4 + side2 / 52 * 8 + side2,lefttop_y + side2 - side2 / 26 * 3 },
-		{lefttop_x - side2 / 26 * 4 + side2 / 52 * 10 + side2,lefttop_y + side2 - side2 / 26 * 8 },
-		{lefttop_x - side2 / 26 * 4 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 7 },
-		
-		{lefttop_x - side2 / 26 * 5 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 7 },
-		{lefttop_x - side2 / 26 - side2 / 52 * 13 + side2 / 52 * 7 + side2,lefttop_y + side2 - side2 / 26 * 5 },
-		{lefttop_x - side2 / 26 * 4 + side2,lefttop_y + side2 - side2 / 26 * 3},
-		
-	};
-	ege_bezier(right_pointsNum_1, right_ploypoints_1);
-	setcolor(EGEARGB(0XFF, 0X60, 0X60, 0X60));
-	setlinewidth(side2 / 520 * 2);
-	ege_line(lefttop_x - side2 / 26 * 3.5 + side2, lefttop_y + side2 - side2 / 26 * 3 , lefttop_x - side2 / 26 * 2.5 + side2, lefttop_y + side2 - side2 / 26 * 5);
-	ege_line(lefttop_x - side2 / 26 * 2.8 + side2, lefttop_y + side2 - side2 / 26 * 5.5, lefttop_x - side2 / 26 * 2.5 + side2, lefttop_y + side2 - side2 / 26 * 5);
-	ege_line(lefttop_x - side2 / 26 * 2.8 + side2, lefttop_y + side2 - side2 / 26 * 5.5, lefttop_x - side2 / 26 * 1 + side2, lefttop_y + side2 - side2 / 26 * 6);
 	
 	
-	ege_line(lefttop_x - side2 / 26 * 2.5 + side2, lefttop_y + side2 - side2 / 26 * 2, lefttop_x - side2 / 26 * 1.5 + side2, lefttop_y + side2 - side2 / 26 * 4);
-	ege_line(lefttop_x - side2 / 26 * 1 + side2, lefttop_y + side2 - side2 / 26 * 3.7, lefttop_x - side2 / 26 * 1.5 + side2, lefttop_y + side2 - side2 / 26 * 4);
-	ege_line(lefttop_x - side2 / 26 * 1 + side2, lefttop_y + side2 - side2 / 26 * 3.7, lefttop_x - side2 / 26 * 1 + side2, lefttop_y + side2 - side2 / 26 * 6);
-	
-	int num = 7;
-	ege_point polypoints[7] = {
-		{lefttop_x - side2 / 26 + side2 / 52 * 6.1, lefttop_y + side2 - side2 / 52 * 2.5},
-		{lefttop_x - side2 / 26 + side2 / 52 * 8, lefttop_y + side2 - side2 / 52 * 3.5},
-		{lefttop_x - side2 / 26 + side2 / 52 * 6.5, lefttop_y + side2 - side2 / 52 * 8.5},
-		{lefttop_x - side2 / 26 + side2 / 52 * 7.5, lefttop_y + side2 - side2 / 52 * 9},
-		{lefttop_x - side2 / 26 + side2 / 52 * 4.5, lefttop_y + side2 - side2 / 52 * 11},
-		{lefttop_x - side2 / 26 + side2 / 52 * 3.5, lefttop_y + side2 - side2 / 52 * 7.5},
-		{lefttop_x - side2 / 26 + side2 / 52 * 4.5, lefttop_y + side2 - side2 / 52 * 8}
-	};
-	setfillcolor(EGEARGB(0XFF, 0X60, 0X60, 0X60));
-	ege_fillpoly(num, polypoints);
+	//左边箭头
+	if (RMI_change == 0) {
+		int num = 7;
+		ege_point polypoints[7] = {
+			{lefttop_x - side2 / 26 + side2 / 52 * 6, lefttop_y + side2 - side2 / 52 * 3.1},
+			{lefttop_x - side2 / 26 + side2 / 52 * 7, lefttop_y + side2 - side2 / 52 * 3.5},
+			{lefttop_x - side2 / 26 + side2 / 52 * 6, lefttop_y + side2 - side2 / 52 * 8.4},
+			{lefttop_x - side2 / 26 + side2 / 52 * 7, lefttop_y + side2 - side2 / 52 * 9},
+			{lefttop_x - side2 / 26 + side2 / 52 * 5, lefttop_y + side2 - side2 / 52 * 11},
+			{lefttop_x - side2 / 26 + side2 / 52 * 4, lefttop_y + side2 - side2 / 52 * 7.5},
+			{lefttop_x - side2 / 26 + side2 / 52 * 5, lefttop_y + side2 - side2 / 52 * 8}
+		};
+		setfillcolor(EGEARGB(0XFF, 0X60, 0X60, 0X60));
+		ege_fillpoly(num, polypoints);
+	}
+	else {
+		int num_1 = 7;
+		ege_point polypoints_1[7] = {
+			{lefttop_x - side2 / 26 + side2 / 52 * 6,lefttop_y + side2 - side2 / 52 * 5},
+			{lefttop_x - side2 / 26 + side2 / 52 * 6,lefttop_y + side2 - side2 / 52 * 4},
+			{lefttop_x - side2 / 26 + side2 / 52 * 12,lefttop_y + side2 - side2 / 52 * 3},
+			{lefttop_x - side2 / 26 + side2 / 52 * 12,lefttop_y + side2 - side2 / 52 * 2},
+			{lefttop_x - side2 / 26 + side2 / 52 * 14,lefttop_y + side2 - side2 / 52 * 3.2},
+			{lefttop_x - side2 / 26 + side2 / 52 * 12,lefttop_y + side2 - side2 / 52 * 5},
+			{lefttop_x - side2 / 26 + side2 / 52 * 12,lefttop_y + side2 - side2 / 52 * 4}
+		};
+		setfillcolor(EGEARGB(0XFF, 0X60, 0X60, 0X60));
+		ege_fillpoly(num_1, polypoints_1);
+	}
 
 	
 	// 表盘阴影
@@ -356,6 +475,29 @@ void draw_RMI(double RMI_x, double RMI_y, double RMI_side) {
 	};
 	ege_fillpoly(num_points_4, ploypoints_4);
 	
+	if (x >= lefttop_x - side2 / 26 + side2 / 52 * 3 && x <= lefttop_x - side2 / 26 + side2 / 52 * 10 &&
+		y <= lefttop_y + side2 && y >= lefttop_y + side2 - side2 / 26 * 4) {
+		if (GetAsyncKeyState(0x04) & 0x0001) {
+			if (RMI_change == 1) {
+				RMI_change = 0;
+			}
+			else {
+				RMI_change = 1;
+			}
+		}
+	}
+	
+	if (x >= lefttop_x - side2 / 26 - side2 / 52 * 6 + side2 && x <= lefttop_x - side2 / 26 + side2 / 52 * 2 + side2 &&
+		y <= lefttop_y + side2 - side2 / 52 * 1 && y >= lefttop_y + side2 - side2 / 52 * 7) {
+		if (GetAsyncKeyState(0x04) & 0x0001) {
+			if (RMI_change_1 == 1) {
+				RMI_change_1 = 0;
+			}
+			else {
+				RMI_change_1 = 1;
+			}
+		}
+	}
 	
 	//光照效果
 	draw_light(RMI_x, RMI_y, RMI_r * 13 / 14);
