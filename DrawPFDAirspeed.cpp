@@ -10,12 +10,13 @@ extern double airSpeed_instruction;
 int num_scale1 = 0;
 int num_scale2 = 0;
 
+
 void draw_PFD_airspeed(double center_x, double center_y, double side)
 {
 	if (airSpeed <= 45) {
 		airSpeed = 45;
 	}
-	side  = side / 96 * 67;
+	side = side / 96 * 67;
 	double length = side;
 	double width = side / 67 * 11.5;
 	
@@ -28,9 +29,9 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	setfont(side / 17.1428, 0, "Consolas");
+	setfont(side / 17.1428, 0, "黑体");
 	
-	setlinewidth(side / 300);
+	setlinewidth(side / 200);
 	double distance = 0;
 	if (airSpeed >= 40)
 		distance = -(airSpeed - 30) / 10;
@@ -53,7 +54,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		
 		// 绘制粉色指示速度标
 		setcolor(EGEARGB(150, 255, 51, 255));
-		setlinewidth(side / 300);
+		setlinewidth(side / 250);
 		int pointSpeed = (int)(airSpeed_instruction - 30);
 		int one_digit, ten_digit, hundred_digit, new_number;
 		one_digit = pointSpeed % 10;
@@ -77,8 +78,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		setcolor(EGEARGB(150, 177, 177, 178));
 		setbkmode(TRANSPARENT);
 		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		setfont(side / 17.1428, 0, "Consolas");
-		setlinewidth(side / 300);
+		setfont(side / 17.1428, 0, "黑体");
 		double x_bit = center_x + width / 11.5 * 1.4,
 		y_bit = center_y - (i + distance) * length / 67 * 5.57;
 		double x_decade = center_x - width / 11.5 * 0.5,
@@ -162,7 +162,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 			outtextxy(x_decade, y_decade, '2');
 			outtextxy(x_hundred, y_hundred, '4');
 		}
-		
+		setlinewidth(side / 200);
 	}
 	
 	// 放置空速显示上下进行遮盖
@@ -194,7 +194,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	setcolor(EGEARGB(150, 177, 177, 178));
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	setfont(side / 12, 0, "Consolas");
+	setfont(side / 12, 0, "黑体");
 	
 	char num12[10] = { ' ','1','2','3','4','5','6','7','8','9' };// 十位
 	if (int_airSpeed >= 90) {
@@ -243,14 +243,14 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	setcolor(EGEARGB(150, 177, 177, 178));
 	setlinewidth(side / 200);
 	ege_point points4[8] = {
-		center_x - width / 2,center_y + length / 67 * 4,// 5
+		center_x - width / 1.9,center_y + length / 67 * 4,// 5
 		center_x - width / 2 + width / 11.5 * 8, center_y + length / 67 * 4,// 6
 		center_x - width / 2 + width / 11.5 * 8,center_y + length / 67 * 1,// 7
 		center_x + width / 11.5 * (9.5 - 5.75),center_y,// 8
 		center_x - width / 2 + width / 11.5 * 8,center_y - length / 67 * 1,// 9
 		center_x - width / 2 + width / 11.5 * 8, center_y - length / 67 * 4,// 10
-		center_x - width / 2,center_y - length / 67 * 4,//11
-		center_x - width / 2,center_y + length / 67 * 4// 5
+		center_x - width / 1.9,center_y - length / 67 * 4,//11
+		center_x - width / 1.9,center_y + length / 67 * 4// 5
 	};
 	ege_drawpoly(8, points4);
 	
@@ -343,7 +343,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		setcolor(EGEARGB(150, 177, 177, 178));
 		setbkmode(TRANSPARENT);
 		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		setfont(side / 12, 0, "Consolas");
+		setfont(side / 12, 0, "黑体");
 		char str[100];
 		sprintf(str, "%.3f", airSpeed_mach);
 		char str0[99];
@@ -359,7 +359,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	setcolor(EGEARGB(150, 255, 51, 255));
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	setfont(side / 12, 0, "Consolas");
+	setfont(side / 12, 0, "黑体");
 	char str[100];
 	sprintf(str, "%.0f", airSpeed_instruction);
 	outtextxy(center_x + width / 10, center_y - length / 2 * 1.11, str);
