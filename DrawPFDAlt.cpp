@@ -15,6 +15,7 @@ void draw_PFD_alt_STD(double side, double center_x, double center_y) {
 	double height = 16.0 / 3.0 / 96.0 * side;
 	double wide = 8.0 / 3.0 / 96.0 * side;
 	
+	settextjustify(LEFT_TEXT, TOP_TEXT);
 	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	setcolor(GREEN);
 	for (int i = 0; i < 3;i++) {
@@ -87,6 +88,7 @@ void draw_PFD_alt_linesAndNum(double side, double center_x, double center_y) {
 	
 	//画00
 	
+	settextjustify(LEFT_TEXT, TOP_TEXT);
 	setfont(num_height, num_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	for (int i = 0;i < 8;i++) {
 		double y = center_y - 33.5 / 96 * side + ten / 100 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
@@ -123,6 +125,7 @@ void draw_PFD_alt_linesAndNum(double side, double center_x, double center_y) {
 		
 	}
 	//计算千位数字
+	settextjustify(LEFT_TEXT, TOP_TEXT);
 	setfont(num_height * 1.2, num_width * 1.2, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	
 	int thousand[8] = {};
@@ -250,6 +253,7 @@ void draw_PFD_alt10(double side, double center_x, double center_y) {
 	//计算精细化坐标（加入十位和个位数字进行处理）
 	double y_100 = uesfulHeight1 / 20.0 * number_height * 0.6 + y;
 	//设定字体
+	settextjustify(LEFT_TEXT, TOP_TEXT);
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	
 	//将背景颜色设置成透明
@@ -270,6 +274,7 @@ void draw_PFD_alt100(double side, double center_x, double center_y) {
 	double hun = fmod(altitude, 1000);
 	
 	hun = hun / 100;
+	settextjustify(LEFT_TEXT, TOP_TEXT);
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	char num[12] = { '9','0','1','2','3','4','5','6','7','8','9','0' };
 	
@@ -285,6 +290,7 @@ void draw_PFD_alt1000(double side, double center_x, double center_y) {
 	double thousand = fmod(altitude, 10000);
 	
 	thousand = thousand / 1000;
+	settextjustify(LEFT_TEXT, TOP_TEXT);
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	
 	char num[12] = { '9','0','1','2','3','4','5','6','7','8','9','0' };
@@ -422,6 +428,7 @@ void draw_PFD_alt10000(double side, double center_x, double center_y) {
 	double tenThousand = fmod(altitude, 100000);
 	
 	tenThousand = tenThousand / 10000;
+	settextjustify(LEFT_TEXT, TOP_TEXT);
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	
 	char num[12] = { '9','0','1','2','3','4','5','6','7','8','9','0' };
@@ -432,6 +439,7 @@ void draw_PFD_alt10000(double side, double center_x, double center_y) {
 //绘制主函数
 
 void draw_PFD_alt( double center_x, double center_y, double side) {
+	
 	
 	draw_PFD_alt_frame(side, center_x, center_y);//画底盘
 	draw_PFD_alt_linesAndNum(side, center_x, center_y);//画线和数字
