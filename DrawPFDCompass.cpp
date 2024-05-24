@@ -5,7 +5,7 @@
 extern double rotationangle;//罗盘上数字和刻度线旋转的角度
 extern double pointrotationangle;//罗盘指针旋转的角度
 extern int course;//罗盘指定的航向
-double realrotationangle = 0;//真实的旋转角度
+double realrotationangle1 = 0;//真实的旋转角度
 
 //画罗盘的框架
 void draw_compass_frame(double compass_x, double compass_y, double side)
@@ -60,7 +60,7 @@ void draw_scale(double compass_x, double compass_y, double side)
 	//长刻度
 	for (double i = 0; i < 360; i += 10)
 	{
-		double scaleAngle = realrotationangle + i;
+		double scaleAngle = realrotationangle1 + i;
 		double rad = scaleAngle * PI / 180.0;
 		double scalePosX = compass_x + 0.96 * compass_r * sin(rad);
 		double scalePosY = compass_y - 0.96 * compass_r * cos(rad);
@@ -72,7 +72,7 @@ void draw_scale(double compass_x, double compass_y, double side)
 	//短刻度
 	for (double i = 5; i < 360; i += 10)
 	{
-		double scaleAngle = realrotationangle + i;
+		double scaleAngle = realrotationangle1 + i;
 		double rad = scaleAngle * PI / 180.0;
 		double scalePosX = compass_x + 0.975 * compass_r * sin(rad);
 		double scalePosY = compass_y - 0.975 * compass_r * cos(rad);
@@ -89,7 +89,7 @@ void draw_compass_text(double compass_x, double compass_y, double side)
 	double compass_r = side * 30.5 / 96;//罗盘的半径
 	for (int i = 0; i < 360; i += 30) //循环输出表上的刻度值
 	{
-		double textAngle = realrotationangle + i;
+		double textAngle = realrotationangle1 + i;
 		double rad = textAngle * PI / 180.0;
 		double textPosX = compass_x + 0.9 * compass_r * sin(rad);
 		double textPosY = compass_y - 0.9 * compass_r * cos(rad);
@@ -177,7 +177,7 @@ void draw_MAG(double compass_x, double compass_y, double side) {
 //画整个罗盘
 void draw_PFD_compass(double compass_x, double compass_y, double side)
 {
-	realrotationangle = 360 - rotationangle;
+	realrotationangle1 = 360 - rotationangle;
 
 	draw_compass_frame(compass_x, compass_y, side);
 
