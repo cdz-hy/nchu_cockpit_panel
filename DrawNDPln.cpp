@@ -1,4 +1,7 @@
 void draw_ND_pln(double center_x, double center_y, double side) {
+	
+	side = side / 2;
+	
 	double small_r = side / 104 * 40;// 确定大圆小圆的半径
 	double big_r = side / 104 * 80;
 
