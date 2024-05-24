@@ -3,33 +3,33 @@
 #include<stdio.h>
 
 extern double rotationangle;// 用于传入用
-double realrotationangle = 0;
-double pointrtationangle = 0;// 小剑的对应角度
-extern int HDGMAG;// 这个参数你应该没设
+double realrotationAngle = 0;
+double pointrationAngle = 0;// 小剑的对应角度
+extern int HDGMAG;
 
 void draw_smallCircle(double x, double y, double r) {
 	setfillcolor(WHITE);
-	ege_ellipse(x + r * 0.45 * cos(-(pointrtationangle + realrotationangle) * PI / 180) - r * 0.025, 
-		y - r * 0.025 - r * 0.3 * sin(-(pointrtationangle + realrotationangle) * PI / 180), r * 0.05, r * 0.05);
-	ege_ellipse(x - r * 0.45 * cos(-(pointrtationangle + realrotationangle) * PI / 180) - r * 0.025,
-		y - r * 0.025 + r * 0.3 * sin(-(pointrtationangle + realrotationangle) * PI / 180), r * 0.05, r * 0.05);
-	ege_ellipse(x + r * 0.25 * cos(-(pointrtationangle + realrotationangle) * PI / 180) - r * 0.025, 
-		y - r * 0.025 - r * 0.6 * sin(-(pointrtationangle + realrotationangle) * PI / 180), r * 0.05, r * 0.05);
-	ege_ellipse(x - r * 0.25 * cos(-(pointrtationangle + realrotationangle) * PI / 180) - r * 0.025, 
-		y - r * 0.025 + r * 0.6 * sin(-(pointrtationangle + realrotationangle) * PI / 180), r * 0.05, r * 0.05);
+	ege_ellipse(x + r * 0.45 * cos(-(pointrationAngle + realrotationAngle) * PI / 180) - r * 0.025, 
+		y - r * 0.025 - r * 0.45 * sin(-(pointrationAngle + realrotationAngle) * PI / 180), r * 0.05, r * 0.05);
+	ege_ellipse(x - r * 0.45 * cos(-(pointrationAngle + realrotationAngle) * PI / 180) - r * 0.025, 
+		y - r * 0.025 + r * 0.45 * sin(-(pointrationAngle + realrotationAngle) * PI / 180), r * 0.05, r * 0.05);
+	ege_ellipse(x + r * 0.25 * cos(-(pointrationAngle + realrotationAngle) * PI / 180) - r * 0.025, 
+		y - r * 0.025 - r * 0.25 * sin(-(pointrationAngle + realrotationAngle) * PI / 180), r * 0.05, r * 0.05);
+	ege_ellipse(x - r * 0.25 * cos(-(pointrationAngle + realrotationAngle) * PI / 180) - r * 0.025, 
+		y - r * 0.025 + r * 0.25 * sin(-(pointrationAngle + realrotationAngle) * PI / 180), r * 0.05, r * 0.05);
 }
 
 void draw_ND_app_center(double center_x, double center_y, double side) {
 	
 	// 初始数据设置
 	double r = side / 115 * 37.5;
-	realrotationangle = 360 - rotationangle;
+	realrotationAngle = 360 - rotationangle;
 	setcolor(EGEARGB(200, 177, 177, 178));
 	
 	// 长长刻度
 	setlinewidth(side / 250);
 	for (double i = 45; i < 360; i += 45)
-	{	// 短刻度对应比例： (1- 2/37.5)
+	{	// 长长刻度对应比例： (1- 2/37.5)
 		double scaleAngle = 0 + i;
 		double rad = scaleAngle * PI / 180.0;
 		ege_line(center_x + 1.15 *r * sin(rad), center_y - 1.15*r * cos(rad), center_x + 0.98* r * sin(rad), center_y - 0.98 * r * cos(rad));
@@ -38,7 +38,7 @@ void draw_ND_app_center(double center_x, double center_y, double side) {
 	setlinewidth(side / 250);// 这是对长刻度的粗细设定
 	for (double i = 0; i < 360; i += 10)
 	{	// 长刻度对应比例：(1- 5/37.5)
-		double scaleAngle = realrotationangle + i;
+		double scaleAngle = realrotationAngle + i;
 		double rad = scaleAngle * PI / 180.0;
 		ege_line(center_x + r * sin(rad), center_y - r * cos(rad), center_x + (1- 5/37.5)* r * sin(rad), center_y - (1 - 5 / 37.5) * r * cos(rad));
 	}
@@ -46,7 +46,7 @@ void draw_ND_app_center(double center_x, double center_y, double side) {
 	setlinewidth(side/ 280);// 这是对短刻度的粗细设定
 	for (double i = 5; i < 360; i += 10)
 	{	// 短刻度对应比例： (1- 2/37.5)
-		double scaleAngle = realrotationangle + i;
+		double scaleAngle = realrotationAngle + i;
 		double rad = scaleAngle * PI / 180.0;
 		ege_line(center_x + r * sin(rad), center_y - r * cos(rad), center_x + (1 - 2 / 37.5) * r * sin(rad), center_y - (1 - 2 / 37.5) * r * cos(rad));
 	}
@@ -64,13 +64,13 @@ void draw_ND_app_center(double center_x, double center_y, double side) {
 	
 	// 旋转数字绘制
 	for (int i = 0; i < 360; i += 30) {
-		double textAngle = realrotationangle + i;
+		double textAngle = realrotationAngle + i;
 		double rad = textAngle * PI / 180.0;
 		double textPosX = center_x + 0.75 * r * sin(rad);//*0.85是调节数字与中心坐标位置的关系，依据自己的位置条件适当修改，如可能在你的表上*0.7是恰好在需要的位置上，则改为*0.7
 		double textPosY = center_y - 0.75 * r * cos(rad);
 		
 		LOGFONTW font;
-		setfont(30, 0, "黑体");
+		setfont(side/ 23.3333333333, 0, "黑体");
 		settextjustify(CENTER_TEXT, CENTER_TEXT);
 		getfont(&font);
 		font.lfEscapement = -textAngle * 10;
@@ -137,31 +137,54 @@ void draw_ND_app_center(double center_x, double center_y, double side) {
 	
 	setlinewidth(side / 250);
 	setcolor(EGEARGB(200, 177, 177, 178));
+	
+	double rad = -(pointrationAngle + rotationangle) * PI / 180;
+	
 	ege_point points3[14] = {
-		center_x - r / 30,center_y-r / 2.9,// 1
-		center_x - r / 30,center_y - r / 2.55,//2
-		center_x - r / 13,center_y - r / 2.55,//3
-		center_x - r / 13,center_y - r / 2.2,//4
-		center_x - r / 30,center_y - r / 2.2,//5
-		center_x - r / 30,center_y - r / 1.12,//6
-		center_x , center_y - r / 1.08,//7
-		center_x + r / 30,center_y - r / 1.12,//8
-		center_x + r / 30,center_y - r / 2.2,//9
-		center_x + r / 13,center_y - r / 2.2,//10
-		center_x + r / 13,center_y - r / 2.55,//11
-		center_x + r / 30,center_y - r / 2.55,// 12
-		center_x + r / 30,center_y - r / 2.9,// 13
-		center_x - r / 30,center_y - r / 2.9//1
+		//center_x - r / 30,center_y - r / 2.9,// 1 
+		-r / 30 * cos(rad) - (-r / 2.9) * sin(rad) + center_x, (-r / 2.9) * cos(rad) + (-r / 30) * sin(rad) + center_y,
+		//center_x - r / 30,center_y - r / 2.55,//2 
+		-r / 30 * cos(rad) - (-r / 2.55) * sin(rad) + center_x, (-r / 2.55) * cos(rad) + (-r / 30) * sin(rad) + center_y,
+		//center_x - r / 13,center_y - r / 2.55,//3 
+		-r / 13 * cos(rad) - (-r / 2.55) * sin(rad) + center_x, (-r / 2.55) * cos(rad) + (-r / 13) * sin(rad) + center_y,
+		//center_x - r / 13,center_y - r / 2.2,//4 
+		-r / 13 * cos(rad) - (-r / 2.2) * sin(rad) + center_x, (-r / 2.2) * cos(rad) + (-r / 13) * sin(rad) + center_y,
+		//center_x - r / 30,center_y - r / 2.2,//5 
+		-r / 30 * cos(rad) - (-r / 2.2) * sin(rad) + center_x, (-r / 2.2) * cos(rad) + (-r / 30) * sin(rad) + center_y,
+		//center_x - r / 30,center_y - r / 1.12,//6 
+		-r / 30 * cos(rad) - (-r / 1.12) * sin(rad) + center_x, (-r / 1.12) * cos(rad) + (-r / 30) * sin(rad) + center_y,
+		//center_x , center_y - r / 1.08,//7 
+		r / 1.08 * sin(rad) + center_x, -r / 1.08 * cos(rad) + center_y,
+		//center_x + r / 30,center_y - r / 1.12,//8 
+		r / 30 * cos(rad) - (-r / 1.12) * sin(rad) + center_x, (-r / 1.12) * cos(rad) + r / 30 * sin(rad) + center_y,
+		//center_x + r / 30,center_y - r / 2.2,//9 
+		r / 30 * cos(rad) - (-r / 2.2) * sin(rad) + center_x, (-r / 2.2) * cos(rad) + r / 30 * sin(rad) + center_y,
+		//center_x + r / 13,center_y - r / 2.2,//10 
+		r / 13 * cos(rad) - (-r / 2.2) * sin(rad) + center_x, (-r / 2.2) * cos(rad) + r / 13 * sin(rad) + center_y,
+		//center_x + r / 13,center_y - r / 2.55,//11 
+		r / 13 * cos(rad) - (-r / 2.55) * sin(rad) + center_x, (-r / 2.55) * cos(rad) + r / 13 * sin(rad) + center_y,
+		//center_x + r / 30,center_y - r / 2.55,//12 
+		r / 30 * cos(rad) - (-r / 2.55) * sin(rad) + center_x, (-r / 2.55) * cos(rad) + r / 30 * sin(rad) + center_y,
+		//center_x + r / 30,center_y - r / 2.9,//13 
+		r / 30 * cos(rad) - (-r / 2.9) * sin(rad) + center_x, (-r / 2.9) * cos(rad) + r / 30 * sin(rad) + center_y,
+		//center_x - r / 30,center_y - r / 2.9//1 
+		-r / 30 * cos(rad) - (-r / 2.9) * sin(rad) + center_x, (-r / 2.9) * cos(rad) + (-r / 30) * sin(rad) + center_y,
 	};
 	ege_drawpoly(14, points3);
 	
 	ege_point points4[6] = {
-		center_x - r / 30,center_y + r / 2.9,// 1
-		center_x + r / 30,center_y + r / 2.9,//2
-		center_x + r / 30,center_y + r / 1.12,//3
-		center_x , center_y + r / 1.08,//4
-		center_x - r / 30,center_y + r / 1.12,//5
-		center_x - r / 30,center_y + r / 2.9//1
+		//center_x - r / 30,center_y + r / 2.9,// 1 
+		-r / 30 * cos(rad) - (r / 2.9) * sin(rad) + center_x, (r / 2.9) * cos(rad) + (-r / 30) * sin(rad) + center_y,
+		//center_x + r / 30,center_y + r / 2.9,//2 
+		r / 30 * cos(rad) - (r / 2.9) * sin(rad) + center_x, (r / 2.9) * cos(rad) + (r / 30) * sin(rad) + center_y,
+		//center_x + r / 30,center_y + r / 1.12,//3 
+		r / 30 * cos(rad) - (r / 1.12) * sin(rad) + center_x, (r / 1.12) * cos(rad) + (r / 30) * sin(rad) + center_y,
+		//center_x , center_y + r / 1.08,//4 
+		-r / 1.08 * sin(rad) + center_x, r / 1.08 * cos(rad) + center_y,
+		//center_x - r / 30,center_y + r / 1.12,//5 
+		-r / 30 * cos(rad) - (r / 1.12) * sin(rad) + center_x, (r / 1.12) * cos(rad) + (-r / 30) * sin(rad) + center_y,
+		//center_x - r / 30,center_y + r / 2.9//1 
+		-r / 30 * cos(rad) - (r / 2.9) * sin(rad) + center_x, (r / 2.9) * cos(rad) + (-r / 30) * sin(rad) + center_y,
 	};
 	ege_drawpoly(6, points4);
 }
