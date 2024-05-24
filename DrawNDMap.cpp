@@ -2,23 +2,23 @@
 #include<graphics.h>
 #include<math.h>
 
-double rotationangle = 45;//表盘刻度的旋转角度
-double realrotationangle = 0;//实际的旋转角度
-double ndtoprotationangle = 0;//顶部三角形的偏转角度
+extern double rotationangle;//表盘刻度的旋转角度
+extern double ndtoprotationangle;//顶部三角形的偏转角度
+double realrotationangle2 = 0;//实际的旋转角度
 int ndcourse = 0;
 //画刻度盘上的弧线
-void draw_acr(double center_x, double center_y, double side) 
+void draw_acr(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 
 	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 
-	ege_arc(center_x - r, center_y - r, r * 2, r * 2, -44.0, -92.0);//弧线部分
+	ege_arc(center_x - r, center_y - r, r * 2, r * 2, -44.0, -92.0);
 }
 
 //画刻度
-void draw_scale(double center_x, double center_y, double side) 
+void draw_scale(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 
@@ -26,9 +26,9 @@ void draw_scale(double center_x, double center_y, double side)
 	setlinewidth(r * 0.008);//设置线宽
 
 	//短刻度
-	for (int i = 5; i < 360; i += 10) 
+	for (int i = 5; i < 360; i += 10)
 	{
-		double scaleAngle = realrotationangle + i;
+		double scaleAngle = realrotationangle2 + i;
 		double rad = scaleAngle * PI / 180.0;
 		double scalePosX = center_x + 0.975 * r * sin(rad);
 		double scalePosY = center_y - 0.975 * r * cos(rad);
@@ -40,7 +40,7 @@ void draw_scale(double center_x, double center_y, double side)
 	//长刻度
 	for (int i = 0; i < 360; i += 10)
 	{
-		double scaleAngle = realrotationangle + i;
+		double scaleAngle = realrotationangle2 + i;
 		double rad = scaleAngle * PI / 180.0;
 		double scalePosX = center_x + 0.975 * r * sin(rad);
 		double scalePosY = center_y - 0.975 * r * cos(rad);
@@ -59,7 +59,7 @@ void draw_ndtext(double center_x, double center_y, double side) {
 
 	for (int i = 0; i < 360; i += 30) //循环输出表上的刻度值
 	{
-		double textAngle = realrotationangle + i;
+		double textAngle = realrotationangle2 + i;
 		double rad = textAngle * PI / 180.0;
 		double textPosX = center_x + 0.92 * r * sin(rad);
 		double textPosY = center_y - 0.92 * r * cos(rad);
@@ -86,7 +86,7 @@ void draw_ndtext(double center_x, double center_y, double side) {
 }
 
 //画指向航向的固定指针
-void draw_ndpoint(double center_x, double center_y, double side) 
+void draw_ndpoint(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 
@@ -101,7 +101,7 @@ void draw_ndpoint(double center_x, double center_y, double side)
 }
 
 //画表中间的一个三角形
-void draw_ndcenterangle(double center_x, double center_y, double side) 
+void draw_ndcenterangle(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 
@@ -127,7 +127,7 @@ void draw_ndcenterangle(double center_x, double center_y, double side)
 }
 
 //画顶部会移动的三角形
-void draw_ndtoptriangle(double center_x, double center_y, double side) 
+void draw_ndtoptriangle(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 
@@ -143,10 +143,10 @@ void draw_ndtoptriangle(double center_x, double center_y, double side)
 	toptriangle[0].y = -r * cos(rad) + center_y;
 
 	toptriangle[1].x = -side * 2 / 104 * cos(rad) + (r + side * 3 / 104) * sin(rad) + center_x;
-	toptriangle[1].y = (- r - side * 3 / 104) * cos(rad) - side * 2 / 104 * sin(rad) + center_y;
+	toptriangle[1].y = (-r - side * 3 / 104) * cos(rad) - side * 2 / 104 * sin(rad) + center_y;
 
 	toptriangle[2].x = side * 2 / 104 * cos(rad) + (r + side * 3 / 104) * sin(rad) + center_x;
-	toptriangle[2].y = (- r - side * 3 / 104) * cos(rad) + side * 2 / 104 * sin(rad) + center_y;
+	toptriangle[2].y = (-r - side * 3 / 104) * cos(rad) + side * 2 / 104 * sin(rad) + center_y;
 
 	toptriangle[3].x = r * sin(rad) + center_x;
 	toptriangle[3].y = -r * cos(rad) + center_y;
@@ -155,7 +155,7 @@ void draw_ndtoptriangle(double center_x, double center_y, double side)
 }
 
 //画顶部不闭合的矩形
-void draw_ndtoprectangle(double center_x, double center_y, double side) 
+void draw_ndtoprectangle(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 
@@ -223,9 +223,9 @@ void draw_ndtoptext(double center_x, double center_y, double side)
 }
 
 //画MAP模式下的NP表
-void draw_ND_map(double center_x, double center_y, double side) 
+void draw_ND_map(double center_x, double center_y, double side)
 {
-	realrotationangle = 360 - rotationangle;
+	realrotationangle2 = 360 - rotationangle;
 
 	draw_acr(center_x, center_y, side);
 
