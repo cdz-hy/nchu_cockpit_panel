@@ -12,15 +12,39 @@ void draw_compass_frame(double compass_x, double compass_y, double side)
 {
 	double compass_r = side * 30.5 / 96;//罗盘的半径
 
-	ege_enable_aa(false);
+	setfillcolor(EGEARGB(0Xff, 0X12, 0X14, 0X13));//罗盘内部填充颜色
+
+	//画一个置于底层的带底色的多边形来避免使用底色填充
+	ege_point coverpoly[5];
+
+	coverpoly[0].x = compass_x - compass_r * sin(55 * PI / 180);
+	coverpoly[0].y = compass_y - compass_r * cos(55 * PI / 180);
+
+	coverpoly[1].x = compass_x - compass_r * 0.5;
+	coverpoly[1].y = compass_y - compass_r;
+
+	coverpoly[2].x = compass_x + compass_r * 0.5;
+	coverpoly[2].y = compass_y - compass_r;
+
+	coverpoly[3].x = compass_x + compass_r * sin(55 * PI / 180);
+	coverpoly[3].y = compass_y - compass_r * cos(55 * PI / 180);
+
+	coverpoly[4].x = compass_x - compass_r * sin(55 * PI / 180);
+	coverpoly[4].y = compass_y - compass_r * cos(55 * PI / 180);
+
+	ege_fillpoly(5, coverpoly);
+
+	//使用圆弧遮盖多余的填充部分
+	for (int i = 0; i < 150; i++)
+	{
+		setcolor(BLACK);
+		ege_arc(compass_x - compass_r, compass_y - compass_r * (1.15 - 0.001 * i), compass_r * 2, compass_r * 2, -35.0, -110.0);
+	}
+
 	setcolor(EGEARGB(0Xff, 0X12, 0X14, 0X13));//罗盘外框线的颜色
 	setlinewidth(2);//罗盘外框线的宽度
 	ege_arc(compass_x - compass_r, compass_y - compass_r, 2 * compass_r, 2 * compass_r, -35.0, -110.0);//罗盘的弧线部分
 	ege_line(compass_x - compass_r * sin(55 * PI / 180), compass_y - compass_r * cos(55 * PI / 180), compass_x + compass_r * sin(55 * PI / 180), compass_y - compass_r * cos(55 * PI / 180));//罗盘的直线部分
-	setfillcolor(EGEARGB(0Xff, 0X12, 0X14, 0X13));//罗盘内部填充颜色
-	floodfill(compass_x, compass_y - compass_r * cos(55 * PI / 180) - 10, EGEARGB(0Xff, 0X12, 0X14, 0X13));//填充罗盘内部
-
-	ege_enable_aa(true);
 }
 
 //画航向指示
