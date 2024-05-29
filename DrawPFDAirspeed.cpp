@@ -20,11 +20,11 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	double length = side;
 	double width = side / 67 * 11.5;
 	
-// 最底层灰色
+	// 最底层灰色
 	setfillcolor(EGEARGB(0xff, 12, 14, 13));
 	ege_fillrect(center_x - width / 2, center_y - length / 2, width, length);
 	
-// 小刻度与数字显示
+	// 小刻度与数字显示
 	setcolor(EGEARGB(150, 177, 177, 178));
 	
 	setbkmode(TRANSPARENT);
@@ -42,15 +42,29 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		num_scale2 = (int)(airSpeed - 40) / 10 % 10 + 1 + 7;
 	}
 	else {
-		num_scale1 = (int)(airSpeed - 100) / 10 % 10 + 1 + ((int)(airSpeed / 100) % 10 - 1) * 10;
-		num_scale2 = num_scale1 + 13;
+		if (airSpeed <= 450) {
+			num_scale1 = (int)(airSpeed - 100) / 10 % 10 + 1 + ((int)(airSpeed / 100) % 10 - 1) * 10;
+			num_scale2 = num_scale1 + 13;
+		}
+		else
+		{
+			num_scale1 = (int)(450- 100) / 10 % 10 + 1 + ((int)(450 / 100) % 10 - 1) * 10;
+			num_scale2 = num_scale1 + 13;
+		}
 	}
-	
+	if(airSpeed >=450)
+		distance = -(450 - 30) / 10;
 	for (int i = num_scale1; i < num_scale2; i++) {
-		ege_line(center_x + width / 11.5 * 3.75,
-			center_y - (i + distance) * length / 67 * 5.57,
-			center_x + width / 2,
-			center_y - (i + distance) * length / 67 * 5.57);
+		if (i<=42) {
+			ege_line(center_x + width / 11.5 * 3.75,
+				center_y - (i + distance) * length / 67 * 5.57,
+				center_x + width / 2,
+				center_y - (i + distance) * length / 67 * 5.57);
+		}
+		else {
+			
+		}
+		
 		
 		// 绘制粉色指示速度标
 		setcolor(EGEARGB(150, 255, 51, 255));
@@ -86,7 +100,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		double x_hundred = center_x - width / 11.5 * 2.4,
 		y_hundred = center_y - (i + distance) * length / 67 * 5.57;
 		
-		if ((i + 1) % 2 == 0)
+		if ((i + 1) % 2 == 0 && i<=42)
 			outtextxy(x_bit, y_bit, '0');
 		if (i == 1)
 			outtextxy(x_decade, y_decade, '4');
@@ -162,10 +176,14 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 			outtextxy(x_decade, y_decade, '2');
 			outtextxy(x_hundred, y_hundred, '4');
 		}
+		if (i == 41) {
+			outtextxy(x_decade, y_decade, '4');
+			outtextxy(x_hundred, y_hundred, '4');
+		}
 		setlinewidth(side / 200);
 	}
 	
-// 放置空速显示上下进行遮盖
+	// 放置空速显示上下进行遮盖
 	setfillcolor(EGEARGB(0xff, 0, 0, 0));
 	ege_point points0[4] = {
 		center_x + width / 2 , center_y + length / 2,// 3
@@ -176,7 +194,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	ege_fillpoly(4, points0);
 	
 	
-// 黑色底板
+	// 黑色底板
 	setfillcolor(EGEARGB(0xff, 0, 0, 0));
 	ege_point points1[7] = {
 		center_x - width / 2,center_y + length / 67 * 4,// 5
@@ -222,7 +240,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 			outtextxy(center_x - width / 2 + width / 11.5 * 6.5, center_y - length / 67 * 7.4 + (i + 1 + double_airSpeed) * length / 67 * 3.7, num_using1[i]);
 	}
 	
-// 上下两个遮盖的灰边
+	// 上下两个遮盖的灰边
 	setfillcolor(EGEARGB(0xff, 12, 14, 13));
 	ege_point points2[4] = {
 		center_x - width / 2 + width / 11.5 * 8, center_y - length / 67 * 4,// 10
@@ -239,7 +257,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	};
 	ege_fillpoly(4, points3);
 	
-// 白色表框显示
+	// 白色表框显示
 	setcolor(EGEARGB(150, 177, 177, 178));
 	setlinewidth(side / 200);
 	ege_point points4[8] = {
@@ -254,7 +272,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	};
 	ege_drawpoly(8, points4);
 	
-// 绿色指针显示
+	// 绿色指针显示
 	setcolor(EGEARGB(150, 76, 153, 0));
 	setlinewidth(side / 200);
 	if (airSpeed_acceleration > 0) {// 绿色指针向上
@@ -338,7 +356,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		}
 	}
 	
-// 马赫显示
+	// 马赫显示
 	if (airSpeed_mach >= 0.4) {
 		setcolor(EGEARGB(150, 177, 177, 178));
 		setbkmode(TRANSPARENT);
@@ -355,7 +373,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		outtextxy(center_x - width / 18, center_y + length / 2 * 1.11, str0);
 	}
 	
-// 速度指示绘制
+	// 速度指示绘制
 	setcolor(EGEARGB(150, 255, 51, 255));
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
