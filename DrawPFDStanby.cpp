@@ -1064,6 +1064,7 @@ void draw_standy_alt(double center_x, double center_y, double side) {
 
 extern double airSpeed;
 
+
 //绘制底框
 void draw_standy_airSpeed_frame(double center_x, double center_y, double side) {
 	double x = center_x - 24.5 / 96.0 * side;
@@ -1109,6 +1110,9 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 	double x1 = center_x + 24.5 / 96 * side;
 	double x2 = center_x + 16.5 / 96 * side;
 	double x3 = center_x + 18.5 / 96 * side;
+	
+	double number_height = side * 2.5 / 96.0 * 2 * 6.5;
+	double number_width = side * 2.5 / 96.0 * 5;
 	for (int i = 0;i < 11;i++) {
 		double y = center_y - 165.5 / 96 * side + ten / 10 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
 		if (fmod(datas[10 - i] - 100, 200) == 0) {
@@ -1120,6 +1124,8 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 			setlinewidth(side * 0.015);
 			ege_line(x1, y, x3, y);
 		}
+		
+		setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 		for (int i = 0;i < 11;i++) {
 			double y = center_y - 165.5 / 96 * side + ten / 10 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
 			double x = center_x - 5.0 / 96 * side;
@@ -1154,8 +1160,8 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 	}
 	
 	settextjustify(LEFT_TEXT, TOP_TEXT);
-	double number_height = side * 2.5 / 96.0 * 2 * 6.5 * 0.7;
-	double number_width = side * 2.5 / 96.0 * 5 * 0.7;
+	number_height = side * 2.5 / 96.0 * 2 * 6.5 * 0.7;
+	number_width = side * 2.5 / 96.0 * 5 * 0.7;
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	
 }
@@ -1247,7 +1253,18 @@ void draw_airSpeed_shadow(double center_x, double center_y, double side) {
 	ege_fillrect(x, y - number_height + side * 0.001, lenth * 1.02, number_height);
 	ege_fillrect(x, y + width - side * 0.046, lenth * 1.02, number_height);
 	
+	setfillcolor(BLACK);
+	ege_fillrect(x, y, lenth * 1.02, side * 0.025);
+	ege_fillrect(x, y + width - side * 0.046 - side * 0.025, lenth * 1.02, side * 0.025);
+	
+	//draw_standy_airSpeed_wireframe(center_x, center_y, side);
+	x = center_x - 24.5 / 96.0 * side;
+	y = center_y - 24.0 / 96.0 * side;
+	lenth = 48.0 / 96.0 * side;
+	width = 53.0 / 96.0 * side;
+	ege_rectangle(x, y, width, lenth);
 }
+
 void draw_standy_airSpeed(double center_x, double center_y, double side) {
 	draw_standy_airSpeed_frame(center_x, center_y, side);
 	draw_standy_airSpeed_lines(center_x, center_y, side);
@@ -1258,4 +1275,6 @@ void draw_standy_airSpeed(double center_x, double center_y, double side) {
 	
 	draw_airSpeed_shadow(center_x, center_y, side);
 }
+
+
 
