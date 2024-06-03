@@ -12,6 +12,11 @@ extern int month2;
 extern int date2;
 int times = 0;
 int state = 0;
+int timestate = 0;
+int mod = -1;
+int minute3 = 0;
+int seconds = 0;
+int setstate = 0;
 
 //画计时器的外框
 void draw_ChronometerFrame(double center_x, double center_y, double side)
@@ -173,7 +178,7 @@ void draw_Chronometer_buttons(double center_x, double center_y, double side)
 	//右上角的按钮
 	setfillcolor(BLACK);
 	ege_point button2[5];
-	
+
 	button2[0].x = -15.5 * side / 108 * cos(Rad2) - (-59.5 * side / 108) * sin(Rad2) + center_x;
 	button2[0].y = -59.5 * side / 108 * cos(Rad2) - 15.5 * side / 108 * sin(Rad2) + center_y;
 
@@ -302,14 +307,14 @@ void draw_Chronometer_buttons(double center_x, double center_y, double side)
 }
 
 //画刻度
-void draw_Chronometer_Scale(double center_x, double center_y, double side) 
+void draw_Chronometer_Scale(double center_x, double center_y, double side)
 {
 	double r = 36 * side / 108;
 
 	//短刻度
 	for (int i = 6; i < 360; i += 6)
 	{
-		if (i % 30 != 0) 
+		if (i % 30 != 0)
 		{
 			setlinewidth(r * 0.018);//设置线宽
 			setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));//设置线的颜色
@@ -352,215 +357,275 @@ void draw_Chronometer_Scale(double center_x, double center_y, double side)
 }
 
 //画中间的时间显示
-void draw_Chronometer_time(double center_x, double center_y, double side) 
+void draw_Chronometer_time(double center_x, double center_y, double side)
 {
-	if (times == 0) {
-		LOGFONTW font;
-		setfont(side * 0.17, side * 0.06, "DigifaceWide");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		//int hour = 1;
-		char stringbuffer[64];
-		sprintf_s(stringbuffer, "%d", hour1);
-		if (hour1 >= 10)
-			outtextxy(center_x - side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
-		else
-			outtextxy(center_x - side * 4 / 108, center_y - side * 10 / 108, stringbuffer);
-
-		setfont(side * 0.17, side * 0.06, "Leelawadee");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		outtextxy(center_x, center_y - side * 10.5 / 108, ":");
-
-		setfont(side * 0.04, side * 0.06, "Leelawadee");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		ege_drawtext("MAN", center_x + side * 27 / 108, center_y - side * 33 / 108);
-
-		setfont(side * 0.17, side * 0.06, "DigifaceWide");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		//int minute = 59;
-		sprintf_s(stringbuffer, "%02d", minute1);
-		outtextxy(center_x + side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
-	}
-	else if (times == 1) 
+	if (timestate == 0 && mod == -1)
 	{
-		LOGFONTW font;
-		setfont(side * 0.17, side * 0.06, "DigifaceWide");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		char stringbuffer[64];
-		sprintf_s(stringbuffer, "%d", month1);
-		if (month1 >= 10)
-			outtextxy(center_x - side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
-		else
-			outtextxy(center_x - side * 4 / 108, center_y - side * 10 / 108, stringbuffer);
+		if (times == 0) {
+			LOGFONTW font;
+			setfont(side * 0.17, side * 0.06, "DigifaceWide");
+			setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			//int hour = 1;
+			char stringbuffer[64];
+			sprintf_s(stringbuffer, "%d", hour1);
+			if (hour1 >= 10)
+				outtextxy(center_x - side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
+			else
+				outtextxy(center_x - side * 5 / 108, center_y - side * 10 / 108, stringbuffer);
 
-		setfont(side * 0.17, side * 0.06, "DigifaceWide");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		sprintf_s(stringbuffer, "%d", date1);
-		if (date1 >= 10)
+			setfont(side * 0.17, side * 0.06, "Leelawadee");
+			setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			outtextxy(center_x, center_y - side * 10.5 / 108, ":");
+
+			setfont(side * 0.04, side * 0.06, "Leelawadee");
+			setcolor(EGEARGB(0xff, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			ege_drawtext("MAN", center_x + side * 27 / 108, center_y - side * 33 / 108);
+
+			setfont(side * 0.17, side * 0.06, "DigifaceWide");
+			setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			//int minute = 59;
+			sprintf_s(stringbuffer, "%02d", minute1);
 			outtextxy(center_x + side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
-		else
-			outtextxy(center_x + side * 4 / 108, center_y - side * 10 / 108, stringbuffer);
+		}
+		else if (times == 1)
+		{
+			LOGFONTW font;
+			setfont(side * 0.17, side * 0.06, "DigifaceWide");
+			setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			char stringbuffer[64];
+			sprintf_s(stringbuffer, "%d", month1);
+			if (month1 >= 10)
+				outtextxy(center_x - side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
+			else
+				outtextxy(center_x - side * 4 / 108, center_y - side * 10 / 108, stringbuffer);
 
-		setfont(side * 0.04, side * 0.06, "Leelawadee");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		ege_drawtext("MAN", center_x + side * 27 / 108, center_y - side * 33 / 108);
-	}
-	else if (times == 2)
-	{
-		LOGFONTW font;
-		setfont(side * 0.17, side * 0.06, "DigifaceWide");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		char stringbuffer[64];
-		sprintf_s(stringbuffer, "%d", hour2);
-		if (hour2 >= 10)
-			outtextxy(center_x - side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
-		else
-			outtextxy(center_x - side * 4 / 108, center_y - side * 10 / 108, stringbuffer);
+			setfont(side * 0.17, side * 0.06, "DigifaceWide");
+			setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			sprintf_s(stringbuffer, "%d", date1);
+			if (date1 >= 10)
+				outtextxy(center_x + side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
+			else
+				outtextxy(center_x + side * 4 / 108, center_y - side * 10 / 108, stringbuffer);
 
-		setfont(side * 0.17, side * 0.06, "Leelawadee");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		outtextxy(center_x, center_y - side * 10.5 / 108, ":");
+			setfont(side * 0.04, side * 0.06, "Leelawadee");
+			setcolor(EGEARGB(0xff, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			ege_drawtext("MAN", center_x + side * 27 / 108, center_y - side * 33 / 108);
+		}
+		else if (times == 2)
+		{
+			LOGFONTW font;
+			setfont(side * 0.17, side * 0.06, "DigifaceWide");
+			setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			char stringbuffer[64];
+			sprintf_s(stringbuffer, "%d", hour2);
+			if (hour2 >= 10)
+				outtextxy(center_x - side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
+			else
+				outtextxy(center_x - side * 5 / 108, center_y - side * 10 / 108, stringbuffer);
 
-		setfont(side * 0.04, side * 0.06, "Leelawadee");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		ege_drawtext("UTC", center_x + side * 27 / 108, center_y - side * 33 / 108);
+			setfont(side * 0.17, side * 0.06, "Leelawadee");
+			setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			outtextxy(center_x, center_y - side * 10.5 / 108, ":");
 
-		setfont(side * 0.17, side * 0.06, "DigifaceWide");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		sprintf_s(stringbuffer, "%02d", minute2);
-		outtextxy(center_x + side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
-	}
-	else if (times == 3)
-	{
-		LOGFONTW font;
-		setfont(side * 0.17, side * 0.06, "DigifaceWide");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		char stringbuffer[64];
-		sprintf_s(stringbuffer, "%d", month2);
-		if (month2 >= 10)
-			outtextxy(center_x - side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
-		else
-			outtextxy(center_x - side * 4 / 108, center_y - side * 10 / 108, stringbuffer);
+			setfont(side * 0.04, side * 0.06, "Leelawadee");
+			setcolor(EGEARGB(0xff, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			ege_drawtext("UTC", center_x + side * 27 / 108, center_y - side * 33 / 108);
 
-		setfont(side * 0.17, side * 0.06, "DigifaceWide");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		sprintf_s(stringbuffer, "%d", date2);
-		if (date2 >= 10)
+			setfont(side * 0.17, side * 0.06, "DigifaceWide");
+			setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			sprintf_s(stringbuffer, "%02d", minute2);
 			outtextxy(center_x + side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
-		else 
-			outtextxy(center_x + side * 4 / 108, center_y - side * 10 / 108, stringbuffer);
+		}
+		else if (times == 3)
+		{
+			LOGFONTW font;
+			setfont(side * 0.17, side * 0.06, "DigifaceWide");
+			setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			char stringbuffer[64];
+			sprintf_s(stringbuffer, "%d", month2);
+			if (month2 >= 10)
+				outtextxy(center_x - side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
+			else
+				outtextxy(center_x - side * 5 / 108, center_y - side * 10 / 108, stringbuffer);
 
-		setfont(side * 0.04, side * 0.06, "Leelawadee");
-		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		ege_drawtext("UTC", center_x + side * 27 / 108, center_y - side * 33 / 108);
+			setfont(side * 0.17, side * 0.06, "DigifaceWide");
+			setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			sprintf_s(stringbuffer, "%d", date2);
+			if (date2 >= 10)
+				outtextxy(center_x + side * 9 / 108, center_y - side * 10 / 108, stringbuffer);
+			else
+				outtextxy(center_x + side * 4 / 108, center_y - side * 10 / 108, stringbuffer);
+
+			setfont(side * 0.04, side * 0.06, "Leelawadee");
+			setcolor(EGEARGB(0xff, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			ege_drawtext("UTC", center_x + side * 27 / 108, center_y - side * 33 / 108);
+		}
 	}
 }
 
 //画文字
-void draw_Chronometer_text(double center_x, double center_y, double side) 
+void draw_Chronometer_text(double center_x, double center_y, double side)
 {
-	LOGFONTW font;
-	setfont(side * 0.07, 0, "Leelawadee");
-	setcolor(EGEARGB(0xff, 0x8F, 0x64, 0x42));
-	font.lfWidth = side * 0.05;
-	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	getfont(&font);
-	font.lfWeight = 550;
-	setfont(&font);
-	//左上角的文字
-	ege_drawtext("CHR", center_x - side * 28 / 108, center_y - side * 48 / 108);
-	//右上角的文字
-	ege_drawtext("TIME/DATE", center_x + side * 9 / 108, center_y - side * 48 / 108);
-	ege_drawtext("SET", center_x + side * 49 / 108, center_y - side * 20 / 108);
-	//左下角的文字
-	ege_drawtext("ET", center_x - side * 49 / 108, center_y + side * 21 / 108);
-	ege_drawtext("RESTE", center_x - side * 15.5 / 108, center_y + side * 49 / 108);
-	//右下角的文字
-	ege_drawtext("+", center_x + side * 48 / 108, center_y + side * 23 / 108);
-	ege_drawtext("-", center_x + side * 24 / 108, center_y + side * 49 / 108);
+	if (timestate == 0 && mod == -1)
+	{
+		LOGFONTW font;
+		setfont(side * 0.07, 0, "Leelawadee");
+		setcolor(EGEARGB(0xff, 0x8F, 0x64, 0x42));
+		font.lfWidth = side * 0.05;
+		settextjustify(CENTER_TEXT, CENTER_TEXT);
+		getfont(&font);
+		font.lfWeight = 550;
+		setfont(&font);
+		//左上角的文字
+		ege_drawtext("CHR", center_x - side * 28 / 108, center_y - side * 48 / 108);
+		//右上角的文字
+		ege_drawtext("TIME/DATE", center_x + side * 9 / 108, center_y - side * 48 / 108);
+		ege_drawtext("SET", center_x + side * 49 / 108, center_y - side * 20 / 108);
+		//左下角的文字
+		ege_drawtext("ET", center_x - side * 49 / 108, center_y + side * 21 / 108);
+		ege_drawtext("RESET", center_x - side * 15.5 / 108, center_y + side * 49 / 108);
+		//右下角的文字
+		ege_drawtext("+", center_x + side * 48 / 108, center_y + side * 23 / 108);
+		ege_drawtext("-", center_x + side * 24 / 108, center_y + side * 49 / 108);
 
-	if (times == 0)
-	{
-		setfont(side * 0.06, 0, "Leelawadee");
-		setcolor(EGEARGB(0xff, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		ege_drawtext("TIME", center_x, center_y - side * 18 / 108);
+		if (times == 0)
+		{
+			setfont(side * 0.06, 0, "Leelawadee");
+			setcolor(EGEARGB(0xff, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			ege_drawtext("TIME", center_x, center_y - side * 18 / 108);
+		}
+		else if (times == 1)
+		{
+			setfont(side * 0.06, 0, "Leelawadee");
+			setcolor(EGEARGB(0xff, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			ege_drawtext("DATE", center_x, center_y - side * 18 / 108);
+		}
+		else if (times == 2)
+		{
+			setfont(side * 0.06, 0, "Leelawadee");
+			setcolor(EGEARGB(0xff, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			ege_drawtext("TIME", center_x, center_y - side * 18 / 108);
+		}
+		else if (times == 3)
+		{
+			setfont(side * 0.06, 0, "Leelawadee");
+			setcolor(EGEARGB(0xff, 0x99, 0x99, 0x99));
+			font.lfWidth = side * 0.05;
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			getfont(&font);
+			font.lfWeight = 550;
+			setfont(&font);
+			ege_drawtext("DATE", center_x, center_y - side * 18 / 108);
+		}
 	}
-	else if (times == 1)
+	else
 	{
+		LOGFONTW font;
+		setfont(side * 0.07, 0, "Leelawadee");
+		setcolor(EGEARGB(0xff, 0x8F, 0x64, 0x42));
+		font.lfWidth = side * 0.05;
+		settextjustify(CENTER_TEXT, CENTER_TEXT);
+		getfont(&font);
+		font.lfWeight = 550;
+		setfont(&font);
+		//左上角的文字
+		ege_drawtext("CHR", center_x - side * 28 / 108, center_y - side * 48 / 108);
+		//右上角的文字
+		ege_drawtext("TIME/DATE", center_x + side * 9 / 108, center_y - side * 48 / 108);
+		ege_drawtext("SET", center_x + side * 49 / 108, center_y - side * 20 / 108);
+		//左下角的文字
+		ege_drawtext("ET", center_x - side * 49 / 108, center_y + side * 21 / 108);
+		ege_drawtext("RESET", center_x - side * 15.5 / 108, center_y + side * 49 / 108);
+		//右下角的文字
+		ege_drawtext("+", center_x + side * 48 / 108, center_y + side * 23 / 108);
+		ege_drawtext("-", center_x + side * 24 / 108, center_y + side * 49 / 108);
+
+
 		setfont(side * 0.06, 0, "Leelawadee");
 		setcolor(EGEARGB(0xff, 0x99, 0x99, 0x99));
 		font.lfWidth = side * 0.05;
@@ -568,29 +633,7 @@ void draw_Chronometer_text(double center_x, double center_y, double side)
 		getfont(&font);
 		font.lfWeight = 550;
 		setfont(&font);
-		ege_drawtext("DATE", center_x, center_y - side * 18 / 108);
-	}
-	else if (times == 2) 
-	{
-		setfont(side * 0.06, 0, "Leelawadee");
-		setcolor(EGEARGB(0xff, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		ege_drawtext("TIME", center_x, center_y - side * 18 / 108);
-	} 
-	else if (times == 3)
-	{
-		setfont(side * 0.06, 0, "Leelawadee");
-		setcolor(EGEARGB(0xff, 0x99, 0x99, 0x99));
-		font.lfWidth = side * 0.05;
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		getfont(&font);
-		font.lfWeight = 550;
-		setfont(&font);
-		ege_drawtext("DATE", center_x, center_y - side * 18 / 108);
+		ege_drawtext("ET", center_x, center_y - side * 18 / 108);
 	}
 }
 
@@ -602,6 +645,7 @@ void check_mouse(double center_x, double center_y, double side)
 	mousepos(&mouse_x, &mouse_y);
 	int mouse_x_real = mouse_x;
 	int mouse_y_real = mouse_y;
+
 	//判断鼠标位置
 	if (mouse_x_real >= center_x + side * 25 / 108 && mouse_x_real <= center_x + side * 40 / 108 && mouse_y_real <= center_y - side * 35 / 108 && mouse_y_real >= center_y - side * 50 / 108)
 	{
@@ -628,13 +672,14 @@ void check_mouse(double center_x, double center_y, double side)
 
 		ege_drawpoly(5, button2);
 	}
+
 	//判断鼠标是否点击
 	if (GetAsyncKeyState(0x04) & 0x8000 && state == 0) {
 		mousepos(&mouse_x, &mouse_y);
 		mouse_x_real = mouse_x;
 		mouse_y_real = mouse_y;
 
-		if (mouse_x_real >= center_x + side * 25 / 108 && mouse_x_real <= center_x + side * 40 / 108 && mouse_y_real <= center_y - side * 35 / 108 && mouse_y_real >= center_y - side * 50 / 108) 
+		if (mouse_x_real >= center_x + side * 25 / 108 && mouse_x_real <= center_x + side * 40 / 108 && mouse_y_real <= center_y - side * 35 / 108 && mouse_y_real >= center_y - side * 50 / 108)
 		{
 			if (times < 3) {
 				times++;
@@ -645,11 +690,193 @@ void check_mouse(double center_x, double center_y, double side)
 				state = 1;
 			}
 		}
-	} 
+	}
+}
+
+//计时模式
+void timing(double center_x, double center_y, double side)
+{
+	static int timess;
+	static double moretime = 0;
+	double a = 0;
+	int mouse_x;
+	int mouse_y;
+	mousepos(&mouse_x, &mouse_y);
+	int mouse_x_real = mouse_x;
+	int mouse_y_real = mouse_y;
+	mousepos(&mouse_x, &mouse_y);
+	mouse_x_real = mouse_x;
+	mouse_y_real = mouse_y;
+
+	if (timess != times)
+	{
+		timess = times;
+		mod = -1;
+		return;
+	}
+
+	if (mod != -1) {
+		if (mod == 0) {
+			minute3 = 0;
+			a = fclock();
+
+			if (a - moretime <= 59)
+				seconds = a - moretime;
+			else
+			{
+				while (a - moretime >= 60)
+				{
+					a -= 60;
+					minute3++;
+				}
+				seconds = a - moretime;
+			}
+
+			double angle = a * 6 * PI / 180;
+
+			ege_point point[4];
+
+			point[0].x = -1 * side / 108 * cos(angle) + center_x;
+			point[0].y = -1 * side / 108 * sin(angle) + center_y;
+
+			point[1].x = 1 * side / 108 * cos(angle) + center_x;
+			point[1].y = 1 * side / 108 * sin(angle) + center_y;
+
+			point[2].x = 2 * side / 108 * cos(angle) - (-30 * side / 108 * sin(angle)) + center_x;
+			point[2].y = -30 * side / 108 * cos(angle) + 2 * side / 108 * sin(angle) + center_y;
+
+			point[3].x = -2 * side / 108 * cos(angle) - (-30 * side / 108 * sin(angle)) + center_x;
+			point[3].y = -30 * side / 108 * cos(angle) - 2 * side / 108 * sin(angle) + center_y;
+
+			setfillcolor(WHITE);
+			ege_fillpoly(4, point);
+		}
+
+		LOGFONTW font;
+		setfont(side * 0.17, side * 0.06, "DigifaceWide");
+		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+		font.lfWidth = side * 0.05;
+		settextjustify(CENTER_TEXT, CENTER_TEXT);
+		getfont(&font);
+		font.lfWeight = 550;
+		setfont(&font);
+		char str[64];
+		sprintf_s(str, "%d", minute3);
+
+		if (minute3 >= 10)
+			outtextxy(center_x - side * 9 / 108, center_y - side * 10 / 108, str);
+		else
+			outtextxy(center_x - side * 5 / 108, center_y - side * 10 / 108, str);
+
+		setfont(side * 0.17, side * 0.06, "Leelawadee");
+		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+		font.lfWidth = side * 0.05;
+		settextjustify(CENTER_TEXT, CENTER_TEXT);
+		getfont(&font);
+		font.lfWeight = 550;
+		setfont(&font);
+		outtextxy(center_x, center_y - side * 10.5 / 108, ":");
+
+		setfont(side * 0.17, side * 0.06, "DigifaceWide");
+		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+		font.lfWidth = side * 0.05;
+		settextjustify(CENTER_TEXT, CENTER_TEXT);
+		getfont(&font);
+		font.lfWeight = 550;
+		setfont(&font);
+		sprintf_s(str, "%02d", seconds);
+		outtextxy(center_x + side * 9 / 108, center_y - side * 10 / 108, str);
+	}
+	else if (mod == -1 && timestate == 1 && (minute3 == 0 && seconds == 0))
+	{
+		seconds = 0;
+		minute3 = 0;
+		LOGFONTW font;
+		setfont(side * 0.17, side * 0.06, "DigifaceWide");
+		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+		font.lfWidth = side * 0.05;
+		settextjustify(CENTER_TEXT, CENTER_TEXT);
+		getfont(&font);
+		font.lfWeight = 550;
+		setfont(&font);
+		char str[64];
+		sprintf_s(str, "%d", minute3);
+
+		if (minute3 >= 10)
+			outtextxy(center_x - side * 9 / 108, center_y - side * 10 / 108, str);
+		else
+			outtextxy(center_x - side * 5 / 108, center_y - side * 10 / 108, str);
+
+		setfont(side * 0.17, side * 0.06, "Leelawadee");
+		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+		font.lfWidth = side * 0.05;
+		settextjustify(CENTER_TEXT, CENTER_TEXT);
+		getfont(&font);
+		font.lfWeight = 550;
+		setfont(&font);
+		outtextxy(center_x, center_y - side * 10.5 / 108, ":");
+
+		setfont(side * 0.17, side * 0.06, "DigifaceWide");
+		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
+		font.lfWidth = side * 0.05;
+		settextjustify(CENTER_TEXT, CENTER_TEXT);
+		getfont(&font);
+		font.lfWeight = 550;
+		setfont(&font);
+		sprintf_s(str, "%02d", seconds);
+		outtextxy(center_x + side * 9 / 108, center_y - side * 10 / 108, str);
+
+	}
+
+
+
+	if (mouse_x_real <= center_x - side * 30 / 108 && mouse_x_real >= center_x - side * 50 / 108 && mouse_y_real <= center_y - side * 25 / 108 && mouse_y_real >= center_y - side * 50 / 108)
+	{
+		double Rad1 = -45 * PI / 180;
+		ege_point button1[5];
+
+		button1[0].x = -7.8 * side / 108 * cos(Rad1) - (-61.8 * side / 108) * sin(Rad1) + center_x;
+		button1[0].y = -61.8 * side / 108 * cos(Rad1) - 7.8 * side / 108 * sin(Rad1) + center_y;
+
+		button1[1].x = -7.8 * side / 108 * cos(Rad1) - (-51.2) * side / 108 * sin(Rad1) + center_x;
+		button1[1].y = -51.2 * side / 108 * cos(Rad1) - 7.8 * side / 108 * sin(Rad1) + center_y;
+
+		button1[2].x = 7.8 * side / 108 * cos(Rad1) - (-51.2 * side / 108) * sin(Rad1) + center_x;
+		button1[2].y = -51.2 * side / 108 * cos(Rad1) + 7.8 * side / 108 * sin(Rad1) + center_y;
+
+		button1[3].x = 7.8 * side / 108 * cos(Rad1) - (-61.8 * side / 108) * sin(Rad1) + center_x;
+		button1[3].y = -61.8 * side / 108 * cos(Rad1) + 7.8 * side / 108 * sin(Rad1) + center_y;
+
+		button1[4].x = -7.8 * side / 108 * cos(Rad1) - (-61.8 * side / 108) * sin(Rad1) + center_x;
+		button1[4].y = -61.8 * side / 108 * cos(Rad1) - 7.8 * side / 108 * sin(Rad1) + center_y;
+
+		setlinewidth(side * 0.001);
+
+		ege_drawpoly(5, button1);
+	}
+
+	if (GetAsyncKeyState(0x04) & 0x8000 && timestate == 0)
+	{
+		if (mouse_x_real <= center_x - side * 30 / 108 && mouse_x_real >= center_x - side * 50 / 108 && mouse_y_real <= center_y - side * 25 / 108 && mouse_y_real >= center_y - side * 50 / 108)
+		{
+			if (mod < 1)
+				mod++;
+			else if (mod == 1)
+			{
+				mod = -1;
+				seconds = 0;
+				minute3 = 0;
+			}
+			timestate = 1;
+		}
+		moretime = fclock();
+	}
+
+	timess = times;
 }
 
 //画精密计时器
-void draw_Chronometer(double center_x, double center_y, double side) 
+void draw_Chronometer(double center_x, double center_y, double side)
 {
 	draw_ChronometerFrame(center_x, center_y, side);
 
@@ -659,6 +886,8 @@ void draw_Chronometer(double center_x, double center_y, double side)
 
 	draw_Chronometer_time(center_x, center_y, side);
 
+	timing(center_x, center_y, side);
+
 	draw_Chronometer_text(center_x, center_y, side);
 
 	check_mouse(center_x, center_y, side);
@@ -666,5 +895,6 @@ void draw_Chronometer(double center_x, double center_y, double side)
 	//判断状态是否发生变化
 	if (!(GetAsyncKeyState(0x04) & 0x8000)) {
 		state = 0;
+		timestate = 0;
 	}
 }
