@@ -9,7 +9,7 @@ void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side);
 void draw_PFD_standby_Compass(double center_x, double center_y, double side);
 void draw_standy_alt(double center_x, double center_y, double side);
 void draw_standy_airSpeed(double center_x, double center_y, double side);
-void draw_PFD_standby_else();
+//void draw_PFD_standby_else();
 void draw_smallpfd_frame(double center_x, double center_y, double side);
 
 //引用全局变量
@@ -19,6 +19,8 @@ extern double sideSlipAngle;
 extern double headingIndication;
 extern double glideIndication;
 extern double altitude;
+extern double rotationangle;
+extern double airSpeed;
 
 //935 655 575
 
@@ -26,19 +28,19 @@ extern double altitude;
 void draw_PFD_standby(double PFD_x, double PFD_y, double PFD_side){
 	
 	//绘制备用PFD姿态仪
-	draw_PFD_standby_AI(PFD_x, PFD_y, PFD_side);
+	draw_PFD_standby_AI(PFD_x+PFD_side/30, PFD_y+PFD_side/30, PFD_side*1.1);
 //	
 //	//绘制备用PFD罗盘
-	draw_PFD_standby_Compass(PFD_x, PFD_y + 2 * PFD_side, PFD_side * 3);
+	draw_PFD_standby_Compass(PFD_x+PFD_side/40, PFD_y + 2.2 * PFD_side, PFD_side * 3.4);
 	
 	//绘制备用PFD高度
-	draw_standy_alt(PFD_x + 0.8 * PFD_side, PFD_y, PFD_side / 2);
+	draw_standy_alt(PFD_x + 0.94 * PFD_side, PFD_y, PFD_side / 1.7);
 	
 	//绘制备用PFD空速
-	draw_standy_airSpeed(PFD_x - 0.8 * PFD_side, PFD_y, PFD_side / 2);
+	draw_standy_airSpeed(PFD_x - 0.8 * PFD_side, PFD_y, PFD_side / 1.65);
 	
 	//绘制PFD边框
-	draw_smallpfd_frame(PFD_x, PFD_y + 3 * PFD_side, PFD_side * 2);
+	draw_smallpfd_frame(PFD_x + PFD_side/20, PFD_y +PFD_side/20, PFD_side*2.3);
 }
 
 
@@ -804,7 +806,7 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 	setlinewidth(single / 2);
 	setcolor(BLACK);
 	ege_ellipse(
-		center_x + (45) * single, center_y + (45 + single * 2.1) * single,
+		center_x + (44.5) * single, center_y + (45 + single * 2.1) * single,
 		single * 25, single * 25
 		);
 	
@@ -817,18 +819,19 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 	draw_black_sign2(center_x - 80 * single, center_y - (29) * single, single);
 	
 	// 文字显示
+	// 因为在小熊猫上会字体偏移所以改正
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	setfont(single * 10, 0, "黑体");
+	setfont(single * 9, 0, "黑体");
 	setcolor(EGEARGB(0xff, 136, 97, 67));
-	ege_drawtext("APP", center_x - 29 * single, center_y - (75) * single);
-	ege_drawtext("HP/IN", center_x + 29 * single, center_y - (75) * single);
-	ege_drawtext("-", center_x - 80 * single, center_y + (29) * single);
-	ege_drawtext("-", center_x - 80 * single, center_y - (29) * single);
-	ege_drawtext("RST", center_x - 29 * single, center_y + (77) * single);
+	ege_drawtext("APP", center_x - 38 * single, center_y - (80) * single);
+	ege_drawtext("HP/IN", center_x + 16 * single, center_y - (80) * single);
+	ege_drawtext("-", center_x - 84 * single, center_y + (25) * single);
+	ege_drawtext("+", center_x - 84 * single, center_y - (32) * single);
+	ege_drawtext("RST", center_x - 38 * single, center_y + (72) * single);
 	setfont(single * 8, 0, "黑体");
-	ege_drawtext("ATT", center_x - 53 * single, center_y + (75) * single);
-	ege_drawtext("RARO", center_x + 31 * single, center_y + (75) * single);
+	ege_drawtext("ATT", center_x - 63 * single, center_y + (71) * single);
+	ege_drawtext("RARO", center_x + 24 * single, center_y + (71) * single);
 }
 
 
