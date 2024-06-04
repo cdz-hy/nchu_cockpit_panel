@@ -337,7 +337,7 @@ void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side){
 	//利用四个矩形遮盖为矩形(正常遮盖)
 	setfillcolor(BLACK);
 	ege_fillrect(AI_x - 1.2 * AI_r, AI_y - 1.2 * AI_r, 2.4 * AI_r, 1.2 * AI_r - AI_side);
-	ege_fillrect(AI_x - 1.2 * AI_r, AI_y + 1 * AI_side, 2.4 * AI_r, 1.2 * AI_r - AI_side);
+	ege_fillrect(AI_x - 1.2 * AI_r, AI_y + 0.92 * AI_side, 2.4 * AI_r, 1.2 * AI_r - AI_side);
 	ege_fillrect(AI_x - 1.2 * AI_r, AI_y - 1.2 * AI_r, 1.32 * AI_r - AI_side , 2.4 * AI_r);
 	ege_fillrect(AI_x + 0.88 * AI_side, AI_y - 1.2 * AI_r, 1.32 * AI_r - AI_side , 2.4 * AI_r);
 	
@@ -818,20 +818,37 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 	draw_black_sign2(center_x - 80 * single, center_y + (29) * single, single);
 	draw_black_sign2(center_x - 80 * single, center_y - (29) * single, single);
 	
+//	// 文字显示
+//	// 因为在小熊猫上会字体偏移所以改正
+//	setbkmode(TRANSPARENT);
+//	settextjustify(CENTER_TEXT, CENTER_TEXT);
+//	setfont(single * 9, 0, "黑体");
+//	setcolor(EGEARGB(0xff, 136, 97, 67));
+//	ege_drawtext("APP", center_x - 38 * single, center_y - (80) * single);
+//	ege_drawtext("HP/IN", center_x + 16 * single, center_y - (80) * single);
+//	ege_drawtext("-", center_x - 84 * single, center_y + (25) * single);
+//	ege_drawtext("+", center_x - 84 * single, center_y - (32) * single);
+//	ege_drawtext("RST", center_x - 38 * single, center_y + (72) * single);
+//	setfont(single * 8, 0, "黑体");
+//	ege_drawtext("ATT", center_x - 63 * single, center_y + (71) * single);
+//	ege_drawtext("RARO", center_x + 24 * single, center_y + (71) * single);
+	
 	// 文字显示
-	// 因为在小熊猫上会字体偏移所以改正
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	setfont(single * 9, 0, "黑体");
+	setfont(single * 10, 0, "黑体");
 	setcolor(EGEARGB(0xff, 136, 97, 67));
-	ege_drawtext("APP", center_x - 38 * single, center_y - (80) * single);
-	ege_drawtext("HP/IN", center_x + 16 * single, center_y - (80) * single);
-	ege_drawtext("-", center_x - 84 * single, center_y + (25) * single);
-	ege_drawtext("+", center_x - 84 * single, center_y - (32) * single);
-	ege_drawtext("RST", center_x - 38 * single, center_y + (72) * single);
+	ege_drawtext("APP", center_x - 29 * single, center_y - (75) * single);
+	ege_drawtext("HP/IN", center_x + 29 * single, center_y - (75) * single);
+	ege_drawtext("-", center_x - 80 * single, center_y + (29) * single);
+	ege_drawtext("+", center_x - 80 * single, center_y - (29) * single);
+	ege_drawtext("RST", center_x - 29 * single, center_y + (77) * single);
 	setfont(single * 8, 0, "黑体");
-	ege_drawtext("ATT", center_x - 63 * single, center_y + (71) * single);
-	ege_drawtext("RARO", center_x + 24 * single, center_y + (71) * single);
+	ege_drawtext("ATT", center_x - 53 * single, center_y + (75) * single);
+	ege_drawtext("RARO", center_x + 31 * single, center_y + (75) * single);
+
+	
+	
 }
 
 

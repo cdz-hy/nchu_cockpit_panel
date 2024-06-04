@@ -1,1 +1,0 @@
-void draw_PFD_compass(double compass_x, double compass_y, double side);

@@ -2,68 +2,104 @@
 
 //==========以下为飞行参数==========//
 
-double pitchAngle = 0;
-double rollAngle = 0;
-double sideSlipAngle = 0;
-double headingIndication = 0;
-double glideIndication = 0;
+extern double pitchAngle;
+extern double rollAngle;
+extern double sideSlipAngle;
+extern double headingIndication;
+extern double glideIndication;
+extern double ndtoprotationangle;
 
-double RCDI_speed = 0;
-double verticalRate = 0;
-double RNG = 56;//初始显示RNG 5
+extern double RCDI_speed;
+extern double verticalRate;
+extern double RNG;//初始显示RNG 5
 
-double altitude = 0;
-double MILLIBARS_data = 0;
-double INGH_data = 0;
+extern double altitude;
+extern double MILLIBARS_data;
+extern double INGH_data;
+extern double indicated_number;
 
-double airSpeed = 0;
-double vmo_speed = 0;
+extern double airSpeed;
+extern double vmo_speed;
+extern double airSpeed_acceleration;
+extern double airSpeed_mach;
+extern double airSpeed_instruction;
 
-double rotationangle = 0;
+extern double rotationangle;
 //double pointrotationangle = 0; 
-double compass_angle_original_data = 0;
+extern double compass_angle_original_data;
+extern int course;
+extern int HDGMAG;
 
-double RMI_point_angle_1 = 0;
-double RMI_point_angle_2 = 0;
+extern double RMI_point_angle_1;
+extern double RMI_point_angle_2;
+extern int RMI_change;//左按钮变化
+extern int RMI_change_1;//右按钮变化
+
+//发动机相关
+extern double Oangle_1;
+extern double Oangle_2;
+extern double fanSpeed;
+extern double gastemp;
+extern double FuelFlowSpeed;
+extern double Fuelrest_1;
+extern double Fuelrest_2;
+extern double Fuelrest_3;
+extern double Fuelrest_total;
+
+//时间相关
+extern int hour1;
+extern int minute1;
+extern int month1;
+extern int date1;
+extern int hour2;
+extern int minute2;
+extern int month2;
+extern int date2;
+
 
 //临时
-double angle = 0;
+extern double angle;
 
+extern double Anum;
 
 
 //==================================//
 
 //==========以下为设置相关==========//
 
+//当前界面	0为默认六个机械仪表
+extern int show;
+
+extern int ND_choice;
 
 //默认画布大小
-int height = 800;
-int length = 1200;
+extern int height;
+extern int length;
 
 //默认显示背景
-int is_showbk = 1;
+extern int is_showbk;
 
 //默认不开启UDP通信
-int UDP_transmission = 0;
+extern int UDP_transmission;
 
 //初始IP地址和端口
-char *IP_address = "192.168.0.0";
-int UDP_port = 49001;
+extern char *IP_address;
+extern int UDP_port;
 
 //展示FPS
-int showFPS = 1;
+extern int showFPS;
 
 //表盘灯光效果
-int G_light = 0x00;
+extern int G_light;
 
 
 //==================================//
 
 //==========以下为警告信息==========//
 
-int alert_pullup = 0;
-int alert_beloGS = 0;
-int alert_ALT = 0;
-int alert_MDA = 0;
-int alert_autoPilot = 0;
+extern int alert_pullup;
+extern int alert_beloGS;
+extern int alert_ALT;
+extern int alert_MDA;
+extern int alert_autoPilot;
 

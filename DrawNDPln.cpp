@@ -1,3 +1,7 @@
+# include <stdio.h>
+# include <graphics.h>
+# include <math.h>
+
 void draw_ND_pln(double center_x, double center_y, double side) {
 	
 	side = side / 2;

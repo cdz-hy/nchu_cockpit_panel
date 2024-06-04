@@ -84,7 +84,8 @@ void draw_frame(double center_x, double center_y, double side) {
 }
 
 
-void Draw_PFD_frame(double PFDframe_x, double PFDframe_y, double side) {
+void draw_PFD_frame(double PFDframe_x, double PFDframe_y, double side) {
+	
 	double Ulength = side / 96;
 	double linewidth = side / 96 * 2;
 	
@@ -94,22 +95,30 @@ void Draw_PFD_frame(double PFDframe_x, double PFDframe_y, double side) {
 	
 	setcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
 	setlinewidth(linewidth);
-	int Frame_num3 = 4;//最外层
-	ege_point Frame_ploypoints3[4] = {
-		{PFDframe_x - Ulength * 61.5 , PFDframe_y - Ulength * 59},
-		{PFDframe_x + Ulength * 61.5 , PFDframe_y - Ulength * 59},
-		{PFDframe_x + Ulength * 61.5 , PFDframe_y + Ulength * 51.5},
-		{PFDframe_x - Ulength * 61.5 , PFDframe_y + Ulength * 51.5},
+	int Frame_num3 = 13;//最外层
+	ege_point Frame_ploypoints3[13] = {
+		{PFDframe_x - Ulength * 60.5 , PFDframe_y - Ulength * 59},
+		{PFDframe_x + Ulength * 60.5 , PFDframe_y - Ulength * 59},
+		{PFDframe_x + Ulength * 60.5 , PFDframe_y - Ulength * 59},
+		{PFDframe_x + Ulength * 60.5 , PFDframe_y - Ulength * 59},
+		
+		{PFDframe_x + Ulength * 60.5 , PFDframe_y + Ulength * 51.5},
+		{PFDframe_x + Ulength * 60.5 , PFDframe_y + Ulength * 51.5},
+		{PFDframe_x + Ulength * 60.5 , PFDframe_y + Ulength * 51.5},
+		
+		{PFDframe_x - Ulength * 60.5 , PFDframe_y + Ulength * 51.5},
+		{PFDframe_x - Ulength * 60.5 , PFDframe_y + Ulength * 51.5},
+		{PFDframe_x - Ulength * 60.5 , PFDframe_y + Ulength * 51.5},
+		
+		{PFDframe_x - Ulength * 60.5 , PFDframe_y - Ulength * 60},
+		{PFDframe_x - Ulength * 60.5 , PFDframe_y - Ulength * 60},
+		{PFDframe_x - Ulength * 60.5 , PFDframe_y - Ulength * 60},
 	};
-	ege_setpattern_lineargradient(PFDframe_x + Ulength * 61.5, PFDframe_y - Ulength * 59, EGEARGB(0XFF, 0X1A, 0X1F, 0X23),
-		PFDframe_x - Ulength * 61.5, PFDframe_y + Ulength * 51.5, EGEARGB(0XFF, 0X15, 0X1A, 0X1E));
-	setfillcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
-	ege_fillpoly(Frame_num3, Frame_ploypoints3);
-	ege_setpattern_none();
+	
+	ege_bezier(Frame_num3, Frame_ploypoints3);
 	
 	
-	
-	setcolor(EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	setcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
 	setlinewidth(linewidth);
 	int Frame_num2 = 25;//中间层
 	ege_point Frame_ploypoints2[25] = {
@@ -147,15 +156,66 @@ void Draw_PFD_frame(double PFDframe_x, double PFDframe_y, double side) {
 		{PFDframe_x - Ulength * 54.5 , PFDframe_y - Ulength * 51}
 	};
 	ege_bezier(Frame_num2, Frame_ploypoints2);
+	setfillcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x + Ulength * 59.5, PFDframe_y - Ulength * 52, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x - Ulength * 59.5, PFDframe_y - Ulength * 52, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x - Ulength * 59.5, PFDframe_y + Ulength * 52, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x + Ulength * 59.5, PFDframe_y + Ulength * 52, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x + Ulength * 59.5, PFDframe_y - Ulength * 13, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x - Ulength * 59.5, PFDframe_y - Ulength * 13, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x - Ulength * 59.5, PFDframe_y + Ulength * 13, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x + Ulength * 59.5, PFDframe_y + Ulength * 13, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x + Ulength * 15, PFDframe_y - Ulength * 55, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x - Ulength * 15, PFDframe_y - Ulength * 55, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x - Ulength * 15, PFDframe_y + Ulength * 52, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x + Ulength * 15, PFDframe_y + Ulength * 52, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	
+	
+	
+	
+	setcolor(EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	setlinewidth(linewidth / 2);
+	int Frame_num4 = 25;//中间层
+	ege_point Frame_ploypoints4[25] = {
+		{PFDframe_x - Ulength * 54.5 , PFDframe_y - Ulength * 50},
+		{PFDframe_x - Ulength * 54 , PFDframe_y - Ulength * 52},
+		{PFDframe_x - Ulength * 53 , PFDframe_y - Ulength * 52.5},
+		{PFDframe_x - Ulength * 51.5, PFDframe_y - Ulength * 52},
+		
+		{PFDframe_x + Ulength * 51.5, PFDframe_y - Ulength * 52},
+		{PFDframe_x + Ulength * 51.5, PFDframe_y - Ulength * 52},
+		{PFDframe_x + Ulength * 51.5, PFDframe_y - Ulength * 52},
+		
+		{PFDframe_x + Ulength * 53 , PFDframe_y - Ulength * 52.5},
+		{PFDframe_x + Ulength * 54 , PFDframe_y - Ulength * 52},
+		{PFDframe_x + Ulength * 54.5 , PFDframe_y - Ulength * 50},
+		
+		{PFDframe_x + Ulength * 54.5 , PFDframe_y + Ulength * 46},
+		{PFDframe_x + Ulength * 54.5 , PFDframe_y + Ulength * 46},
+		{PFDframe_x + Ulength * 54.5 , PFDframe_y + Ulength * 46},
+		
+		{PFDframe_x + Ulength * 54 , PFDframe_y + Ulength * 48},
+		{PFDframe_x + Ulength * 53 , PFDframe_y + Ulength * 48.5},
+		{PFDframe_x + Ulength * 51.5, PFDframe_y + Ulength * 49},
+		
+		{PFDframe_x - Ulength * 51.5, PFDframe_y + Ulength * 49},
+		{PFDframe_x - Ulength * 51.5, PFDframe_y + Ulength * 49},
+		{PFDframe_x - Ulength * 51.5, PFDframe_y + Ulength * 49},
+		
+		{PFDframe_x - Ulength * 53 , PFDframe_y + Ulength * 48.5},
+		{PFDframe_x - Ulength * 54 , PFDframe_y + Ulength * 48},
+		{PFDframe_x - Ulength * 54.5 , PFDframe_y + Ulength * 46},
+		
+		{PFDframe_x - Ulength * 54.5 , PFDframe_y - Ulength * 51},
+		{PFDframe_x - Ulength * 54.5 , PFDframe_y - Ulength * 51},
+		{PFDframe_x - Ulength * 54.5 , PFDframe_y - Ulength * 51}
+	};
+	ege_bezier(Frame_num4, Frame_ploypoints4);
 	setfillcolor(EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
-	floodfill(PFDframe_x, PFDframe_y, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
 	
 	
-	
-	
-	
-	setcolor(EGEARGB(0XFF, 0X00, 0X00, 0X00));
-	setlinewidth(linewidth);
+	setcolor(EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	setlinewidth(linewidth / 2);
 	//最里面一层
 	int Frame_num1 = 25;
 	ege_point Frame_ploypoints1[25] = {
@@ -195,20 +255,24 @@ void Draw_PFD_frame(double PFDframe_x, double PFDframe_y, double side) {
 		
 	};
 	ege_bezier(Frame_num1, Frame_ploypoints1);
-	setfillcolor(EGEARGB(0XFF, 0X00, 0X00, 0X00));
-	floodfill(PFDframe_x, PFDframe_y, EGEARGB(0XFF, 0X00, 0X00, 0X00));
-	
-	
-	
-	
-	
-	
-	
+	setfillcolor(EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	floodfill(PFDframe_x - Ulength * 53.5, PFDframe_y - Ulength * 45, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	floodfill(PFDframe_x + Ulength * 53.5, PFDframe_y - Ulength * 45, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	floodfill(PFDframe_x - Ulength * 53.5, PFDframe_y + Ulength * 44, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	floodfill(PFDframe_x + Ulength * 53.5, PFDframe_y + Ulength * 44, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	floodfill(PFDframe_x - Ulength * 13.5, PFDframe_y - Ulength * 51, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	floodfill(PFDframe_x + Ulength * 13.5, PFDframe_y - Ulength * 51, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	floodfill(PFDframe_x - Ulength * 13.5, PFDframe_y + Ulength * 48, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	floodfill(PFDframe_x + Ulength * 13.5, PFDframe_y + Ulength * 48, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	floodfill(PFDframe_x - Ulength * 53.5, PFDframe_y - Ulength * 12, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	floodfill(PFDframe_x + Ulength * 53.5, PFDframe_y - Ulength * 12, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	floodfill(PFDframe_x + Ulength * 53.5, PFDframe_y + Ulength * 12, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	floodfill(PFDframe_x - Ulength * 53.5, PFDframe_y + Ulength * 12, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
 	
 	ege_enable_aa(true);
 	
 	setcolor(EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
-	setlinewidth(linewidth * 1.5);
+	setlinewidth(linewidth / 2 );
 	int Frame_num2_1 = 25;
 	ege_point Frame_ploypoints2_1[25] = {
 		{PFDframe_x - Ulength * 54.5 , PFDframe_y - Ulength * 50},
@@ -248,8 +312,8 @@ void Draw_PFD_frame(double PFDframe_x, double PFDframe_y, double side) {
 	
 	
 	
-	setcolor(EGEARGB(0XFF, 0X00, 0X00, 0X00));
-	setlinewidth(linewidth * 1.5);
+	setcolor(EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	setlinewidth(linewidth * 0.6);
 	//最里面一层
 	int Frame_num1_1 = 25;
 	ege_point Frame_ploypoints1_1[25] = {
@@ -289,6 +353,11 @@ void Draw_PFD_frame(double PFDframe_x, double PFDframe_y, double side) {
 		
 	};
 	ege_bezier(Frame_num1_1, Frame_ploypoints1_1);
+	
+	ege_setpattern_lineargradient(PFDframe_x, PFDframe_y + Ulength * 61.5, EGEARGB(0XFF, 0X00, 0X00, 0X00),
+		PFDframe_x, PFDframe_y + Ulength * 47, EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
+	ege_fillrect(PFDframe_x - Ulength * 61.5, PFDframe_y + Ulength * 47, Ulength * 123, Ulength * 14.5);
+	ege_setpattern_none();
 	
 	setfillcolor(EGEARGB(0XFF, 0X18, 0X1C, 0X20));
 	int Frame_num_left = 12;//底下左边
@@ -330,10 +399,7 @@ void Draw_PFD_frame(double PFDframe_x, double PFDframe_y, double side) {
 	
 	
 	
-	ege_setpattern_lineargradient(PFDframe_x , PFDframe_y + Ulength * 51.5 , EGEARGB(0XDF, 0X00, 0X00, 0X00) , 
-		PFDframe_x, PFDframe_y + Ulength * 47 ,EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
-	ege_fillrect(PFDframe_x - Ulength * 61.5, PFDframe_y + Ulength * 47, Ulength * 123, Ulength * 4.5);
-	ege_setpattern_none();
+	
 	
 	setcolor(EGEARGB(0X40, 0X40, 0X40, 0X40));
 	setlinewidth(linewidth / 3);
@@ -356,5 +422,7 @@ void Draw_PFD_frame(double PFDframe_x, double PFDframe_y, double side) {
 	ege_line(PFDframe_x - Ulength * 61.5, PFDframe_y + Ulength * 51.5, PFDframe_x - Ulength * 61.5, PFDframe_y + Ulength * 61.5);
 	ege_line(PFDframe_x - Ulength * 61.5, PFDframe_y + Ulength * 61.5, PFDframe_x - Ulength * 21.5, PFDframe_y + Ulength * 61.5);
 	ege_line(PFDframe_x - Ulength * 20.5, PFDframe_y + Ulength * 61.5, PFDframe_x + Ulength * 61.5, PFDframe_y + Ulength * 61.5);
+	
+	
 }
 

@@ -13,6 +13,10 @@ extern int alert_autoPilot;
 
 
 void draw_back(double center_x, double center_y, double unitLength) {
+	
+	
+	setfont(0,0,"微软雅黑");
+	
 	setcolor(BLACK);
 	setlinewidth(unitLength / 10);
 	ege_line(center_x - unitLength * 24, center_y - unitLength * 14, center_x - unitLength * 5, center_y - unitLength * 16);

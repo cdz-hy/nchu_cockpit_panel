@@ -22,6 +22,8 @@ double compass_temp_data1 = 0;
 double datarotationangle = 0;//表示旋钮控制左上角显示屏上数字的增加值
 double realrotationangle = 0;
 
+extern int G_light;
+
 //画出表盘下方两个旋钮
 void draw_downbotten(double realrotationangle, int compass_x, int compass_y, int compass_r) {
 	//左侧旋钮
