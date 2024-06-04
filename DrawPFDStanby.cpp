@@ -31,13 +31,13 @@ void draw_PFD_standby(double PFD_x, double PFD_y, double PFD_side){
 	draw_PFD_standby_AI(PFD_x+PFD_side/30, PFD_y+PFD_side/30, PFD_side*1.1);
 //	
 //	//绘制备用PFD罗盘
-	draw_PFD_standby_Compass(PFD_x+PFD_side/40, PFD_y + 2.2 * PFD_side, PFD_side * 3.4);
+	draw_PFD_standby_Compass(PFD_x+PFD_side/40, PFD_y + 2.22 * PFD_side, PFD_side * 3.4);
 	
 	//绘制备用PFD高度
-	draw_standy_alt(PFD_x + 0.94 * PFD_side, PFD_y, PFD_side / 1.7);
+	draw_standy_alt(PFD_x + 0.94 * PFD_side, PFD_y + 0.02 * PFD_side, PFD_side / 1.7);
 	
 	//绘制备用PFD空速
-	draw_standy_airSpeed(PFD_x - 0.8 * PFD_side, PFD_y, PFD_side / 1.65);
+	draw_standy_airSpeed(PFD_x - 0.8 * PFD_side, PFD_y + 0.02 * PFD_side, PFD_side / 1.65);
 	
 	//绘制PFD边框
 	draw_smallpfd_frame(PFD_x + PFD_side/20, PFD_y +PFD_side/20, PFD_side*2.3);
@@ -375,25 +375,26 @@ void draw_PFD_Compass_frame(double center_x, double center_y, double side)
 	coverpoly[1].y = center_y - r + side * 9 / 126;
 	
 	coverpoly[2].x = center_x - r + side * 79 / 126;
-	coverpoly[2].y = center_y - r + 6 * side / 126;
+	coverpoly[2].y = center_y - r + 7.7 * side / 126;
 	
-	coverpoly[3].x = center_x - r + side * 59 / 126;
-	coverpoly[3].y = center_y - r + side / 126;
+	coverpoly[3].x = center_x - r + side * 66 / 126;
+	coverpoly[3].y = center_y - r + 1.5 * side / 126;
 	
 	coverpoly[4].x = center_x;
-	coverpoly[4].y = center_y - 1.05 * r;
+	coverpoly[4].y = center_y - r;
 	
-	coverpoly[5].x = center_x - r + side * 43 / 126;
-	coverpoly[5].y = center_y - r + side / 126;
+	coverpoly[5].x = center_x - r + side * 36 / 126;
+	coverpoly[5].y = center_y - r + 1.5 * side / 126;
 	
 	coverpoly[6].x = center_x - r + side * 23 / 126;
-	coverpoly[6].y = center_y - r + 6 * side / 126;
+	coverpoly[6].y = center_y - r + 8.1 * side / 126;
 	
 	ege_fillpoly(7, coverpoly);
 	
 	for (int i = 0; i <= 5; i++)
 	{
 		setcolor(BLACK);
+		setlinewidth(r * 0.01);
 		ege_arc(center_x - r, center_y - r - r * 0.01 * i, r * 2, r * 2, -56.0, -68.0);
 	}
 	
@@ -441,13 +442,13 @@ void draw_PFD_compass_text(double compass_x, double compass_y, double side)
 	{
 		double textAngle = realrotationangle4 + i;
 		double rad = textAngle * PI / 180.0;
-		double textPosX = compass_x + 0.9 * compass_r * sin(rad);
-		double textPosY = compass_y - 0.9 * compass_r * cos(rad);
+		double textPosX = compass_x + 0.89 * compass_r * sin(rad);
+		double textPosY = compass_y - 0.89 * compass_r * cos(rad);
 		
 		//设置文字的格式
 		LOGFONTW font;
 		setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));
-		setfont(compass_r * 0.14, 0, "Leelawadee");
+		setfont(compass_r * 0.15, 0, "Leelawadee");
 		settextjustify(CENTER_TEXT, CENTER_TEXT);
 		getfont(&font);
 		font.lfEscapement = -textAngle * 10;
@@ -478,7 +479,7 @@ void draw_PFD_compass_text(double compass_x, double compass_y, double side)
 			//设置文字的格式
 			LOGFONTW font;
 			setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));
-			setfont(compass_r * 0.11, 0, "Leelawadee");
+			setfont(compass_r * 0.10, 0, "Leelawadee");
 			settextjustify(CENTER_TEXT, CENTER_TEXT);
 			getfont(&font);
 			font.lfEscapement = -textAngle * 10;
@@ -506,7 +507,7 @@ void draw_PFD_course(double center_x, double center_y, double side)
 	ege_point triangle[4];
 	
 	triangle[0].x = center_x;
-	triangle[0].y = center_y - side * 49.7 / 126;
+	triangle[0].y = center_y - side * 48.7 / 126;
 	
 	triangle[1].x = center_x - side * 2.5 / 126;
 	triangle[1].y = center_y - side * 52.7 / 126;
@@ -515,7 +516,7 @@ void draw_PFD_course(double center_x, double center_y, double side)
 	triangle[2].y = center_y - side * 52.7 / 126;
 	
 	triangle[3].x = center_x;
-	triangle[3].y = center_y - side * 49.7 / 126;
+	triangle[3].y = center_y - side * 48.7 / 126;
 	
 	ege_drawpoly(4, triangle);
 }
@@ -533,6 +534,7 @@ void draw_PFD_standby_Compass(double center_x, double center_y, double side)
 	
 	draw_PFD_course(center_x, center_y, side);
 }
+
 
 
 //===================================================================================================//
