@@ -1,4 +1,4 @@
-# include <stdio.h>
+ï»¿# include <stdio.h>
 # include <graphics.h>
 # include <math.h>
 
@@ -18,12 +18,12 @@ int minute3 = 0;
 int seconds = 0;
 int setstate = 0;
 
-//»­¼ÆÊ±Æ÷µÄÍâ¿ò
+//ç”»è®¡æ—¶å™¨çš„å¤–æ¡†
 void draw_ChronometerFrame(double center_x, double center_y, double side)
 {
 	double chronometer_r = side * 43 / 108;
 
-	//Íâ¿òµÚÒ»²ã
+	//å¤–æ¡†ç¬¬ä¸€å±‚
 	setfillcolor(EGEARGB(0xff, 0x13, 0x15, 0x18));
 	ege_point chronometerframe1[9];
 
@@ -56,7 +56,7 @@ void draw_ChronometerFrame(double center_x, double center_y, double side)
 
 	ege_fillpoly(9, chronometerframe1);
 
-	//Íâ¿òµÚ¶ş²ã
+	//å¤–æ¡†ç¬¬äºŒå±‚
 	ege_setpattern_lineargradient(center_x - chronometer_r, center_y - chronometer_r, EGEARGB(0xff, 0x1C, 0x1E, 0x20), center_x + chronometer_r, center_y + chronometer_r, EGEARGB(0xff, 0x02, 0x03, 0x03));
 	ege_point chronometerframe2[9];
 
@@ -90,7 +90,7 @@ void draw_ChronometerFrame(double center_x, double center_y, double side)
 	ege_fillpoly(9, chronometerframe2);
 	ege_setpattern_none();
 
-	//Íâ¿ò×îÄÚ²ã
+	//å¤–æ¡†æœ€å†…å±‚
 	setfillcolor(BLACK);
 	ege_point chronometerframe3[9];
 	chronometerframe3[0].x = center_x - side * 42 / 108;
@@ -123,12 +123,12 @@ void draw_ChronometerFrame(double center_x, double center_y, double side)
 	ege_fillpoly(9, chronometerframe3);
 }
 
-//»­¼¸¸ö°´Å¥
+//ç”»å‡ ä¸ªæŒ‰é’®
 void draw_Chronometer_buttons(double center_x, double center_y, double side)
 {
-	//°´Å¥1µÄÆ«×ª½Ç¶È
+	//æŒ‰é’®1çš„åè½¬è§’åº¦
 	double Rad1 = -45 * PI / 180;
-	//°´Å¥1µÄÒõÓ°Ğ§¹û
+	//æŒ‰é’®1çš„é˜´å½±æ•ˆæœ
 	setfillcolor(EGEARGB(0xff, 0x1C, 0x1E, 0x20));
 	ege_point button1shadow[5];
 
@@ -149,7 +149,7 @@ void draw_Chronometer_buttons(double center_x, double center_y, double side)
 
 	ege_fillpoly(5, button1shadow);
 
-	//×óÉÏ½ÇµÄ°´Å¥
+	//å·¦ä¸Šè§’çš„æŒ‰é’®
 	setfillcolor(BLACK);
 	ege_point button1[5];
 
@@ -170,12 +170,12 @@ void draw_Chronometer_buttons(double center_x, double center_y, double side)
 
 	ege_fillpoly(5, button1);
 
-	//°´Å¥2£¬3µÄÆ«×ª½Ç¶È
+	//æŒ‰é’®2ï¼Œ3çš„åè½¬è§’åº¦
 	double Rad2 = 45 * PI / 180;
-	//°´Å¥2£¬3µÄÒõÓ°Ğ§¹û
+	//æŒ‰é’®2ï¼Œ3çš„é˜´å½±æ•ˆæœ
 
 
-	//ÓÒÉÏ½ÇµÄ°´Å¥
+	//å³ä¸Šè§’çš„æŒ‰é’®
 	setfillcolor(BLACK);
 	ege_point button2[5];
 
@@ -215,12 +215,12 @@ void draw_Chronometer_buttons(double center_x, double center_y, double side)
 
 	ege_fillpoly(5, button3);
 
-	//°´Å¥4£¬5µÄÆ«×ª½Ç¶È
+	//æŒ‰é’®4ï¼Œ5çš„åè½¬è§’åº¦
 	Rad2 = 135 * PI / 180;
-	//°´Å¥4£¬5µÄÒõÓ°Ğ§¹û
+	//æŒ‰é’®4ï¼Œ5çš„é˜´å½±æ•ˆæœ
 
 
-	//ÓÒÏÂ½ÇµÄ°´Å¥
+	//å³ä¸‹è§’çš„æŒ‰é’®
 	setfillcolor(BLACK);
 	//ege_point button2[5];
 
@@ -260,12 +260,12 @@ void draw_Chronometer_buttons(double center_x, double center_y, double side)
 
 	ege_fillpoly(5, button3);
 
-	//°´Å¥6£¬7µÄÆ«×ª½Ç¶È
+	//æŒ‰é’®6ï¼Œ7çš„åè½¬è§’åº¦
 	Rad2 = 225 * PI / 180;
-	//°´Å¥6£¬7µÄÒõÓ°Ğ§¹û
+	//æŒ‰é’®6ï¼Œ7çš„é˜´å½±æ•ˆæœ
 
 
-	//ÓÒÉÏ½ÇµÄ°´Å¥
+	//å³ä¸Šè§’çš„æŒ‰é’®
 	setfillcolor(BLACK);
 	//ege_point button2[5];
 
@@ -306,33 +306,33 @@ void draw_Chronometer_buttons(double center_x, double center_y, double side)
 	ege_fillpoly(5, button3);
 }
 
-//»­¿Ì¶È
+//ç”»åˆ»åº¦
 void draw_Chronometer_Scale(double center_x, double center_y, double side)
 {
 	double r = 36 * side / 108;
 
-	//¶Ì¿Ì¶È
+	//çŸ­åˆ»åº¦
 	for (int i = 6; i < 360; i += 6)
 	{
 		if (i % 30 != 0)
 		{
-			setlinewidth(r * 0.018);//ÉèÖÃÏß¿í
-			setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));//ÉèÖÃÏßµÄÑÕÉ«
+			setlinewidth(r * 0.018);//è®¾ç½®çº¿å®½
+			setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));//è®¾ç½®çº¿çš„é¢œè‰²
 			double rad = i * PI / 180;
 			ege_line(r * 1.03 * sin(rad) + center_x, -r * 1.03 * cos(rad) + center_y, r * 0.92 * sin(rad) + center_x, -r * 0.92 * cos(rad) + center_y);
 		}
 	}
 
-	//³¤¿Ì¶È
+	//é•¿åˆ»åº¦
 	for (int i = 0; i < 360; i += 30)
 	{
-		setlinewidth(r * 0.02);//ÉèÖÃÏß¿í
-		setcolor(EGEARGB(0xaa, 0xff, 0xff, 0xff));//ÉèÖÃÏßµÄÑÕÉ«
+		setlinewidth(r * 0.02);//è®¾ç½®çº¿å®½
+		setcolor(EGEARGB(0xaa, 0xff, 0xff, 0xff));//è®¾ç½®çº¿çš„é¢œè‰²
 		double rad = i * PI / 180;
 		ege_line(r * 1.1 * sin(rad) + center_x, -r * 1.1 * cos(rad) + center_y, r * 0.92 * sin(rad) + center_x, -r * 0.92 * cos(rad) + center_y);
 	}
 
-	//¿Ì¶ÈÖµ
+	//åˆ»åº¦å€¼
 	for (int i = 0; i <= 360; i += 60)
 	{
 		//double textAngle = i;
@@ -341,7 +341,7 @@ void draw_Chronometer_Scale(double center_x, double center_y, double side)
 		double textPosY = center_y - 0.78 * r * cos(rad);
 
 		LOGFONT font;
-		setfont(side * 0.07, side * 0.037, "ºÚÌå");
+		setfont(side * 0.07, side * 0.037, "é»‘ä½“");
 		setcolor(EGEARGB(0x99, 0x99, 0x99, 0x99));
 		settextjustify(CENTER_TEXT, CENTER_TEXT);
 		getfont(&font);
@@ -356,7 +356,7 @@ void draw_Chronometer_Scale(double center_x, double center_y, double side)
 	}
 }
 
-//»­ÖĞ¼äµÄÊ±¼äÏÔÊ¾
+//ç”»ä¸­é—´çš„æ—¶é—´æ˜¾ç¤º
 void draw_Chronometer_time(double center_x, double center_y, double side)
 {
 	if (timestate == 0 && mod == -1)
@@ -533,7 +533,7 @@ void draw_Chronometer_time(double center_x, double center_y, double side)
 	}
 }
 
-//»­ÎÄ×Ö
+//ç”»æ–‡å­—
 void draw_Chronometer_text(double center_x, double center_y, double side)
 {
 	if (timestate == 0 && mod == -1)
@@ -546,15 +546,15 @@ void draw_Chronometer_text(double center_x, double center_y, double side)
 		getfont(&font);
 		font.lfWeight = 550;
 		setfont(&font);
-		//×óÉÏ½ÇµÄÎÄ×Ö
+		//å·¦ä¸Šè§’çš„æ–‡å­—
 		ege_drawtext("CHR", center_x - side * 28 / 108, center_y - side * 48 / 108);
-		//ÓÒÉÏ½ÇµÄÎÄ×Ö
+		//å³ä¸Šè§’çš„æ–‡å­—
 		ege_drawtext("TIME/DATE", center_x + side * 9 / 108, center_y - side * 48 / 108);
 		ege_drawtext("SET", center_x + side * 49 / 108, center_y - side * 20 / 108);
-		//×óÏÂ½ÇµÄÎÄ×Ö
+		//å·¦ä¸‹è§’çš„æ–‡å­—
 		ege_drawtext("ET", center_x - side * 49 / 108, center_y + side * 21 / 108);
 		ege_drawtext("RESET", center_x - side * 15.5 / 108, center_y + side * 49 / 108);
-		//ÓÒÏÂ½ÇµÄÎÄ×Ö
+		//å³ä¸‹è§’çš„æ–‡å­—
 		ege_drawtext("+", center_x + side * 48 / 108, center_y + side * 23 / 108);
 		ege_drawtext("-", center_x + side * 24 / 108, center_y + side * 49 / 108);
 
@@ -613,15 +613,15 @@ void draw_Chronometer_text(double center_x, double center_y, double side)
 		getfont(&font);
 		font.lfWeight = 550;
 		setfont(&font);
-		//×óÉÏ½ÇµÄÎÄ×Ö
+		//å·¦ä¸Šè§’çš„æ–‡å­—
 		ege_drawtext("CHR", center_x - side * 28 / 108, center_y - side * 48 / 108);
-		//ÓÒÉÏ½ÇµÄÎÄ×Ö
+		//å³ä¸Šè§’çš„æ–‡å­—
 		ege_drawtext("TIME/DATE", center_x + side * 9 / 108, center_y - side * 48 / 108);
 		ege_drawtext("SET", center_x + side * 49 / 108, center_y - side * 20 / 108);
-		//×óÏÂ½ÇµÄÎÄ×Ö
+		//å·¦ä¸‹è§’çš„æ–‡å­—
 		ege_drawtext("ET", center_x - side * 49 / 108, center_y + side * 21 / 108);
 		ege_drawtext("RESET", center_x - side * 15.5 / 108, center_y + side * 49 / 108);
-		//ÓÒÏÂ½ÇµÄÎÄ×Ö
+		//å³ä¸‹è§’çš„æ–‡å­—
 		ege_drawtext("+", center_x + side * 48 / 108, center_y + side * 23 / 108);
 		ege_drawtext("-", center_x + side * 24 / 108, center_y + side * 49 / 108);
 
@@ -637,7 +637,7 @@ void draw_Chronometer_text(double center_x, double center_y, double side)
 	}
 }
 
-//¼ì²âÊó±êÊÇ·ñÔÚÄ³ÇøÓòÄÚ°´ÏÂ
+//æ£€æµ‹é¼ æ ‡æ˜¯å¦åœ¨æŸåŒºåŸŸå†…æŒ‰ä¸‹
 void check_mouse(double center_x, double center_y, double side)
 {
 	int mouse_x;
@@ -646,7 +646,7 @@ void check_mouse(double center_x, double center_y, double side)
 	int mouse_x_real = mouse_x;
 	int mouse_y_real = mouse_y;
 
-	//ÅĞ¶ÏÊó±êÎ»ÖÃ
+	//åˆ¤æ–­é¼ æ ‡ä½ç½®
 	if (mouse_x_real >= center_x + side * 25 / 108 && mouse_x_real <= center_x + side * 40 / 108 && mouse_y_real <= center_y - side * 35 / 108 && mouse_y_real >= center_y - side * 50 / 108)
 	{
 		double Rad2 = 45 * PI / 180;
@@ -673,7 +673,7 @@ void check_mouse(double center_x, double center_y, double side)
 		ege_drawpoly(5, button2);
 	}
 
-	//ÅĞ¶ÏÊó±êÊÇ·ñµã»÷
+	//åˆ¤æ–­é¼ æ ‡æ˜¯å¦ç‚¹å‡»
 	if (GetAsyncKeyState(0x04) & 0x8000 && state == 0) {
 		mousepos(&mouse_x, &mouse_y);
 		mouse_x_real = mouse_x;
@@ -693,12 +693,13 @@ void check_mouse(double center_x, double center_y, double side)
 	}
 }
 
-//¼ÆÊ±Ä£Ê½
+//è®¡æ—¶æ¨¡å¼
 void timing(double center_x, double center_y, double side)
 {
 	static int timess;
-	static double moretime = 0;
-	double a = 0;
+	static double moretime;
+	static double a;
+	static double angle;
 	int mouse_x;
 	int mouse_y;
 	mousepos(&mouse_x, &mouse_y);
@@ -732,21 +733,21 @@ void timing(double center_x, double center_y, double side)
 				seconds = a - moretime;
 			}
 
-			double angle = a * 6 * PI / 180;
+			angle = (a - moretime) * 6 * PI / 180;
 
 			ege_point point[4];
 
-			point[0].x = -1 * side / 108 * cos(angle) + center_x;
-			point[0].y = -1 * side / 108 * sin(angle) + center_y;
+			point[0].x = -0.25 * side / 108 * cos(angle) - (-15 * side / 108 * sin(angle)) + center_x;
+			point[0].y = -15 * side / 108 * cos(angle) - 0.25 * side / 108 * sin(angle) + center_y;
 
-			point[1].x = 1 * side / 108 * cos(angle) + center_x;
-			point[1].y = 1 * side / 108 * sin(angle) + center_y;
+			point[1].x = 0.25 * side / 108 * cos(angle) - (-15 * side / 108 * sin(angle)) + center_x;
+			point[1].y = -15 * side / 108 * cos(angle) + 0.25 * side / 108 * sin(angle) + center_y;
 
-			point[2].x = 2 * side / 108 * cos(angle) - (-30 * side / 108 * sin(angle)) + center_x;
-			point[2].y = -30 * side / 108 * cos(angle) + 2 * side / 108 * sin(angle) + center_y;
+			point[2].x = 1 * side / 108 * cos(angle) - (-30 * side / 108 * sin(angle)) + center_x;
+			point[2].y = -30 * side / 108 * cos(angle) + 1 * side / 108 * sin(angle) + center_y;
 
-			point[3].x = -2 * side / 108 * cos(angle) - (-30 * side / 108 * sin(angle)) + center_x;
-			point[3].y = -30 * side / 108 * cos(angle) - 2 * side / 108 * sin(angle) + center_y;
+			point[3].x = -1 * side / 108 * cos(angle) - (-30 * side / 108 * sin(angle)) + center_x;
+			point[3].y = -30 * side / 108 * cos(angle) - 1 * side / 108 * sin(angle) + center_y;
 
 			setfillcolor(WHITE);
 			ege_fillpoly(4, point);
@@ -786,6 +787,23 @@ void timing(double center_x, double center_y, double side)
 		setfont(&font);
 		sprintf_s(str, "%02d", seconds);
 		outtextxy(center_x + side * 9 / 108, center_y - side * 10 / 108, str);
+
+		ege_point point[4];
+
+		point[0].x = -0.25 * side / 108 * cos(angle) - (-15 * side / 108 * sin(angle)) + center_x;
+		point[0].y = -15 * side / 108 * cos(angle) - 0.25 * side / 108 * sin(angle) + center_y;
+
+		point[1].x = 0.25 * side / 108 * cos(angle) - (-15 * side / 108 * sin(angle)) + center_x;
+		point[1].y = -15 * side / 108 * cos(angle) + 0.25 * side / 108 * sin(angle) + center_y;
+
+		point[2].x = 1 * side / 108 * cos(angle) - (-30 * side / 108 * sin(angle)) + center_x;
+		point[2].y = -30 * side / 108 * cos(angle) + 1 * side / 108 * sin(angle) + center_y;
+
+		point[3].x = -1 * side / 108 * cos(angle) - (-30 * side / 108 * sin(angle)) + center_x;
+		point[3].y = -30 * side / 108 * cos(angle) - 1 * side / 108 * sin(angle) + center_y;
+
+		setfillcolor(WHITE);
+		ege_fillpoly(4, point);
 	}
 	else if (mod == -1 && timestate == 1 && (minute3 == 0 && seconds == 0))
 	{
@@ -825,7 +843,6 @@ void timing(double center_x, double center_y, double side)
 		setfont(&font);
 		sprintf_s(str, "%02d", seconds);
 		outtextxy(center_x + side * 9 / 108, center_y - side * 10 / 108, str);
-
 	}
 
 
@@ -868,14 +885,13 @@ void timing(double center_x, double center_y, double side)
 				minute3 = 0;
 			}
 			timestate = 1;
+			moretime = fclock();
 		}
-		moretime = fclock();
 	}
-
 	timess = times;
 }
 
-//»­¾«ÃÜ¼ÆÊ±Æ÷
+//ç”»ç²¾å¯†è®¡æ—¶å™¨
 void draw_Chronometer(double center_x, double center_y, double side)
 {
 	draw_ChronometerFrame(center_x, center_y, side);
@@ -892,7 +908,7 @@ void draw_Chronometer(double center_x, double center_y, double side)
 
 	check_mouse(center_x, center_y, side);
 
-	//ÅĞ¶Ï×´Ì¬ÊÇ·ñ·¢Éú±ä»¯
+	//åˆ¤æ–­çŠ¶æ€æ˜¯å¦å‘ç”Ÿå˜åŒ–
 	if (!(GetAsyncKeyState(0x04) & 0x8000)) {
 		state = 0;
 		timestate = 0;
