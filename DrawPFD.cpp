@@ -12,6 +12,8 @@ void draw_PFD_airspeed(double center_x, double center_y, double side);
 void draw_PFD_alt( double center_x, double center_y, double side);
 void draw_PFD_compass(double compass_x, double compass_y, double side);
 void draw_PFD_RCDI(double RCDI_x,double RCDI_y,double RCDI_side);
+void draw_PFD_top(double top_x, double top_y, double side) ;
+void draw_1(double x, double y, double side);
 
 
 
@@ -31,6 +33,10 @@ void draw_PFD(double PFD_x, double PFD_y, double PFD_side){
 	draw_PFD_RCDI(PFD_x + 49.5 / 96 * PFD_side, PFD_y ,PFD_side);
 	
 	draw_PFD_frame(PFD_x + 0.06 * PFD_side, PFD_y ,PFD_side);
+	
+	draw_PFD_top(PFD_x, PFD_y - 41.0 / 96 * PFD_side,PFD_side);
+	
+	draw_1(PFD_x  + 20.0 / 96 * PFD_side, PFD_y - 31.0 / 96 * PFD_side,PFD_side);
 	
 }
 //==========================================================================================//

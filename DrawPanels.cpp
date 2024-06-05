@@ -96,10 +96,10 @@ void draw_panels(){
 	double click_time = -1;
 
 	
-	
+	double dirtmp = 0;
 	
 	for (; is_run(); delay_fps(60)) {
-		
+		dirtmp += 0.3;
 		
 		//刷新清屏
 		cleardevice();
@@ -661,9 +661,10 @@ void draw_panels(){
 			
 			if(ND_choice == 1){
 				draw_ND_pln(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-				WAYPOINT wp1 = {"", 28.877, 115.91, "", "", "", 100, "", ""};
-				WAYPOINT wp2 = {"", 28.898841667, 115.918341667, "abc", "", "", 100, "", ""};
+				WAYPOINT wp1 = {0,"", 28.877 - 0.01 * dirtmp, 115.91 + 0.005 * dirtmp, "", "", "", 100, "", ""};
+				WAYPOINT wp2 = {0,"", 28.898841667, 115.918341667, "abc", "", "", 100, "", ""};
 				draw_waypoint(wp1,wp2,0,5,PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
+				draw_route(wp1,dirtmp,200,PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
 			}
 			else if(ND_choice == 2){
 				draw_ND_map(PFD_x + 1.4 * PFD_side, PFD_y + PFD_side / 3 ,PFD_side);
