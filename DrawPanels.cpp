@@ -20,6 +20,7 @@
 #include "DrawNDAppCenter.h"
 #include "DrawEICAS.h"
 #include "DrawChronometer.h"
+#include "DrawEHISControl.h"
 
 #include "DrawNDInfo.h"
 
@@ -689,7 +690,8 @@ void draw_panels(){
 			draw_PFD_frame(PFD_x + 2.7 * PFD_side, PFD_y ,PFD_side);
 			draw_EICAS(PFD_x + 2.7 * PFD_side, PFD_y ,PFD_side);
 			
-			
+//			//画EHIS的控制面板
+//			draw_EHIS_control(PFD_x, PFD_y - 2 * PFD_side ,PFD_side);
 			
 			//实现PFD的移动
 			if (GetAsyncKeyState(0x01) & 0x8000) {

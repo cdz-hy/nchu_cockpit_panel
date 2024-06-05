@@ -315,9 +315,9 @@ void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side){
 	AI_pointTmp3_x = - (AI_y - 0.95 * AI_side - AI_y) * sin(rollAngle) + AI_x;
 	AI_pointTmp3_y = (AI_y - 0.95 * AI_side - AI_y) * cos(rollAngle) + AI_y;
 	AI_pointTmp4_x = (AI_x - 0.04 * AI_side - AI_x) * cos(rollAngle) - (AI_y - 0.88 * AI_side - AI_y) * sin(rollAngle) + AI_x;
-	AI_pointTmp4_y = (AI_y - 0.88 * AI_side - AI_y) * cos(rollAngle) + (AI_x - 0.08 * AI_side - AI_x) * sin(rollAngle) + AI_y;
+	AI_pointTmp4_y = (AI_y - 0.88 * AI_side - AI_y) * cos(rollAngle) + (AI_x - 0.04 * AI_side - AI_x) * sin(rollAngle) + AI_y;
 	AI_pointTmp5_x = (AI_x + 0.04 * AI_side - AI_x) * cos(rollAngle) - (AI_y - 0.88 * AI_side - AI_y) * sin(rollAngle) + AI_x;
-	AI_pointTmp5_y = (AI_y - 0.88 * AI_side - AI_y) * cos(rollAngle) + (AI_x + 0.08 * AI_side - AI_x) * sin(rollAngle) + AI_y;
+	AI_pointTmp5_y = (AI_y - 0.88 * AI_side - AI_y) * cos(rollAngle) + (AI_x + 0.04 * AI_side - AI_x) * sin(rollAngle) + AI_y;
 	
 	
 	setcolor(WHITE);
@@ -1060,7 +1060,7 @@ void draw_alt_lines(double center_x, double center_y, double side) {
 	
 	double gap = side * 331.0 / 96.0 / 10;
 	double x1 = center_x - 31.0 / 96 * side;
-	double x2 = center_x - 31.5 / 96 * side + side * 7.5 / 96;
+	double x2 = center_x - 31.5 / 96 * side + side * 9.5 / 96;
 	
 	for (int i = 0;i < 11;i++) {
 		double y = center_y - 165.5 / 96 * side + ten / 100 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
@@ -1081,8 +1081,8 @@ void draw_alt_lines(double center_x, double center_y, double side) {
 		double x = center_x + 14.0 / 96 * side;
 		int h = datas[i] / 100;
 		if (datas[10 - i] == 0) {
-			double x1 = center_x + 24.5 / 96 * side;
-			ege_drawtext("0", x1, y);
+			double x1 = center_x + 14.0 / 96 * side;
+			ege_drawtext("000", x1, y);
 		}
 		else if (fmod(datas[10 - i], 200) == 0) 
 		{	
@@ -1109,6 +1109,28 @@ void draw_alt_lines(double center_x, double center_y, double side) {
 	}
 }
 
+void draw_alt_Standy_shadow(double center_x, double center_y, double side) {
+	double number_height = side * 2.5 / 96.0 * 2 * 6.5;
+	double x = center_x + 31.5 / 96 * side - 78.0 / 96 * side;
+	double y = center_y - 24.0 / 96 * side;
+	
+	setfillcolor(BLACK);
+	
+	y += side * 48 / 96 - side * 0.019;
+	double wide = side * 78 / 96;
+	double height = side * 0.02;
+	
+	ege_fillrect(center_x - 31.5 / 96 * side, y, side * 63 / 96, height);
+	ege_fillrect(center_x - 31.5 / 96 * side, y - number_height * 1.425, side * 63 / 96, height);
+	x = center_x + 31.5 / 96 * side - 78.0 / 96 * side;
+	y = center_y - 24.0 / 96 * side;
+	
+	wide = side * 78 / 96;
+	height = side * 48 / 96;
+	setcolor(WHITE);
+	ege_rectangle(x, y, wide, height);
+}
+
 //总绘制函数
 
 void draw_standy_alt(double center_x, double center_y, double side) {
@@ -1127,9 +1149,11 @@ void draw_standy_alt(double center_x, double center_y, double side) {
 	draw_alt_10(center_x, center_y, side,height);//十位及个位
 	draw_alt_else(center_x, center_y, side, height);//其他位
 	draw_alt_NumShadow(center_x, center_y, side);//数字的遮盖
-	
+	draw_alt_Standy_shadow(center_x, center_y, side);
 	
 }
+
+
 
 
 
@@ -1144,7 +1168,6 @@ void draw_standy_alt(double center_x, double center_y, double side) {
 
 
 extern double airSpeed;
-
 
 //绘制底框
 void draw_standy_airSpeed_frame(double center_x, double center_y, double side) {
@@ -1190,55 +1213,105 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 	double gap = side * 331.0 / 96.0 / 10;
 	double x1 = center_x + 24.5 / 96 * side;
 	double x2 = center_x + 16.5 / 96 * side;
-	double x3 = center_x + 18.5 / 96 * side;
+	double x3 = center_x + 13.0 / 96 * side;
 	
 	double number_height = side * 2.5 / 96.0 * 2 * 6.5;
 	double number_width = side * 2.5 / 96.0 * 5;
-	for (int i = 0;i < 11;i++) {
-		double y = center_y - 165.5 / 96 * side + ten / 10 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
-		if (fmod(datas[10 - i] - 100, 200) == 0) {
-			setlinewidth(side * 0.015);
-			ege_line(x1, y, x2, y);
-		}
-		else
-		{
-			setlinewidth(side * 0.015);
-			ege_line(x1, y, x3, y);
-		}
-		
-		setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
+	if (datas[5] >= 30) {
 		for (int i = 0;i < 11;i++) {
 			double y = center_y - 165.5 / 96 * side + ten / 10 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
-			double x = center_x - 5.0 / 96 * side;
-			int h = datas[i] / 100;
-			if (datas[10 - i] == 0) {
-				double x1 = center_x + 2.0 / 96 * side;
-				ege_drawtext("0", x1, y);
-			}
-			else if (fmod(datas[10 - i], 20) == 0)
-			{
-				if (datas[10 - i] < 1000 && datas[10 - i] > -1000) {
-					char str[64];
-					snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
-					ege_drawtext(str, x, y);
-				}
-				else if (datas[10 - i] >= 1000 && datas[10 - i] <= 10000)
-				{
-					double x1 = center_x + 11.0 / 96 * side;
-					char str[64];
-					snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
-					ege_drawtext(str, x1, y);
+			if (datas[10 - i] >= 30) {
+				if (fmod(datas[10 - i] - 100, 20) == 0) {
+					setlinewidth(side * 0.02);
+					ege_line(x1, y, x2, y);
 				}
 				else
 				{
-					double x1 = center_x + 6.5 / 96 * side;
-					char str[64];
-					snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
-					ege_drawtext(str, x1, y);
+					setlinewidth(side * 0.02);
+					ege_line(x1, y, x3, y);
+				}
+			}
+			
+			for (int i = 0;i < 11;i++) {
+				double y = center_y - 165.5 / 96 * side + ten / 10 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
+				double x = center_x - 5.0 / 96 * side;
+				int h = datas[i] / 100;
+				if (fmod(datas[10 - i], 20) == 0 && datas[10 - i] >= 30)
+				{
+					if (datas[10 - i] < 1000 && datas[10 - i] > -1000) {
+						setfont(number_height * 0.8, number_width * 0.8, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
+						char str[64];
+						snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
+						ege_drawtext(str, x + side * 0.08, y);
+					}
+					else if (datas[10 - i] >= 1000 && datas[10 - i] <= 10000)
+					{
+						setfont(number_height * 0.8, number_width * 0.8, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
+						double x1 = center_x + 11.0 / 96 * side;
+						char str[64];
+						snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
+						ege_drawtext(str, x1, y);
+					}
+					else
+					{
+						double x1 = center_x + 6.5 / 96 * side;
+						char str[64];
+						snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
+						ege_drawtext(str, x1, y);
+					}
 				}
 			}
 		}
 	}
+	else
+	{
+		for (int i = 0;i < 11;i++) {
+			datas[i] = 30 + 10 * (i - 5);
+		}
+		for (int i = 0;i < 11;i++) {
+			double y = center_y - 165.5 / 96 * side + 0 / 10 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
+			if (datas[10 - i] >= 30) {
+				if (fmod(datas[10 - i] - 100, 20) == 0) {
+					setlinewidth(side * 0.02);
+					ege_line(x1, y, x2, y);
+				}
+				else
+				{
+					setlinewidth(side * 0.02);
+					ege_line(x1, y, x3, y);
+				}
+			}
+			setfont(number_height * 0.8, number_width * 0.8, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
+			for (int i = 0;i < 11;i++) {
+				double y = center_y - 165.5 / 96 * side + 0 / 10 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
+				double x = center_x - 5.0 / 96 * side;
+				int h = datas[i] / 100;
+				if (fmod(datas[10 - i], 20) == 0 && datas[10 - i] >= 30)
+				{
+					if (datas[10 - i] < 1000 && datas[10 - i] > -1000) {
+						char str[64];
+						snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
+						ege_drawtext(str, x + side * 0.08, y);
+					}
+					else if (datas[10 - i] >= 1000 && datas[10 - i] <= 10000)
+					{
+						double x1 = center_x + 11.0 / 96 * side;
+						char str[64];
+						snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
+						ege_drawtext(str, x1, y);
+					}
+					else
+					{
+						double x1 = center_x + 6.5 / 96 * side;
+						char str[64];
+						snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
+						ege_drawtext(str, x1, y);
+					}
+				}
+			}
+		}
+	}
+	
 	
 	settextjustify(LEFT_TEXT, TOP_TEXT);
 	number_height = side * 2.5 / 96.0 * 2 * 6.5 * 0.7;
@@ -1247,7 +1320,7 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 	
 }
 
-void draw_airSpeed_10(double center_x, double center_y, double side) {
+void draw_airSpeed_10(double center_x, double center_y, double side,double speed) {
 	setcolor(EGEARGB(200, 177, 177, 178));
 	double y = center_y - side * 0.17;
 	double x = center_x;
@@ -1257,8 +1330,8 @@ void draw_airSpeed_10(double center_x, double center_y, double side) {
 	
 	char num[] = { '9','0','1','2','3','4','5','6','7','8','9','0'};
 	char zeros[] = { '0','0','0','0','0','0','0','0','0' };
-	double usefulHeight10 = fmod(airSpeed, 10);//得到 （十 + 个）
-	double uesfulHeight1 = fmod(airSpeed, 1);//得到个位
+	double usefulHeight10 = fmod(speed, 10);//得到 （十 + 个）
+	double uesfulHeight1 = fmod(speed, 1);//得到个位
 	
 	
 	int num2 = usefulHeight10 / 1 ;//准确的十位;
@@ -1286,7 +1359,7 @@ void draw_airSpeed_10(double center_x, double center_y, double side) {
 	
 	setbkmode(1);
 	//将区间进一步分段
-	double judge = fmod(airSpeed, 1);
+	double judge = fmod(speed, 1);
 	if (judge >= 0 && judge < 0.35) {
 		for (int i = 0;i < 3;i++) {
 			outtextxy(x + 7.0 / 96.0 * side, y_100 + number_height * 0.6 * -(i - 1), nums[i + 1]);
@@ -1306,21 +1379,24 @@ void draw_airSpeed_10(double center_x, double center_y, double side) {
 	}
 }
 
-void draw_airSpeed_else(double center_x, double center_y, double side) {
-	
-	
+void draw_airSpeed_else(double center_x, double center_y, double side, double speed) {
 	char num[] = { '9','0','1','2','3','4','5','6','7','8','9','0' };
 	double y = center_y - side * 0.17;
 	double number_height = side * 2.5 / 96.0 * 2 * 6.5;
 	double number_width = side * 2.5 / 96.0 * 5;
 	
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
-	int hun = airSpeed / 100;
-	int ten = airSpeed / 10;
+	int hun = speed / 100;
+	int ten = speed / 10;
 	ten = ten % 10;
+	if (speed >= 100) {
+		outtextxy(center_x - number_width * 2.05, y - number_height * 0.025,num[hun + 1]);
+		outtextxy(center_x - number_width * 0.8, y - number_height * 0.025, num[ten + 1]);
+	}
+	else {
+		outtextxy(center_x - number_width * 0.8, y - number_height * 0.025, num[ten + 1]);
+	}
 	
-	outtextxy(center_x - number_width * 2.05, y - number_height * 0.025,num[hun + 1]);
-	outtextxy(center_x - number_width * 0.8, y - number_height * 0.025, num[ten + 1]);
 }
 
 void draw_airSpeed_shadow(double center_x, double center_y, double side) {
@@ -1346,16 +1422,33 @@ void draw_airSpeed_shadow(double center_x, double center_y, double side) {
 	ege_rectangle(x, y, width, lenth);
 }
 
+void draw_airSpeed_shadow_main(double center_x, double center_y, double side) {
+	double x = center_x - 24.5 / 96.0 * side;
+	double y = center_y - 165.5 / 96.0 * side;
+	double lenth = 331.0 / 96.0 * side;
+	double width = 49.0 / 96.0 * side;
+	
+	double a = side * 0.44;
+	setfillcolor(BLACK);
+	ege_fillrect(x, y - a, width, a);
+	ege_fillrect(x, y + lenth, width, a);
+}
+
 void draw_standy_airSpeed(double center_x, double center_y, double side) {
+	double speed = 0;
+	if (airSpeed < 30) {
+		speed = 30;
+	}
+	else {
+		speed = airSpeed;
+	}
 	draw_standy_airSpeed_frame(center_x, center_y, side);
 	draw_standy_airSpeed_lines(center_x, center_y, side);
 	
 	draw_standy_airSpeed_wireframe(center_x, center_y, side);
-	draw_airSpeed_10(center_x, center_y, side);
-	draw_airSpeed_else(center_x, center_y, side);
+	draw_airSpeed_10(center_x, center_y, side, speed);
+	draw_airSpeed_else(center_x, center_y, side, speed);
 	
 	draw_airSpeed_shadow(center_x, center_y, side);
+	draw_airSpeed_shadow_main(center_x, center_y, side);
 }
-
-
-

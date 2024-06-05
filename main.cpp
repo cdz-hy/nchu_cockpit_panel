@@ -8,13 +8,14 @@
 #include <regex>
 #include <iostream>
 #include <thread>
+#include <fstream>
 using namespace std;
 
 #include "DrawPanels.h"
 #include "DataReceive.h"
 #include "G_variable.h"
-
-void get_keymsg();
+#include "G_structs.h"
+#include "KeyboardControl.h"
 
 
 int main() {
@@ -81,7 +82,83 @@ int main() {
 		}
 	}
 
-
+	
+	
+	//读取航路点文件
+	
+	extern vector<WAYPOINT> waypoints;
+	string inputTmp;
+	ifstream inputFile("fix_data.dat");
+	
+	if (inputFile.is_open()) {
+		while (getline(inputFile,inputTmp)) {
+			
+			WAYPOINT wpTmp;
+			istringstream issTmp(inputTmp);
+			
+			string stringTmp[10];
+			
+			issTmp >> wpTmp.lat >> wpTmp.lon >> stringTmp[0] >> stringTmp[1] >> stringTmp[2] >> stringTmp[3];
+			
+			strcpy(wpTmp.name, stringTmp[0].c_str());
+			strcpy(wpTmp.type, stringTmp[1].c_str());
+			strcpy(wpTmp.FIRName, stringTmp[2].c_str());
+			strcpy(wpTmp.fullType, stringTmp[3].c_str());
+			wpTmp.num = 1;
+			
+			waypoints.push_back(wpTmp);
+			
+		}
+	}
+	
+	inputFile.close();
+	
+	
+	//读取航路文件
+	
+	extern vector<WAYPOINT> route;
+	ifstream inputFile2("ZSCNZSSS.fms");
+	
+	if (inputFile2.is_open()) {
+		while (getline(inputFile2,inputTmp)) {
+			
+			WAYPOINT wpTmp;
+			istringstream issTmp(inputTmp);
+			
+			string stringTmp[10];
+			
+			if(issTmp >> stringTmp[0] >> stringTmp[1] >> stringTmp[2] >> wpTmp.lat >> wpTmp.lon ){
+				
+				strcpy(wpTmp.code, stringTmp[0].c_str());
+				strcpy(wpTmp.name, stringTmp[1].c_str());
+				strcpy(wpTmp.fullName, stringTmp[1].c_str());
+				
+				if(stringTmp[1].length() == 3){
+					wpTmp.num = 2;//VOR
+				}
+				else if(stringTmp[1].length() == 5){
+					wpTmp.num = 1;//waypoint
+				}
+				else if(stringTmp[1].length() == 3){
+					wpTmp.num = 4;//airport
+				}
+				
+				route.push_back(wpTmp);
+				
+			}
+			else{
+				continue;
+			}
+			
+		}
+	}
+	
+	inputFile2.close();
+	
+	
+	
+	
+	
 	//绘图环境设置
 	initgraph(length, height, INIT_ANIMATION);
 	setcaption("Boeing727-200F&737-800仪表模拟");
@@ -95,10 +172,11 @@ int main() {
 	
 	thread panels(draw_panels);
 	thread datas(data_receive);		
-	
+	thread control(get_keymsg);	
 	
 	panels.join();
 	datas.join();
+	control.join();
 
 	
 	closegraph();

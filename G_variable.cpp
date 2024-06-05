@@ -1,3 +1,8 @@
+#include <vector>
+#include "G_structs.h"
+using namespace std;
+
+
 //==================================//
 
 //==========以下为飞行参数==========//
@@ -63,6 +68,10 @@ double angle = 0;
 double Anum = 0;
 
 
+//所存储的所有航点和nav信息
+vector<WAYPOINT> waypoints;
+vector<WAYPOINT> route;
+
 //==================================//
 
 //==========以下为设置相关==========//
@@ -102,4 +111,40 @@ int alert_beloGS = 0;
 int alert_ALT = 0;
 int alert_MDA = 0;
 int alert_autoPilot = 0;
+
+
+
+//==================================//
+
+//==========以下为控制板信息==========//
+
+//旋钮面板
+double MINSKonb = 0;
+double MINSRef = 55;
+double baroKnob = 0;
+double baroUnit = 55;
+double EHSIMode = 55;
+double mapDistance = 0;
+int RST = 0;
+int STD = 0;
+int CTR = 0;
+int TFC = 0;
+
+int FPV = 0;
+int MTRS = 0;
+
+int WXR = 0;
+int STA = 0;
+int WPT = 0;
+int ARPT = 0;
+int DATA = 0;
+int POS = 0;
+int TERR = 0;
+
+int VOR1 = 2;
+int VOR2 = 2;
+
+int ChangeLight = 64;
+
+double changecolor = 1;
 

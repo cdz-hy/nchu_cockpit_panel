@@ -1,3 +1,8 @@
+#include <vector>
+#include "G_structs.h"
+using namespace std;
+
+
 //==================================//
 
 //==========以下为飞行参数==========//
@@ -62,6 +67,9 @@ extern double angle;
 
 extern double Anum;
 
+//所存储的所有航点和nav信息
+extern vector<WAYPOINT> waypoints;
+extern vector<WAYPOINT> route;
 
 //==================================//
 
@@ -103,3 +111,31 @@ extern int alert_ALT;
 extern int alert_MDA;
 extern int alert_autoPilot;
 
+//==================================//
+
+//==========以下为控制板信息==========//
+
+//旋钮面板
+extern double MINSKonb;
+extern double MINSRef;
+extern double baroKnob;
+extern double baroUnit;
+extern double EHSIMode;
+extern double mapDistance;
+extern double changecolor;
+extern int FPV;
+extern int MTRS;
+extern int RST;
+extern int STD;
+extern int CTR;
+extern int TFC;
+extern int WXR;
+extern int STA;
+extern int WPT;
+extern int ARPT;
+extern int DATA;
+extern int POS;
+extern int TERR;
+extern int VOR1;
+extern int VOR2;
+extern int ChangeLight;
