@@ -67,10 +67,16 @@ double angle = 0;
 
 double Anum = 0;
 
+//经纬度
+double latitude = 0;
+double longitude = 0;
 
 //所存储的所有航点和nav信息
 vector<WAYPOINT> waypoints;
 vector<WAYPOINT> route;
+
+//已经走过的航线
+vector<WAYPOINT> routePassed;
 
 //==================================//
 
@@ -144,7 +150,7 @@ int TERR = 0;
 int VOR1 = 2;
 int VOR2 = 2;
 
-int ChangeLight = 64;
+int MainPanelLight = 64;
 
 double changecolor = 1;
 

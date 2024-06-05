@@ -157,10 +157,10 @@ void draw_PFD_frame(double PFDframe_x, double PFDframe_y, double side) {
 	};
 	ege_bezier(Frame_num2, Frame_ploypoints2);
 	setfillcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
-	floodfill(PFDframe_x + Ulength * 58.5, PFDframe_y - Ulength * 58, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
-	floodfill(PFDframe_x - Ulength * 58.5, PFDframe_y - Ulength * 58, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
-	floodfill(PFDframe_x - Ulength * 58.5, PFDframe_y + Ulength * 50, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
-	floodfill(PFDframe_x + Ulength * 58.5, PFDframe_y + Ulength * 50, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x + Ulength * 57.5, PFDframe_y - Ulength * 57, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x - Ulength * 57.5, PFDframe_y - Ulength * 57, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x - Ulength * 57.5, PFDframe_y + Ulength * 50, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	floodfill(PFDframe_x + Ulength * 57.5, PFDframe_y + Ulength * 50, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
 	floodfill(PFDframe_x + Ulength * 58.5, PFDframe_y - Ulength * 13, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
 	floodfill(PFDframe_x - Ulength * 58.5, PFDframe_y - Ulength * 13, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
 	floodfill(PFDframe_x - Ulength * 58.5, PFDframe_y + Ulength * 13, EGEARGB(0XFF, 0X1A, 0X1F, 0X23));

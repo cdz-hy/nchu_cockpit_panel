@@ -662,10 +662,10 @@ void draw_panels(){
 			
 			if(ND_choice == 1){
 				draw_ND_pln(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-				WAYPOINT wp1 = {0,"", 28.877 - 0.01 * dirtmp, 115.91 + 0.005 * dirtmp, "", "", "", 100, "", ""};
-				WAYPOINT wp2 = {0,"", 28.898841667, 115.918341667, "abc", "", "", 100, "", ""};
-				draw_waypoint(wp1,wp2,0,5,PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-				draw_route(wp1,dirtmp,200,PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
+				WAYPOINT nowPos = {0,"", 28.877 - 0.01 * dirtmp, 115.91 + 0.005 * dirtmp, "", "", "", 100, "", ""};
+//				WAYPOINT nowPos = {0,"", latitude, longitude, "", "", "", 100, "", ""};
+				draw_waypoint(nowPos,rotationangle,50,PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
+				draw_route(nowPos,dirtmp,200,PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
 			}
 			else if(ND_choice == 2){
 				draw_ND_map(PFD_x + 1.4 * PFD_side, PFD_y + PFD_side / 3 ,PFD_side);
@@ -690,8 +690,8 @@ void draw_panels(){
 			draw_PFD_frame(PFD_x + 2.7 * PFD_side, PFD_y ,PFD_side);
 			draw_EICAS(PFD_x + 2.7 * PFD_side, PFD_y ,PFD_side);
 			
-//			//画EHIS的控制面板
-//			draw_EHIS_control(PFD_x, PFD_y - 2 * PFD_side ,PFD_side);
+			//画EHIS的控制面板
+			draw_EHIS_control(PFD_x, PFD_y - 1 * PFD_side ,PFD_side);
 			
 			//实现PFD的移动
 			if (GetAsyncKeyState(0x01) & 0x8000) {

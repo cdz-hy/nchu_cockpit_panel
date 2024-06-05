@@ -67,9 +67,16 @@ extern double angle;
 
 extern double Anum;
 
+//经纬度
+extern double latitude;
+extern double longitude;
+
 //所存储的所有航点和nav信息
 extern vector<WAYPOINT> waypoints;
 extern vector<WAYPOINT> route;
+
+//已经走过的航线
+extern vector<WAYPOINT> routePassed;
 
 //==================================//
 
@@ -138,4 +145,4 @@ extern int POS;
 extern int TERR;
 extern int VOR1;
 extern int VOR2;
-extern int ChangeLight;
+extern int MainPanelLight;

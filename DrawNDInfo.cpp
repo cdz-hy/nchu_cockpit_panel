@@ -25,36 +25,51 @@ double getBearing(double lat1, double lon1, double lat2, double lon2);
 
 //绘制航路点（三角形）
 
-void draw_waypoint(WAYPOINT wp1, WAYPOINT wp2, double dir, double ratio,double x, double y, double side){
+extern vector<WAYPOINT> waypoints;
+
+void draw_waypoint(WAYPOINT nowPos, double dir, double ratio,double x, double y, double side){
 	
-	double dis = getDistance(wp1.lat, wp1.lon, wp2.lat, wp2.lon);
-	double bearing = getBearing(wp1.lat, wp1.lon, wp2.lat, wp2.lon);
-	
-	double rside = 0.010752 * side;
-	double rhigh = 0.015129 * side;
-	double rl = dis / 1000 * 0.1738176 * side / ratio;
-	double rx = (cos(toRadians(bearing - dir - 90)) * rl) + x;
-	double ry = (sin(toRadians(bearing - dir - 90)) * rl) + y;
-	
-	ege_point pointTmp[4] = {
-		{rx,ry - rhigh / 2},
-		{rx - rside / 2,ry + rhigh / 2},
-		{rx + rside / 2,ry + rhigh / 2},
-		{rx,ry - rhigh / 2},
-	};
-	
-	setlinewidth(0.001 * side);
-	setcolor(WHITE);
-	ege_drawpoly(4, pointTmp);
-	
-	if(0.01 * side > 5){
-		setfont(0.01 * side, 0.01 * side , "黑体");
-		ege_drawtext(wp2.name,rx,ry + rhigh / 2 + 0.005 * side);
+	for(auto wp : waypoints){
+		
+		double dis = getDistance(nowPos.lat, nowPos.lon, wp.lat, wp.lon);
+		double bearing = getBearing(nowPos.lat, nowPos.lon, wp.lat, wp.lon);
+		
+		double rside = 0.010752 * side;
+		double rhigh = 0.015129 * side;
+		double rl = dis / 1000 * 0.1738176 * side / ratio;
+		double rx = (cos(toRadians(bearing - dir - 90)) * rl) + x;
+		double ry = (sin(toRadians(bearing - dir - 90)) * rl) + y;
+		
+		//当航路点在圆内时再绘制
+		if(pow(rl, 2) <= pow(side / 104 * 40, 2)){
+			
+			ege_point pointTmp[4] = {
+				{rx,ry - rhigh / 3},
+				{rx - rside / 2,ry + rhigh / 2},
+				{rx + rside / 2,ry + rhigh / 2},
+				{rx,ry - rhigh / 3},
+			};
+			
+			setlinewidth(0.001 * side);
+//		setcolor(WHITE);
+			setcolor(EGEARGB(0xff,0x64,0x7B,0x94));
+			ege_drawpoly(4, pointTmp);
+			
+			if(0.01 * side > 5){
+				setfont(0.01 * side, 0.01 * side , "黑体");
+				ege_drawtext(wp.name,rx,ry + rhigh / 2 + 0.007 * side);
+			}
+			
+		}
+		
 	}
+	
+
 }
 
 
 extern vector<WAYPOINT> route;
+extern vector<WAYPOINT> routePassed;
 
 void draw_route(WAYPOINT wp, double dir, double ratio,double x, double y, double side){
 	
@@ -83,10 +98,19 @@ void draw_route(WAYPOINT wp, double dir, double ratio,double x, double y, double
 		//圆的直径
 		double d = side / 104 * 40 * 2;
 		
+		//先判断这段路线是不是接下来的一段，从而设置不同颜色
+//		if(!strcmp((*(routePassed.end() - 1)).name, wp.name)){
+//			
+//			setfillcolor(EGEARGB(0xFF,0x));
+//			
+//		}
+//		else{
+//			
+//		}
+		
 		//先判断两点是不是都在范围内，如果都在，直接链接即可
 		if(rx > x - d / 2 && rx < x + d / 2 && ry > y - d / 2 && ry < y + d / 2 && rx2 > x - d / 2 && rx2 < x + d / 2 && ry2 > y - d / 2 && ry2 < y + d / 2 ){
 			//都在，不用处理
-			setcolor(WHITE);
 			ege_line(rx, ry, rx2, ry2);
 		}
 		//若有一点不在，要计算连线与边缘的交点，连在内的点和交点
@@ -114,7 +138,6 @@ void draw_route(WAYPOINT wp, double dir, double ratio,double x, double y, double
 					rx2 = xTmp;
 					ry2 = yTmp;
 					
-					setcolor(WHITE);
 					ege_line(rx, ry, rx2, ry2);
 					break;
 				}
@@ -124,7 +147,7 @@ void draw_route(WAYPOINT wp, double dir, double ratio,double x, double y, double
 			
 		}
 		//第一个点不在时
-		else if(( rx < x - d / 2 && rx > x + d / 2 && ry < y - d / 2 && ry > y + d / 2 ) && (rx2 > x - d / 2 || rx2 < x + d / 2 || ry2 > y - d / 2 || ry2 < y + d / 2 )){
+		else if(( rx < x - d / 2 || rx > x + d / 2 || ry < y - d / 2 || ry > y + d / 2 ) && (rx2 > x - d / 2 && rx2 < x + d / 2 && ry2 > y - d / 2 && ry2 < y + d / 2 )){
 			
 			double a[2][3] = {{-(ry2 - ry) / (rx2 - rx) , 1, -(ry2 - ry) / (rx2 - rx) * rx + ry} , {}};
 			
@@ -146,7 +169,6 @@ void draw_route(WAYPOINT wp, double dir, double ratio,double x, double y, double
 					rx = xTmp;
 					ry = yTmp;
 					
-					setcolor(WHITE);
 					ege_line(rx, ry, rx2, ry2);
 					break;
 				}
@@ -155,7 +177,49 @@ void draw_route(WAYPOINT wp, double dir, double ratio,double x, double y, double
 			}
 			
 		}
-		
+		//两个点都不在时
+		else if(( rx < x - d / 2 || rx > x + d / 2 || ry < y - d / 2 || ry > y + d / 2 ) && (rx2 < x - d / 2 || rx2 > x + d / 2 || ry2 < y - d / 2 || ry2 > y + d / 2 )){
+			
+			double a[2][3] = {{-(ry2 - ry) / (rx2 - rx) , 1, -(ry2 - ry) / (rx2 - rx) * rx + ry} , {}};
+			
+			//b的每一行是边缘方程的矩阵表示
+			double b[4][3] = {{0, 1 , (y + d / 2)}, {1, 0 , (x + d / 2)}, {0, 1, (y - d / 2)}, {1, 0, (x - d / 2)}};
+			
+			int xTmps[5];
+			int yTmps[5];
+			int cot = 0;
+			
+			for(int i = 0; i < 4; i ++){
+				
+				for(int k = 0; k < 3; k ++){
+					a[1][k] = b[i][k];			
+				}
+				
+				double xTmp = ((a[1][1] * a[0][2]) - (a[0][1] * a[1][2])) / ((a[0][0] * a[1][1]) - (a[1][0] * a[0][1]));
+				double yTmp = ((a[0][0] * a[1][2]) - (a[0][2] * a[1][0])) / ((a[0][0] * a[1][1]) - (a[1][0] * a[0][1]));
+				
+				//两点都不在边缘内侧，直线与边缘要么没有交点，要么有两个；  此时不用判断交点在不在两个点中间
+				if(xTmp >= x - 1.0001 * d / 2 && xTmp <= x + 1.0001 * d / 2 && yTmp >= y - 1.0001 * d / 2 && yTmp <= y + 1.0001 * d / 2){
+					rx = xTmp;
+					ry = yTmp;
+					cot ++;
+					
+					xTmps[cot] = xTmp;
+					yTmps[cot] = yTmp;
+					
+					break;
+				}
+				
+			}
+			
+			//判断有几个交点,两个时则绘制
+			if(cot == 2){
+				
+				ege_line(xTmps[0], yTmps[0], xTmps[1], yTmps[1]);
+			}
+			
+			
+		}
 		
 		
 		

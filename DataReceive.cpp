@@ -89,6 +89,8 @@ void data_receive(){
 				rotationangle = data[3][4];
 				compass_angle_original_data = data[10][1];
 				
+				latitude = data[6][1];
+				longitude = data[6][2];
 				
 			}
 			
