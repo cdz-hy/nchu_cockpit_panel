@@ -28,6 +28,10 @@ extern double vmo_speed;
 extern double airSpeed_acceleration;
 extern double airSpeed_mach;
 extern double airSpeed_instruction;
+extern double GS;
+extern double TAS;
+extern double WS;
+extern double WD;
 
 extern double rotationangle;
 //double pointrotationangle = 0; 
