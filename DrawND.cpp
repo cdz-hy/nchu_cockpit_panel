@@ -6,6 +6,7 @@
 #include "DrawFrame.h"
 #include "G_variable.h"
 #include "DrawScrew.h"
+#include "DrawNDInfo.h"
 
 // 目录：
 /*
@@ -55,7 +56,7 @@ extern double ndtoprotationangle;//顶部三角形的偏转角度
 //==================================以下为绘制总表部分========================================//
 void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	
-	draw_ND_frame_chassis(ND_x,ND_y,ND_side);
+	draw_ND_frame_chassis(ND_x, ND_y, ND_side);
 	
 	if(MINSRef = 55) {
 		
@@ -80,37 +81,49 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	
 	if(CTR == 0){
 		if(EHSIMode == 55 || EHSIMode == 80 || EHSIMode == 110){
-			draw_ND_map(ND_x+ND_side/16,ND_y+ ND_side / 3.2,ND_side);
+			
+			draw_ND_map(ND_x, ND_y + ND_side * 32 / 104, ND_side);
+			
 		}else if(EHSIMode == 135){
-			draw_ND_pln(ND_x+ND_side/14,ND_y,ND_side);
+			
+			draw_ND_pln(ND_x, ND_y, ND_side);
+			
 		}
 	}else if(CTR == 1){
 		if(EHSIMode == 55 || EHSIMode == 80){
-			draw_ND_app_center(ND_x+ND_side/14,ND_y,ND_side);
+			
+			draw_ND_app_center(ND_x, ND_y, ND_side);
+			
 		}else if(EHSIMode == 110){
-			draw_ND_map(ND_x+ND_side/16,ND_y + ND_side / 3.2,ND_side);
+			
+			draw_ND_map(ND_x, ND_y + ND_side * 32 / 104, ND_side);
+			
 		}else if(EHSIMode == 135){
-			draw_ND_pln(ND_x+ND_side/14,ND_y,ND_side);
+			
+			draw_ND_pln(ND_x , ND_y, ND_side);
+			
 		}
 	}
+	
 	
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	setfont(ND_side/ 35, 0, "黑体");
 	setcolor(EGEARGB(180, 100, 149, 237));
+	
 	if(ARPT == 1) {
-		ege_drawtext("ARPT", ND_x - ND_side / 2.35,ND_y + ND_side / 6);
+		ege_drawtext("ARPT", ND_x - ND_side / 2.21,ND_y + ND_side / 6);
 	}
 	if(WPT == 1) {
-		ege_drawtext("WPT", ND_x - ND_side / 2.35,ND_y + ND_side / 5.1);
+		ege_drawtext("WPT", ND_x - ND_side / 2.18,ND_y + ND_side / 5.1);
 	}
 	if(STA == 1) {
-		ege_drawtext("STA", ND_x - ND_side / 2.35,ND_y + ND_side / 4.5);
+		ege_drawtext("STA", ND_x - ND_side / 2.18,ND_y + ND_side / 4.5);
 	}
 	
 	setfont(ND_side/ 30, 0, "黑体");
 	if(WXR == 1) {
-		ege_drawtext("WXR", ND_x - ND_side / 2.35,ND_y + ND_side / 4);
+		ege_drawtext("WXR", ND_x - ND_side / 2.2,ND_y + ND_side / 4);
 	}
 	
 	if(DATA == 1){
@@ -124,11 +137,11 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	}
 	
 	
-	draw_PFD_frame(ND_x + 0.06 * ND_side, ND_y ,ND_side);
+	draw_PFD_frame(ND_x, ND_y, ND_side);
 	
-	draw_ND_smallWhiteCircle(ND_x - ND_side/2.4,ND_y +  ND_side / 1.72,ND_side / 22);
+	draw_ND_smallWhiteCircle(ND_x - ND_side / 2.4, ND_y +  ND_side / 1.72, ND_side / 22);
 	
-	draw_screw3(ND_x + ND_side/2,ND_y +  ND_side / 1.668,ND_side / 22,45);
+	draw_screw3(ND_x + ND_side / 2, ND_y +  ND_side / 1.668,ND_side / 22, 45);
 }
 
 //==========================================================================================//
@@ -151,7 +164,7 @@ PLN PLN+CENTER 是一种模式
 // 绘制表框黑色底盘
 void draw_ND_frame_chassis(double center_x, double center_y, double side){
 	setfillcolor(BLACK);
-	ege_fillrect(center_x - side * 1 /2,center_y - side * 1.1 /2,side*1.1,side*1.1);
+	ege_fillrect(center_x - side * 1.1 /2,center_y - side * 1.1 /2,side*1.1,side*1.1);
 }
 
 // 绘制表框下部白色的小圆球
