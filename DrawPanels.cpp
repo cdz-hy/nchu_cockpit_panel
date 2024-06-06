@@ -13,17 +13,14 @@
 #include "DrawScrew.h"
 #include "DrawBackground.h"
 #include "G_variable.h"
+
+
 #include "DrawPFD.h"
-//#include "DrawNDPln.h"
 #include "DrawPFDStandby.h"
-//#include "DrawNDMap.h"
-//#include "DrawNDAppCenter.h"
 #include "DrawEICAS.h"
 #include "DrawChronometer.h"
 #include "DrawEHISControl.h"
-
 #include "DrawND.h"
-
 #include "DrawNDInfo.h"
 
 
@@ -82,10 +79,10 @@ void draw_panels(){
 	double PFD_move_y = 0;
 	double PFD_move_x_tmp = 0;
 	double PFD_move_y_tmp = 0;
-	double ND_move_x = 0;
-	double ND_move_y = 0;
-	double ND_move_x_tmp = 0;
-	double ND_move_y_tmp = 0;
+//	double ND_move_x = 0;
+//	double ND_move_y = 0;
+//	double ND_move_x_tmp = 0;
+//	double ND_move_y_tmp = 0;
 	
 	
 	// 此时鼠标是否按下
@@ -97,12 +94,8 @@ void draw_panels(){
 	
 	//存储鼠标按下时间判断双击
 	double click_time = -1;
-
-	
-	double dirtmp = 0;
 	
 	for (; is_run(); delay_fps(60)) {
-		dirtmp += 0.3;
 		
 		//刷新清屏
 		cleardevice();
@@ -164,19 +157,15 @@ void draw_panels(){
 		double PFD_x = center_x + PFD_move_x * unit_side;
 		double PFD_y = center_y + PFD_move_y * unit_side;
 		
-		//ND
-		double ND_side = 15 * unit_side;
-		double ND_x = 1.2 * center_x + ND_move_x * unit_side;
-		double ND_y = 1.2 * center_y + ND_move_y * unit_side;
+//		//ND
+//		double ND_side = 15 * unit_side;
+//		double ND_x = 1.2 * center_x + ND_move_x * unit_side;
+//		double ND_y = 1.2 * center_y + ND_move_y * unit_side;
 		
 		
 		
 		//界面为0时显示全部六个机械表盘
 		if (show == 0) {
-			
-//			char tmp[10];
-//			sprintf(tmp,"%d",is_showbk);
-//			xyprintf(20,20,tmp);
 			
 			if (is_showbk)
 				draw_back(center_x, center_y + 0.8 * unit_side, unit_side);
@@ -261,37 +250,6 @@ void draw_panels(){
 					center_move_x_tmp = center_move_x;
 					center_move_y_tmp = center_move_y;
 				}
-				
-				
-				
-//				//使用鼠标右键和GetAsyncKeyState异步实现放大变小
-//				if(GetAsyncKeyState(0x02) & 0x8000){
-//					if(is_down == 0){
-//						is_down = 11;
-//						mouse_x_cur = mouse_x;
-//						mouse_y_cur = mouse_y;
-//					}
-//					if(is_down == 11){
-//						mousepos(&mouse_x, &mouse_y);
-//						if(mouse_y > mouse_y_cur){
-//							if(unit_side > 15){
-//								unit_side -= (mouse_y - mouse_y_cur) / 200;
-//							}
-//						}
-//						else{
-//							if(unit_side < 100){
-//								unit_side -= (mouse_y - mouse_y_cur) / 200;
-//							}
-//						}
-//					}
-//
-//				}
-//				else if(is_down == 11){
-//					is_down = 0;
-//				}
-				
-				
-				
 				//滚轮实现放大缩小
 				mouse_msg msgRecord = { 0 };
 				bool redraw = true;
@@ -331,8 +289,6 @@ void draw_panels(){
 						AI_move_y = (mouse_y - mouse_y_cur) / unit_side;
 						AI_move_x += AI_move_x_tmp;
 						AI_move_y += AI_move_y_tmp;
-//					AI_move_x_tmp = AI_move_x;
-//					AI_move_y_tmp = AI_move_y;
 					}
 				} else if (is_down == 1) {
 					
@@ -347,8 +303,6 @@ void draw_panels(){
 					}
 					
 					is_down = 0;
-//					AI_move_x = AI_move_x_tmp;
-//					AI_move_y = AI_move_y_tmp;
 					AI_move_x_tmp = AI_move_x;
 					AI_move_y_tmp = AI_move_y;
 				}
@@ -619,74 +573,25 @@ void draw_panels(){
 		}
 		
 		
+		//====================================================================================//
+		
 		
 		//界面为10时显示所有电子仪表
 		else if(show == 10){
 			
-			//设置底座颜色
-			setfillcolor(BLACK);
-//				//正常大小
-//			ege_fillrect(PFD_x - PFD_side / 2, PFD_y - PFD_side / 2,1.07 * PFD_side, PFD_side);
-			//为遮盖compass多余部分的版本
-			ege_fillrect(PFD_x - PFD_side / 2, PFD_y - PFD_side / 2,1.07 * PFD_side,1.05 * PFD_side);
-			
 			mousepos(&mouse_x, &mouse_y);
-			if(mouse_x >= PFD_x - PFD_side / 2 && mouse_y >= PFD_y - PFD_side / 2 && mouse_x <= PFD_x + 0.57 * PFD_side && mouse_y <= PFD_y + PFD_side / 2){
-				setcolor(EGEARGB(0x50, 0xff, 0xff, 0xff));
-				setlinewidth(0.05 * unit_side_static);
-				ege_rectangle(PFD_x - PFD_side / 2, PFD_y - PFD_side / 2,1.07 * PFD_side, PFD_side);
-			}
 			
+//			if(mouse_x >= PFD_x - PFD_side / 2 && mouse_y >= PFD_y - PFD_side / 2 && mouse_x <= PFD_x + 0.57 * PFD_side && mouse_y <= PFD_y + PFD_side / 2){
+//				setcolor(EGEARGB(0x50, 0xff, 0xff, 0xff));
+//				setlinewidth(0.05 * unit_side_static);
+//				ege_rectangle(PFD_x - PFD_side / 2, PFD_y - PFD_side / 2,1.07 * PFD_side, PFD_side);
+//			}
 			
-//			Draw_PFD_frame(PFD_x + 0.06 * PFD_side, PFD_y ,PFD_side);
-//			draw_PFD_AI(PFD_x, PFD_y ,PFD_side);
-//			
-//			
-//			draw_PFD_compass(PFD_x , PFD_y + 60.0 / 96 * PFD_side,PFD_side);
-////			draw_PFD_compass(PFD_x , PFD_y + 63.0 / 96 * PFD_side,PFD_side);
-////			draw_PFD_compass(PFD_x , PFD_y + 66.0 / 96 * PFD_side,PFD_side);
-//			
-//			draw_PFD_airspeed(PFD_x - 34.5 / 96 * PFD_side, PFD_y ,PFD_side);
-//			draw_PFD_alt(PFD_x + 35.0 / 96 * PFD_side, PFD_y ,PFD_side);
-//			draw_PFD_RCDI(PFD_x + 49.5 / 96 * PFD_side, PFD_y ,PFD_side);
-////			draw_PFD_standby(PFD_x + 1.5 * PFD_side, PFD_y ,PFD_side / 3);
-//			draw_PFD_top(PFD_x, PFD_y - 41.0 / 96 * PFD_side,PFD_side);
-//			draw_1(PFD_x  + 20.0 / 96 * PFD_side, PFD_y - 31.0 / 96 * PFD_side,PFD_side);
-			
+			//画PFD
 			draw_PFD(PFD_x, PFD_y ,PFD_side);
-			
-//			//设置ND底座颜色
-//			setfillcolor(BLACK);
-//			ege_fillrect(PFD_x + 1.2 * PFD_side - PFD_side / 2, PFD_y - PFD_side / 2,1.07 * PFD_side,1.05 * PFD_side);
-			
-			
-//			draw_PFD_frame(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-//			
-//			if(ND_choice == 1){
-//				draw_ND_pln(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-//				WAYPOINT nowPos = {0,"", 28.877 - 0.01 * dirtmp, 115.91 + 0.005 * dirtmp, "", "", "", 100, "", ""};
-////				WAYPOINT nowPos = {0,"", latitude, longitude, "", "", "", 100, "", ""};
-//				draw_waypoint(nowPos,rotationangle,mapDistance,PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-//				draw_route(nowPos,dirtmp,mapDistance,PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-//			}
-//			else if(ND_choice == 2){
-//				draw_ND_map(PFD_x + 1.4 * PFD_side, PFD_y + PFD_side * 32 / 104 /* + PFD_side / 3 */,PFD_side);
-//				WAYPOINT nowPos = {0,"", 28.877, 115.91, "", "", "", 100, "", ""};
-////				draw_waypoint_map(nowPos,dirtmp,mapDistance,PFD_x + 1.4 * PFD_side, PFD_y + PFD_side * 37.6 / 104 ,PFD_side);
-////				draw_route_map(nowPos,dirtmp,mapDistance,PFD_x + 1.4 * PFD_side, PFD_y + PFD_side * 37.6 / 104, PFD_side);
-//				draw_waypoint_map(nowPos,dirtmp,mapDistance,PFD_x + 1.4 * PFD_side, PFD_y + PFD_side * 32 / 104 ,PFD_side);
-//				draw_route_map(nowPos,dirtmp,mapDistance,PFD_x + 1.4 * PFD_side, PFD_y + PFD_side * 32 / 104, PFD_side);
-//			}
-//			else if(ND_choice == 3){
-//				draw_ND_app_center(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-//			}
-			
+		
+			//画ND
 			draw_ND(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-			
-			if(GetAsyncKeyState(0x35) & 0x0001){
-				ND_choice += 1;
-				ND_choice %= 4;
-			}
 			
 			//备用表
 			draw_PFD_standby(PFD_x + 3.8 * PFD_side, PFD_y ,PFD_side / 5);
@@ -694,16 +599,17 @@ void draw_panels(){
 			//画计时器
 			draw_Chronometer(PFD_x - 0.85 * PFD_side, PFD_y - 0.3 * PFD_side,0.45 * PFD_side);
 			
-			
 			//画EICAS
 			draw_EICAS(PFD_x + 2.7 * PFD_side, PFD_y ,PFD_side);
 			
 			//画EHIS的控制面板
 			draw_EHIS_control(PFD_x, PFD_y - 1 * PFD_side ,PFD_side);
 			
-			//实现PFD的移动
+			
+			
+			//实现移动
 			if (GetAsyncKeyState(0x01) & 0x8000) {
-				if (is_down == 0/* && mouse_x >= PFD_x - PFD_side / 2 && mouse_y >= PFD_y - PFD_side / 2 && mouse_x <= PFD_x + 0.57 * PFD_side && mouse_y <= PFD_y + PFD_side / 2*/) {
+				if (is_down == 0) {
 					is_down = 11;
 					mouse_x_cur = mouse_x;
 					mouse_y_cur = mouse_y;
@@ -717,14 +623,14 @@ void draw_panels(){
 				}
 			} else if (is_down == 11) {
 				
-				//全屏展示PFD表
-				if (mouse_x >= PFD_x - 0.5 * PFD_side && mouse_x <= PFD_x + 0.5 * PFD_side && mouse_y >= PFD_y - 0.5 * PFD_side && mouse_y <= PFD_y + 0.5 * PFD_side) {
-					if (fclock() - click_time < 0.3) {
-						show = 11;
-					} else {
-						click_time = fclock();
-					}
-				}
+//				//全屏展示PFD表
+//				if (mouse_x >= PFD_x - 0.5 * PFD_side && mouse_x <= PFD_x + 0.5 * PFD_side && mouse_y >= PFD_y - 0.5 * PFD_side && mouse_y <= PFD_y + 0.5 * PFD_side) {
+//					if (fclock() - click_time < 0.3) {
+//						show = 11;
+//					} else {
+//						click_time = fclock();
+//					}
+//				}
 				
 				is_down = 0;
 				PFD_move_x_tmp = PFD_move_x;

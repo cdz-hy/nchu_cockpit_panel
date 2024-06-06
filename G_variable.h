@@ -92,6 +92,10 @@ extern vector<WAYPOINT> VORs;
 
 //==========以下为设置相关==========//
 
+//显示的界面（线程）
+//// 1 - 机械表	 2 - 电子 
+//extern int Page;
+
 //当前界面	0为默认六个机械仪表
 extern int show;
 

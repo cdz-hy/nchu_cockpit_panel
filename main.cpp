@@ -3,12 +3,9 @@
 #include <graphics.h>
 #include <windows.h>
 #include <math.h>
-#include <cstdio>
 #include <string>
-#include <regex>
 #include <iostream>
 #include <thread>
-#include <fstream>
 using namespace std;
 
 #include "DrawPanels.h"
@@ -17,6 +14,7 @@ using namespace std;
 #include "G_structs.h"
 #include "KeyboardControl.h"
 #include "ReadFiles.h"
+
 
 int main() {
 
@@ -41,7 +39,6 @@ int main() {
 	panels.join();
 	datas.join();
 	control.join();
-
 	
 	closegraph();
 	return 0;

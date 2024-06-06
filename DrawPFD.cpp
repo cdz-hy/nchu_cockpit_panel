@@ -22,6 +22,9 @@ void draw_1(double x, double y, double side);
 
 void draw_PFD(double PFD_x, double PFD_y, double PFD_side){
 	
+	//设置底座颜色
+	setfillcolor(BLACK);
+	ege_fillrect(PFD_x - PFD_side / 2, PFD_y - PFD_side / 2,1.07 * PFD_side,1.05 * PFD_side);
 	
 	draw_PFD_AI(PFD_x, PFD_y ,PFD_side);
 	
