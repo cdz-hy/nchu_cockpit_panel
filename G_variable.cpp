@@ -19,6 +19,7 @@ double verticalRate = -7866;
 double RNG = 56;//初始显示RNG 5
 
 double altitude = 0;
+double altitude2 = 0;//对地
 double MILLIBARS_data = 0;
 double INGH_data = 0;
 double indicated_number = 200;
@@ -122,6 +123,16 @@ int showFPS = 1;
 //表盘灯光效果
 int G_light = 0x00;
 
+double OUTBDangle = 0;
+double INBDangle = 0;
+double LOWERangle = 0;
+double LOWERangle_1 = 0;
+double INBDangle_1 = 0;
+double UPPERangle = 0;
+double Brightangle = 0;
+double changecolor = 0;
+int MainPanelLight = 0;
+
 
 //==================================//
 
@@ -164,8 +175,4 @@ int TERR = 0;
 
 int VOR1 = 2;
 int VOR2 = 2;
-
-int MainPanelLight = 64;
-
-double changecolor = 1;
 

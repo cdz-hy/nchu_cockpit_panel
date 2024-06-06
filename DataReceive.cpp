@@ -57,6 +57,7 @@ void data_receive(){
 					}
 					else if(fabs(data[i][0] - 20) <= 0.001){
 						altitude = data[i][6];
+						altitude2 = data[i][4] - 4;
 						latitude = data[i][1];
 						longitude = data[i][2];
 					}
@@ -66,6 +67,7 @@ void data_receive(){
 					}
 					else if(fabs(data[i][0] - 3) <= 0.001){
 						airSpeed = data[i][1];
+						TAS = data[i][3];
 					}
 					else if(fabs(data[i][0] - 4) <= 0.001){
 						vmo_speed = data[i][1] * 10;

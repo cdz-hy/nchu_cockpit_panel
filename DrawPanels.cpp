@@ -22,6 +22,7 @@
 #include "DrawEHISControl.h"
 #include "DrawND.h"
 #include "DrawNDInfo.h"
+#include "DrawLightControl.h"
 
 
 void draw_panels(){
@@ -627,8 +628,8 @@ void draw_panels(){
 			//画EHIS的控制面板——定
 			draw_EHIS_control(PFD_x + PFD_side * 0.65, PFD_y - 0.86 * PFD_side, PFD_side*0.8);
 
-			
-			
+			//灯光控制
+			draw_Light_contral(PFD_x + PFD_side * 0.65, PFD_y + 0.86 * PFD_side, PFD_side*0.8);
 			
 			
 			

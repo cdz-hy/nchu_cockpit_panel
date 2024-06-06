@@ -256,9 +256,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 			
 			
 		}
-		char a[10];
-		sprintf(a,"%d",MINSRef);
-		xyprintf(100,100,a);
+		
 	}
 	
 	

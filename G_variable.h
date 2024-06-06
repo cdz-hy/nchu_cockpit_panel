@@ -19,6 +19,7 @@ extern double verticalRate;
 extern double RNG;//初始显示RNG 5
 
 extern double altitude;
+extern double altitude2;//对地
 extern double MILLIBARS_data;
 extern double INGH_data;
 extern double indicated_number;
@@ -121,6 +122,16 @@ extern int showFPS;
 //表盘灯光效果
 extern int G_light;
 
+extern double OUTBDangle;
+extern double INBDangle;
+extern double LOWERangle;
+extern double LOWERangle_1;
+extern double INBDangle_1;
+extern double UPPERangle;
+extern double Brightangle;
+extern double changecolor;
+extern int MainPanelLight;
+
 
 //==================================//
 
@@ -143,7 +154,6 @@ extern double baroKnob;
 extern double baroUnit;
 extern double EHISMode;
 extern double mapDistance;
-extern double changecolor;
 extern int FPV;
 extern int MTRS;
 extern int RST;
@@ -159,4 +169,3 @@ extern int POS;
 extern int TERR;
 extern int VOR1;
 extern int VOR2;
-extern int MainPanelLight;

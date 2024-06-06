@@ -4,6 +4,7 @@
 #include <math.h>
 
 #include "DrawFrame.h"
+#include "G_variable.h"
 
 //函数声明
 
