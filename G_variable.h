@@ -133,6 +133,7 @@ extern double Brightangle;
 extern double changecolor;
 extern int MainPanelLight;
 
+extern PIMAGE pimg1;
 extern PIMAGE pimg2;
 extern PIMAGE pimg3;
 extern PIMAGE pimg4;
