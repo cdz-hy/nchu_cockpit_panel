@@ -67,16 +67,10 @@ double angle = 0;
 
 double Anum = 0;
 
-//经纬度
-double latitude = 0;
-double longitude = 0;
 
 //所存储的所有航点和nav信息
 vector<WAYPOINT> waypoints;
 vector<WAYPOINT> route;
-
-//已经走过的航线
-vector<WAYPOINT> routePassed;
 
 //==================================//
 
@@ -98,7 +92,7 @@ int is_showbk = 1;
 int UDP_transmission = 0;
 
 //初始IP地址和端口
-char *IP_address = "192.168.0.0";
+//char *IP_address = "192.168.0.0";
 int UDP_port = 49001;
 
 //展示FPS
@@ -129,20 +123,20 @@ double MINSKonb = 0;
 double MINSRef = 55;
 double baroKnob = 0;
 double baroUnit = 55;
-double EHSIMode = 55;
+double EHSIMode = 135;
 double mapDistance = 0;
 int RST = 0;
 int STD = 0;
-int CTR = 0;
+int CTR = 1;
 int TFC = 0;
 
 int FPV = 0;
 int MTRS = 0;
 
-int WXR = 0;
-int STA = 0;
-int WPT = 0;
-int ARPT = 0;
+int WXR = 1;
+int STA = 1;
+int WPT = 1;
+int ARPT = 1;
 int DATA = 0;
 int POS = 0;
 int TERR = 0;
@@ -150,7 +144,7 @@ int TERR = 0;
 int VOR1 = 2;
 int VOR2 = 2;
 
-int MainPanelLight = 64;
+int ChangeLight = 64;
 
 double changecolor = 1;
 
