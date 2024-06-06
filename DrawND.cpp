@@ -56,7 +56,18 @@ extern double ndtoprotationangle;//顶部三角形的偏转角度
 //==================================以下为绘制总表部分========================================//
 void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	
+	
+	int ratio = 5;
+	ratio = 5 * pow(2, mapDistance / 30);
+	
+	
 	draw_ND_frame_chassis(ND_x, ND_y, ND_side);
+	
+	
+	setbkmode(TRANSPARENT);
+	settextjustify(CENTER_TEXT, CENTER_TEXT);
+	setfont(ND_side/ 35, 0, "黑体");
+	setcolor(EGEARGB(180, 100, 149, 237));
 	
 	if(MINSRef = 55) {
 		
@@ -80,59 +91,117 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	}	
 	
 	if(CTR == 0){
-		if(EHSIMode == 55 || EHSIMode == 80 || EHSIMode == 110){
+		
+		if(EHISMode == 55 || EHISMode == 80 || EHISMode == 110){
 			
 			draw_ND_map(ND_x, ND_y + ND_side * 32 / 104, ND_side);
 			
-		}else if(EHSIMode == 135){
+		}else if(EHISMode == 135){
 			
 			draw_ND_pln(ND_x, ND_y, ND_side);
 			
 		}
+		
+		
+		
+		setbkmode(TRANSPARENT);
+		settextjustify(CENTER_TEXT, CENTER_TEXT);
+		setfont(ND_side/ 35, 0, "黑体");
+		setcolor(EGEARGB(180, 100, 149, 237));
+		
+		if(ARPT == 1) {
+			ege_drawtext("ARPT", ND_x - ND_side / 2.21,ND_y + ND_side / 6);
+		}
+		if(WPT == 1) {
+			ege_drawtext("WPT", ND_x - ND_side / 2.18,ND_y + ND_side / 5.1);
+			
+			if(EHISMode == 55 || EHISMode == 80 || EHISMode == 110){
+				WAYPOINT nowPos = {0,"", latitude, longitude, "", "", "", 100, "", ""};
+				draw_waypoint_map(nowPos, rotationangle, ratio, ND_x, ND_y + ND_side * 32 / 104, ND_side);
+				draw_route_map(nowPos, rotationangle, ratio, ND_x, ND_y + ND_side * 32 / 104, ND_side);
+			}
+			else if(EHISMode == 135){
+				WAYPOINT nowPos = {0,"", latitude, longitude, "", "", "", 100, "", ""};
+				draw_waypoint(nowPos, 0, ratio, ND_x, ND_y, ND_side);
+				draw_route(nowPos, 0, ratio, ND_x, ND_y, ND_side);
+			}
+		}
+		if(STA == 1) {
+			
+			setcolor(EGEARGB(180, 100, 149, 237));
+			ege_drawtext("STA", ND_x - ND_side / 2.18,ND_y + ND_side / 4.5);
+		}
+		
+		setfont(ND_side/ 30, 0, "黑体");
+		setcolor(EGEARGB(180, 100, 149, 237));
+		if(WXR == 1) {
+			ege_drawtext("WXR", ND_x - ND_side / 2.2,ND_y + ND_side / 4);
+		}
+		
+		if(DATA == 1){
+			
+		}
+		if(POS == 1) {
+			
+		}
+		if(TERR == 1) {
+			
+		}
+		
+		
+		
+		
 	}else if(CTR == 1){
-		if(EHSIMode == 55 || EHSIMode == 80){
+		
+		if(EHISMode == 55 || EHISMode == 80){
 			
 			draw_ND_app_center(ND_x, ND_y, ND_side);
 			
-		}else if(EHSIMode == 110){
+		}else if(EHISMode == 110){
 			
 			draw_ND_map(ND_x, ND_y + ND_side * 32 / 104, ND_side);
 			
-		}else if(EHSIMode == 135){
+		}else if(EHISMode == 135){
 			
 			draw_ND_pln(ND_x , ND_y, ND_side);
 			
 		}
-	}
-	
-	
-	setbkmode(TRANSPARENT);
-	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	setfont(ND_side/ 35, 0, "黑体");
-	setcolor(EGEARGB(180, 100, 149, 237));
-	
-	if(ARPT == 1) {
-		ege_drawtext("ARPT", ND_x - ND_side / 2.21,ND_y + ND_side / 6);
-	}
-	if(WPT == 1) {
-		ege_drawtext("WPT", ND_x - ND_side / 2.18,ND_y + ND_side / 5.1);
-	}
-	if(STA == 1) {
-		ege_drawtext("STA", ND_x - ND_side / 2.18,ND_y + ND_side / 4.5);
-	}
-	
-	setfont(ND_side/ 30, 0, "黑体");
-	if(WXR == 1) {
-		ege_drawtext("WXR", ND_x - ND_side / 2.2,ND_y + ND_side / 4);
-	}
-	
-	if(DATA == 1){
 		
-	}
-	if(POS == 1) {
 		
-	}
-	if(TERR == 1) {
+		
+		if(ARPT == 1) {
+			
+		}
+		if(WPT == 1) {
+			
+			if(EHISMode == 110){
+				WAYPOINT nowPos = {0,"", latitude, longitude, "", "", "", 100, "", ""};
+				draw_waypoint_map(nowPos, rotationangle, ratio, ND_x, ND_y + ND_side * 32 / 104, ND_side);
+				draw_route_map(nowPos, rotationangle, ratio, ND_x, ND_y + ND_side * 32 / 104, ND_side);
+			}
+			else if(EHISMode == 135){
+				WAYPOINT nowPos = {0,"", latitude, longitude, "", "", "", 100, "", ""};
+				draw_waypoint(nowPos, 0, ratio, ND_x, ND_y, ND_side);
+				draw_route(nowPos, 0, ratio, ND_x, ND_y, ND_side);
+			}
+			
+		}
+		if(STA == 1) {
+			
+		}
+		if(WXR == 1) {
+			
+		}
+		
+		if(DATA == 1){
+			
+		}
+		if(POS == 1) {
+			
+		}
+		if(TERR == 1) {
+			
+		}
 		
 	}
 	
@@ -142,6 +211,7 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	draw_ND_smallWhiteCircle(ND_x - ND_side / 2.4, ND_y +  ND_side / 1.72, ND_side / 22);
 	
 	draw_screw3(ND_x + ND_side / 2, ND_y +  ND_side / 1.668,ND_side / 22, 45);
+	
 }
 
 //==========================================================================================//
