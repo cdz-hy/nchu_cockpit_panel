@@ -1,4 +1,5 @@
 #include <vector>
+#include<graphics.h>
 #include "G_structs.h"
 using namespace std;
 
@@ -132,6 +133,10 @@ extern double Brightangle;
 extern double changecolor;
 extern int MainPanelLight;
 
+extern PIMAGE pimg2;
+extern PIMAGE pimg3;
+extern PIMAGE pimg4;
+extern PIMAGE pimg5;
 
 //==================================//
 
