@@ -134,6 +134,7 @@ double Brightangle = 0;
 double changecolor = 0;
 int MainPanelLight = 0;
 
+PIMAGE pimg1;
 PIMAGE pimg2;
 PIMAGE pimg3;
 PIMAGE pimg4;
