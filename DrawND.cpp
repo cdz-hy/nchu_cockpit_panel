@@ -35,7 +35,7 @@ void draw_ND_map(double center_x, double center_y, double side);//
 void draw_ND_pln(double center_x, double center_y, double side);//
 void draw_ND_frame_chassis(double center_x, double center_y, double side);//
 void draw_ND_smallWhiteCircle(double center_x, double center_y, double side);
-
+void draw_ND_Speed(double center_x, double center_y, double side);
 
 // 变量声明
 //APP+CENTER  VOR+CENTER 模式:
@@ -69,17 +69,17 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	setfont(ND_side/ 35, 0, "黑体");
 	setcolor(EGEARGB(180, 100, 149, 237));
 	
-	if(MINSRef = 55) {
+	if(MINSRef == 55) {
 		
 	}
-	if(MINSRef = 125) {
+	if(MINSRef == 125) {
 		
 	}
 	
-	if(baroUnit = 55) {
+	if(baroUnit == 55) {
 		
 	}
-	if(baroUnit = 125) {
+	if(baroUnit == 125) {
 		
 	}
 	
@@ -104,15 +104,26 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 		
 		
 		
-		setbkmode(TRANSPARENT);
-		settextjustify(CENTER_TEXT, CENTER_TEXT);
-		setfont(ND_side/ 35, 0, "黑体");
-		setcolor(EGEARGB(180, 100, 149, 237));
 		
 		if(ARPT == 1) {
+			setbkmode(TRANSPARENT);
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			setfont(ND_side/ 35, 0, "黑体");
+			setcolor(EGEARGB(180, 100, 149, 237));
 			ege_drawtext("ARPT", ND_x - ND_side / 2.21,ND_y + ND_side / 6);
+			
+//			if()
+			if(EHISMode == 135){
+				WAYPOINT nowPos = {0,"", latitude, longitude, "", "", "", 100, "", ""};
+				draw_airports(nowPos, 0, ratio, ND_x, ND_y, ND_side);
+			}
+			
 		}
 		if(WPT == 1) {
+			setbkmode(TRANSPARENT);
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			setfont(ND_side/ 35, 0, "黑体");
+			setcolor(EGEARGB(180, 100, 149, 237));
 			ege_drawtext("WPT", ND_x - ND_side / 2.18,ND_y + ND_side / 5.1);
 			
 			if(EHISMode == 55 || EHISMode == 80 || EHISMode == 110){
@@ -127,14 +138,17 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 			}
 		}
 		if(STA == 1) {
-			
+			setbkmode(TRANSPARENT);
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			setfont(ND_side/ 35, 0, "黑体");
 			setcolor(EGEARGB(180, 100, 149, 237));
 			ege_drawtext("STA", ND_x - ND_side / 2.18,ND_y + ND_side / 4.5);
 		}
-		
-		setfont(ND_side/ 30, 0, "黑体");
-		setcolor(EGEARGB(180, 100, 149, 237));
 		if(WXR == 1) {
+			setbkmode(TRANSPARENT);
+			settextjustify(CENTER_TEXT, CENTER_TEXT);
+			setfont(ND_side/ 35, 0, "黑体");
+			setcolor(EGEARGB(180, 100, 149, 237));
 			ege_drawtext("WXR", ND_x - ND_side / 2.2,ND_y + ND_side / 4);
 		}
 		
@@ -170,6 +184,10 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 		
 		
 		if(ARPT == 1) {
+			if(EHISMode == 135){
+				WAYPOINT nowPos = {0,"", latitude, longitude, "", "", "", 100, "", ""};
+				draw_airports(nowPos, 0, ratio, ND_x, ND_y, ND_side);
+			}
 			
 		}
 		if(WPT == 1) {
@@ -208,6 +226,8 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	
 	draw_PFD_frame(ND_x, ND_y, ND_side);
 	
+	draw_ND_Speed(ND_x, ND_y, ND_side);
+	
 	draw_ND_smallWhiteCircle(ND_x - ND_side / 2.4, ND_y +  ND_side / 1.72, ND_side / 22);
 	
 	draw_screw3(ND_x + ND_side / 2, ND_y +  ND_side / 1.668,ND_side / 22, 45);
@@ -241,6 +261,109 @@ void draw_ND_frame_chassis(double center_x, double center_y, double side){
 void draw_ND_smallWhiteCircle(double center_x, double center_y, double side){
 	setfillcolor(EGEARGB(0xff,79,79,75));
 	ege_fillellipse(center_x - side / 2,center_y - side /2,side,side);
+}
+
+// 绘制表盘左上角的真实空速，对地速度，风速风向
+void draw_ND_Speed(double center_x, double center_y, double side) {
+	// 真实空速，对地速度，风速风向显示
+	setbkmode(TRANSPARENT);
+	settextjustify(CENTER_TEXT, CENTER_TEXT);
+	setcolor(EGEARGB(200, 177, 177, 178));
+	setfont(side / 30, 0, "黑体");// 这是对字体的大小的设置
+	char ch[64];
+	ege_drawtext("GS", center_x - side / 2.2, center_y - side / 2.3);
+	ege_drawtext("TAS", center_x - side / 3.1, center_y - side / 2.3);
+	if (WS == 0 && WD == 0) {
+		if (TAS <= 100) {
+			GS = TAS;
+			setfont(side / 23, 0, "黑体");
+			sprintf_s(ch, "%d", (int)GS);
+			if (TAS <= 10)
+				ege_drawtext(ch, center_x - side / 2.6, center_y - side / 2.3);
+			else {
+				ege_drawtext(ch, center_x - side / 2.54, center_y - side / 2.3);
+			}
+			ege_drawtext("---", center_x - side / 3.88, center_y - side / 2.3);
+		}
+		else {
+			GS = TAS;
+			setfont(side / 23, 0, "黑体");
+			sprintf_s(ch, "%d", (int)GS);
+			ege_drawtext(ch, center_x - side / 2.56, center_y - side / 2.3);
+			ege_drawtext(ch, center_x - side / 4.1 , center_y - side / 2.3);
+		}
+		ege_drawtext("---", center_x - side / 2.3, center_y - side / 2.58);
+		ege_drawtext("。", center_x - side / 2.64, center_y - side / 2.44);
+		ege_drawtext("/", center_x - side / 2.74, center_y - side / 2.58);
+		ege_drawtext("---", center_x - side / 3.18, center_y - side / 2.58);
+	}
+	else {
+		GS =sqrt(fabs(TAS * TAS + WS * WS + 2 * TAS * WS * cos(WD)));
+		setfont(side / 23, 0, "黑体");
+		if (TAS <= 100) {
+			sprintf_s(ch, "%d", (int)GS);
+			if (GS <= 10)
+				ege_drawtext(ch, center_x - side / 2.6, center_y - side / 2.3);
+			else {
+				ege_drawtext(ch, center_x - side / 2.54, center_y - side / 2.3);
+			}
+			ege_drawtext("---", center_x - side / 3.88, center_y - side / 2.3);
+			if (WS == 0 && WD != 0) {
+				sprintf_s(ch, "%d", (int)WD);
+				ege_drawtext(ch, center_x - side / 2.3, center_y - side / 2.58);
+				ege_drawtext("。", center_x - side / 2.64, center_y - side / 2.44);
+				ege_drawtext("/", center_x - side / 2.74, center_y - side / 2.58);
+				ege_drawtext("---", center_x - side / 3.18, center_y - side / 2.58);
+			}
+			else if ((WD == 0 && WS != 0)) {
+				ege_drawtext("---", center_x - side / 2.3, center_y - side / 2.58);
+				ege_drawtext("。", center_x - side / 2.64, center_y - side / 2.44);
+				ege_drawtext("/", center_x - side / 2.74, center_y - side / 2.58);
+				sprintf_s(ch, "%d", (int)WS);
+				ege_drawtext(ch, center_x - side / 3.18, center_y - side / 2.58);
+			}
+			else {
+				sprintf_s(ch, "%d", (int)WD);
+				ege_drawtext(ch, center_x - side / 2.3, center_y - side / 2.58);
+				ege_drawtext("。", center_x - side / 2.64, center_y - side / 2.44);
+				ege_drawtext("/", center_x - side / 2.74, center_y - side / 2.58);
+				sprintf_s(ch, "%d", (int)WS);
+				ege_drawtext(ch, center_x - side / 3.18, center_y - side / 2.58);
+			}
+		}
+		else {
+			sprintf_s(ch, "%d", (int)GS);
+			if (GS <= 10)
+				ege_drawtext(ch, center_x - side / 2.6, center_y - side / 2.3);
+			else {
+				ege_drawtext(ch, center_x - side / 2.54, center_y - side / 2.3);
+			}
+			sprintf_s(ch, "%d", (int)TAS);
+			ege_drawtext(ch, center_x - side / 4.1, center_y - side / 2.3);
+			if (WS == 0 && WD != 0) {
+				sprintf_s(ch, "%d", (int)WD);
+				ege_drawtext(ch, center_x - side / 2.3, center_y - side / 2.58);
+				ege_drawtext("。", center_x - side / 2.64, center_y - side / 2.44);
+				ege_drawtext("/", center_x - side / 2.74, center_y - side / 2.58);
+				ege_drawtext("---", center_x - side / 3.18, center_y - side / 2.58);
+			}
+			else if ((WD == 0 && WS != 0)) {
+				ege_drawtext("---", center_x - side / 2.3, center_y - side / 2.58);
+				ege_drawtext("。", center_x - side / 2.64, center_y - side / 2.44);
+				ege_drawtext("/", center_x - side / 2.74, center_y - side / 2.58);
+				sprintf_s(ch, "%d", (int)WS);
+				ege_drawtext(ch, center_x - side / 3.18, center_y - side / 2.58);
+			}
+			else {
+				sprintf_s(ch, "%d", (int)WD);
+				ege_drawtext(ch, center_x - side / 2.3, center_y - side / 2.58);
+				ege_drawtext("。", center_x - side / 2.64, center_y - side / 2.44);
+				ege_drawtext("/", center_x - side / 2.74, center_y - side / 2.58);
+				sprintf_s(ch, "%d", (int)WS);
+				ege_drawtext(ch, center_x - side / 3.18, center_y - side / 2.58);
+			}
+		}
+	}
 }
 
 //================================APP+CENTER  VOR+CENTER 模式==================================//
@@ -673,6 +796,7 @@ void draw_ND_map(double center_x, double center_y, double side)
 
 //================================PLN PLN+CENTER 模式==================================//
 
+
 void draw_ND_pln(double center_x, double center_y, double side) {
 	
 	side = side / 2;
@@ -706,18 +830,57 @@ void draw_ND_pln(double center_x, double center_y, double side) {
 	// 数字显示与WSNE显示
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	setfont(side / 16.666666, 0, "黑体");// 这是对数字的大小的设置
+	setfont(side / 14, 0, "黑体");// 这是对数字的大小的设置
 	char ch[64];
-	sprintf_s(ch, "%d", 20);// 上20输出
-	ege_drawtext(ch, center_x, center_y - small_r / 1.01);
-	sprintf_s(ch, "%d", 20);// 下20输出
-	ege_drawtext(ch, center_x, center_y + small_r / 0.99);
-	sprintf_s(ch, "%d", 40);// 上40输出
-	ege_drawtext(ch, center_x, center_y - big_r / 1.01);
-	sprintf_s(ch, "%d", 40);// 下40输出
-	ege_drawtext(ch, center_x, center_y + big_r / 0.99);
+	int mapdistance_small = 0;
+	int mapdistance_big = 0;
+	if(mapDistance == 0){
+		mapdistance_small = 0;
+		mapdistance_big = 5;
+	}else if(mapDistance == 30){
+		mapdistance_small = 5;
+		mapdistance_big = 10;
+	}else if(mapDistance == 60){
+		mapdistance_small = 10;
+		mapdistance_big = 20;
+	}else if(mapDistance == 90){
+		mapdistance_small = 20;
+		mapdistance_big = 40;
+	}else if(mapDistance == 120){
+		mapdistance_small = 40;
+		mapdistance_big = 80;
+	}else if(mapDistance == 150){
+		mapdistance_small = 80;
+		mapdistance_big = 160;
+	}else if(mapDistance == 180){
+		mapdistance_small = 160;
+		mapdistance_big = 320;
+	}else if(mapDistance == 210){
+		mapdistance_small = 320;
+		mapdistance_big = 640;
+	}
+	if(mapDistance == 0){
+		ege_drawtext("", center_x, center_y - small_r / 1.01);
+		ege_drawtext("", center_x, center_y + small_r / 0.99);
+		sprintf_s(ch, "%d", mapdistance_big);// 上40输出
+		ege_drawtext(ch, center_x, center_y - big_r / 1.01);
+		sprintf_s(ch, "%d", mapdistance_big);// 下40输出
+		ege_drawtext(ch, center_x, center_y + big_r / 0.99);
+	}else {
+		if(mapDistance>= 180)
+			setfont(side / 18, 0, "黑体");
+		sprintf_s(ch, "%d", mapdistance_small);// 上20输出
+		ege_drawtext(ch, center_x, center_y - small_r / 1.01);
+		sprintf_s(ch, "%d", mapdistance_small);// 下20输出
+		ege_drawtext(ch, center_x, center_y + small_r / 0.99);
+		sprintf_s(ch, "%d", mapdistance_big);// 上40输出
+		ege_drawtext(ch, center_x, center_y - big_r / 1.01);
+		sprintf_s(ch, "%d", mapdistance_big);// 下40输出
+		ege_drawtext(ch, center_x, center_y + big_r / 0.99);
+	}
+	
 	/*
-	* 上面的加减是40,20输出的位置坐标
+	* 上面的加减是输出数字的位置坐标
 	*/
 	setcolor(EGEARGB(250, 76, 153, 0));// 这是对NSME以及箭头颜色的设置（绿色）
 	setfont(side / 12.5, 0, "黑体");// 这是对WSNE的大小的设置
@@ -734,3 +897,4 @@ void draw_ND_pln(double center_x, double center_y, double side) {
 	ege_line(center_x + side / 34, center_y - big_r / 0.87,// 第一个坐标是靠上的,第二个坐标是靠右的
 		center_x + side / 22, center_y - big_r / 0.89);
 }
+

@@ -6,7 +6,7 @@ extern double MINSKonb;//RST上层
 extern double MINSRef;//RST下层
 extern double baroKnob;//STD上层
 extern double baroUnit;//STD下层
-extern double EHSIMode;//CTR
+extern double EHISMode;//CTR
 extern double mapDistance;//TFC
 extern double changecolor;
 extern int FPV;
@@ -28,6 +28,7 @@ extern int MainPanelLight;
 int MainPanel_mouse_x = 0, MainPanel_mouse_y = 0;
 int MainPanel_speed_is_down = 0;
 int MainPanel_mouse_y_cur = 0, MainPanel_mouse_x_cur = 0;
+
 void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) {
 	
 	int x, y;
@@ -90,6 +91,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 		{EHIScontrol_x - 65 * Ulength , EHIScontrol_y - 38 * Ulength},
 		
 	};
+	
 	ege_bezier(KnobPanelFramePointNum, KnobPanelFrameploypoints);
 	setfillcolor(EGEARGB(0XFF, 0X18, 0X1C, 0X20));
 	floodfill(EHIScontrol_x - 64 * Ulength, EHIScontrol_y - 37 * Ulength, EGEARGB(0XFF, 0X18, 0X1C, 0X20));
@@ -254,6 +256,9 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 			
 			
 		}
+		char a[10];
+		sprintf(a,"%d",MINSRef);
+		xyprintf(100,100,a);
 	}
 	
 	
@@ -272,6 +277,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 		}
 	}
 	
+
 	
 	setlinewidth(linewidth / 2);
 	
@@ -338,7 +344,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 				Topknob_R4 = 7.5;
 				RST = 1;
 			}
-			if (RST == 1) {
+			else if (RST == 1) {
 				Topknob_R4 = 7.5;
 				RST = 0;
 			}
@@ -548,7 +554,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 				Topknob_R5 = 7.5;
 				STD = 1;
 			}
-			if (STD == 1) {
+			else if (STD == 1) {
 				Topknob_R5 = 7.5;
 				STD = 0;
 			}
@@ -604,11 +610,11 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	if (x > EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 && x< EHIScontrol_x - 17.5 * Ulength - Lowknob_R4 && y > EHIScontrol_y + 11 * Ulength - Lowknob_R1 && y < EHIScontrol_y + 11 * Ulength + Lowknob_R1) {
 		
 		if (GetAsyncKeyState(0x02) & 0x0001) {
-			if (EHSIMode == 110) {
-				EHSIMode -= 30;
+			if (EHISMode == 110) {
+				EHISMode -= 30;
 			}
-			else if(EHSIMode>55){
-				EHSIMode -= 25;
+			else if(EHISMode>55){
+				EHISMode -= 25;
 			}
 			
 		}
@@ -616,11 +622,11 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	if (x < EHIScontrol_x - 17.5 * Ulength + Lowknob_R1 && x> EHIScontrol_x - 17.5 * Ulength + Lowknob_R4 && y > EHIScontrol_y + 11 * Ulength - Lowknob_R1 && y < EHIScontrol_y + 11 * Ulength + Lowknob_R1) {
 		
 		if (GetAsyncKeyState(0x02) & 0x0001) {
-			if (EHSIMode == 80) {
-				EHSIMode += 30;
+			if (EHISMode == 80) {
+				EHISMode += 30;
 			}
-			else if (EHSIMode < 135) {
-				EHSIMode += 25;
+			else if (EHISMode < 135) {
+				EHISMode += 25;
 			}
 			
 		}
@@ -650,18 +656,18 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	
 	int leftLowknobnum_2 = 12;//左下旋钮
 	ege_point leftLowknobploypoints_2[12] = {
-		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos(EHSIMode * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin(EHSIMode * PI / 180)},
-		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHSIMode + 30) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHSIMode + 30) * PI / 180)},
-		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHSIMode + 60) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHSIMode + 60) * PI / 180)},
-		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHSIMode + 90) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHSIMode + 90) * PI / 180)},
-		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHSIMode + 120) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHSIMode + 120) * PI / 180)},
-		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHSIMode + 150) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHSIMode + 150) * PI / 180)},
-		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHSIMode + 180) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHSIMode + 180) * PI / 180)},
-		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHSIMode + 210) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHSIMode + 210) * PI / 180)},
-		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHSIMode + 240) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHSIMode + 240) * PI / 180)},
-		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHSIMode + 270) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHSIMode + 270) * PI / 180)},
-		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHSIMode + 300) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHSIMode + 300) * PI / 180)},
-		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHSIMode + 330) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHSIMode + 330) * PI / 180)},
+		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos(EHISMode * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin(EHISMode * PI / 180)},
+		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHISMode + 30) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHISMode + 30) * PI / 180)},
+		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHISMode + 60) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHISMode + 60) * PI / 180)},
+		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHISMode + 90) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHISMode + 90) * PI / 180)},
+		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHISMode + 120) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHISMode + 120) * PI / 180)},
+		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHISMode + 150) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHISMode + 150) * PI / 180)},
+		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHISMode + 180) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHISMode + 180) * PI / 180)},
+		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHISMode + 210) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHISMode + 210) * PI / 180)},
+		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHISMode + 240) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHISMode + 240) * PI / 180)},
+		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHISMode + 270) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHISMode + 270) * PI / 180)},
+		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHISMode + 300) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHISMode + 300) * PI / 180)},
+		{EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHISMode + 330) * PI / 180) , EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHISMode + 330) * PI / 180)},
 	};
 	
 	setfillcolor(EGEARGB(0XFF, 0X58, 0X58, 0X56));
@@ -671,26 +677,26 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	ege_setpattern_none();
 	setcolor(EGEARGB(0X1F, 0X50, 0X50, 0X50));
 	for (int i = 0; i < 360; i += 30) {
-		ege_line(EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHSIMode + i) * PI / 180), EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHSIMode + i) * PI / 180),
-			EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHSIMode + i) * PI / 180), EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHSIMode + i) * PI / 180));
+		ege_line(EHIScontrol_x - 17.5 * Ulength - Lowknob_R1 * cos((EHISMode + i) * PI / 180), EHIScontrol_y + 11 * Ulength - Lowknob_R1 * sin((EHISMode + i) * PI / 180),
+			EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHISMode + i) * PI / 180), EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHISMode + i) * PI / 180));
 	}
 	
 	
 	
 	int leftLowknobnum_1 = 12;
 	ege_point leftLowknobploypoints_1[12] = {
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos(EHSIMode * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin(EHSIMode * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHSIMode + 30) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHSIMode + 30) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHSIMode + 60) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHSIMode + 60) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHSIMode + 90) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHSIMode + 90) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHSIMode + 120) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHSIMode + 120) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHSIMode + 150) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHSIMode + 150) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHSIMode + 180) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHSIMode + 180) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHSIMode + 210) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHSIMode + 210) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHSIMode + 240) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHSIMode + 240) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHSIMode + 270) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHSIMode + 270) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHSIMode + 300) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHSIMode + 300) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHSIMode + 330) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHSIMode + 330) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos(EHISMode * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin(EHISMode * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHISMode + 30) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHISMode + 30) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHISMode + 60) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHISMode + 60) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHISMode + 90) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHISMode + 90) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHISMode + 120) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHISMode + 120) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHISMode + 150) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHISMode + 150) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHISMode + 180) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHISMode + 180) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHISMode + 210) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHISMode + 210) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHISMode + 240) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHISMode + 240) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHISMode + 270) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHISMode + 270) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHISMode + 300) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHISMode + 300) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHISMode + 330) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHISMode + 330) * PI / 180)},
 	};
 	
 	setfillcolor(EGEARGB(0XFF, 0X58, 0X58, 0X56));
@@ -698,18 +704,18 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	setlinewidth(linewidth * 2.5);
 	setcolor(EGEARGB(0XFF, 0X2A, 0X25, 0X1F));
 	ege_line(EHIScontrol_x - 18 * Ulength, EHIScontrol_y + 11 * Ulength,
-		EHIScontrol_x - 17.5 * Ulength - (Lowknob_R1 - Ulength / 3) * cos(EHSIMode  * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 - Ulength / 3) * sin(EHSIMode  * PI / 180));
+		EHIScontrol_x - 17.5 * Ulength - (Lowknob_R1 - Ulength / 3) * cos(EHISMode  * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 - Ulength / 3) * sin(EHISMode  * PI / 180));
 	
 	setlinewidth(linewidth * 1);
 	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
 	ege_line(EHIScontrol_x - 18 * Ulength, EHIScontrol_y + 11 * Ulength,
-		EHIScontrol_x - 17.5 * Ulength - (Lowknob_R1 - Ulength / 3) * cos(EHSIMode  * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 - Ulength / 3) * sin(EHSIMode * PI / 180));
+		EHIScontrol_x - 17.5 * Ulength - (Lowknob_R1 - Ulength / 3) * cos(EHISMode  * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 - Ulength / 3) * sin(EHISMode * PI / 180));
 	
 	setlinewidth(linewidth / 4);
 	
 	setcolor(EGEARGB(0X3F, 0X58, 0X58, 0X56));
-	ege_line(EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos(EHSIMode * PI / 180), EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin(EHSIMode * PI / 180),
-		EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHSIMode + 30) * PI / 180), EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHSIMode + 30) * PI / 180));
+	ege_line(EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos(EHISMode * PI / 180), EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin(EHISMode * PI / 180),
+		EHIScontrol_x - 18 * Ulength - Lowknob_R2 * cos((EHISMode + 30) * PI / 180), EHIScontrol_y + 12 * Ulength - Lowknob_R2 * sin((EHISMode + 30) * PI / 180));
 	setlinewidth(linewidth / 2);
 	
 	if (x < EHIScontrol_x - 18 * Ulength + Lowknob_R3 && x > EHIScontrol_x - 18 * Ulength - Lowknob_R3 && y > EHIScontrol_y + 12 * Ulength - Lowknob_R3 && y < EHIScontrol_y + 12 * Ulength + Lowknob_R3) {
@@ -720,7 +726,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 				Lowknob_R4 = 6;
 				CTR = 1;
 			}
-			if (CTR == 1) {
+			else if (CTR == 1) {
 				Lowknob_R4 = 6;
 				CTR = 0;
 			}
@@ -730,18 +736,18 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	
 	int leftLowknobnum_3 = 12;
 	ege_point leftLowknobploypoints_3[12] = {
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos(EHSIMode * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin(EHSIMode * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHSIMode + 30) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHSIMode + 30) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHSIMode + 60) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHSIMode + 60) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHSIMode + 90) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHSIMode + 90) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHSIMode + 120) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHSIMode + 120) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHSIMode + 150) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHSIMode + 150) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHSIMode + 180) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHSIMode + 180) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHSIMode + 210) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHSIMode + 210) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHSIMode + 240) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHSIMode + 240) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHSIMode + 270) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHSIMode + 270) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHSIMode + 300) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHSIMode + 300) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHSIMode + 330) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHSIMode + 330) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos(EHISMode * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin(EHISMode * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHISMode + 30) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHISMode + 30) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHISMode + 60) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHISMode + 60) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHISMode + 90) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHISMode + 90) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHISMode + 120) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHISMode + 120) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHISMode + 150) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHISMode + 150) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHISMode + 180) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHISMode + 180) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHISMode + 210) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHISMode + 210) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHISMode + 240) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHISMode + 240) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHISMode + 270) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHISMode + 270) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHISMode + 300) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHISMode + 300) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R4 * cos((EHISMode + 330) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R4 * sin((EHISMode + 330) * PI / 180)},
 	};
 	
 	setfillcolor(EGEARGB(0XFF, 0X00, 0X00, 0X00));
@@ -750,18 +756,18 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	
 	int leftLowknobnum_4 = 12;
 	ege_point leftLowknobploypoints_4[12] = {
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos(EHSIMode * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin(EHSIMode * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHSIMode + 30) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHSIMode + 30) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHSIMode + 60) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHSIMode + 60) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHSIMode + 90) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHSIMode + 90) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHSIMode + 120) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHSIMode + 120) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHSIMode + 150) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHSIMode + 150) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHSIMode + 180) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHSIMode + 180) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHSIMode + 210) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHSIMode + 210) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHSIMode + 240) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHSIMode + 240) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHSIMode + 270) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHSIMode + 270) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHSIMode + 300) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHSIMode + 300) * PI / 180)},
-		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHSIMode + 330) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHSIMode + 330) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos(EHISMode * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin(EHISMode * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHISMode + 30) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHISMode + 30) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHISMode + 60) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHISMode + 60) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHISMode + 90) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHISMode + 90) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHISMode + 120) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHISMode + 120) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHISMode + 150) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHISMode + 150) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHISMode + 180) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHISMode + 180) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHISMode + 210) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHISMode + 210) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHISMode + 240) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHISMode + 240) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHISMode + 270) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHISMode + 270) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHISMode + 300) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHISMode + 300) * PI / 180)},
+		{EHIScontrol_x - 18 * Ulength - Lowknob_R3 * cos((EHISMode + 330) * PI / 180) , EHIScontrol_y + 12 * Ulength - Lowknob_R3 * sin((EHISMode + 330) * PI / 180)},
 	};
 	
 	setfillcolor(EGEARGB(0XFF, 0X11, 0X11, 0X11));
@@ -883,7 +889,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 				Lowknob_R5 = 6;
 				TFC = 1;
 			}
-			if (TFC == 1) {
+			else if (TFC == 1) {
 				Lowknob_R5 = 6;
 				TFC = 0;
 			}
@@ -947,7 +953,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 				ii = 1;
 				FPV = 1;
 			}
-			if (FPV == 1) {
+			else if (FPV == 1) {
 				ii = 1;
 				FPV = 0;
 			}
@@ -965,7 +971,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 				jj = 1;
 				MTRS = 1;
 			}
-			if (MTRS == 1) {
+			else if (MTRS == 1) {
 				jj = 1;
 				MTRS = 0;
 			}
@@ -1289,7 +1295,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 			if (WXR == 0) {
 				WXR = 1;
 			}
-			if (WXR == 1) {
+			else if (WXR == 1) {
 				WXR = 0;
 			}
 			
@@ -1306,7 +1312,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 			if (STA == 0) {
 				STA = 1;
 			}
-			if (STA == 1) {
+			else if (STA == 1) {
 				STA = 0;
 			}
 			
@@ -1323,7 +1329,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 			if (WPT == 0) {
 				WPT = 1;
 			}
-			if (WPT == 1) {
+			else if (WPT == 1) {
 				WPT = 0;
 			}
 			
@@ -1340,7 +1346,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 			if (ARPT == 0) {
 				ARPT = 1;
 			}
-			if (ARPT == 1) {
+			else if (ARPT == 1) {
 				ARPT = 0;
 			}
 			
@@ -1357,7 +1363,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 			if (DATA == 0) {
 				DATA = 1;
 			}
-			if (DATA == 1) {
+			else if (DATA == 1) {
 				DATA = 0;
 			}
 			
@@ -1374,7 +1380,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 			if (POS == 0) {
 				POS = 1;
 			}
-			if (POS == 1) {
+			else if (POS == 1) {
 				POS = 0;
 			}
 			
@@ -1391,7 +1397,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 			if (TERR == 0) {
 				TERR = 1;
 			}
-			if (TERR == 1) {
+			else if (TERR == 1) {
 				TERR = 0;
 			}
 			

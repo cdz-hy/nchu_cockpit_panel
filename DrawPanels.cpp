@@ -14,13 +14,15 @@
 #include "DrawBackground.h"
 #include "G_variable.h"
 #include "DrawPFD.h"
-#include "DrawNDPln.h"
+//#include "DrawNDPln.h"
 #include "DrawPFDStandby.h"
-#include "DrawNDMap.h"
-#include "DrawNDAppCenter.h"
+//#include "DrawNDMap.h"
+//#include "DrawNDAppCenter.h"
 #include "DrawEICAS.h"
 #include "DrawChronometer.h"
 #include "DrawEHISControl.h"
+
+#include "DrawND.h"
 
 #include "DrawNDInfo.h"
 
@@ -658,21 +660,28 @@ void draw_panels(){
 //			ege_fillrect(PFD_x + 1.2 * PFD_side - PFD_side / 2, PFD_y - PFD_side / 2,1.07 * PFD_side,1.05 * PFD_side);
 			
 			
-			draw_PFD_frame(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
+//			draw_PFD_frame(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
+//			
+//			if(ND_choice == 1){
+//				draw_ND_pln(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
+//				WAYPOINT nowPos = {0,"", 28.877 - 0.01 * dirtmp, 115.91 + 0.005 * dirtmp, "", "", "", 100, "", ""};
+////				WAYPOINT nowPos = {0,"", latitude, longitude, "", "", "", 100, "", ""};
+//				draw_waypoint(nowPos,rotationangle,mapDistance,PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
+//				draw_route(nowPos,dirtmp,mapDistance,PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
+//			}
+//			else if(ND_choice == 2){
+//				draw_ND_map(PFD_x + 1.4 * PFD_side, PFD_y + PFD_side * 32 / 104 /* + PFD_side / 3 */,PFD_side);
+//				WAYPOINT nowPos = {0,"", 28.877, 115.91, "", "", "", 100, "", ""};
+////				draw_waypoint_map(nowPos,dirtmp,mapDistance,PFD_x + 1.4 * PFD_side, PFD_y + PFD_side * 37.6 / 104 ,PFD_side);
+////				draw_route_map(nowPos,dirtmp,mapDistance,PFD_x + 1.4 * PFD_side, PFD_y + PFD_side * 37.6 / 104, PFD_side);
+//				draw_waypoint_map(nowPos,dirtmp,mapDistance,PFD_x + 1.4 * PFD_side, PFD_y + PFD_side * 32 / 104 ,PFD_side);
+//				draw_route_map(nowPos,dirtmp,mapDistance,PFD_x + 1.4 * PFD_side, PFD_y + PFD_side * 32 / 104, PFD_side);
+//			}
+//			else if(ND_choice == 3){
+//				draw_ND_app_center(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
+//			}
 			
-			if(ND_choice == 1){
-				draw_ND_pln(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-				WAYPOINT nowPos = {0,"", 28.877 - 0.01 * dirtmp, 115.91 + 0.005 * dirtmp, "", "", "", 100, "", ""};
-//				WAYPOINT nowPos = {0,"", latitude, longitude, "", "", "", 100, "", ""};
-				draw_waypoint(nowPos,rotationangle,50,PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-				draw_route(nowPos,dirtmp,200,PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-			}
-			else if(ND_choice == 2){
-				draw_ND_map(PFD_x + 1.4 * PFD_side, PFD_y + PFD_side / 3 ,PFD_side);
-			}
-			else if(ND_choice == 3){
-				draw_ND_app_center(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-			}
+			draw_ND(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
 			
 			if(GetAsyncKeyState(0x35) & 0x0001){
 				ND_choice += 1;
@@ -687,7 +696,6 @@ void draw_panels(){
 			
 			
 			//画EICAS
-			draw_PFD_frame(PFD_x + 2.7 * PFD_side, PFD_y ,PFD_side);
 			draw_EICAS(PFD_x + 2.7 * PFD_side, PFD_y ,PFD_side);
 			
 			//画EHIS的控制面板

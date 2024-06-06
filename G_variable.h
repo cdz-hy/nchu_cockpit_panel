@@ -82,6 +82,12 @@ extern vector<WAYPOINT> route;
 //已经走过的航线
 extern vector<WAYPOINT> routePassed;
 
+//机场信息
+extern vector<WAYPOINT> airports;
+
+//VOR台信息
+extern vector<WAYPOINT> VORs;
+
 //==================================//
 
 //==========以下为设置相关==========//
@@ -131,7 +137,7 @@ extern double MINSKonb;
 extern double MINSRef;
 extern double baroKnob;
 extern double baroUnit;
-extern double EHSIMode;
+extern double EHISMode;
 extern double mapDistance;
 extern double changecolor;
 extern int FPV;

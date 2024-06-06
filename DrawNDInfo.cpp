@@ -31,6 +31,11 @@ void draw_waypoint(WAYPOINT nowPos, double dir, double ratio,double x, double y,
 	
 	for(auto wp : waypoints){
 		
+		if(fabs(wp.lat - nowPos.lat) > 0.3 || fabs(wp.lon - nowPos.lon) > 0.3){
+			continue;
+		}
+		
+		
 		double dis = getDistance(nowPos.lat, nowPos.lon, wp.lat, wp.lon);
 		double bearing = getBearing(nowPos.lat, nowPos.lon, wp.lat, wp.lon);
 		
@@ -65,6 +70,93 @@ void draw_waypoint(WAYPOINT nowPos, double dir, double ratio,double x, double y,
 	}
 	
 
+}
+
+
+//绘制机场（圆形）
+
+extern vector<WAYPOINT> airports;
+void draw_airports(WAYPOINT nowPos, double dir, double ratio,double x, double y, double side){
+	
+	
+	
+	for(auto wp : airports){
+		
+		if(fabs(wp.lat - nowPos.lat) > 0.3 || fabs(wp.lon - nowPos.lon) > 0.3){
+			continue;
+		}
+		
+		
+		double dis = getDistance(nowPos.lat, nowPos.lon, wp.lat, wp.lon);
+		double bearing = getBearing(nowPos.lat, nowPos.lon, wp.lat, wp.lon);
+		
+		double rside = 0.010752 * side;
+		double rhigh = 0.015129 * side;
+		double rl = dis / 1000 * 0.1738176 * side / ratio;
+		double rx = (cos(toRadians(bearing - dir - 90)) * rl) + x;
+		double ry = (sin(toRadians(bearing - dir - 90)) * rl) + y;
+		
+		//当航路点在圆内时再绘制
+		if(pow(rl, 2) <= pow(side / 104 * 40, 2)){
+			
+			setlinewidth(0.001 * side);
+			setcolor(WHITE);
+			ege_ellipse(rx - rhigh / 2, ry - rhigh / 2, rhigh, rhigh);
+			
+			if(0.01 * side > 5){
+				setcolor(WHITE);
+				setfont(0.01 * side, 0.01 * side , "黑体");
+				
+				ege_drawtext(wp.name,rx,ry);
+			}
+			
+		}
+		
+	}
+}
+
+
+//绘制VOR台（六边形）
+
+extern vector<WAYPOINT> VORs;
+void draw_VORs(WAYPOINT nowPos, double dir, double ratio,double x, double y, double side){
+	
+	
+	
+	for(auto wp : VORs){
+		
+		if(fabs(wp.lat - nowPos.lat) > 0.3 || fabs(wp.lon - nowPos.lon) > 0.3){
+			continue;
+		}
+		
+		
+		double dis = getDistance(nowPos.lat, nowPos.lon, wp.lat, wp.lon);
+		double bearing = getBearing(nowPos.lat, nowPos.lon, wp.lat, wp.lon);
+		
+		double rside = 0.010752 * side;
+		double rhigh = 0.015129 * side;
+		double rl = dis / 1000 * 0.1738176 * side / ratio;
+		double rx = (cos(toRadians(bearing - dir - 90)) * rl) + x;
+		double ry = (sin(toRadians(bearing - dir - 90)) * rl) + y;
+		
+		//当点在圆内时再绘制
+		if(pow(rl, 2) <= pow(side / 104 * 40, 2)){
+			
+			setlinewidth(0.001 * side);
+			setfillcolor(WHITE);
+			ege_ellipse(rx - rhigh / 2, ry - rhigh / 2, rhigh, rhigh);
+			
+			if(0.01 * side > 5){
+				setcolor(WHITE);
+				setfont(0.01 * side, 0.01 * side , "黑体");
+				
+				ege_drawtext(wp.name,rx,ry);
+			}
+			
+			
+		}
+		
+	}
 }
 
 
@@ -326,11 +418,14 @@ void draw_route(WAYPOINT wp, double dir, double ratio,double x, double y, double
 
 
 //这个x，y是同上
-//传进来的不是三角形上面的顶点，是三角形中心！
+//传进来的是三角形中心,也是图上飞机位置！
 void draw_waypoint_map(WAYPOINT nowPos, double dir, double ratio,double x, double y, double side){
 	
 	for(auto wp : waypoints){
 		
+		if(fabs(wp.lat - nowPos.lat) > 0.3 || fabs(wp.lon - nowPos.lon) > 0.3){
+			continue;
+		}
 		
 		double dis = getDistance(nowPos.lat, nowPos.lon, wp.lat, wp.lon);
 		double bearing = getBearing(nowPos.lat, nowPos.lon, wp.lat, wp.lon);
@@ -342,8 +437,8 @@ void draw_waypoint_map(WAYPOINT nowPos, double dir, double ratio,double x, doubl
 		double ry = (sin(toRadians(bearing - dir - 90)) * rl) + y;
 		
 		//当航路点在范围内内时再绘制
-		if(pow(rx - x, 2) + pow(ry - (y - side * 2 / 3 * 8 / 104), 2) <= pow(side / 104 * 71, 2)
-			&& ry <= y + side * 8 / 104 / 3 && rx <= x + side * 48 / 104 && rx >= x - side * 48 / 104){
+		if(pow(rx - x, 2) + pow(ry - y, 2) <= pow(side / 104 * 71, 2)
+			&& ry <= y + side * 16 / 104 / 3 && rx <= x + side * 48 / 104 && rx >= x - side * 48 / 104){
 			
 			ege_point pointTmp[4] = {
 				{rx,ry - rhigh / 3},
@@ -370,7 +465,7 @@ void draw_waypoint_map(WAYPOINT nowPos, double dir, double ratio,double x, doubl
 }
 
 
-//传进来的不是三角形上面的顶点，是三角形中心！
+//传进来的是三角形中心,也是图上飞机位置！
 void draw_route_map(WAYPOINT wp, double dir, double ratio,double x, double y, double side){
 	
 	for(auto it = route.begin(); it + 1 != route.end(); it ++){
@@ -414,8 +509,8 @@ void draw_route_map(WAYPOINT wp, double dir, double ratio,double x, double y, do
 		//这个时候判断rx和ry在不在范围是判断的两者在不在矩形区域中！
 //		if(pow(rx - x, 2) + pow(ry - (y - side * 2 / 3 * 8 / 104), 2) <= pow(side / 104 * 71, 2) && ry <= y + side * 8 / 104 / 3 && rx <= x + side * 48 / 104 && rx >= x - side * 48 / 104 
 //			&& pow(rx2 - x, 2) + pow(ry2 - (y - side * 2 / 3 * 8 / 104), 2) <= pow(side / 104 * 71, 2) && ry2 <= y + side * 8 / 104 / 3 && rx2 <= x + side * 48 / 104 && rx2 >= x - side * 48 / 104)
-		if(ry >= y - side * ((71.0 + 16 / 3) / 104) && ry <= y + side * 8 / 104 / 3 && rx <= x + side * 48 / 104 && rx >= x - side * 48 / 104 
-			&& ry2 >= y - side * ((71.0 + 16 / 3) / 104) && ry2 <= y + side * 8 / 104 / 3 && rx2 <= x + side * 48 / 104 && rx2 >= x - side * 48 / 104){
+		if(ry >= y - side * (71.0 / 104) && ry <= y + side * 16 / 104 / 3 && rx <= x + side * 48 / 104 && rx >= x - side * 48 / 104 
+			&& ry2 >= y - side * (71.0 / 104) && ry2 <= y + side * 16 / 104 / 3 && rx2 <= x + side * 48 / 104 && rx2 >= x - side * 48 / 104){
 			//都在，不用处理
 			ege_line(rx, ry, rx2, ry2);
 			
@@ -423,14 +518,14 @@ void draw_route_map(WAYPOINT wp, double dir, double ratio,double x, double y, do
 		//若有一点不在，要计算连线与边缘的交点，连在内的点和交点
 		//第二个点不在时
 		//这里一定要是71.0!!!!!!!!!!!!!!!!!!!
-		else if(ry >= y - side * ((71.0 + 16 / 3) / 104) && ry <= y + side * 8 / 104 / 3 && rx <= x + side * 48 / 104 && rx >= x - side * 48 / 104 
-			&& (ry2 < y - side * ((71.0 + 16 / 3) / 104) || ry2 > y + side * 8 / 104 / 3 || rx2 > x + side * 48 / 104 || rx2 < x - side * 48 / 104)){
+		else if(ry >= y - side * (71.0 / 104) && ry <= y + side * 16 / 104 / 3 && rx <= x + side * 48 / 104 && rx >= x - side * 48 / 104 
+			&& (ry2 < y - side * (71.0 / 104) || ry2 > y + side * 16 / 104 / 3 || rx2 > x + side * 48 / 104 || rx2 < x - side * 48 / 104)){
 			//现坐标系是以x，y为中心；x正方向向右，y正方向向下
 			//两点的直线方程以矩阵表示，矩阵a的第一行是这个直线，第二行是边缘的方程，现在默认第二行都是0
 			double a[2][3] = {{-(ry2 - ry) / (rx2 - rx) , 1, -(ry2 - ry) / (rx2 - rx) * rx + ry} , {}};
 			
 			//b的每一行是边缘方程的矩阵表示
-			double b[4][3] = {{0, 1 , (y + side * 8 / 104 / 3)}, {1, 0 , (x + side * 48 / 104)}, {0, 1, (y - side * ((71.0 + 16 / 3) / 104) )}, {1, 0, (x - side * 48 / 104)}};
+			double b[4][3] = {{0, 1 , (y + side * 16 / 104 / 3)}, {1, 0 , (x + side * 48 / 104)}, {0, 1, (y - side * (71.0 / 104) )}, {1, 0, (x - side * 48 / 104)}};
 			
 			for(int i = 0; i < 4; i ++){
 				
@@ -442,7 +537,7 @@ void draw_route_map(WAYPOINT wp, double dir, double ratio,double x, double y, do
 				double yTmp = ((a[0][0] * a[1][2]) - (a[0][2] * a[1][0])) / ((a[0][0] * a[1][1]) - (a[1][0] * a[0][1]));
 				
 				//要取的是在边缘范围内的交点，同时还要保证交点是在第一个点到第二个点中间！！！(保证在中间通过)
-				if(yTmp >= y - 1.0001 * side * ((71.0 + 16 / 3) / 104) && yTmp <= y + 1.0001 * side * 8 / 104 / 3 && xTmp<= x + 1.0001 * side * 48 / 104 && xTmp >= x - 1.0001 * side * 48 / 104
+				if(yTmp >= y - 1.0001 * side * (71.0 / 104) && yTmp <= y + 1.0001 * side * 16 / 104 / 3 && xTmp<= x + 1.0001 * side * 48 / 104 && xTmp >= x - 1.0001 * side * 48 / 104
 					&& xTmp <= max(rx, rx2) && xTmp >= min(rx, rx2) && yTmp <= max(ry, ry2) && yTmp >= min(ry, ry2)){
 					rx2 = xTmp;
 					ry2 = yTmp;
@@ -457,13 +552,13 @@ void draw_route_map(WAYPOINT wp, double dir, double ratio,double x, double y, do
 			
 		}
 		//第一个点不在时
-		else if((ry < y - side * ((71.0 + 16 / 3) / 104) || ry > y + side * 8 / 104 / 3 || rx > x + side * 48 / 104 || rx < x - side * 48 / 104) 
-			&& ry2 >= y - side * ((71.0 + 16 / 3) / 104) && ry2 <= y + side * 8 / 104 / 3 && rx2 <= x + side * 48 / 104 && rx2 >= x - side * 48 / 104){
+		else if((ry < y - side * (71.0 / 104) || ry > y + side * 16 / 104 / 3 || rx > x + side * 48 / 104 || rx < x - side * 48 / 104) 
+			&& ry2 >= y - side * (71.0 / 104) && ry2 <= y + side * 16 / 104 / 3 && rx2 <= x + side * 48 / 104 && rx2 >= x - side * 48 / 104){
 			
 			double a[2][3] = {{-(ry2 - ry) / (rx2 - rx) , 1, -(ry2 - ry) / (rx2 - rx) * rx + ry} , {}};
 			
 			//b的每一行是边缘方程的矩阵表示
-			double b[4][3] = {{0, 1 , (y + side * 8 / 104 / 3)}, {1, 0 , (x + side * 48 / 104)}, {0, 1, (y - side * ((71.0 + 16 / 3) / 104) )}, {1, 0, (x - side * 48 / 104)}};
+			double b[4][3] = {{0, 1 , (y + side * 16 / 104 / 3)}, {1, 0 , (x + side * 48 / 104)}, {0, 1, (y - side * (71.0 / 104) )}, {1, 0, (x - side * 48 / 104)}};
 			
 			for(int i = 0; i < 4; i ++){
 				
@@ -475,7 +570,7 @@ void draw_route_map(WAYPOINT wp, double dir, double ratio,double x, double y, do
 				double yTmp = ((a[0][0] * a[1][2]) - (a[0][2] * a[1][0])) / ((a[0][0] * a[1][1]) - (a[1][0] * a[0][1]));
 				
 				//要取的是在边缘范围内的交点，同时还要保证交点是在第一个点到第二个点中间！！！(保证在中间通过)
-				if(yTmp >= y - 1.0001 * side * ((71.0 + 16 / 3) / 104) && yTmp <= y + 1.0001 * side * 8 / 104 / 3 && xTmp<= x + 1.0001 * side * 48 / 104 && xTmp >= x - 1.0001 * side * 48 / 104
+				if(yTmp >= y - 1.0001 * side * (71.0 / 104) && yTmp <= y + 1.0001 * side * 16 / 104 / 3 && xTmp<= x + 1.0001 * side * 48 / 104 && xTmp >= x - 1.0001 * side * 48 / 104
 					&& xTmp <= max(rx, rx2) && xTmp >= min(rx, rx2) && yTmp <= max(ry, ry2) && yTmp >= min(ry, ry2)){
 					rx = xTmp;
 					ry = yTmp;
@@ -489,13 +584,13 @@ void draw_route_map(WAYPOINT wp, double dir, double ratio,double x, double y, do
 			
 		}
 		//两个点都不在时
-		else if((ry < y - side * ((71.0 + 16 / 3) / 104) || ry > y + side * 8 / 104 / 3 || rx > x + side * 48 / 104 || rx < x - side * 48 / 104)
-			|| (ry2 < y - side * ((71.0 + 16 / 3) / 104) || ry2 > y + side * 8 / 104 / 3 || rx2 > x + side * 48 / 104 || rx2 < x - side * 48 / 104)){
+		else if((ry < y - side * (71.0 / 104) || ry > y + side * 16 / 104 / 3 || rx > x + side * 48 / 104 || rx < x - side * 48 / 104)
+			|| (ry2 < y - side * (71.0 / 104) || ry2 > y + side * 16 / 104 / 3 || rx2 > x + side * 48 / 104 || rx2 < x - side * 48 / 104)){
 			
 			double a[2][3] = {{-(ry2 - ry) / (rx2 - rx) , 1, -(ry2 - ry) / (rx2 - rx) * rx + ry} , {}};
 			
 			//b的每一行是边缘方程的矩阵表示
-			double b[4][3] = {{0, 1 , (y + side * 8 / 104 / 3)}, {1, 0 , (x + side * 48 / 104)}, {0, 1, (y - side * ((71.0 + 16 / 3) / 104) )}, {1, 0, (x - side * 48 / 104)}};
+			double b[4][3] = {{0, 1 , (y + side * 16 / 104 / 3)}, {1, 0 , (x + side * 48 / 104)}, {0, 1, (y - side * (71.0 / 104) )}, {1, 0, (x - side * 48 / 104)}};
 			
 			int xTmps[5];
 			int yTmps[5];
@@ -511,7 +606,7 @@ void draw_route_map(WAYPOINT wp, double dir, double ratio,double x, double y, do
 				double yTmp = ((a[0][0] * a[1][2]) - (a[0][2] * a[1][0])) / ((a[0][0] * a[1][1]) - (a[1][0] * a[0][1]));
 				
 				//两点都不在边缘内侧，直线与边缘要么没有交点，要么有两个；  此时不用判断交点在不在两个点中间
-				if(yTmp >= y - 1.0001 * side * ((71.0 + 16 / 3) / 104) && yTmp <= y + 1.0001 * side * 8 / 104 / 3 && xTmp<= x + 1.0001 * side * 48 / 104 && xTmp >= x - 1.0001 * side * 48 / 104){
+				if(yTmp >= y - 1.0001 * side * (71.0 / 104) && yTmp <= y + 1.0001 * side * 16 / 104 / 3 && xTmp<= x + 1.0001 * side * 48 / 104 && xTmp >= x - 1.0001 * side * 48 / 104){
 					rx = xTmp;
 					ry = yTmp;
 					cot ++;
@@ -538,6 +633,7 @@ void draw_route_map(WAYPOINT wp, double dir, double ratio,double x, double y, do
 	}
 	
 	
+	
 	int cot = 0;
 	
 	//上述代码执行了绘制线路
@@ -554,7 +650,7 @@ void draw_route_map(WAYPOINT wp, double dir, double ratio,double x, double y, do
 		double ry = (sin(toRadians(bearing - dir - 90)) * rl) + y;
 		
 		//当航路点在范围内时再绘制
-		if(pow(rl, 2) <= pow(side / 104 * 40, 2)){
+		if(ry >= y - side * (71.0 / 104) && ry <= y + side * 16 / 104 / 3 && rx <= x + side * 48 / 104 && rx >= x - side * 48 / 104){
 			
 			ege_point pointTmp[4] = {
 				{rx,ry - rhigh / 3},

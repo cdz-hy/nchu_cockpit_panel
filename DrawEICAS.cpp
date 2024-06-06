@@ -3,6 +3,8 @@
 #include<math.h>
 #include<stdio.h>
 
+#include "DrawFrame.h"
+
 extern double Oangle_1;
 extern double Oangle_2;
 extern double fanSpeed;
@@ -14,6 +16,9 @@ extern double Fuelrest_3;
 extern double Fuelrest_total;
 
 void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
+	
+	setfillcolor(BLACK);
+	ege_fillrect(Oilcenterx - side / 1.9, Oilcentery - side / 1.9, 1.1 * side, 1.1 * side);
 	
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	
@@ -288,5 +293,7 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	ege_line(Oilcenterx - Ulength * 7 - R, Oilcentery - Ulength * 22.5 - R, Oilcenterx - Ulength * 8 - R, Oilcentery - Ulength * 24 - R);
 	ege_line(Oilcenterx - Ulength * 7 - R, Oilcentery - Ulength * 22.5 - R, Oilcenterx - Ulength * 8.5 - R, Oilcentery - Ulength * 22 - R);
 	
+	
+	draw_PFD_frame(Oilcenterx, Oilcentery, side);
 	
 }
