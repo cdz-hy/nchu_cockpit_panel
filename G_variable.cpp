@@ -28,6 +28,10 @@ double vmo_speed = 0;
 double airSpeed_acceleration = 0;
 double airSpeed_mach = 0.5;
 double airSpeed_instruction = 130;
+double GS = 0;
+double TAS = 166;
+double WS = 0;//风速
+double WD = 0;//风向
 
 double rotationangle = 0;
 //double pointrotationangle = 0; 
