@@ -25,6 +25,12 @@
 #include "DrawLightControl.h"
 
 
+
+void getZoomImage(PIMAGE pimg, const char* fileName, int width, int height);
+void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side);
+void draw_getImage(double PFD_x, double PFD_y, double PFD_side);
+void  draw_delImage();
+
 void draw_panels(){
 	
 	
@@ -95,6 +101,9 @@ void draw_panels(){
 	
 	//存储鼠标按下时间判断双击
 	double click_time = -1;
+	
+	// 这里会报错，因为pfd的相关参数在循环里面
+	draw_getImage(PFD_x, PFD_y, PFD_side);
 	
 	for (; is_run(); delay_fps(60)) {
 		
@@ -611,28 +620,28 @@ void draw_panels(){
 			
 			
 			//画PFD
-			draw_PFD(PFD_x, PFD_y ,PFD_side);
+			draw_PFD(PFD_x, PFD_y, PFD_side);
 			
-			//ND表——定
+			//ND表
 			draw_ND(PFD_x + 1.3 * PFD_side, PFD_y, PFD_side);
 			
-			//备用表——定
-			draw_PFD_standby(PFD_x + 2.26 * PFD_side, PFD_y - 0.3 * PFD_side, 0.175 * PFD_side);
+			//备用表
+			draw_PFD_standby(PFD_x + 2.26 * PFD_side, PFD_y - 0.3 * PFD_side, 0.35/2 * PFD_side);
 			
-			//画计时器——定
+			//画计时器
 			draw_Chronometer(PFD_x - 0.93 * PFD_side, PFD_y - 0.3 * PFD_side, 0.45 * PFD_side);
 			
-			//画EICAS——定
+			//画EICAS
 			draw_EICAS(PFD_x + 3.225 * PFD_side, PFD_y, PFD_side);
 			
-			//画EHIS的控制面板——定
-			draw_EHIS_control(PFD_x + PFD_side * 0.65, PFD_y - 0.86 * PFD_side, PFD_side*0.8);
+			//画EHIS的控制面板
+			draw_EHIS_control(PFD_x + PFD_side * 1.54, PFD_y - 1.5 * PFD_side, PFD_side*0.8);
 
 			//灯光控制
 			draw_Light_contral(PFD_x + PFD_side * 0.65, PFD_y + 0.86 * PFD_side, PFD_side*0.8);
 			
 			
-			
+			draw_electricPanel_backgrounds(PFD_x, PFD_y, PFD_side);
 			
 			
 			//实现移动
@@ -726,7 +735,51 @@ void draw_panels(){
 		
 	}
 	
-	
+		draw_delImage();
 }
 
 
+void draw_getImage(double PFD_x, double PFD_y, double PFD_side) {
+	pimg1 = newimage();
+	getZoomImage(pimg1, "./res/NOSEWHEEL.png",PFD_side*0.545, PFD_side*0.25);
+	pimg2 = newimage();
+	getZoomImage(pimg2, "./res/B1776.png", PFD_side * 0.5, PFD_side * 0.18);
+	pimg3 = newimage();
+	getZoomImage(pimg3, "./res/LIGHTSETC.png", PFD_side * 0.8, PFD_side * 0.5);
+	pimg4 = newimage();
+	getZoomImage(pimg4, "./res/standbyPFDup.png", PFD_side * 0.52, PFD_side * 0.52);
+	pimg5 = newimage();
+	getZoomImage(pimg5, "./res/standbyPFDdown.png", PFD_side * 0.52, PFD_side * 0.52);
+}
+
+void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side) {
+	putimage_withalpha(NULL, pimg1, PFD_x - 1.224 * PFD_side, PFD_y - 0.07 * PFD_side);
+	putimage_withalpha(NULL, pimg2, PFD_x - 1.18 * PFD_side, PFD_y + 0.168 * PFD_side);
+	putimage_withalpha(NULL, pimg3, PFD_x + 1.13 * PFD_side, PFD_y - 1.12 * PFD_side);
+	putimage_withalpha(NULL, pimg4, PFD_x + 2 * PFD_side, PFD_y - 1.07 * PFD_side);
+	putimage_withalpha(NULL, pimg5, PFD_x + 2 * PFD_side, PFD_y - 0.06* PFD_side);
+}
+
+void  draw_delImage() {
+	delimage(pimg1);
+	delimage(pimg2);
+	delimage(pimg3);
+	delimage(pimg4);
+	delimage(pimg5);
+}
+
+void getZoomImage(PIMAGE pimg, const char* fileName, int width, int height)
+{
+	if (pimg == NULL)
+		return;
+	
+	PIMAGE temp = newimage();
+	getimage(temp, fileName);
+	
+	if ((getwidth(pimg) != width) || (getheight(pimg) != height))
+		resize(pimg, width, height);
+	
+	putimage(pimg, 0, 0, width, height, temp, 0, 0, getwidth(temp), getheight(temp));
+	
+	delimage(temp);
+}
