@@ -587,23 +587,50 @@ void draw_panels(){
 //				ege_rectangle(PFD_x - PFD_side / 2, PFD_y - PFD_side / 2,1.07 * PFD_side, PFD_side);
 //			}
 			
+//			//画PFD
+//			draw_PFD(PFD_x, PFD_y ,PFD_side);
+//		
+//			//画ND
+//			draw_ND(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
+//			
+//			//备用表
+//			draw_PFD_standby(PFD_x + 3.8 * PFD_side, PFD_y ,PFD_side / 5);
+//			
+//			//画计时器
+//			draw_Chronometer(PFD_x - 0.85 * PFD_side, PFD_y - 0.3 * PFD_side,0.45 * PFD_side);
+//			
+//			//画EICAS
+//			draw_EICAS(PFD_x + 2.7 * PFD_side, PFD_y ,PFD_side);
+//			
+//			//画EHIS的控制面板
+//			draw_EHIS_control(PFD_x, PFD_y - 1 * PFD_side ,PFD_side);
+			
+			
+			
+			
+			
 			//画PFD
 			draw_PFD(PFD_x, PFD_y ,PFD_side);
-		
-			//画ND
-			draw_ND(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
 			
-			//备用表
-			draw_PFD_standby(PFD_x + 3.8 * PFD_side, PFD_y ,PFD_side / 5);
+			//ND表——定
+			draw_ND(PFD_x + 1.3 * PFD_side, PFD_y, PFD_side);
 			
-			//画计时器
-			draw_Chronometer(PFD_x - 0.85 * PFD_side, PFD_y - 0.3 * PFD_side,0.45 * PFD_side);
+			//备用表——定
+			draw_PFD_standby(PFD_x + 2.26 * PFD_side, PFD_y - 0.3 * PFD_side, 0.175 * PFD_side);
 			
-			//画EICAS
-			draw_EICAS(PFD_x + 2.7 * PFD_side, PFD_y ,PFD_side);
+			//画计时器——定
+			draw_Chronometer(PFD_x - 0.93 * PFD_side, PFD_y - 0.3 * PFD_side, 0.45 * PFD_side);
 			
-			//画EHIS的控制面板
-			draw_EHIS_control(PFD_x, PFD_y - 1 * PFD_side ,PFD_side);
+			//画EICAS——定
+			draw_EICAS(PFD_x + 3.225 * PFD_side, PFD_y, PFD_side);
+			
+			//画EHIS的控制面板——定
+			draw_EHIS_control(PFD_x + PFD_side * 0.65, PFD_y - 0.86 * PFD_side, PFD_side*0.8);
+
+			
+			
+			
+			
 			
 			
 			
