@@ -140,6 +140,12 @@ PIMAGE pimg3;
 PIMAGE pimg4;
 PIMAGE pimg5;
 
+PIMAGE pimg1sta;
+PIMAGE pimg2sta;
+PIMAGE pimg3sta;
+PIMAGE pimg4sta;
+PIMAGE pimg5sta;
+
 //==================================//
 
 //==========以下为警告信息==========//
@@ -181,4 +187,5 @@ int TERR = 0;
 
 int VOR1 = 2;
 int VOR2 = 2;
+
 

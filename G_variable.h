@@ -139,6 +139,12 @@ extern PIMAGE pimg3;
 extern PIMAGE pimg4;
 extern PIMAGE pimg5;
 
+extern PIMAGE pimg1sta;
+extern PIMAGE pimg2sta;
+extern PIMAGE pimg3sta;
+extern PIMAGE pimg4sta;
+extern PIMAGE pimg5sta;
+
 //==================================//
 
 //==========以下为警告信息==========//
@@ -175,3 +181,4 @@ extern int POS;
 extern int TERR;
 extern int VOR1;
 extern int VOR2;
+
