@@ -511,8 +511,10 @@ int num_scale2 = 0;
 
 void draw_PFD_airspeed(double center_x, double center_y, double side)
 {
+	
+	double airspeed0 = airSpeed;
 	if (airSpeed <= 45) {
-		airSpeed = 45;
+		airspeed0 = 45;
 	}
 	side = side / 96 * 67;
 	double length = side;
@@ -531,29 +533,29 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	
 	setlinewidth(side / 200);
 	double distance = 0;
-	if (airSpeed >= 40)
-		distance = -(airSpeed - 30) / 10;
-	if (airSpeed < 40)
-		distance = -airSpeed / 40;
-	if (airSpeed <= 40) num_scale2 = 7;
-	else if (airSpeed <= 100) {
-		num_scale2 = (int)(airSpeed - 40) / 10 % 10 + 1 + 7;
+	if (airspeed0 >= 40)
+		distance = -(airspeed0 - 30) / 10;
+	if (airspeed0 < 40)
+		distance = -airspeed0 / 40;
+	if (airspeed0 <= 40) num_scale2 = 7;
+	else if (airspeed0 <= 100) {
+		num_scale2 = (int)(airspeed0 - 40) / 10 % 10 + 1 + 7;
 	}
 	else {
-		if (airSpeed <= 450) {
-			num_scale1 = (int)(airSpeed - 100) / 10 % 10 + 1 + ((int)(airSpeed / 100) % 10 - 1) * 10;
+		if (airspeed0 <= 450) {
+			num_scale1 = (int)(airspeed0 - 100) / 10 % 10 + 1 + ((int)(airspeed0 / 100) % 10 - 1) * 10;
 			num_scale2 = num_scale1 + 13;
 		}
 		else
 		{
-			num_scale1 = (int)(450- 100) / 10 % 10 + 1 + ((int)(450 / 100) % 10 - 1) * 10;
+			num_scale1 = (int)(450 - 100) / 10 % 10 + 1 + ((int)(450 / 100) % 10 - 1) * 10;
 			num_scale2 = num_scale1 + 13;
 		}
 	}
-	if(airSpeed >=450)
+	if (airspeed0 >= 450)
 		distance = -(450 - 30) / 10;
 	for (int i = num_scale1; i < num_scale2; i++) {
-		if (i<=42) {
+		if (i <= 42) {
 			ege_line(center_x + width / 11.5 * 3.75,
 				center_y - (i + distance) * length / 67 * 5.57,
 				center_x + width / 2,
@@ -598,7 +600,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		double x_hundred = center_x - width / 11.5 * 2.4,
 		y_hundred = center_y - (i + distance) * length / 67 * 5.57;
 		
-		if ((i + 1) % 2 == 0 && i<=42)
+		if ((i + 1) % 2 == 0 && i <= 42)
 			outtextxy(x_bit, y_bit, '0');
 		if (i == 1)
 			outtextxy(x_decade, y_decade, '4');
@@ -705,28 +707,28 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	};
 	ege_fillpoly(7, points1);
 	
-	int int_airSpeed = (int)airSpeed;
-	double double_airSpeed = airSpeed - int_airSpeed;
+	int int_airspeed0 = (int)airspeed0;
+	double double_airspeed0 = airspeed0 - int_airspeed0;
 	setcolor(EGEARGB(150, 177, 177, 178));
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	setfont(side / 15, 0, "黑体");
 	
 	char num12[10] = { ' ','1','2','3','4','5','6','7','8','9' };// 十位
-	if (int_airSpeed >= 90) {
+	if (int_airspeed0 >= 90) {
 		num12[0] = '0';
 	}
-	int tens_digit = (int_airSpeed / 10) % 10;
+	int tens_digit = (int_airspeed0 / 10) % 10;
 	char num_using2 = num12[tens_digit];
 	outtextxy(center_x - width / 2 + width / 11.5 * 3.8, center_y - length / 67 * 8.4 + (2) * length / 67 * 4.2, num_using2);
 	
 	char num13[10] = { ' ','1','2','3','4','5','6','7','8','9' };// 百位
-	int hundreds_digit = (int_airSpeed / 100) % 10;
+	int hundreds_digit = (int_airspeed0 / 100) % 10;
 	char num_using3 = num13[hundreds_digit];
 	outtextxy(center_x - width / 2 + width / 11.5 * 1.5, center_y - length / 67 * 8.4 + (2) * length / 67 * 4.2, num_using3);
 	
 	char num11[12] = { '9','0','1','2','3','4','5','6','7','8','9','0' };// 个位
-	int ones_digit1 = int_airSpeed % 10;
+	int ones_digit1 = int_airspeed0 % 10;
 	int ones_digit2 = ones_digit1 + 1;
 	int ones_digit3 = ones_digit1 - 1;
 	char num_using1[3] = {};
@@ -734,8 +736,8 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	num_using1[1] = num11[ones_digit1 + 1];
 	num_using1[2] = num11[ones_digit3 + 1];
 	for (int i = 0; i < 3; i++) {
-		if ((center_y - length / 67 * 8.2 + (i + 1 + double_airSpeed) * length / 67 * 3.8) <= center_y + length / 67 * 3.9)
-			outtextxy(center_x - width / 2 + width / 11.5 * 6.5, center_y - length / 67 * 7.4 + (i + 1 + double_airSpeed) * length / 67 * 3.7, num_using1[i]);
+		if ((center_y - length / 67 * 8.2 + (i + 1 + double_airspeed0) * length / 67 * 3.8) <= center_y + length / 67 * 3.9)
+			outtextxy(center_x - width / 2 + width / 11.5 * 6.5, center_y - length / 67 * 7.4 + (i + 1 + double_airspeed0) * length / 67 * 3.7, num_using1[i]);
 	}
 	
 	// 上下两个遮盖的灰边
