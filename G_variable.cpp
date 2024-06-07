@@ -40,6 +40,8 @@ double rotationangle = 0;
 double compass_angle_original_data = 0;
 int course = 0;
 int HDGMAG = 95;
+int course2 = 0;
+int course3 = 0;
 
 double RMI_point_angle_1 = 0;
 double RMI_point_angle_2 = 0;
