@@ -31,7 +31,10 @@ void draw_ndcenterangle(double center_x, double center_y, double side);
 void draw_ndtoptriangle(double center_x, double center_y, double side);
 void draw_ndtoprectangle(double center_x, double center_y, double side);
 void draw_ndtoptext(double center_x, double center_y, double side);
-void draw_ND_map(double center_x, double center_y, double side);//
+void draw_reserveroad(double center_x, double center_y, double side);
+void draw_ndcourse(double compass_x, double compass_y, double side);
+void draw_ND_map1(double center_x, double center_y, double side);//
+void draw_ND_map2(double center_x, double center_y, double side);//
 void draw_ND_pln(double center_x, double center_y, double side);//
 void draw_ND_frame_chassis(double center_x, double center_y, double side);//
 void draw_ND_smallWhiteCircle(double center_x, double center_y, double side);
@@ -92,9 +95,13 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	
 	if(CTR == 0){
 		
-		if(EHISMode == 55 || EHISMode == 80 || EHISMode == 110){
+		if(EHISMode == 55 || EHISMode == 80 ){
 			
-			draw_ND_map(ND_x, ND_y + ND_side * 32 / 104, ND_side);
+			draw_ND_map1(ND_x, ND_y + ND_side * 32 / 104, ND_side);
+			
+		}else if(EHISMode == 110){
+			
+			draw_ND_map2(ND_x, ND_y + ND_side * 32 / 104, ND_side);
 			
 		}else if(EHISMode == 135){
 			
@@ -770,10 +777,119 @@ void draw_ndtoptext(double center_x, double center_y, double side)
 	ege_drawtext("MAG", center_x + side * 12 / 104, center_y - r - side * 6 / 104);
 }
 
-//画MAP模式下的ND表
-void draw_ND_map(double center_x, double center_y, double side)
-{
 
+//画选定的航向
+void draw_ndcourse(double compass_x, double compass_y, double side)
+{
+	double compass_r = side * 71 / 104;//表盘的半径
+	
+	//画指示标志
+	setcolor(EGEARGB(0x99, 0xDE, 0x58, 0xC5));
+	setlinewidth(compass_r * 0.007);
+	ege_point graphics[22];
+	
+	double rad = (course2 + realrotationangle2) * PI / 180;
+	
+	if ((course2 + realrotationangle2) > 310 || (course2 + realrotationangle2) < 50) {
+		graphics[0].x = -compass_r * sin(0.5 * PI / 180) * cos(rad) - (-compass_r * cos(0.5 * PI / 180) * sin(rad)) + compass_x;
+		graphics[0].y = -compass_r * cos(0.5 * PI / 180) * cos(rad) - compass_r * sin(0.5 * PI / 180) * sin(rad) + compass_y;
+		
+		graphics[1].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.2 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 0.75 / 96) * sin(rad)) + compass_x;
+		graphics[1].y = (-compass_r * cos(0.5 * PI / 180) - side * 0.75 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.2 / 96) * sin(rad) + compass_y;
+		
+		graphics[2].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.2 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 0.75 / 96) * sin(rad)) + compass_x;
+		graphics[2].y = (-compass_r * cos(0.5 * PI / 180) - side * 0.75 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.2 / 96) * sin(rad) + compass_y;
+		
+		graphics[3].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.4 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[3].y = (-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.4 / 96) * sin(rad) + compass_y;
+		
+		graphics[4].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.6 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[4].y = (-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.6 / 96) * sin(rad) + compass_y;
+		
+		graphics[5].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.6 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[5].y = (-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.6 / 96) * sin(rad) + compass_y;
+		
+		graphics[6].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[6].y = (-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[7].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 0.7 / 96) * sin(rad)) + compass_x;
+		graphics[7].y = (-compass_r * cos(0.5 * PI / 180) - side * 0.7 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[8].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 0.7 / 96) * sin(rad)) + compass_x;
+		graphics[8].y = (-compass_r * cos(0.5 * PI / 180) - side * 0.7 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[9].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) + side * 0.1 / 96) * sin(rad)) + compass_x;
+		graphics[9].y = (-compass_r * cos(0.5 * PI / 180) + side * 0.1 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[10].x = compass_r * sin(rad) + compass_x;
+		graphics[10].y = -compass_r * cos(rad) + compass_y;
+		
+		graphics[11].x = compass_r * sin(rad) + compass_x;
+		graphics[11].y = -compass_r * cos(rad) + compass_y;
+		
+		graphics[12].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) + side * 0.1 / 96) * sin(rad)) + compass_x;
+		graphics[12].y = (-compass_r * cos(-0.5 * PI / 180) + side * 0.1 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[13].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 0.7 / 96) * sin(rad)) + compass_x;
+		graphics[13].y = (-compass_r * cos(-0.5 * PI / 180) - side * 0.7 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[14].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 0.7 / 96) * sin(rad)) + compass_x;
+		graphics[14].y = (-compass_r * cos(-0.5 * PI / 180) - side * 0.7 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[15].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[15].y = (-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[16].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.6 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[16].y = (-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.6 / 96) * sin(rad) + compass_y;
+		
+		graphics[17].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.6 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[17].y = (-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.6 / 96) * sin(rad) + compass_y;
+		
+		graphics[18].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.4 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[18].y = (-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.4 / 96) * sin(rad) + compass_y;
+		
+		graphics[19].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.2 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 0.75 / 96) * sin(rad)) + compass_x;
+		graphics[19].y = (-compass_r * cos(-0.5 * PI / 180) - side * 0.75 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.2 / 96) * sin(rad) + compass_y;
+		
+		graphics[20].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.2 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 0.75 / 96) * sin(rad)) + compass_x;
+		graphics[20].y = (-compass_r * cos(-0.5 * PI / 180) - side * 0.75 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.2 / 96) * sin(rad) + compass_y;
+		
+		graphics[21].x = (-compass_r * sin(-0.5 * PI / 180)) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180)) * sin(rad)) + compass_x;
+		graphics[21].y = (-compass_r * cos(-0.5 * PI / 180)) * cos(rad) - (compass_r * sin(-0.5 * PI / 180)) * sin(rad) + compass_y;
+		
+		ege_bezier(22, graphics);
+	}
+}
+
+//画预定航线
+void draw_reserveroad(double center_x, double center_y, double side)
+{
+	double compass_r = side * 71 / 104;//表盘的半径
+	
+	double rad = (course3 + realrotationangle2) * PI / 180;
+	
+	if ((course3 + realrotationangle2) > 360)
+	{
+		rad = (course3 + realrotationangle2 - 360) * PI / 180;
+	}
+	
+	//ege_line(300, 400, 400, 300);
+	/*char str[64];
+	sprintf_s(str, "%lf", rad * 180 / PI);
+	ege_drawtext(str, 400, 400);*/
+	if (center_x + compass_r * sin(rad) >= center_x - compass_r * sin(45 * PI / 180) && center_x + compass_r * sin(rad) <= center_x + compass_r * sin(45 * PI / 180) && center_y - compass_r * cos(rad) <= center_y + side * 33 / 104) {
+		ege_line(center_x + compass_r * 0.2 * sin(rad), center_y - compass_r * 0.2 * cos(rad), center_x + compass_r * sin(rad), center_y - compass_r * cos(rad));
+	}
+	//else if(center_x + compass_r * sin(rad) < center_x - compass_r * sin(45 * PI / 180) && center_y - compass_r * cos(rad) <= )
+	setlinestyle(CENTER_LINE);
+	setlinewidth(compass_r * 0.007);
+	ege_line(center_x - compass_r * 0.2 * sin(rad), center_y + compass_r * 0.2 * cos(rad), center_x - compass_r * 0.3 * sin(rad), center_y + compass_r * 0.3 * cos(rad));
+	setlinestyle(SOLID_LINE);
+}
+
+void draw_ND_map1(double center_x, double center_y, double side)
+{
+	
 	realrotationangle2 = 360 - rotationangle;
 	
 	draw_acr(center_x, center_y, side);
@@ -793,6 +909,31 @@ void draw_ND_map(double center_x, double center_y, double side)
 	draw_ndtoptext(center_x, center_y, side);
 }
 
+//画MAP模式下的NP表
+void draw_ND_map2(double center_x, double center_y, double side)
+{
+	realrotationangle2 = 360 - rotationangle;
+	
+	draw_reserveroad(center_x, center_y, side);
+	
+	draw_acr(center_x, center_y, side);
+	
+	draw_map_scale(center_x, center_y, side);
+	
+	draw_ndtext(center_x, center_y, side);
+	
+	draw_ndpoint(center_x, center_y, side);
+	
+	draw_ndcourse(center_x, center_y, side);
+	
+	draw_ndcenterangle(center_x, center_y, side);
+	
+	draw_ndtoptriangle(center_x, center_y, side);
+	
+	draw_ndtoprectangle(center_x, center_y, side);
+	
+	draw_ndtoptext(center_x, center_y, side);
+}
 
 //================================PLN PLN+CENTER 模式==================================//
 
