@@ -63,6 +63,7 @@ void draw_PFD_AI_background();
 void draw_PFD_AI_gear();
 void draw_PFD_AI_pointer();
 void draw_PFD_AI_occlusion();
+void draw_PFD_AI_alt();
 
 //引用全局变量
 extern double pitchAngle;
@@ -95,6 +96,8 @@ void draw_PFD_AI(double x, double y, double side){
 	//绘制周围遮挡的（黑边）
 	draw_PFD_AI_occlusion();
 	
+	//绘制高度警告（对地）
+	draw_PFD_AI_alt();
 //	if (GetAsyncKeyState(0x41) & 0x8000)
 //		rollAngle -= 0.002;
 //	if (GetAsyncKeyState(0x44) & 0x8000)
@@ -465,6 +468,22 @@ void draw_PFD_AI_occlusion(){
 		ege_arc(AI_x + i - 0.4 * AI_side, AI_y + i - 0.4 * AI_side, 0.4 * AI_side, 0.4 * AI_side, 0, 90);
 		//左下角
 		ege_arc(AI_x - i, AI_y + i - 0.4 * AI_side, 0.4 * AI_side, 0.4 * AI_side, 90, 90);
+	}
+	
+}
+
+
+void draw_PFD_AI_alt() {
+	
+	if(altitude2 <= 2500){
+		setfillcolor(BLACK);
+		ege_fillrect(AI_x - AI_side / 3.6, AI_y +  AI_side * 37 / 48, AI_side / 1.8, AI_side * 20 / 96);
+		
+		char num[10];
+		sprintf(num,"%.0f",altitude2);
+		setcolor(WHITE);
+		setfont(0.2 * AI_side, 0.1 * AI_side, "黑体");
+		ege_drawtext(num, AI_x, AI_y +  AI_side * 86 / 96);
 	}
 	
 }
