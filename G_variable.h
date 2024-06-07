@@ -40,6 +40,8 @@ extern double rotationangle;
 extern double compass_angle_original_data;
 extern int course;
 extern int HDGMAG;
+extern int course2;
+extern int course3;
 
 extern double RMI_point_angle_1;
 extern double RMI_point_angle_2;
@@ -114,7 +116,7 @@ extern int is_showbk;
 extern int UDP_transmission;
 
 //初始IP地址和端口
-extern char *IP_address;
+extern char* IP_address;
 extern int UDP_port;
 
 //展示FPS
