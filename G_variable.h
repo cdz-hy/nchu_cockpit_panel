@@ -25,6 +25,8 @@ extern double MILLIBARS_data;
 extern double INGH_data;
 extern double indicated_number;
 
+extern double attackAngle;//攻角
+
 extern double airSpeed;
 extern double vmo_speed;
 extern double airSpeed_acceleration;
@@ -73,7 +75,6 @@ extern int date2;
 //临时
 extern double angle;
 
-extern double Anum;
 
 //经纬度
 extern double latitude;

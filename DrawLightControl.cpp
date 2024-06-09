@@ -912,7 +912,11 @@ void draw_Light_contral(double leftPanel_x, double leftPanel_y, double side) {
 				if (leftPanel_mouse_y > leftPanel_mouse_y_cur) {
 					if (Brightangle < 260) {
 						Brightangle += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 70;
-						MainPanelLight += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 100;
+//						MainPanelLight += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 100;
+						if(Brightangle >= 260){
+							Brightangle = 260;
+						}
+						MainPanelLight = (Brightangle + 20 ) * 255.0 / 280 - 255;
 					}
 					else if (Brightangle >= 260) {
 						Brightangle = 260;
@@ -922,12 +926,18 @@ void draw_Light_contral(double leftPanel_x, double leftPanel_y, double side) {
 				else {
 					if (Brightangle > -20) {
 						Brightangle += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 70;
-						MainPanelLight += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 100;
+//						MainPanelLight += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 100;
+						if(Brightangle <= -20){
+							Brightangle -20;
+						}
+						MainPanelLight = (Brightangle + 20 ) * 255.0 / 280 - 255;
 					}
-					else if (Brightangle <= -20) {
-						Brightangle = -20;
-						MainPanelLight = 0;
-					}
+//					else if (Brightangle <= -20) {
+//						Brightangle = -20;
+//						MainPanelLight = 0;
+//						MainPanelLight = (Brightangle + 20 ) * 255.0 / 280 - 255;
+//						
+//					}
 				}
 			}
 		}
@@ -956,21 +966,15 @@ void draw_Light_contral(double leftPanel_x, double leftPanel_y, double side) {
 				if (leftPanel_mouse_y > leftPanel_mouse_y_cur) {
 					if (INBDangle < 255) {
 						INBDangle += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 70;//一共255度；
-						
-					}
-					else if (INBDangle >= 255) {
-						INBDangle = 255;
-						
+						if (INBDangle >= 255)
+							INBDangle = 255;
 					}
 				}
 				else {
 					if (INBDangle > 0) {
 						INBDangle += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 70;
-						
-					}
-					else if (INBDangle <= 0) {
-						INBDangle = 0;
-						
+						if (INBDangle <= 0) 
+							INBDangle = 0;
 					}
 				}
 			}
@@ -1044,22 +1048,24 @@ void draw_Light_contral(double leftPanel_x, double leftPanel_y, double side) {
 				if (leftPanel_mouse_y > leftPanel_mouse_y_cur) {
 					if (OUTBDangle < 255) {
 						OUTBDangle += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 70;//一共255度；
-						
+						if(OUTBDangle > 255)
+							OUTBDangle = 255;
 					}
-					else if (OUTBDangle >= 255) {
-						OUTBDangle = 255;
-						
-					}
+//					else if (OUTBDangle >= 255) {
+//						OUTBDangle = 255;
+//						
+//					}
 				}
 				else {
 					if (OUTBDangle > 0) {
 						OUTBDangle += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 70;
-						
+						if(OUTBDangle <= 0)
+							OUTBDangle = 0;
 					}
-					else if (OUTBDangle <= 0) {
-						OUTBDangle = 0;
-						
-					}
+//					else if (OUTBDangle <= 0) {
+//						OUTBDangle = 0;
+//						
+//					}
 				}
 			}
 		}
@@ -1087,21 +1093,15 @@ void draw_Light_contral(double leftPanel_x, double leftPanel_y, double side) {
 				if (leftPanel_mouse_y > leftPanel_mouse_y_cur) {
 					if (UPPERangle < 255) {
 						UPPERangle += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 70;//一共255度；
-						
-					}
-					else if (UPPERangle >= 255) {
-						UPPERangle = 255;
-						
+						if(UPPERangle >=255)
+							UPPERangle = 255;
 					}
 				}
 				else {
 					if (UPPERangle > 0) {
 						UPPERangle += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 70;
-						
-					}
-					else if (UPPERangle <= 0) {
-						UPPERangle = 0;
-						
+						if(UPPERangle <= 0)
+							UPPERangle = 0;
 					}
 				}
 			}

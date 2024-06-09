@@ -54,6 +54,7 @@ void data_receive(){
 					}
 					else if(fabs(data[i][0] - 18) <= 0.001){
 						sideSlipAngle = -data[i][8] * PI / 4 / 16 * 0.7;
+						attackAngle = data[i][1];
 					}
 					else if(fabs(data[i][0] - 20) <= 0.001){
 						altitude = data[i][6];

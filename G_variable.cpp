@@ -20,10 +20,12 @@ double verticalRate = -7866;
 double RNG = 56;//初始显示RNG 5
 
 double altitude = 0;
-double altitude2 = 0;//对地
+double altitude2 = -4;//对地
 double MILLIBARS_data = 0;
 double INGH_data = 0;
 double indicated_number = 200;
+
+double attackAngle = 0;//攻角
 
 double airSpeed = 0;
 double vmo_speed = 0;
@@ -73,7 +75,6 @@ int date2;
 //临时
 double angle = 0;
 
-double Anum = 0;
 
 //经纬度
 double latitude = 28.877;
@@ -126,13 +127,13 @@ int showFPS = 1;
 //表盘灯光效果
 int G_light = 0x00;
 
-double OUTBDangle = 0;
-double INBDangle = 0;
+double OUTBDangle = 200;
+double INBDangle = 200;
 double LOWERangle = 0;
 double LOWERangle_1 = 0;
 double INBDangle_1 = 0;
 double UPPERangle = 0;
-double Brightangle = 0;
+double Brightangle = 220;
 double changecolor = 0;
 int MainPanelLight = 0;
 

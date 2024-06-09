@@ -14,7 +14,7 @@ void draw_PFD_alt( double center_x, double center_y, double side);
 void draw_PFD_compass(double compass_x, double compass_y, double side);
 void draw_PFD_RCDI(double RCDI_x,double RCDI_y,double RCDI_side);
 void draw_PFD_top(double top_x, double top_y, double side) ;
-void draw_1(double x, double y, double side);
+void draw_PFD_attackAngle(double x, double y, double side);
 
 
 
@@ -37,11 +37,15 @@ void draw_PFD(double PFD_x, double PFD_y, double PFD_side){
 	
 	draw_PFD_RCDI(PFD_x + 49.5 / 96 * PFD_side, PFD_y ,PFD_side);
 	
-	draw_PFD_frame(PFD_x + 0.06 * PFD_side, PFD_y ,PFD_side);
-	
 	draw_PFD_top(PFD_x, PFD_y - 41.0 / 96 * PFD_side,PFD_side);
 	
-	draw_1(PFD_x  + 20.0 / 96 * PFD_side, PFD_y - 31.0 / 96 * PFD_side,PFD_side);
+	draw_PFD_attackAngle(PFD_x  + 20.0 / 96 * PFD_side, PFD_y - 31.0 / 96 * PFD_side,PFD_side);
+	
+	//灯光遮盖效果
+	setfillcolor(EGEARGB(255 - (int)OUTBDangle, 0x00, 0x00, 0x00));
+	ege_fillrect(PFD_x - PFD_side / 1.95, PFD_y - PFD_side / 1.95, PFD_side * 1.1 ,PFD_side * 1.05);
+	
+	draw_PFD_frame(PFD_x + 0.06 * PFD_side, PFD_y ,PFD_side);
 	
 }
 //==========================================================================================//
@@ -525,7 +529,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	ege_fillrect(center_x - width / 2, center_y - length / 2, width, length);
 	
 	// 小刻度与数字显示
-	setcolor(EGEARGB(150, 177, 177, 178));
+	setcolor(EGEARGB(0x99, 177, 177, 178));
 	
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
@@ -567,7 +571,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		
 		
 		// 绘制粉色指示速度标
-		setcolor(EGEARGB(150, 255, 51, 255));
+		setcolor(EGEARGB(0x99, 255, 51, 255));
 		setlinewidth(side / 250);
 		int pointSpeed = (int)(airSpeed_instruction - 30);
 		int one_digit, ten_digit, hundred_digit, new_number;
@@ -589,7 +593,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 			ege_drawpoly(6, points6);
 		}
 		
-		setcolor(EGEARGB(150, 177, 177, 178));
+		setcolor(EGEARGB(0x99, 177, 177, 178));
 		setbkmode(TRANSPARENT);
 		settextjustify(CENTER_TEXT, CENTER_TEXT);
 		setfont(side / 17.1428, 0, "黑体");
@@ -709,7 +713,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	
 	int int_airspeed0 = (int)airspeed0;
 	double double_airspeed0 = airspeed0 - int_airspeed0;
-	setcolor(EGEARGB(150, 177, 177, 178));
+	setcolor(EGEARGB(0x99, 177, 177, 178));
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	setfont(side / 15, 0, "黑体");
@@ -758,7 +762,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	ege_fillpoly(4, points3);
 	
 	// 白色表框显示
-	setcolor(EGEARGB(150, 177, 177, 178));
+	setcolor(EGEARGB(0x99, 177, 177, 178));
 	setlinewidth(side / 200);
 	ege_point points4[8] = {
 		center_x - width / 1.9,center_y + length / 67 * 4,// 5
@@ -773,7 +777,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	ege_drawpoly(8, points4);
 	
 	// 绿色指针显示
-	setcolor(EGEARGB(150, 76, 153, 0));
+	setcolor(EGEARGB(0x99, 76, 153, 0));
 	setlinewidth(side / 200);
 	if (airSpeed_acceleration > 0) {// 绿色指针向上
 		if (airSpeed_acceleration <= (length / 2 - side / 60)) {
@@ -858,7 +862,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	
 	// 马赫显示
 	if (airSpeed_mach >= 0.4) {
-		setcolor(EGEARGB(150, 177, 177, 178));
+		setcolor(EGEARGB(0x99, 177, 177, 178));
 		setbkmode(TRANSPARENT);
 		settextjustify(CENTER_TEXT, CENTER_TEXT);
 		setfont(side / 12, 0, "黑体");
@@ -874,7 +878,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	}
 	
 	// 速度指示绘制
-	setcolor(EGEARGB(150, 255, 51, 255));
+	setcolor(EGEARGB(0x99, 255, 51, 255));
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	setfont(side / 12, 0, "黑体");
@@ -1356,7 +1360,7 @@ void draw_PFD_alt10000(double side, double center_x, double center_y) {
 //主显示指定的高度
 
 void draw_PFD_alt_indicatedNum(double side, double center_x, double center_y) {
-	setcolor(EGEARGB(150, 255, 51, 255));
+	setcolor(EGEARGB(0xff, 255, 51, 255));
 	char num[12] = { '9','0','1','2','3','4','5','6','7','8','9','0' };
 	double number_height = side * 0.055 * 1.1;
 	double number_width = side * 2.5 / 96.0 * 0.85;
@@ -1414,7 +1418,7 @@ void draw_PFD_alt_indicatedNum(double side, double center_x, double center_y) {
 		
 		int tenTHOU = indicated_number / 10000;
 		char TenTHOU = num[(int)tenTHOU + 1];
-		setcolor(EGEARGB(150, 255, 51, 255));
+		setcolor(EGEARGB(0x99, 255, 51, 255));
 		outtextxy(x - side * 4.0 / 96.0, y - side * 3.7 / 96.0, TenTHOU);
 	}
 }
@@ -1451,7 +1455,7 @@ void draw_PFD_alt_indicatedFrame(double side, double center_x, double center_y) 
 		double y = center_y - 33.5 / 96 * side + ten / 100 * gap + No * gap;//底部坐标 + 偏移坐标 + 循环坐标
 		
 		//设置颜色
-		setcolor(EGEARGB(150, 255, 51, 255));
+		setcolor(EGEARGB(200, 255, 51, 255));
 		
 		double x = center_x - 6.3 / 96 * side;
 		double y1 = y - 4.5 / 96.0 * side;
@@ -1908,9 +1912,13 @@ void draw_PFD_top(double top_x, double top_y, double side) {
 	ege_line(top_x - Ulength * 8.5, top_y - Ulength * 3, top_x - Ulength * 8.5, top_y + Ulength * 3);
 	ege_line(top_x + Ulength * 8.5, top_y - Ulength * 3, top_x + Ulength * 8.5, top_y + Ulength * 3);
 }
-void draw_1(double x, double y, double side) {
+
+
+
+
+void draw_PFD_attackAngle(double x, double y, double side) {
 	
-	extern double Anum;
+	extern double attackAngle;
 	
 	double Ulength = side / 96;
 	double linewidth = Ulength / 3;
@@ -1930,33 +1938,33 @@ void draw_1(double x, double y, double side) {
 	
 	double angle;
 	
-	if (Anum == 0) {
+	if (attackAngle == 0) {
 		angle = 225;
 	}
-	else if (Anum > 0 && Anum <= 20) {
-		angle = 225 - Anum * 9;
+	else if (attackAngle > 0 && attackAngle <= 20) {
+		angle = 225 - attackAngle * 9;
 	}
-	else if (Anum > 20) {
+	else if (attackAngle > 20) {
 		angle = 45;
 	}
-	else if (Anum < 0 && Anum >= -5) {
-		angle = 225 - Anum * 9;
+	else if (attackAngle < 0 && attackAngle >= -5) {
+		angle = 225 - attackAngle * 9;
 	}
-	else if (Anum < -5) {
+	else if (attackAngle < -5) {
 		angle = 270;
 	}
 	
 	ege_line(x, y, x - 6 * Ulength * cos(angle * PI / 180), y - 6 * Ulength * sin(angle * PI / 180));
 	setfont(Ulength / 7 * 30, Ulength / 7 * 3, "Calibri");
-	if (Anum >= -6 && Anum <= 22) {
+	if (attackAngle >= -6 && attackAngle <= 22) {
 		char num[64];
-		sprintf_s(num, "%.1f", Anum);
+		sprintf_s(num, "%.1f", attackAngle);
 		ege_drawtext(num, x - 6 * Ulength, y );
 	}
-	else if (Anum > 22) {
+	else if (attackAngle > 22) {
 		ege_drawtext("22.0", x - 6 * Ulength, y );
 	}
-	else if (Anum < -6) {
+	else if (attackAngle < -6) {
 		ege_drawtext("-6.0", x - 6 * Ulength, y );
 	}
 }
@@ -1964,3 +1972,4 @@ void draw_1(double x, double y, double side) {
 
 
 //=========================================================================================//
+

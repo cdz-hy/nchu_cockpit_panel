@@ -154,14 +154,21 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	ege_bezier(Frameshadenum, Frameshadeploypoints);
 	
 	
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	setfont(Ulength * 5, Ulength * 2, "Bahnschrift");
+	ege_line(EHIScontrol_x - 43.5 * Ulength, EHIScontrol_y - 15 * Ulength,
+		EHIScontrol_x - 43.5 * Ulength - (Topknob_R1 + 1.5 * Ulength) * cos(55 * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 + 1.5 * Ulength) * sin(55 * PI / 180));
+	ege_line(EHIScontrol_x - 43.5 * Ulength , EHIScontrol_y - 15 * Ulength ,
+		EHIScontrol_x - 43.5 * Ulength - (Topknob_R1 + 1.5 * Ulength) * cos(125 * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 + 1.5 * Ulength) * sin(125 * PI / 180));
+	ege_drawtext("RADIO",EHIScontrol_x - 57 * Ulength, EHIScontrol_y - 27 * Ulength);
+	ege_drawtext("MINS",EHIScontrol_x - 44 * Ulength, EHIScontrol_y - 30 * Ulength);
+	ege_drawtext("BARO",EHIScontrol_x - 31 * Ulength, EHIScontrol_y - 27 * Ulength);
 	
-	if (changecolor == 1) {
-		
-		setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
-	}
-	else {
-		setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
-	}
+	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
+	
+	
+	
+	
 	setfont(Ulength * 5, Ulength * 2, "Bahnschrift");
 	ege_line(EHIScontrol_x - 43.5 * Ulength, EHIScontrol_y - 15 * Ulength,
 		EHIScontrol_x - 43.5 * Ulength - (Topknob_R1 + 1.5 * Ulength) * cos(55 * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 + 1.5 * Ulength) * sin(55 * PI / 180));
@@ -205,6 +212,12 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 		EHIScontrol_x - 43.5 * Ulength - (Topknob_R1 - Ulength / 3) * cos(MINSRef * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 - Ulength / 3) * sin(MINSRef * PI / 180));
 	
 	setlinewidth(linewidth * 1.1);
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	ege_line(EHIScontrol_x - 43.5 * Ulength, EHIScontrol_y - 15 * Ulength,
+		EHIScontrol_x - 43.5 * Ulength - (Topknob_R1 - Ulength / 3) * cos(MINSRef * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 - Ulength / 3) * sin(MINSRef * PI / 180));
+	
+	
+	setlinewidth(linewidth * 1.1);
 	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
 	ege_line(EHIScontrol_x - 43.5 * Ulength, EHIScontrol_y - 15 * Ulength,
 		EHIScontrol_x - 43.5 * Ulength - (Topknob_R1 - Ulength / 3) * cos(MINSRef * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 - Ulength / 3) * sin(MINSRef * PI / 180));
@@ -234,6 +247,12 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	setcolor(EGEARGB(0XFF, 0X3A, 0X35, 0X2F));
 	ege_line(EHIScontrol_x - 45 * Ulength, EHIScontrol_y - 15 * Ulength ,
 		EHIScontrol_x - 45 * Ulength - (Topknob_R1 - Ulength/2) * cos(MINSRef * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 - Ulength/2) * sin(MINSRef * PI / 180));
+	
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	setlinewidth(linewidth * 1.1);
+	
+	ege_line(EHIScontrol_x - 45 * Ulength, EHIScontrol_y - 15 * Ulength,
+		EHIScontrol_x - 45 * Ulength - (Topknob_R1 - Ulength / 2) * cos(MINSRef * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 - Ulength / 2) * sin(MINSRef * PI / 180));
 	
 	
 	
@@ -275,7 +294,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 		}
 	}
 	
-
+	
 	
 	setlinewidth(linewidth / 2);
 	
@@ -402,13 +421,21 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	xyprintf(EHIScontrol_x - 41.5 * Ulength - Topknob_R3, EHIScontrol_y - 9 * Ulength - Topknob_R3, "RST");
 	
 	
-	if (changecolor == 1) {
-		
-		setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
-	}
-	else {
-		setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
-	}
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	
+	setfont(Ulength * 5, Ulength * 2, "Bahnschrift");
+	ege_line(EHIScontrol_x + 43.5 * Ulength, EHIScontrol_y - 15 * Ulength,
+		EHIScontrol_x + 43.5 * Ulength - (Topknob_R1 + 1.5 * Ulength) * cos(55 * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 + 1.5 * Ulength) * sin(55 * PI / 180));
+	ege_line(EHIScontrol_x + 43.5 * Ulength, EHIScontrol_y - 15 * Ulength,
+		EHIScontrol_x + 43.5 * Ulength - (Topknob_R1 + 1.5 * Ulength) * cos(125 * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 + 1.5 * Ulength) * sin(125 * PI / 180));
+	ege_drawtext("HPA",EHIScontrol_x + 56 * Ulength, EHIScontrol_y - 27 * Ulength);
+	ege_drawtext("BARO",EHIScontrol_x + 43 * Ulength, EHIScontrol_y - 30 * Ulength);
+	ege_drawtext("IN",EHIScontrol_x + 33 * Ulength, EHIScontrol_y - 27 * Ulength);
+	
+	
+	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
+	
+	
 	setfont(Ulength * 5, Ulength * 2, "Bahnschrift");
 	ege_line(EHIScontrol_x + 43.5 * Ulength, EHIScontrol_y - 15 * Ulength,
 		EHIScontrol_x + 43.5 * Ulength - (Topknob_R1 + 1.5 * Ulength) * cos(55 * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 + 1.5 * Ulength) * sin(55 * PI / 180));
@@ -452,6 +479,14 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 		EHIScontrol_x + 43.5 * Ulength - (Topknob_R1 - Ulength / 3) * cos(baroUnit * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 - Ulength / 3) * sin(baroUnit * PI / 180));
 	
 	setlinewidth(linewidth * 1.1);
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	ege_line(EHIScontrol_x + 43.5 * Ulength, EHIScontrol_y - 15 * Ulength,
+		EHIScontrol_x + 43.5 * Ulength - (Topknob_R1 - Ulength / 3) * cos(baroUnit * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 - Ulength / 3) * sin(baroUnit * PI / 180));
+	
+	
+	
+	
+	setlinewidth(linewidth * 1.1);
 	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
 	ege_line(EHIScontrol_x + 43.5 * Ulength, EHIScontrol_y - 15 * Ulength,
 		EHIScontrol_x + 43.5 * Ulength - (Topknob_R1 - Ulength / 3) * cos(baroUnit * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 - Ulength / 3) * sin(baroUnit * PI / 180));
@@ -483,6 +518,14 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	setcolor(EGEARGB(0XFF, 0X3A, 0X35, 0X2F));
 	ege_line(EHIScontrol_x + 45 * Ulength, EHIScontrol_y - 15 * Ulength,
 		EHIScontrol_x + 45 * Ulength - (Topknob_R1 - Ulength / 4) * cos(baroUnit * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 - Ulength / 4) * sin(baroUnit * PI / 180));
+	
+	setlinewidth(linewidth * 1.1);
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	ege_line(EHIScontrol_x + 45 * Ulength, EHIScontrol_y - 15 * Ulength,
+		EHIScontrol_x + 45 * Ulength - (Topknob_R1 - Ulength / 4) * cos(baroUnit * PI / 180), EHIScontrol_y - 15 * Ulength - (Topknob_R1 - Ulength / 4) * sin(baroUnit * PI / 180));
+	
+	
+	
 	
 	setlinewidth(linewidth * 1.1);
 	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
@@ -630,13 +673,30 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 		}
 	}
 	
-	if (changecolor == 1) {
-		
-		setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
-	}
-	else {
-		setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
-	}
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	
+	setfont(Ulength * 5, Ulength * 1.7, "Bahnschrift");
+	ege_line(EHIScontrol_x - 17.5 * Ulength, EHIScontrol_y + 11 * Ulength,
+		EHIScontrol_x - 17.5 * Ulength - (Lowknob_R1 + 1.5 * Ulength) * cos(55 * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 + 1.5 * Ulength) * sin(55 * PI / 180));
+	ege_line(EHIScontrol_x - 17.5 * Ulength, EHIScontrol_y + 11 * Ulength,
+		EHIScontrol_x - 17.5 * Ulength - (Lowknob_R1 + 1.5 * Ulength) * cos(80 * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 + 1.5 * Ulength) * sin(80 * PI / 180));
+	ege_line(EHIScontrol_x - 17.5 * Ulength, EHIScontrol_y + 11 * Ulength,
+		EHIScontrol_x - 17.5 * Ulength - (Lowknob_R1 + 1.5 * Ulength) * cos(110 * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 + 1.5 * Ulength) * sin(115 * PI / 180));
+	ege_line(EHIScontrol_x - 17.5 * Ulength, EHIScontrol_y + 11 * Ulength,
+		EHIScontrol_x - 17.5 * Ulength - (Lowknob_R1 + 1.5 * Ulength) * cos(135 * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 + 1.5 * Ulength) * sin(135 * PI / 180));
+	
+	ege_drawtext("APP",EHIScontrol_x - 27.5 * Ulength, EHIScontrol_y + 2.5 * Ulength);
+	ege_drawtext("VOR",EHIScontrol_x - 21 * Ulength, EHIScontrol_y - 1 * Ulength);
+	ege_drawtext("MAP", EHIScontrol_x - 12 * Ulength, EHIScontrol_y - 1 * Ulength);
+	ege_drawtext("PLN",EHIScontrol_x - 6 * Ulength, EHIScontrol_y + 3 * Ulength);
+	
+	
+	
+	
+	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
+	
+	
+	
 	setfont(Ulength * 5, Ulength * 1.7, "Bahnschrift");
 	ege_line(EHIScontrol_x - 17.5 * Ulength, EHIScontrol_y + 11 * Ulength,
 		EHIScontrol_x - 17.5 * Ulength - (Lowknob_R1 + 1.5 * Ulength) * cos(55 * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 + 1.5 * Ulength) * sin(55 * PI / 180));
@@ -703,6 +763,16 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	setcolor(EGEARGB(0XFF, 0X2A, 0X25, 0X1F));
 	ege_line(EHIScontrol_x - 18 * Ulength, EHIScontrol_y + 11 * Ulength,
 		EHIScontrol_x - 17.5 * Ulength - (Lowknob_R1 - Ulength / 3) * cos(EHISMode  * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 - Ulength / 3) * sin(EHISMode  * PI / 180));
+	
+	
+	
+	setlinewidth(linewidth * 1);
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	ege_line(EHIScontrol_x - 18 * Ulength, EHIScontrol_y + 11 * Ulength,
+		EHIScontrol_x - 17.5 * Ulength - (Lowknob_R1 - Ulength / 3) * cos(EHISMode * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 - Ulength / 3) * sin(EHISMode * PI / 180));
+	
+	
+	
 	
 	setlinewidth(linewidth * 1);
 	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
@@ -775,13 +845,30 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	xyprintf(EHIScontrol_x - 13.5 * Ulength - Lowknob_R3, EHIScontrol_y + 17 * Ulength - Lowknob_R3, "CTR");
 	
 	
-	if (changecolor == 1) {
-		
-		setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	for (int i = 0; i <= 210; i += 30) {
+		ege_line(EHIScontrol_x + 17.5 * Ulength, EHIScontrol_y + 11 * Ulength,
+			EHIScontrol_x + 17.5 * Ulength - (Lowknob_R1 + Ulength * 2) * cos(i * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 + Ulength * 2) * sin(i * PI / 180));
 	}
-	else {
-		setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
-	}
+	
+	ege_drawtext("5",EHIScontrol_x + 5 * Ulength, EHIScontrol_y + 11 * Ulength);
+	ege_drawtext("10",EHIScontrol_x + 6 * Ulength, EHIScontrol_y + 5 * Ulength);
+	ege_drawtext("20",EHIScontrol_x + 10 * Ulength, EHIScontrol_y - 0 * Ulength);
+	ege_drawtext("40",EHIScontrol_x + 17 * Ulength, EHIScontrol_y - 2 * Ulength);
+	ege_drawtext("80",EHIScontrol_x + 25 * Ulength, EHIScontrol_y - 0.5 * Ulength);
+	ege_drawtext("160",EHIScontrol_x + 30.5 * Ulength, EHIScontrol_y + 5.5 * Ulength);
+	ege_drawtext("320",EHIScontrol_x + 32 * Ulength, EHIScontrol_y + 12 * Ulength);
+	ege_drawtext("640",EHIScontrol_x + 31 * Ulength, EHIScontrol_y + 18 * Ulength);
+	
+	
+	
+	
+	
+	
+	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
+	
+	
+	
 	setfont(Ulength * 5, Ulength * 2, "Bahnschrift");
 	for (int i = 0; i <= 210; i += 30) {
 		ege_line(EHIScontrol_x + 17.5 * Ulength, EHIScontrol_y + 11 * Ulength,
@@ -866,6 +953,13 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	setcolor(EGEARGB(0XFF, 0X2A, 0X25, 0X1F));
 	ege_line(EHIScontrol_x + 18 * Ulength, EHIScontrol_y + 11 * Ulength,
 		EHIScontrol_x + 17.5 * Ulength - (Lowknob_R1 - Ulength / 3) * cos(mapDistance  * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 - Ulength / 3) * sin(mapDistance  * PI / 180));
+	
+	setlinewidth(linewidth * 1);
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	ege_line(EHIScontrol_x + 18 * Ulength, EHIScontrol_y + 11 * Ulength,
+		EHIScontrol_x + 17.5 * Ulength - (Lowknob_R1 - Ulength / 3) * cos(mapDistance  * PI / 180), EHIScontrol_y + 11 * Ulength - (Lowknob_R1 - Ulength / 3) * sin(mapDistance  * PI / 180));
+	
+	
 	
 	setlinewidth(linewidth * 1);
 	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
@@ -1022,14 +1116,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	
 	
 	
-	
-	if (changecolor == 1) {
-		
-		setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
-	}
-	else {
-		setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
-	}
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	ege_ellipse(EHIScontrol_x - 20 * Ulength, EHIScontrol_y - Ulength * 29, Ulength * 14, Ulength * 14);
 	ege_ellipse(EHIScontrol_x + 6 * Ulength, EHIScontrol_y - Ulength * 29, Ulength * 14, Ulength * 14);
 	setfont(Ulength * 5, Ulength * 2, "Bahnschrift");
@@ -1043,12 +1130,6 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	ege_drawtext("DATA",EHIScontrol_x + 18.5 * Ulength, EHIScontrol_y + 28 * Ulength);
 	ege_drawtext("POS",EHIScontrol_x + 36.5 * Ulength, EHIScontrol_y + 28 * Ulength);
 	ege_drawtext("TERR",EHIScontrol_x + 54.5 * Ulength, EHIScontrol_y + 28 * Ulength);
-	
-	
-	
-	
-	
-	
 	
 	int VOR1nums = 13;
 	ege_point VOR1ploypoints[13] = {
@@ -1074,6 +1155,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	ege_drawtext("VOR 1",EHIScontrol_x - Ulength * 57, EHIScontrol_y - 3 * Ulength);
 	ege_drawtext("OFF",EHIScontrol_x - Ulength * 46, EHIScontrol_y + 7 * Ulength);
 	
+	
 	int VOR2nums = 13;
 	ege_point VOR2ploypoints[13] = {
 		{EHIScontrol_x + Ulength * 61,EHIScontrol_y + 2 * Ulength},
@@ -1097,6 +1179,83 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	ege_bezier(VOR2nums, VOR2ploypoints);
 	ege_drawtext("VOR 2",EHIScontrol_x + Ulength * 57, EHIScontrol_y - 3 * Ulength);
 	ege_drawtext("OFF",EHIScontrol_x + Ulength * 46, EHIScontrol_y + 7 * Ulength);
+	
+	
+	
+	
+	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
+	
+	
+	
+	
+	ege_ellipse(EHIScontrol_x - 20 * Ulength, EHIScontrol_y - Ulength * 29, Ulength * 14, Ulength * 14);
+	ege_ellipse(EHIScontrol_x + 6 * Ulength, EHIScontrol_y - Ulength * 29, Ulength * 14, Ulength * 14);
+	setfont(Ulength * 5, Ulength * 2, "Bahnschrift");
+	ege_drawtext("FPV",EHIScontrol_x - 13 * Ulength, EHIScontrol_y - Ulength * 32);
+	ege_drawtext("MTRS",EHIScontrol_x + 13 * Ulength, EHIScontrol_y - Ulength * 32);
+	setfont(Ulength * 5, Ulength * 2, "Bahnschrift");
+	ege_drawtext("WXR",EHIScontrol_x - 53.5 * Ulength, EHIScontrol_y + 28 * Ulength);
+	ege_drawtext("STA",EHIScontrol_x - 35.5 * Ulength, EHIScontrol_y + 28 * Ulength);
+	ege_drawtext("WPT",EHIScontrol_x - 17.5 * Ulength, EHIScontrol_y + 28 * Ulength);
+	ege_drawtext("ARPT",EHIScontrol_x + 0.5 * Ulength, EHIScontrol_y + 28 * Ulength);
+	ege_drawtext("DATA",EHIScontrol_x + 18.5 * Ulength, EHIScontrol_y + 28 * Ulength);
+	ege_drawtext("POS",EHIScontrol_x + 36.5 * Ulength, EHIScontrol_y + 28 * Ulength);
+	ege_drawtext("TERR",EHIScontrol_x + 54.5 * Ulength, EHIScontrol_y + 28 * Ulength);
+	
+	
+	
+	
+	
+	
+	
+	int VOR1nums_2 = 13;
+	ege_point VOR1ploypoints_2[13] = {
+		{EHIScontrol_x - Ulength * 61,EHIScontrol_y + 2 * Ulength},
+		{EHIScontrol_x - Ulength * 58,EHIScontrol_y - 2 * Ulength},
+		{EHIScontrol_x - Ulength * 54,EHIScontrol_y - 2 * Ulength},
+		{EHIScontrol_x - Ulength * 51,EHIScontrol_y + 2 * Ulength},
+		
+		{EHIScontrol_x - Ulength * 51,EHIScontrol_y + 11 * Ulength},
+		{EHIScontrol_x - Ulength * 51,EHIScontrol_y + 11 * Ulength},
+		{EHIScontrol_x - Ulength * 51,EHIScontrol_y + 11 * Ulength},
+		
+		{EHIScontrol_x - Ulength * 54,EHIScontrol_y + 15 * Ulength},
+		{EHIScontrol_x - Ulength * 58,EHIScontrol_y + 15 * Ulength},
+		{EHIScontrol_x - Ulength * 61,EHIScontrol_y + 11 * Ulength},
+		
+		{EHIScontrol_x - Ulength * 61,EHIScontrol_y + 2 * Ulength},
+		{EHIScontrol_x - Ulength * 61,EHIScontrol_y + 2 * Ulength},
+		{EHIScontrol_x - Ulength * 61,EHIScontrol_y + 2 * Ulength},
+		
+	};
+	ege_bezier(VOR1nums_2, VOR1ploypoints_2);
+	ege_drawtext("VOR 1",EHIScontrol_x - Ulength * 57, EHIScontrol_y - 3 * Ulength);
+	ege_drawtext("OFF",EHIScontrol_x - Ulength * 46, EHIScontrol_y + 7 * Ulength);
+	
+	int VOR2nums_2 = 13;
+	ege_point VOR2ploypoints_2[13] = {
+		{EHIScontrol_x + Ulength * 61,EHIScontrol_y + 2 * Ulength},
+		{EHIScontrol_x + Ulength * 58,EHIScontrol_y - 2 * Ulength},
+		{EHIScontrol_x + Ulength * 54,EHIScontrol_y - 2 * Ulength},
+		{EHIScontrol_x + Ulength * 51,EHIScontrol_y + 2 * Ulength},
+		
+		{EHIScontrol_x + Ulength * 51,EHIScontrol_y + 11 * Ulength},
+		{EHIScontrol_x + Ulength * 51,EHIScontrol_y + 11 * Ulength},
+		{EHIScontrol_x + Ulength * 51,EHIScontrol_y + 11 * Ulength},
+		
+		{EHIScontrol_x + Ulength * 54,EHIScontrol_y + 15 * Ulength},
+		{EHIScontrol_x + Ulength * 58,EHIScontrol_y + 15 * Ulength},
+		{EHIScontrol_x + Ulength * 61,EHIScontrol_y + 11 * Ulength},
+		
+		{EHIScontrol_x + Ulength * 61,EHIScontrol_y + 2 * Ulength},
+		{EHIScontrol_x + Ulength * 61,EHIScontrol_y + 2 * Ulength},
+		{EHIScontrol_x + Ulength * 61,EHIScontrol_y + 2 * Ulength},
+		
+	};
+	ege_bezier(VOR2nums_2, VOR2ploypoints_2);
+	ege_drawtext("VOR 2",EHIScontrol_x + Ulength * 57, EHIScontrol_y - 3 * Ulength);
+	ege_drawtext("OFF",EHIScontrol_x + Ulength * 46, EHIScontrol_y + 7 * Ulength);
+	
 	ege_enable_aa(false);
 	setfillcolor(EGEARGB(0XFF, 0X00, 0X00, 0X00));
 	setlinewidth(linewidth / 3);
@@ -1174,74 +1333,74 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	
 	
 	if (VOR1 == 0) {
-	setfillcolor(EGEARGB(0XFF, 0X4B, 0X4B, 0X49));
-	
-	for (int i = 0; i <= 60; i++) {
-	ege_fillellipse(EHIScontrol_x - Ulength * (57 + 0.025 * i), EHIScontrol_y + (4 - i * 0.1) * Ulength, Ulength * (3 + i * 0.015), Ulength * (3 + i * 0.015));
-	}
-	setlinewidth(linewidth / 5);
-	setcolor(EGEARGB(0X8F, 0X20, 0X20, 0X20));
-	ege_ellipse(EHIScontrol_x - Ulength * (57 + 0.025 * 60), EHIScontrol_y + (4 - 60 * 0.1) * Ulength, Ulength* (3 + 60 * 0.015), Ulength* (3 + 60 * 0.015));
-	ege_line(EHIScontrol_x - Ulength * (57 + 0.025 * 60), EHIScontrol_y + (0.8) * Ulength,
-	EHIScontrol_x - Ulength * 57 , EHIScontrol_y + 6  * Ulength);
-	ege_line(EHIScontrol_x - Ulength * (53 + 0.025 * 60), EHIScontrol_y + (0.5) * Ulength,
-	EHIScontrol_x - Ulength * 54, EHIScontrol_y + 6 * Ulength);
+		setfillcolor(EGEARGB(0XFF, 0X4B, 0X4B, 0X49));
+		
+		for (int i = 0; i <= 60; i++) {
+			ege_fillellipse(EHIScontrol_x - Ulength * (57 + 0.025 * i), EHIScontrol_y + (4 - i * 0.1) * Ulength, Ulength * (3 + i * 0.015), Ulength * (3 + i * 0.015));
+		}
+		setlinewidth(linewidth / 5);
+		setcolor(EGEARGB(0X8F, 0X20, 0X20, 0X20));
+		ege_ellipse(EHIScontrol_x - Ulength * (57 + 0.025 * 60), EHIScontrol_y + (4 - 60 * 0.1) * Ulength, Ulength* (3 + 60 * 0.015), Ulength* (3 + 60 * 0.015));
+		ege_line(EHIScontrol_x - Ulength * (57 + 0.025 * 60), EHIScontrol_y + (0.8) * Ulength,
+			EHIScontrol_x - Ulength * 57 , EHIScontrol_y + 6  * Ulength);
+		ege_line(EHIScontrol_x - Ulength * (53 + 0.025 * 60), EHIScontrol_y + (0.5) * Ulength,
+			EHIScontrol_x - Ulength * 54, EHIScontrol_y + 6 * Ulength);
 	}
 	if (VOR1 == 1) {
-	setfillcolor(EGEARGB(0XFF, 0X4B, 0X4B, 0X49));
-	ege_fillellipse(EHIScontrol_x - Ulength * 58, EHIScontrol_y + 4 * Ulength, Ulength * 4, Ulength * 4);
-	
+		setfillcolor(EGEARGB(0XFF, 0X4B, 0X4B, 0X49));
+		ege_fillellipse(EHIScontrol_x - Ulength * 58, EHIScontrol_y + 4 * Ulength, Ulength * 4, Ulength * 4);
+		
 	}
 	if (VOR1 == 2) {
-	setfillcolor(EGEARGB(0XFF, 0X4B, 0X4B, 0X49));
-	
-	for (int i = 0; i <= 60; i++) {
-	ege_fillellipse(EHIScontrol_x - Ulength * (57 + 0.025 * i), EHIScontrol_y + (5 + i * 0.1) * Ulength, Ulength * (3 + i * 0.015), Ulength * (3 + i * 0.015));
-	}
-	setlinewidth(linewidth / 5);
-	setcolor(EGEARGB(0X8F, 0X20, 0X20, 0X20));
-	ege_ellipse(EHIScontrol_x - Ulength * (57 + 0.025 * 60), EHIScontrol_y + (5 + 60 * 0.1) * Ulength, Ulength * (3 + 60 * 0.015), Ulength * (3 + 60 * 0.015));
-	ege_line(EHIScontrol_x - Ulength * (57.3 + 0.025 * 60), EHIScontrol_y + 14.2 * Ulength,
-	EHIScontrol_x - Ulength * 57, EHIScontrol_y + 6 * Ulength);
-	ege_line(EHIScontrol_x - Ulength * (53 + 0.025 * 60), EHIScontrol_y + 13.5 * Ulength,
-	EHIScontrol_x - Ulength * 54, EHIScontrol_y + 7 * Ulength);
+		setfillcolor(EGEARGB(0XFF, 0X4B, 0X4B, 0X49));
+		
+		for (int i = 0; i <= 60; i++) {
+			ege_fillellipse(EHIScontrol_x - Ulength * (57 + 0.025 * i), EHIScontrol_y + (5 + i * 0.1) * Ulength, Ulength * (3 + i * 0.015), Ulength * (3 + i * 0.015));
+		}
+		setlinewidth(linewidth / 5);
+		setcolor(EGEARGB(0X8F, 0X20, 0X20, 0X20));
+		ege_ellipse(EHIScontrol_x - Ulength * (57 + 0.025 * 60), EHIScontrol_y + (5 + 60 * 0.1) * Ulength, Ulength * (3 + 60 * 0.015), Ulength * (3 + 60 * 0.015));
+		ege_line(EHIScontrol_x - Ulength * (57.3 + 0.025 * 60), EHIScontrol_y + 14.2 * Ulength,
+			EHIScontrol_x - Ulength * 57, EHIScontrol_y + 6 * Ulength);
+		ege_line(EHIScontrol_x - Ulength * (53 + 0.025 * 60), EHIScontrol_y + 13.5 * Ulength,
+			EHIScontrol_x - Ulength * 54, EHIScontrol_y + 7 * Ulength);
 	}
 	
 	
 	
 	if (VOR2 == 0) {
-	setfillcolor(EGEARGB(0XFF, 0X4B, 0X4B, 0X49));
-	
-	for (int i = 0; i <= 60; i++) {
-	ege_fillellipse(EHIScontrol_x + Ulength * (54 + 0.025 * i), EHIScontrol_y + (4 - i * 0.1) * Ulength, Ulength * (3 + i * 0.015), Ulength * (3 + i * 0.015));
-	}
-	setlinewidth(linewidth / 5);
-	setcolor(EGEARGB(0X8F, 0X20, 0X20, 0X20));
-	ege_ellipse(EHIScontrol_x + Ulength * (54 + 0.025 * 60), EHIScontrol_y + (4 - 60 * 0.1) * Ulength, Ulength * (3 + 60 * 0.015), Ulength * (3 + 60 * 0.015));
-	ege_line(EHIScontrol_x + Ulength * (58 + 0.025 * 60), EHIScontrol_y + (0.8) * Ulength,
-	EHIScontrol_x + Ulength * 57, EHIScontrol_y + 6 * Ulength);
-	ege_line(EHIScontrol_x + Ulength * (53 + 0.025 * 60), EHIScontrol_y + (0.5) * Ulength,
-	EHIScontrol_x + Ulength * 54, EHIScontrol_y + 6 * Ulength);
+		setfillcolor(EGEARGB(0XFF, 0X4B, 0X4B, 0X49));
+		
+		for (int i = 0; i <= 60; i++) {
+			ege_fillellipse(EHIScontrol_x + Ulength * (54 + 0.025 * i), EHIScontrol_y + (4 - i * 0.1) * Ulength, Ulength * (3 + i * 0.015), Ulength * (3 + i * 0.015));
+		}
+		setlinewidth(linewidth / 5);
+		setcolor(EGEARGB(0X8F, 0X20, 0X20, 0X20));
+		ege_ellipse(EHIScontrol_x + Ulength * (54 + 0.025 * 60), EHIScontrol_y + (4 - 60 * 0.1) * Ulength, Ulength * (3 + 60 * 0.015), Ulength * (3 + 60 * 0.015));
+		ege_line(EHIScontrol_x + Ulength * (58 + 0.025 * 60), EHIScontrol_y + (0.8) * Ulength,
+			EHIScontrol_x + Ulength * 57, EHIScontrol_y + 6 * Ulength);
+		ege_line(EHIScontrol_x + Ulength * (53 + 0.025 * 60), EHIScontrol_y + (0.5) * Ulength,
+			EHIScontrol_x + Ulength * 54, EHIScontrol_y + 6 * Ulength);
 	}
 	if (VOR2 == 1) {
-	setfillcolor(EGEARGB(0XFF, 0X4B, 0X4B, 0X49));
-	ege_fillellipse(EHIScontrol_x + Ulength * 54, EHIScontrol_y + 4 * Ulength, Ulength * 4, Ulength * 4);
-	
+		setfillcolor(EGEARGB(0XFF, 0X4B, 0X4B, 0X49));
+		ege_fillellipse(EHIScontrol_x + Ulength * 54, EHIScontrol_y + 4 * Ulength, Ulength * 4, Ulength * 4);
+		
 	}
 	
 	if (VOR2 == 2) {
-	setfillcolor(EGEARGB(0XFF, 0X4B, 0X4B, 0X49));
-	
-	for (int i = 0; i <= 60; i++) {
-	ege_fillellipse(EHIScontrol_x + Ulength * (54 + 0.025 * i), EHIScontrol_y + (5 + i * 0.1) * Ulength, Ulength * (3 + i * 0.015), Ulength * (3 + i * 0.015));
-	}
-	setlinewidth(linewidth / 5);
-	setcolor(EGEARGB(0X8F, 0X20, 0X20, 0X20));
-	ege_ellipse(EHIScontrol_x + Ulength * (54 + 0.025 * 60), EHIScontrol_y + (5 + 60 * 0.1) * Ulength, Ulength * (3 + 60 * 0.015), Ulength * (3 + 60 * 0.015));
-	ege_line(EHIScontrol_x + Ulength * (58.3 + 0.025 * 60), EHIScontrol_y + 13.5 * Ulength,
-	EHIScontrol_x + Ulength * 57, EHIScontrol_y + 6 * Ulength);
-	ege_line(EHIScontrol_x + Ulength * (54 + 0.025 * 60), EHIScontrol_y + 13.5 * Ulength,
-	EHIScontrol_x + Ulength * 54, EHIScontrol_y + 7 * Ulength);
+		setfillcolor(EGEARGB(0XFF, 0X4B, 0X4B, 0X49));
+		
+		for (int i = 0; i <= 60; i++) {
+			ege_fillellipse(EHIScontrol_x + Ulength * (54 + 0.025 * i), EHIScontrol_y + (5 + i * 0.1) * Ulength, Ulength * (3 + i * 0.015), Ulength * (3 + i * 0.015));
+		}
+		setlinewidth(linewidth / 5);
+		setcolor(EGEARGB(0X8F, 0X20, 0X20, 0X20));
+		ege_ellipse(EHIScontrol_x + Ulength * (54 + 0.025 * 60), EHIScontrol_y + (5 + 60 * 0.1) * Ulength, Ulength * (3 + 60 * 0.015), Ulength * (3 + 60 * 0.015));
+		ege_line(EHIScontrol_x + Ulength * (58.3 + 0.025 * 60), EHIScontrol_y + 13.5 * Ulength,
+			EHIScontrol_x + Ulength * 57, EHIScontrol_y + 6 * Ulength);
+		ege_line(EHIScontrol_x + Ulength * (54 + 0.025 * 60), EHIScontrol_y + 13.5 * Ulength,
+			EHIScontrol_x + Ulength * 54, EHIScontrol_y + 7 * Ulength);
 	}
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	if (x> EHIScontrol_x - Ulength * 58 && x < EHIScontrol_x - Ulength * 54 && y>EHIScontrol_y + 3 * Ulength&&y<= EHIScontrol_y + 6 * Ulength) {
@@ -1467,3 +1626,4 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	
 	
 }
+

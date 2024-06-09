@@ -742,6 +742,7 @@ void draw_panels(){
 
 
 void draw_getImage() {
+	
 	pimg1 = newimage();
 	getimage(pimg1, "./res/NOSEWHEEL.png");
 	pimg2 = newimage();
