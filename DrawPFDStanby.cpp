@@ -406,7 +406,7 @@ void draw_PFD_Compass_frame(double center_x, double center_y, double side)
 void draw_PFD_scale(double compass_x, double compass_y, double side)
 {
 	double compass_r = side * 51.2 / 126;
-	setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));//设置线条颜色
+	setcolor(EGEARGB(0xff, 0xff, 0xff, 0xff));//设置线条颜色
 	setlinewidth(compass_r * 0.01);//设置线条宽度
 	//长刻度
 	for (double i = 0; i < 360; i += 10)
@@ -447,7 +447,7 @@ void draw_PFD_compass_text(double compass_x, double compass_y, double side)
 		
 		//设置文字的格式
 		LOGFONTW font;
-		setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));
+		setcolor(EGEARGB(0xff, 0xff, 0xff, 0xff));
 		setfont(compass_r * 0.15, 0, "Leelawadee");
 		settextjustify(CENTER_TEXT, CENTER_TEXT);
 		getfont(&font);
@@ -478,7 +478,7 @@ void draw_PFD_compass_text(double compass_x, double compass_y, double side)
 			
 			//设置文字的格式
 			LOGFONTW font;
-			setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));
+			setcolor(EGEARGB(0xff, 0xff, 0xff, 0xff));
 			setfont(compass_r * 0.10, 0, "Leelawadee");
 			settextjustify(CENTER_TEXT, CENTER_TEXT);
 			getfont(&font);
@@ -585,7 +585,7 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 	double width = single * 130;
 	double length = single * 126;
 	
-	
+	 
 	setlinewidth(side/100);// 这里是对于表盘上部阴影的处理
 	setcolor(EGEARGB(0Xff, 13, 15, 17));
 	ege_line(center_x - 63 * single, center_y - (63 + 21) * single,//1
@@ -883,13 +883,15 @@ void draw_alt_standy_frame(double center_x, double center_y, double side) {
 //绘制线框和黑色填充
 
 void draw_alt_standy_wireframe(double center_x, double center_y, double side) {
-	setcolor(EGEARGB(200, 177, 177, 178));
+	setcolor(EGEARGB(250, 177, 177, 178));
 	double x = center_x + 31.5 / 96 * side - 78.0 / 96 * side;
 	double y = center_y - 24.0 / 96 * side;
 	
 	double wide = side * 78 / 96;
 	double height = side * 48 / 96;
-	setlinewidth(side * 0.01);
+	
+	setcolor(EGEARGB(250,177,177,178));
+	setlinewidth(side * 0.02);
 	setfillcolor(BLACK);
 	ege_fillrect(x, y, wide, height);
 	ege_rectangle(x, y, wide, height);
@@ -899,7 +901,7 @@ void draw_alt_standy_wireframe(double center_x, double center_y, double side) {
 //画其他的数字
 
 void draw_alt_else(double center_x, double center_y, double side, double height) {
-	setcolor(EGEARGB(200, 177, 177, 178));
+	setcolor(WHITE);
 	double y = center_y - side * 0.17;
 	double x = center_x;
 	double number_height = side * 2.5 / 96.0 * 2 * 6.5;
@@ -972,7 +974,7 @@ void draw_alt_else(double center_x, double center_y, double side, double height)
 //画十位和个位
 
 void draw_alt_10(double center_x,double center_y,double side,double height) {
-	setcolor(EGEARGB(200, 177, 177, 178));
+	setcolor(WHITE);
 	double y = center_y - side * 0.17;
 	double x = center_x;
 	double number_height = side  * 2.5 / 96.0 * 2 * 6.5;
@@ -1046,7 +1048,7 @@ void draw_alt_NumShadow(double center_x, double center_y, double side) {
 }
 
 void draw_alt_lines(double center_x, double center_y, double side) {
-	setcolor(EGEARGB(200, 177, 177, 178));
+	setcolor(WHITE);
 	
 	setlinewidth(side * 0.005);
 	int datas[11] = {};
@@ -1127,7 +1129,8 @@ void draw_alt_Standy_shadow(double center_x, double center_y, double side) {
 	
 	wide = side * 78 / 96;
 	height = side * 48 / 96;
-	setcolor(WHITE);
+	setcolor(EGEARGB(200,177,177,178));
+	setlinewidth(side * 0.02);
 	ege_rectangle(x, y, wide, height);
 }
 
@@ -1143,7 +1146,6 @@ void draw_standy_alt(double center_x, double center_y, double side) {
 		height = altitude;
 	}
 	draw_alt_standy_frame(center_x, center_y, side);//底框
-	
 	draw_alt_lines(center_x, center_y, side);//绘制下层表的所有刻度线
 	draw_alt_standy_wireframe(center_x, center_y, side);//线框和线框下的底色
 	draw_alt_10(center_x, center_y, side,height);//十位及个位
@@ -1181,6 +1183,7 @@ void draw_standy_airSpeed_frame(double center_x, double center_y, double side) {
 }
 
 void draw_standy_airSpeed_wireframe(double center_x, double center_y, double side) {
+	
 	double x = center_x - 24.5 / 96.0 * side;
 	double y = center_y - 24.0 / 96.0 * side;
 	double lenth = 48.0 / 96.0 * side;
@@ -1188,9 +1191,8 @@ void draw_standy_airSpeed_wireframe(double center_x, double center_y, double sid
 	setfillcolor(BLACK);
 	ege_fillrect(x, y, width, lenth);
 	
-	setlinewidth(side * 0.01);
-	
-	setcolor(EGEARGB(200, 177, 177, 178));
+	setcolor(EGEARGB(200,177,177,178));
+	setlinewidth(side * 0.02);
 	ege_rectangle(x, y, width, lenth);
 	
 	setcolor(BLACK);
@@ -1198,7 +1200,7 @@ void draw_standy_airSpeed_wireframe(double center_x, double center_y, double sid
 }
 
 void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
-	setcolor(EGEARGB(200, 177, 177, 178));
+	setcolor(WHITE);
 	
 	setlinewidth(side * 0.005);
 	int datas[11] = {};
@@ -1321,7 +1323,7 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 }
 
 void draw_airSpeed_10(double center_x, double center_y, double side,double speed) {
-	setcolor(EGEARGB(200, 177, 177, 178));
+	setcolor(WHITE);
 	double y = center_y - side * 0.17;
 	double x = center_x;
 	double number_height = side * 2.5 / 96.0 * 2 * 6.5;
@@ -1390,16 +1392,17 @@ void draw_airSpeed_else(double center_x, double center_y, double side, double sp
 	int ten = speed / 10;
 	ten = ten % 10;
 	if (speed >= 100) {
-		outtextxy(center_x - number_width * 2.05, y - number_height * 0.025,num[hun + 1]);
-		outtextxy(center_x - number_width * 0.8, y - number_height * 0.025, num[ten + 1]);
+		outtextxy(center_x - number_width * 1.5, y - number_height * 0.025,num[hun + 1]);
+		outtextxy(center_x - number_width * 0.5, y - number_height * 0.025, num[ten + 1]);
 	}
 	else {
-		outtextxy(center_x - number_width * 0.8, y - number_height * 0.025, num[ten + 1]);
+		outtextxy(center_x - number_width * 0.5, y - number_height * 0.025, num[ten + 1]);
 	}
 	
 }
 
 void draw_airSpeed_shadow(double center_x, double center_y, double side) {
+	
 	double number_height = side * 2.5 / 96.0 * 2 * 6.5;
 	double number_width = side * 2.5 / 96.0 * 5;
 	setfillcolor(EGEARGB(0Xff, 59, 59, 59));
@@ -1419,6 +1422,8 @@ void draw_airSpeed_shadow(double center_x, double center_y, double side) {
 	y = center_y - 24.0 / 96.0 * side;
 	lenth = 48.0 / 96.0 * side;
 	width = 53.0 / 96.0 * side;
+	setcolor(EGEARGB(200,177,177,178));
+	setlinewidth(side * 0.02);
 	ege_rectangle(x, y, width, lenth);
 }
 
