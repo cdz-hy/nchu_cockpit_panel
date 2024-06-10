@@ -273,7 +273,7 @@ void draw_ND_Speed(double center_x, double center_y, double side) {
 	// 真实空速，对地速度，风速风向显示
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	setcolor(EGEARGB(200, 177, 177, 178));
+	setcolor(WHITE);
 	setfont(side / 30, 0, "黑体");// 这是对字体的大小的设置
 	char ch[64];
 	ege_drawtext("GS", center_x - side / 2.2, center_y - side / 2.3);
@@ -390,7 +390,7 @@ void draw_ND_app_center(double center_x, double center_y, double side) {
 	// 初始数据设置
 	double r = side / 115 * 37.5;
 	realrotationAngle = 360 - rotationangle;
-	setcolor(EGEARGB(200, 177, 177, 178));
+	setcolor(EGEARGB(0xff, 177, 177, 178));
 	
 	// 长长刻度
 	setlinewidth(side / 250);
@@ -502,7 +502,7 @@ void draw_ND_app_center(double center_x, double center_y, double side) {
 	
 	
 	setlinewidth(side / 250);
-	setcolor(EGEARGB(200, 177, 177, 178));
+	setcolor(EGEARGB(0xff, 177, 177, 178));
 	
 	double rad = -(pointrationAngle + rotationangle) * PI / 180;
 	
@@ -563,7 +563,7 @@ void draw_acr(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	ege_arc(center_x - r, center_y - r, r * 2, r * 2, -44.0, -92.0);
@@ -574,7 +574,7 @@ void draw_map_scale(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	//短刻度
@@ -607,7 +607,7 @@ void draw_ndtext(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	for (int i = 0; i < 360; i += 30) //循环输出表上的刻度值
@@ -619,7 +619,7 @@ void draw_ndtext(double center_x, double center_y, double side)
 		
 		//设置文字的格式
 		LOGFONTW font;
-		setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));
+		setcolor(EGEARGB(0xff, 0xff, 0xff, 0xff));
 		setfont(r * 0.09, 0, "Leelawadee");
 		settextjustify(CENTER_TEXT, CENTER_TEXT);
 		getfont(&font);
@@ -643,7 +643,7 @@ void draw_ndpoint(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	//画出指针
@@ -658,7 +658,7 @@ void draw_ndcenterangle(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	//画表中间的一个三角形
@@ -684,7 +684,7 @@ void draw_ndtoptriangle(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	double rad = ndtoprotationangle * PI / 180;//将旋转角度化成弧度制
@@ -712,7 +712,7 @@ void draw_ndtoprectangle(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	//画顶部不闭合的矩形
@@ -738,7 +738,7 @@ void draw_ndtoptext(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	//顶部中间的数字显示
@@ -810,7 +810,7 @@ void draw_ND_pln(double center_x, double center_y, double side) {
 	double big_r = side / 104 * 80;
 	
 	setlinewidth(side / 125);// 这是圆弧线的线宽设置
-	setcolor(EGEARGB(150, 177, 177, 178));// 这是对于线的颜色的设置,与数字颜色的设置（白色）
+	setcolor(EGEARGB(0xff, 177, 177, 178));// 这是对于线的颜色的设置,与数字颜色的设置（白色）
 	ege_arc(center_x - small_r, center_y - small_r,
 		small_r * 2, small_r * 2,
 		97, 166);
@@ -833,6 +833,7 @@ void draw_ND_pln(double center_x, double center_y, double side) {
 		-86, 172);
 	
 	// 数字显示与WSNE显示
+	setcolor(WHITE);
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	setfont(side / 14, 0, "黑体");// 这是对数字的大小的设置
