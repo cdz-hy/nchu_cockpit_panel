@@ -1723,7 +1723,7 @@ void draw_compass_frame(double compass_x, double compass_y, double side)
 void draw_course_indication(double compass_x, double compass_y, double side)
 {
 	double compass_r = side * 30.5 / 96;//罗盘的半径
-	setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));//设置线条颜色
+	setcolor(EGEARGB(0xff, 0xff, 0xff, 0xff));//设置线条颜色
 	setlinewidth(compass_r * 0.01);//设置线条宽度
 	
 	ege_point triangle[4];//点类型结构体保存三角形个点坐标
@@ -1751,7 +1751,7 @@ void draw_course_indication(double compass_x, double compass_y, double side)
 void draw_scale(double compass_x, double compass_y, double side)
 {
 	double compass_r = side * 30.5 / 96;//罗盘的半径
-	setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));//设置线条颜色
+	setcolor(EGEARGB(0xff, 0xff, 0xff, 0xff));//设置线条颜色
 	setlinewidth(compass_r * 0.01);//设置线条宽度
 	//长刻度
 	for (double i = 0; i < 360; i += 10)
@@ -1792,7 +1792,7 @@ void draw_compass_text(double compass_x, double compass_y, double side)
 		
 		//设置文字的格式
 		LOGFONTW font;
-		setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));
+		setcolor(EGEARGB(0xff, 0xff, 0xff, 0xff));
 		setfont(compass_r * 0.13, 0, "Leelawadee");
 		settextjustify(CENTER_TEXT, CENTER_TEXT);
 		getfont(&font);
@@ -1816,7 +1816,7 @@ void draw_compass_text(double compass_x, double compass_y, double side)
 //画指针
 void draw_compass_point(double compass_x, double compass_y, double side) {
 	double compass_r = side * 30.5 / 96;//罗盘的半径
-	setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));//设置线条颜色
+	setcolor(EGEARGB(0xff, 0xff, 0xff, 0xff));//设置线条颜色
 	setlinewidth(compass_r * 0.01);//设置线条宽度
 	ege_line(compass_x + compass_r * cos(55 * PI / 180) * sin(pointrotationangle * PI / 180), compass_y - compass_r * cos(55 * PI / 180) * cos(pointrotationangle * PI / 180), compass_x + compass_r * sin(pointrotationangle * PI / 180), compass_y - compass_r * cos(pointrotationangle * PI / 180));//竖线部分
 	ege_line(-side / 96 * cos(pointrotationangle * PI / 180) + compass_r * 0.7 * sin(pointrotationangle * PI / 180) + compass_x, -compass_r * 0.7 * cos(pointrotationangle * PI / 180) - side / 96 * sin(pointrotationangle * PI / 180) + compass_y, side / 96 * cos(pointrotationangle * PI / 180) + compass_r * 0.7 * sin(pointrotationangle * PI / 180) + compass_x, -compass_r * 0.7 * cos(pointrotationangle * PI / 180) + side / 96 * sin(pointrotationangle * PI / 180) + compass_y);
@@ -1828,7 +1828,7 @@ void draw_course(double compass_x, double compass_y, double side) {
 	
 	//设置文字的格式
 	LOGFONTW font;
-	setcolor(EGEARGB(0x99, 0xDE, 0x58, 0xC5));
+	setcolor(EGEARGB(0xff, 0xDE, 0x58, 0xC5));
 	setfont(compass_r * 0.13, 0, "Leelawadee");
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	getfont(&font);
@@ -1841,7 +1841,7 @@ void draw_course(double compass_x, double compass_y, double side) {
 	ege_drawtext(strBuffer, compass_x - compass_r * 0.23, compass_y - compass_r * 0.63);
 	
 	//设置文字的格式
-	setcolor(EGEARGB(0x99, 0xDE, 0x58, 0xC5));
+	setcolor(EGEARGB(0xff, 0xDE, 0x58, 0xC5));
 	setfont(compass_r * 0.1, 0, "Leelawadee");
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	getfont(&font);
@@ -1859,7 +1859,7 @@ void draw_MAG(double compass_x, double compass_y, double side) {
 	//设置文字的格式
 	LOGFONTW font;
 	setcolor(GREEN);
-	setcolor(EGEARGB(0x99, 0x75, 0xf9, 0x4d));
+	setcolor(EGEARGB(0xff, 0x75, 0xf9, 0x4d));
 	setfont(compass_r * 0.1, 0, "Leelawadee");
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	getfont(&font);
