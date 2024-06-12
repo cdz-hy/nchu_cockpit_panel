@@ -13,7 +13,7 @@ double rollAngle = 0;
 double sideSlipAngle = 0;
 double headingIndication = 0;
 double glideIndication = 0;
-double ndtoprotationangle = 0;
+double ndpointrotationangle = 0;
 
 double RCDI_speed = 7866;
 double verticalRate = -7866;
@@ -27,7 +27,7 @@ double indicated_number = 200;
 
 double attackAngle = 0;//攻角
 
-double airSpeed = 0;
+double airSpeed = 120;
 double vmo_speed = 0;
 double airSpeed_acceleration = 0;
 double airSpeed_mach = 0.5;
