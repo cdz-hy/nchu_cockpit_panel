@@ -13,7 +13,7 @@ extern double rollAngle;
 extern double sideSlipAngle;
 extern double headingIndication;
 extern double glideIndication;
-extern double ndtoprotationangle;
+extern double ndpointrotationangle;
 
 extern double RCDI_speed;
 extern double verticalRate;
