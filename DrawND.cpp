@@ -31,6 +31,7 @@ void draw_ndcenterangle(double center_x, double center_y, double side);
 void draw_ndtoptriangle(double center_x, double center_y, double side);
 void draw_ndtoprectangle(double center_x, double center_y, double side);
 void draw_ndtoptext(double center_x, double center_y, double side);
+void draw_ND_app(double center_x, double center_y, double side);//
 void draw_ND_map(double center_x, double center_y, double side);//
 void draw_ND_pln(double center_x, double center_y, double side);//
 void draw_ND_frame_chassis(double center_x, double center_y, double side);//
@@ -47,7 +48,8 @@ extern double rotationangle;// 用于传入用
 double realrotationangle2 = 0;//实际的旋转角度
 int ndcourse = 0;
 extern double rotationangle;//表盘刻度的旋转角度
-extern double ndtoprotationangle;//顶部三角形的偏转角度
+double ndtoprotationangle =  0;//顶部三角形的偏转角度
+extern double ndpointrotationangle;
 //PLN PLN+CENTER 模式
 //暂无
 
@@ -92,8 +94,12 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	
 	if(CTR == 0){
 		
-		if(EHISMode == 55 || EHISMode == 80 || EHISMode == 110){
+		if(EHISMode == 55 || EHISMode == 80 ){
 			
+			draw_ND_app(ND_x, ND_y + ND_side * 32 / 104, ND_side);
+		}
+		else if(EHISMode == 110){
+
 			draw_ND_map(ND_x, ND_y + ND_side * 32 / 104, ND_side);
 			
 		}else if(EHISMode == 135){
@@ -558,15 +564,134 @@ void draw_ND_app_center(double center_x, double center_y, double side) {
 
 //================================APP VOR  MAP  MAP+CENTER 模式==================================//
 
+
+//画指向航向的指针
+void draw_ndpoint2(double center_x, double center_y, double side)
+{
+	double r = side * 71 / 104;//表盘的半径
+	
+	setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));//设置线条颜色
+	setlinewidth(r * 0.008);//设置线宽
+	
+	double rad = (realrotationangle2 + ndpointrotationangle) * PI / 180;
+	
+	if ((realrotationangle2 + ndpointrotationangle) >= 300 || (realrotationangle2 + ndpointrotationangle) <= 60) {
+		//画出指针
+		ege_line(center_x, center_y, r * sin(rad) + center_x, -r * cos(rad) + center_y);
+		ege_line(-r * 0.02 * cos(rad) - (-r / 4 * sin(rad)) + center_x, -r / 4 * cos(rad) - r * 0.02 * sin(rad) + center_y, r * 0.02 * cos(rad) - (-r / 4 * sin(rad)) + center_x, -r / 4 * cos(rad) + r * 0.02 * sin(rad) + center_y);
+		ege_line(-r * 0.02 * cos(rad) - (-r / 2 * sin(rad)) + center_x, -r / 2 * cos(rad) - r * 0.02 * sin(rad) + center_y, r * 0.02 * cos(rad) - (-r / 2 * sin(rad)) + center_x, -r / 2 * cos(rad) + r * 0.02 * sin(rad) + center_y);
+		ege_line(-r * 0.02 * cos(rad) - (-r * 3 / 4 * sin(rad)) + center_x, -r * 3 / 4 * cos(rad) - r * 0.02 * sin(rad) + center_y, r * 0.02 * cos(rad) - (-r * 3 / 4 * sin(rad)) + center_x, -r * 3 / 4 * cos(rad) + r * 0.02 * sin(rad) + center_y);
+	}
+}
+
+//画顶部会移动的三角形
+void draw_ndtoptriangle2(double center_x, double center_y, double side)
+{
+	double r = side * 71 / 104;//表盘的半径
+	
+	setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));//设置线条颜色
+	setlinewidth(r * 0.008);//设置线宽
+	
+	double rad = 0;//将旋转角度化成弧度制
+	
+	if (1/*(ndtoprotationangle + realrotationangle2) > 310 || (ndtoprotationangle + realrotationangle2) < 50*/) {
+		//画顶部会移动的三角形
+		ege_point toptriangle[4];
+		
+		toptriangle[0].x = r * sin(rad) + center_x;
+		toptriangle[0].y = -r * cos(rad) + center_y;
+		
+		toptriangle[1].x = -side * 2 / 104 * cos(rad) + (r + side * 3 / 104) * sin(rad) + center_x;
+		toptriangle[1].y = (-r - side * 3 / 104) * cos(rad) - side * 2 / 104 * sin(rad) + center_y;
+		
+		toptriangle[2].x = side * 2 / 104 * cos(rad) + (r + side * 3 / 104) * sin(rad) + center_x;
+		toptriangle[2].y = (-r - side * 3 / 104) * cos(rad) + side * 2 / 104 * sin(rad) + center_y;
+		
+		toptriangle[3].x = r * sin(rad) + center_x;
+		toptriangle[3].y = -r * cos(rad) + center_y;
+		
+		ege_drawpoly(4, toptriangle);
+	}
+}
+
+//画顶部显示的文字内容
+void draw_ndtoptext2(double center_x, double center_y, double side)
+{
+	double r = side * 71 / 104;//表盘的半径
+	
+	setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));//设置线条颜色
+	setlinewidth(r * 0.008);//设置线宽
+	
+	//顶部中间的数字显示
+	LOGFONTW font;
+	setfont(r * 0.09, 0, "Leelawadee");
+	settextjustify(CENTER_TEXT, CENTER_TEXT);
+	getfont(&font);
+	font.lfEscapement = 0;
+	font.lfWeight = 550;
+	setfont(&font);
+	
+	char stringBuffer[64];
+	ndcourse = rotationangle;
+	sprintf_s(stringBuffer, "%03d", ndcourse);
+	ege_drawtext(stringBuffer, center_x, center_y - r - side * 6 / 104);
+	
+	//顶部左边的字母显示
+	setfont(r * 0.07, 0, "Leelawadee");
+	setcolor(EGEARGB(0x99, 0x75, 0xf9, 0x4d));
+	settextjustify(CENTER_TEXT, CENTER_TEXT);
+	getfont(&font);
+	font.lfEscapement = 0;
+	font.lfWeight = 550;
+	setfont(&font);
+	ege_drawtext("HDG", center_x - side * 11 / 104, center_y - r - side * 6 / 104);
+	
+	//顶部右边的字母显示
+	setfont(r * 0.07, 0, "Leelawadee");
+	setcolor(EGEARGB(0x99, 0x75, 0xf9, 0x4d));
+	settextjustify(CENTER_TEXT, CENTER_TEXT);
+	getfont(&font);
+	font.lfEscapement = 0;
+	font.lfWeight = 550;
+	setfont(&font);
+	ege_drawtext("MAG", center_x + side * 12 / 104, center_y - r - side * 6 / 104);
+}
+
+//画预定航线
+void draw_reserveroad(double center_x, double center_y, double side)
+{
+	double compass_r = side * 71 / 104;//表盘的半径
+	
+	double rad = (course3 + realrotationangle2) * PI / 180;
+	
+	if ((course3 + realrotationangle2) > 360)
+	{
+		rad = (course3 + realrotationangle2 - 360) * PI / 180;
+	}
+	
+	//ege_line(300, 400, 400, 300);
+	/*char str[64];
+	sprintf_s(str, "%lf", rad * 180 / PI);
+	ege_drawtext(str, 400, 400);*/
+	if (center_x + compass_r * sin(rad) >= center_x - compass_r * sin(45 * PI / 180) && center_x + compass_r * sin(rad) <= center_x + compass_r * sin(45 * PI / 180) && center_y - compass_r * cos(rad) <= center_y + side * 33 / 104) {
+		ege_line(center_x + compass_r * 0.2 * sin(rad), center_y - compass_r * 0.2 * cos(rad), center_x + compass_r * sin(rad), center_y - compass_r * cos(rad));
+	}
+	//else if(center_x + compass_r * sin(rad) < center_x - compass_r * sin(45 * PI / 180) && center_y - compass_r * cos(rad) <= )
+	setlinestyle(CENTER_LINE);
+	setlinewidth(compass_r * 0.007);
+	ege_line(center_x - compass_r * 0.2 * sin(rad), center_y + compass_r * 0.2 * cos(rad), center_x - compass_r * 0.3 * sin(rad), center_y + compass_r * 0.3 * cos(rad));
+	setlinestyle(SOLID_LINE);
+}
+
 //画刻度盘上的弧线
 void draw_acr(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
-	ege_arc(center_x - r, center_y - r, r * 2, r * 2, -44.0, -92.0);
+	ege_arc(center_x - r, center_y - r, r * 2, r * 2, -40.0, -100.0);
 }
 
 //画刻度
@@ -574,7 +699,7 @@ void draw_map_scale(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	//短刻度
@@ -603,11 +728,10 @@ void draw_map_scale(double center_x, double center_y, double side)
 }
 
 //画刻度值
-void draw_ndtext(double center_x, double center_y, double side)
-{
+void draw_ndtext(double center_x, double center_y, double side) {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	for (int i = 0; i < 360; i += 30) //循环输出表上的刻度值
@@ -619,7 +743,7 @@ void draw_ndtext(double center_x, double center_y, double side)
 		
 		//设置文字的格式
 		LOGFONTW font;
-		setcolor(EGEARGB(0xff, 0xff, 0xff, 0xff));
+		setcolor(EGEARGB(0x99, 0xff, 0xff, 0xff));
 		setfont(r * 0.09, 0, "Leelawadee");
 		settextjustify(CENTER_TEXT, CENTER_TEXT);
 		getfont(&font);
@@ -639,15 +763,15 @@ void draw_ndtext(double center_x, double center_y, double side)
 }
 
 //画指向航向的固定指针
-void draw_ndpoint(double center_x, double center_y, double side)
+void draw_ndpoint1(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	//画出指针
-	ege_line(center_x, center_y, center_x, center_y - r);
+	ege_line(center_x, center_y, center_x, center_y - r - 3 * side / 104);
 	ege_line(center_x - r * 0.02, center_y - r / 4, center_x + r * 0.02, center_y - r / 4);
 	ege_line(center_x - r * 0.02, center_y - r / 2, center_x + r * 0.02, center_y - r / 2);
 	ege_line(center_x - r * 0.02, center_y - r * 3 / 4, center_x + r * 0.02, center_y - r * 3 / 4);
@@ -658,7 +782,7 @@ void draw_ndcenterangle(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	//画表中间的一个三角形
@@ -680,31 +804,33 @@ void draw_ndcenterangle(double center_x, double center_y, double side)
 }
 
 //画顶部会移动的三角形
-void draw_ndtoptriangle(double center_x, double center_y, double side)
+void draw_ndtoptriangle1(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
-	double rad = ndtoprotationangle * PI / 180;//将旋转角度化成弧度制
+	double rad = (ndtoprotationangle + realrotationangle2) * PI / 180;//将旋转角度化成弧度制
 	
-	//画顶部会移动的三角形
-	ege_point toptriangle[4];
-	
-	toptriangle[0].x = r * sin(rad) + center_x;
-	toptriangle[0].y = -r * cos(rad) + center_y;
-	
-	toptriangle[1].x = -side * 2 / 104 * cos(rad) + (r + side * 3 / 104) * sin(rad) + center_x;
-	toptriangle[1].y = (-r - side * 3 / 104) * cos(rad) - side * 2 / 104 * sin(rad) + center_y;
-	
-	toptriangle[2].x = side * 2 / 104 * cos(rad) + (r + side * 3 / 104) * sin(rad) + center_x;
-	toptriangle[2].y = (-r - side * 3 / 104) * cos(rad) + side * 2 / 104 * sin(rad) + center_y;
-	
-	toptriangle[3].x = r * sin(rad) + center_x;
-	toptriangle[3].y = -r * cos(rad) + center_y;
-	
-	ege_drawpoly(4, toptriangle);
+	if ((ndtoprotationangle + realrotationangle2) > 310 || (ndtoprotationangle + realrotationangle2) < 50) {
+		//画顶部会移动的三角形
+		ege_point toptriangle[4];
+		
+		toptriangle[0].x = r * sin(rad) + center_x;
+		toptriangle[0].y = -r * cos(rad) + center_y;
+		
+		toptriangle[1].x = -side * 2 / 104 * cos(rad) + (r + side * 3 / 104) * sin(rad) + center_x;
+		toptriangle[1].y = (-r - side * 3 / 104) * cos(rad) - side * 2 / 104 * sin(rad) + center_y;
+		
+		toptriangle[2].x = side * 2 / 104 * cos(rad) + (r + side * 3 / 104) * sin(rad) + center_x;
+		toptriangle[2].y = (-r - side * 3 / 104) * cos(rad) + side * 2 / 104 * sin(rad) + center_y;
+		
+		toptriangle[3].x = r * sin(rad) + center_x;
+		toptriangle[3].y = -r * cos(rad) + center_y;
+		
+		ege_drawpoly(4, toptriangle);
+	}
 }
 
 //画顶部不闭合的矩形
@@ -712,7 +838,7 @@ void draw_ndtoprectangle(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	//画顶部不闭合的矩形
@@ -734,11 +860,11 @@ void draw_ndtoprectangle(double center_x, double center_y, double side)
 }
 
 //画顶部显示的文字内容
-void draw_ndtoptext(double center_x, double center_y, double side)
+void draw_ndtoptext1(double center_x, double center_y, double side)
 {
 	double r = side * 71 / 104;//表盘的半径
 	
-	setcolor(EGEARGB(0xff, 177, 177, 178));//设置线条颜色
+	setcolor(EGEARGB(150, 177, 177, 178));//设置线条颜色
 	setlinewidth(r * 0.008);//设置线宽
 	
 	//顶部中间的数字显示
@@ -751,6 +877,7 @@ void draw_ndtoptext(double center_x, double center_y, double side)
 	setfont(&font);
 	
 	char stringBuffer[64];
+	ndcourse = ndpointrotationangle;
 	sprintf_s(stringBuffer, "%03d", ndcourse);
 	ege_drawtext(stringBuffer, center_x, center_y - r - side * 6 / 104);
 	
@@ -775,11 +902,94 @@ void draw_ndtoptext(double center_x, double center_y, double side)
 	ege_drawtext("MAG", center_x + side * 12 / 104, center_y - r - side * 6 / 104);
 }
 
-//画MAP模式下的ND表
+//画选定的航向
+void draw_ndcourse(double compass_x, double compass_y, double side) 
+{
+	double compass_r = side * 71 / 104;//表盘的半径
+	
+	//画指示标志
+	setcolor(EGEARGB(0x99, 0xDE, 0x58, 0xC5));
+	setlinewidth(compass_r * 0.007);
+	ege_point graphics[22];
+	
+	double rad = (course2 + realrotationangle2) * PI / 180;
+	
+	if ((course2 + realrotationangle2) > 310 || (course2 + realrotationangle2) < 50) {
+		graphics[0].x = -compass_r * sin(0.5 * PI / 180) * cos(rad) - (-compass_r * cos(0.5 * PI / 180) * sin(rad)) + compass_x;
+		graphics[0].y = -compass_r * cos(0.5 * PI / 180) * cos(rad) - compass_r * sin(0.5 * PI / 180) * sin(rad) + compass_y;
+		
+		graphics[1].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.2 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 0.75 / 96) * sin(rad)) + compass_x;
+		graphics[1].y = (-compass_r * cos(0.5 * PI / 180) - side * 0.75 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.2 / 96) * sin(rad) + compass_y;
+		
+		graphics[2].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.2 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 0.75 / 96) * sin(rad)) + compass_x;
+		graphics[2].y = (-compass_r * cos(0.5 * PI / 180) - side * 0.75 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.2 / 96) * sin(rad) + compass_y;
+		
+		graphics[3].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.4 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[3].y = (-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.4 / 96) * sin(rad) + compass_y;
+		
+		graphics[4].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.6 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[4].y = (-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.6 / 96) * sin(rad) + compass_y;
+		
+		graphics[5].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.6 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[5].y = (-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.6 / 96) * sin(rad) + compass_y;
+		
+		graphics[6].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[6].y = (-compass_r * cos(0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[7].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 0.7 / 96) * sin(rad)) + compass_x;
+		graphics[7].y = (-compass_r * cos(0.5 * PI / 180) - side * 0.7 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[8].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) - side * 0.7 / 96) * sin(rad)) + compass_x;
+		graphics[8].y = (-compass_r * cos(0.5 * PI / 180) - side * 0.7 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[9].x = (-compass_r * sin(0.5 * PI / 180) - side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(0.5 * PI / 180) + side * 0.1 / 96) * sin(rad)) + compass_x;
+		graphics[9].y = (-compass_r * cos(0.5 * PI / 180) + side * 0.1 / 96) * cos(rad) - (compass_r * sin(0.5 * PI / 180) + side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[10].x = compass_r * sin(rad) + compass_x;
+		graphics[10].y = -compass_r * cos(rad) + compass_y;
+		
+		graphics[11].x = compass_r * sin(rad) + compass_x;
+		graphics[11].y = -compass_r * cos(rad) + compass_y;
+		
+		graphics[12].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) + side * 0.1 / 96) * sin(rad)) + compass_x;
+		graphics[12].y = (-compass_r * cos(-0.5 * PI / 180) + side * 0.1 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[13].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 0.7 / 96) * sin(rad)) + compass_x;
+		graphics[13].y = (-compass_r * cos(-0.5 * PI / 180) - side * 0.7 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[14].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 0.7 / 96) * sin(rad)) + compass_x;
+		graphics[14].y = (-compass_r * cos(-0.5 * PI / 180) - side * 0.7 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[15].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.8 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[15].y = (-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.8 / 96) * sin(rad) + compass_y;
+		
+		graphics[16].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.6 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[16].y = (-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.6 / 96) * sin(rad) + compass_y;
+		
+		graphics[17].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.6 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[17].y = (-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.6 / 96) * sin(rad) + compass_y;
+		
+		graphics[18].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.4 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * sin(rad)) + compass_x;
+		graphics[18].y = (-compass_r * cos(-0.5 * PI / 180) - side * 1.5 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.4 / 96) * sin(rad) + compass_y;
+		
+		graphics[19].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.2 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 0.75 / 96) * sin(rad)) + compass_x;
+		graphics[19].y = (-compass_r * cos(-0.5 * PI / 180) - side * 0.75 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.2 / 96) * sin(rad) + compass_y;
+		
+		graphics[20].x = (-compass_r * sin(-0.5 * PI / 180) + side * 0.2 / 96) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180) - side * 0.75 / 96) * sin(rad)) + compass_x;
+		graphics[20].y = (-compass_r * cos(-0.5 * PI / 180) - side * 0.75 / 96) * cos(rad) - (compass_r * sin(-0.5 * PI / 180) - side * 0.2 / 96) * sin(rad) + compass_y;
+		
+		graphics[21].x = (-compass_r * sin(-0.5 * PI / 180)) * cos(rad) - ((-compass_r * cos(-0.5 * PI / 180)) * sin(rad)) + compass_x;
+		graphics[21].y = (-compass_r * cos(-0.5 * PI / 180)) * cos(rad) - (compass_r * sin(-0.5 * PI / 180)) * sin(rad) + compass_y;
+		
+		ege_bezier(22, graphics);
+	}
+}
+
+//画MAP模式下的NP表
 void draw_ND_map(double center_x, double center_y, double side)
 {
-
-	realrotationangle2 = 360 - rotationangle;
+	realrotationangle2 = 360 - ndpointrotationangle;
+	ndtoprotationangle = rotationangle;
 	
 	draw_acr(center_x, center_y, side);
 	
@@ -787,17 +997,44 @@ void draw_ND_map(double center_x, double center_y, double side)
 	
 	draw_ndtext(center_x, center_y, side);
 	
-	draw_ndpoint(center_x, center_y, side);
+	draw_ndpoint1(center_x, center_y, side);
+	
+	draw_ndcourse(center_x, center_y, side);
 	
 	draw_ndcenterangle(center_x, center_y, side);
 	
-	draw_ndtoptriangle(center_x, center_y, side);
+	draw_ndtoptriangle1(center_x, center_y, side);
 	
 	draw_ndtoprectangle(center_x, center_y, side);
 	
-	draw_ndtoptext(center_x, center_y, side);
+	draw_ndtoptext1(center_x, center_y, side);
 }
 
+//画APP模式下的ND表
+void draw_ND_app(double center_x, double center_y, double side)
+{
+	realrotationangle2 = 360 - rotationangle;
+	
+	draw_reserveroad(center_x, center_y, side);
+	
+	draw_acr(center_x, center_y, side);
+	
+	draw_map_scale(center_x, center_y, side);
+	
+	draw_ndtext(center_x, center_y, side);
+	
+	draw_ndpoint2(center_x, center_y, side);
+	
+	draw_ndcourse(center_x, center_y, side);
+	
+	draw_ndcenterangle(center_x, center_y, side);
+	
+	draw_ndtoptriangle2(center_x, center_y, side);
+	
+	draw_ndtoprectangle(center_x, center_y, side);
+	
+	draw_ndtoptext2(center_x, center_y, side);
+}
 
 //================================PLN PLN+CENTER 模式==================================//
 
