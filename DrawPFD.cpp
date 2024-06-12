@@ -565,10 +565,6 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 				center_x + width / 2,
 				center_y - (i + distance) * length / 67 * 5.57);
 		}
-		else {
-			
-		}
-		
 		
 		// 绘制粉色指示速度标
 		setcolor(EGEARGB(0x99, 255, 51, 255));
@@ -779,86 +775,135 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	// 绿色指针显示
 	setcolor(EGEARGB(0x99, 76, 153, 0));
 	setlinewidth(side / 200);
-	if (airSpeed_acceleration > 0) {// 绿色指针向上
-		if (airSpeed_acceleration <= (length / 2 - side / 60)) {
-			ege_line(center_x + width / 11.5 * (9.5 - 5.75),
-				center_y,
-				center_x + width / 11.5 * (9.5 - 5.75),
-				center_y - airSpeed_acceleration);
-			if (airSpeed_acceleration >= side / 60) {
-				ege_point points5[4] = {
-					center_x + width / 11.5 * 2.7,// 左下
-					center_y - airSpeed_acceleration,
-					center_x + width / 11.5 * 4.5,// 右下
-					center_y - airSpeed_acceleration,
-					center_x + width / 11.5 * 3.75,// 上部定位点
-					center_y - airSpeed_acceleration - side / 60,
-					center_x + width / 11.5 * 2.7,
-					center_y - airSpeed_acceleration
-				};
-				ege_drawpoly(4, points5);
-			}
-			
-		}
-		else
-		{
-			ege_line(center_x + width / 11.5 * (9.5 - 5.75),
-				center_y,
-				center_x + width / 11.5 * (9.5 - 5.75),
-				center_y - length / 2 + side / 60);
-			ege_point points5[4] = {
-				center_x + width / 11.5 * 2.7,// 左下
-				center_y - length / 2 + side / 60,
-				center_x + width / 11.5 * 4.5,// 右下
-				center_y - length / 2 + side / 60 ,
-				center_x + width / 11.5 * 3.75,// 上部定位点
-				center_y - length / 2 ,
-				center_x + width / 11.5 * 2.7,
-				center_y - length / 2 + side / 60
-			};
-			ege_drawpoly(4, points5);
-		}
+	
+	double futureAirspeed = airSpeed_acceleration * 10;
+	
+	if (airspeed0 <= 45 && futureAirspeed >=0) {
+		futureAirspeed = futureAirspeed - 45;
+	}
+	
+	if (futureAirspeed >= 57) {
+		futureAirspeed = 57;
+	}
+	else if (futureAirspeed <= -57) {
+		futureAirspeed = -57;
+	}
+	
+	double greenDistace = length / 2 / 60 * futureAirspeed;
+	
+	ege_line(center_x + width / 11.5 * (9.5 - 5.75),
+		center_y,
+		center_x + width / 11.5 * (9.5 - 5.75),
+		center_y - greenDistace);
+	
+	if (greenDistace >= 0) {
+		ege_point points5[4] = {
+			center_x + width / 11.5 * 2.7,// 左下
+			center_y - greenDistace,
+			center_x + width / 11.5 * 4.5,// 右下
+			center_y - greenDistace,
+			center_x + width / 11.5 * 3.75,// 上部定位点
+			center_y - greenDistace - side / 60,
+			center_x + width / 11.5 * 2.7,
+			center_y - greenDistace
+		};
+		ege_drawpoly(4, points5);
+	}
+	else {
+		ege_point points5[4] = {
+			center_x + width / 11.5 * 2.7,// 左上
+			center_y - greenDistace ,
+			center_x + width / 11.5 * 4.5,// 右上
+			center_y - greenDistace ,
+			center_x + width / 11.5 * 3.75,// 下部定位点
+			center_y - greenDistace + side / 60 ,
+			center_x + width / 11.5 * 2.7,
+			center_y - greenDistace
+		};
+		ege_drawpoly(4, points5);
+	}
+	
+	
+	/*if (airSpeed_acceleration > 0) {// 绿色指针向上
+	if (airSpeed_acceleration <= (length / 2 - side / 60)) {
+	ege_line(center_x + width / 11.5 * (9.5 - 5.75),
+	center_y,
+	center_x + width / 11.5 * (9.5 - 5.75),
+	center_y - airSpeed_acceleration);
+	if (airSpeed_acceleration >= side / 60) {
+	ege_point points5[4] = {
+	center_x + width / 11.5 * 2.7,// 左下
+	center_y - airSpeed_acceleration,
+	center_x + width / 11.5 * 4.5,// 右下
+	center_y - airSpeed_acceleration,
+	center_x + width / 11.5 * 3.75,// 上部定位点
+	center_y - airSpeed_acceleration - side / 60,
+	center_x + width / 11.5 * 2.7,
+	center_y - airSpeed_acceleration
+	};
+	ege_drawpoly(4, points5);
+	}
+	
+	}
+	else
+{
+	ege_line(center_x + width / 11.5 * (9.5 - 5.75),
+	center_y,
+	center_x + width / 11.5 * (9.5 - 5.75),
+	center_y - length / 2 + side / 60);
+	ege_point points5[4] = {
+	center_x + width / 11.5 * 2.7,// 左下
+	center_y - length / 2 + side / 60,
+	center_x + width / 11.5 * 4.5,// 右下
+	center_y - length / 2 + side / 60 ,
+	center_x + width / 11.5 * 3.75,// 上部定位点
+	center_y - length / 2 ,
+	center_x + width / 11.5 * 2.7,
+	center_y - length / 2 + side / 60
+	};
+	ege_drawpoly(4, points5);
+	}
 	}
 	if (airSpeed_acceleration < 0) {// 绿色指针向下
-		if (airSpeed_acceleration >= -(length / 2 - side / 60)) {
-			ege_line(center_x + width / 11.5 * (9.5 - 5.75),
-				center_y,
-				center_x + width / 11.5 * (9.5 - 5.75),
-				center_y - airSpeed_acceleration);
-			if (airSpeed_acceleration <= -side / 60) {
-				ege_point points5[4] = {
-					center_x + width / 11.5 * 2.7,// 左上
-					center_y - airSpeed_acceleration ,
-					center_x + width / 11.5 * 4.5,// 右上
-					center_y - airSpeed_acceleration ,
-					center_x + width / 11.5 * 3.75,// 下部定位点
-					center_y - airSpeed_acceleration + side / 60 ,
-					center_x + width / 11.5 * 2.7,
-					center_y - airSpeed_acceleration
-				};
-				ege_drawpoly(4, points5);
-			}
-			
-		}
-		else
-		{
-			ege_line(center_x + width / 11.5 * (9.5 - 5.75),
-				center_y,
-				center_x + width / 11.5 * (9.5 - 5.75),
-				center_y + length / 2 - side / 60);
-			ege_point points5[4] = {
-				center_x + width / 11.5 * 2.7,// 左上
-				center_y + length / 2 - side / 60,
-				center_x + width / 11.5 * 4.5,// 右上
-				center_y + length / 2 - side / 60,
-				center_x + width / 11.5 * 3.75,// 下部定位点
-				center_y + length / 2 ,
-				center_x + width / 11.5 * 2.7,
-				center_y + length / 2 - side / 60
-			};
-			ege_drawpoly(4, points5);
-		}
+	if (airSpeed_acceleration >= -(length / 2 - side / 60)) {
+	ege_line(center_x + width / 11.5 * (9.5 - 5.75),
+	center_y,
+	center_x + width / 11.5 * (9.5 - 5.75),
+	center_y - airSpeed_acceleration);
+	if (airSpeed_acceleration <= -side / 60) {
+	ege_point points5[4] = {
+	center_x + width / 11.5 * 2.7,// 左上
+	center_y - airSpeed_acceleration ,
+	center_x + width / 11.5 * 4.5,// 右上
+	center_y - airSpeed_acceleration ,
+	center_x + width / 11.5 * 3.75,// 下部定位点
+	center_y - airSpeed_acceleration + side / 60 ,
+	center_x + width / 11.5 * 2.7,
+	center_y - airSpeed_acceleration
+	};
+	ege_drawpoly(4, points5);
 	}
+	
+	}
+	else
+{
+	ege_line(center_x + width / 11.5 * (9.5 - 5.75),
+	center_y,
+	center_x + width / 11.5 * (9.5 - 5.75),
+	center_y + length / 2 - side / 60);
+	ege_point points5[4] = {
+	center_x + width / 11.5 * 2.7,// 左上
+	center_y + length / 2 - side / 60,
+	center_x + width / 11.5 * 4.5,// 右上
+	center_y + length / 2 - side / 60,
+	center_x + width / 11.5 * 3.75,// 下部定位点
+	center_y + length / 2 ,
+	center_x + width / 11.5 * 2.7,
+	center_y + length / 2 - side / 60
+	};
+	ege_drawpoly(4, points5);
+	}
+	}*/
 	
 	// 马赫显示
 	if (airSpeed_mach >= 0.4) {
@@ -867,7 +912,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		settextjustify(CENTER_TEXT, CENTER_TEXT);
 		setfont(side / 12, 0, "黑体");
 		char str[100];
-		sprintf(str, "%.3f", airSpeed_mach);
+		sprintf_s(str, "%.3f", airSpeed_mach);
 		char str0[99];
 		int i;
 		for (i = 1; str[i] != '\0'; i++) {
@@ -883,7 +928,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	setfont(side / 12, 0, "黑体");
 	char str[100];
-	sprintf(str, "%.0f", airSpeed_instruction);
+	sprintf_s(str, "%.0f", airSpeed_instruction);
 	outtextxy(center_x + width / 10, center_y - length / 2 * 1.11, str);
 }
 
