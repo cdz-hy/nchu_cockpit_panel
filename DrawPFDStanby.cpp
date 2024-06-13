@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <math.h>
 
+
 //函数声明
 
 void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side);
@@ -11,6 +12,8 @@ void draw_standy_alt(double center_x, double center_y, double side);
 void draw_standy_airSpeed(double center_x, double center_y, double side);
 //void draw_PFD_standby_else();
 void draw_smallpfd_frame(double center_x, double center_y, double side);
+void draw_PFD_standby_Compass(double center_x, double center_y, double side);
+void drwa_ND_atmosphericPressure(double center_x,double center_y,double side);
 
 //引用全局变量
 extern double pitchAngle;
@@ -21,6 +24,7 @@ extern double glideIndication;
 extern double altitude;
 extern double rotationangle;
 extern double airSpeed;
+extern double INGH_data;
 
 //935 655 575
 
@@ -41,6 +45,9 @@ void draw_PFD_standby(double PFD_x, double PFD_y, double PFD_side){
 	
 	//绘制PFD边框
 	draw_smallpfd_frame(PFD_x + PFD_side/20, PFD_y +PFD_side/20, PFD_side*2.3);
+	
+	//绘制pfd右上角的气压指示
+	drwa_ND_atmosphericPressure(PFD_x,PFD_y,PFD_side);
 }
 
 
@@ -533,6 +540,8 @@ void draw_PFD_standby_Compass(double center_x, double center_y, double side)
 	draw_PFD_compass_text(center_x, center_y, side);
 	
 	draw_PFD_course(center_x, center_y, side);
+	
+	
 }
 
 
@@ -853,6 +862,18 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 	
 }
 
+// 绘制表盘右上角的气压指示
+void drwa_ND_atmosphericPressure(double center_x,double center_y,double side){
+	
+	setbkmode(TRANSPARENT);
+	settextjustify(CENTER_TEXT, CENTER_TEXT);
+	setfont(side/6, 0, "黑体");
+	setcolor(EGEARGB(250, 76, 153, 0));
+	char str[100];
+	sprintf_s(str, "%.2f", INGH_data);
+	ege_drawtext(str,center_x + side / 3.3,center_y - side / 1.1);
+	ege_drawtext("IN",center_x + side / 1.66,center_y - side / 1.1);
+}
 
 
 //===================================================================================================//
