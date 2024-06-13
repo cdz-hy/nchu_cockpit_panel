@@ -53,13 +53,21 @@ int RMI_change_1 = 0;//右按钮变化
 //发动机相关
 double Oangle_1 = 0;
 double Oangle_2 = 0;
-double fanSpeed = 101.5;
-double gastemp = 120;
-double FuelFlowSpeed = 0;
-double Fuelrest_1 = 0;
-double Fuelrest_2 = 0;
-double Fuelrest_3 = 0;
-double Fuelrest_total = 0;
+double Oangle_3 = 0;
+double Oangle_4 = 0;
+
+double fanSpeed = 0;
+double fanSpeed_1 = 0;
+double gastemp = 0;
+double gastemp_1 = 0;
+double FuelFlowSpeed = 2.04;
+double FuelFlowSpeed_1 = 1.02;
+
+
+double Fuelrest_1 = 5.65;
+double Fuelrest_2 = 0.02;
+double Fuelrest_3 = 5.65;
+double Fuelrest_total = Fuelrest_1 + Fuelrest_2 + Fuelrest_3;
 
 //时间相关
 int hour1;
