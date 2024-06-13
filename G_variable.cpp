@@ -22,7 +22,7 @@ double RNG = 56;//初始显示RNG 5
 double altitude = 0;
 double altitude2 = -4;//对地
 double MILLIBARS_data = 0;
-double INGH_data = 0;
+double INGH_data = 29.92;//气压
 double indicated_number = 200;
 
 double attackAngle = 0;//攻角
