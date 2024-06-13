@@ -150,12 +150,14 @@ PIMAGE pimg2;
 PIMAGE pimg3;
 PIMAGE pimg4;
 PIMAGE pimg5;
+PIMAGE pimg6;
 
 PIMAGE pimg1sta;
 PIMAGE pimg2sta;
 PIMAGE pimg3sta;
 PIMAGE pimg4sta;
 PIMAGE pimg5sta;
+PIMAGE pimg6sta;
 
 //==================================//
 
