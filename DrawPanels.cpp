@@ -658,11 +658,17 @@ void draw_panels(){
 			//画EICAS
 			draw_EICAS(PFD_x + 3.225 * PFD_side, PFD_y, PFD_side);
 			
+			//画EICAS2
+			draw_EICAS2(PFD_x + 3.225 * PFD_side, PFD_y + 1.33 * PFD_side, PFD_side);
+			
 			//画EHIS的控制面板
 			draw_EHIS_control(PFD_x + PFD_side * 1.54, PFD_y - 1.5 * PFD_side, PFD_side*0.8);
 			
 			//灯光控制
 			draw_Light_contral(PFD_x + PFD_side * 0.65, PFD_y + 1 * PFD_side, PFD_side*0.8);
+			
+			//显示屏的控制板
+			draw_TopContral(PFD_x + PFD_side * 0.65, PFD_y - 0.91 * PFD_side, PFD_side*0.8);
 			
 			
 			draw_electricPanel_backgrounds(PFD_x, PFD_y , PFD_side);

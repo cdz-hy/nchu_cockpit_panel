@@ -66,6 +66,27 @@ extern double Fuelrest_2;
 extern double Fuelrest_3;
 extern double Fuelrest_total;
 
+
+extern double N21;
+extern double N22;
+
+extern double FF1;
+extern double FF2;
+
+extern double oilPress1;
+extern double oilPress2;
+
+extern double oilTemp1;
+extern double oilTemp2;
+
+extern double oilQTY1;
+extern double oilQTY2;
+
+extern double VIB1;
+extern double VIB2;
+
+
+
 //时间相关
 extern int hour1;
 extern int minute1;
@@ -91,6 +112,7 @@ extern vector<WAYPOINT> route;
 
 //已经走过的航线
 extern vector<WAYPOINT> routePassed;
+extern int nowPos;//目前刚经过第几个航路点
 
 //机场信息
 extern vector<WAYPOINT> airports;
@@ -131,6 +153,7 @@ extern int showFPS;
 //表盘灯光效果
 extern int G_light;
 
+//控制板
 extern double OUTBDangle;
 extern double INBDangle;
 extern double LOWERangle;
@@ -140,6 +163,10 @@ extern double UPPERangle;
 extern double Brightangle;
 extern double changecolor;
 extern int MainPanelLight;
+
+
+
+
 
 extern PIMAGE pimg1;
 extern PIMAGE pimg2;
@@ -192,3 +219,7 @@ extern int TERR;
 extern int VOR1;
 extern int VOR2;
 
+extern double MainpanelDU;
+extern double LOWERDU;
+extern int MainpanelDU_gear;
+extern int LOWERDU_gear;

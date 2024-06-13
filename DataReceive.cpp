@@ -18,7 +18,7 @@ void data_receive(){
 			XPCSocket sock = aopenUDP(IP_address, UDP_port, UDP_port);
 			
 			//读取接收的信息
-			const int rows = 18;
+			const int rows = 28;
 			float data[rows][9] = {0};
 			if (readDATA(sock, data, rows) && data[1][1] > 0) {
 				
@@ -53,6 +53,8 @@ void data_receive(){
 						pitchAngle = data[i][1] * PI / 180;
 						rollAngle = -data[i][2] * PI / 180;
 						rotationangle = data[i][4];
+						ndpointrotationangle = data[i][3];//临时航迹
+//						 = data[i][3];
 					}
 					else if(fabs(data[i][0] - 18) <= 0.001){
 						sideSlipAngle = -data[i][8] * PI / 4 / 16 * 0.7;
@@ -85,13 +87,27 @@ void data_receive(){
 						fanSpeed = data[i][1];
 						fanSpeed_1 = data[i][2];
 					}
+					else if(fabs(data[i][0] - 42) <= 0.001){
+						N21 = data[i][1];
+						N22 = data[i][2];
+					}
 					else if(fabs(data[i][0] - 45) <= 0.001){
 						FuelFlowSpeed = data[i][1] / 1000;
 						FuelFlowSpeed_1 = data[i][2] / 1000;
+						FF1 = FuelFlowSpeed;
+						FF2 = FuelFlowSpeed_1;
 					}
 					else if(fabs(data[i][0] - 47) <= 0.001){
 						gastemp = data[i][1];
 						gastemp_1 = data[i][2];
+					}
+					else if(fabs(data[i][0] - 49) <= 0.001){
+						oilPress1 = data[i][1];
+						oilPress2 = data[i][2];
+					}
+					else if(fabs(data[i][0] - 50) <= 0.001){
+						oilTemp1 = data[i][1];
+						oilTemp2 = data[i][2];
 					}
 					else if(fabs(data[i][0] - 62) <= 0.001){
 						Fuelrest_1 = data[i][1] / 1000;

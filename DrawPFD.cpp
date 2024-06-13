@@ -35,7 +35,7 @@ void draw_PFD(double PFD_x, double PFD_y, double PFD_side){
 	
 	draw_PFD_alt(PFD_x + 35.0 / 96 * PFD_side, PFD_y ,PFD_side);
 	
-	draw_PFD_RCDI(PFD_x + 49.5 / 96 * PFD_side, PFD_y ,PFD_side);
+	draw_PFD_RCDI(PFD_x + 49.5 / 96 * PFD_side,0.99 * PFD_y ,PFD_side);
 	
 	draw_PFD_top(PFD_x, PFD_y - 41.0 / 96 * PFD_side,PFD_side);
 	
@@ -943,7 +943,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 //==================================以下为高度表表部分========================================//
 
 
-
+extern int MTRS;
 extern double altitude;
 extern double indicated_number;
 //绘制STD
@@ -1411,7 +1411,7 @@ void draw_PFD_alt_indicatedNum(double side, double center_x, double center_y) {
 	double number_width = side * 2.5 / 96.0 * 0.85;
 	
 	double x = center_x + 3.0 / 96.0 * side;
-	double y = center_y - 33.5 / 96 * side - number_height * 0.3;
+	double y = center_y - 33.5 / 96 * side - number_height * 0.5;
 	
 	settextjustify(LEFT_TEXT, TOP_TEXT);
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
@@ -1442,12 +1442,14 @@ void draw_PFD_alt_indicatedNum(double side, double center_x, double center_y) {
 		char nums[64] = {};
 		sprintf_s(nums, "%d", thou);
 		x = center_x - 2.1 / 96.0 * side;
-		y = center_y - 33.5 / 96 * side - number_height * 0.32;
-		ege_drawtext("0", x, y);
+		y = center_y - 33.5 / 96 * side - number_height * 0.48;
+		outtextxy(x - number_width * 0.5, y - number_height * 0.5,thou);
+		//ege_drawtext(nums, x, y);
 	}
 	else {
 		//当在10000以上的时候，再向上显示
-		double thousand = indicated_number / 1000;
+		double thousand = fmod(indicated_number, 10000) / 1000;
+		//double thousand = indicated_number / 1000;
 		number_height = side * 0.055 * 1.3;
 		number_width = side * 2.5 / 96.0 * 0.85 * 1.3;
 		ege_drawtext(last, x, y);
@@ -1458,8 +1460,8 @@ void draw_PFD_alt_indicatedNum(double side, double center_x, double center_y) {
 		char nums[64] = {};
 		sprintf_s(nums, "%d", thou);
 		x = center_x - 2.1 / 96.0 * side;
-		y = center_y - 33.5 / 96 * side - number_height * 0.32;
-		ege_drawtext("0", x, y);
+		y = center_y - 33.5 / 96 * side - number_height * 0.48;
+		outtextxy(x - number_width * 0.5, y - number_height * 0.5, thou);
 		
 		int tenTHOU = indicated_number / 10000;
 		char TenTHOU = num[(int)tenTHOU + 1];
@@ -1516,8 +1518,122 @@ void draw_PFD_alt_indicatedFrame(double side, double center_x, double center_y) 
 		ege_line(x, y1 + height * 0.6, x, y1 + height + side * 0.001);
 		ege_line(x, y1 + height * 0.4, x + side * 0.01, y + side * 0.001);
 		ege_line(x, y1 + height * 0.6, x + side * 0.01, y - side * 0.001);
-		//ege_rectangle(x, y1, wide, height);
 	}
+}
+
+//绘制在MTRS模式下的高度显示（米）
+
+void draw_PFD_alt_metre(double side, double center_x, double center_y) {
+	bool negative = false;//负数
+	double metre = altitude * 0.3148;
+	
+	if (metre < 0) {
+		metre = -metre;
+		negative = true;
+	}
+	
+	setlinewidth(0.002 * side);
+	
+	double wide = 13.1 / 96.0 * side;
+	double height = 4.0 / 96.0 * side;
+	double Mheight = height * 0.8 * 1.2;
+	double Mwidth = Mheight * 1.2 * 0.3;
+	double x = center_x + 31.5 / 96.0 * side - 29.0 / 96.0 * side - 5.5 / 96.0 * side + 1.7 / 96.0 * side;
+	double y = center_y - 4.5 / 96.0 * side - height;
+	setcolor(EGEARGB(200, 177, 177, 178));
+	setfillcolor(BLACK);
+	ege_fillrect(x, y, wide, height);
+	ege_rectangle(x, y, wide, height);
+	
+	//绘制一个M
+	setcolor(EGEARGB(255, 57,127, 139));
+	
+	setfont(Mheight, Mwidth, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
+	outtextxy(x + side * 10.5 / 96.0, y + side * 0.005, 'M');
+	int numbers[5] = {};
+	
+	//首先是将每个数字取出来
+	int a = (int)metre;
+	numbers[0] = fmod(a, 10) / 1;
+	numbers[1] = fmod(a - numbers[0], 100) / 10;
+	numbers[2] = fmod(a - numbers[0] - numbers[1] * 10, 1000) / 100;
+	numbers[3] = fmod(a - numbers[0] - numbers[1] * 10 - numbers[2] * 100, 10000) / 1000;
+	numbers[4] = fmod(a - numbers[0] - numbers[1] * 10 - numbers[2] * 100 - numbers[3] * 1000, 100000) / 10000;
+	
+	char num[12] = { '9','0','1','2','3','4','5','6','7','8','9','0' };
+	double num_height = height * 0.8 * 1.5;
+	double num_width = Mheight * 1.5 * 0.3;
+	setfont(num_height, num_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
+	
+	setcolor(EGEARGB(200, 177, 177, 178));
+	for (int i = 0;i < 5;i++) {
+		if (metre / pow(10, i) > 1) {
+			outtextxy(x + side * 11.5 / 96.0 - Mwidth - num_width * (i + 1), y - side * 0.005,num[numbers[i] + 1]);
+		}
+	}
+	int b = 0;
+	for (int i = 0;i < 5;i++) {
+		if (metre / pow(10, i) > 1) {
+			b = i;
+		}
+	}
+	if (negative) {
+		outtextxy(x + side * 11.5 / 96.0 - Mwidth - num_width * (b + 2), y - side * 0.005, '-');
+	}
+}
+
+//绘制MTRS模式下的指定的高度（米）
+
+void draw_PFD_indicatedMetre(double side, double center_x, double center_y) {
+	bool negative = false;
+	
+	if (indicated_number < 0) {
+		indicated_number = -indicated_number;
+		negative = true;
+	}
+	char num[12] = { '9','0','1','2','3','4','5','6','7','8','9','0' };
+	double metre = indicated_number * 0.3148;
+	//首先应该画一个M
+	setcolor(EGEARGB(255,57,128,139));
+	double x = center_x + side * 5 / 96.0;
+	double y = center_y - side * 43.5 / 96.0;
+	double wide = 13.1 / 96.0 * side;
+	double height = 4.0 / 96.0 * side;
+	double Mheight = height * 0.8 * 1.2;
+	double Mwidth = Mheight * 1.2 * 0.3;
+	setfont(Mheight, Mwidth, "Calibri", 0, 0, 0, 0, 0, 0);
+	outtextxy(x, y, 'M');
+	
+	double num_height = height * 0.8 * 1.5;
+	double num_width = Mheight * 1.5 * 0.3;
+	setfont(num_height, num_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
+	int numbers[5] = {};
+	int a = (int)metre;
+	numbers[0] = fmod(a, 10) / 1;
+	numbers[1] = fmod(a - numbers[0], 100) / 10;
+	numbers[2] = fmod(a - numbers[0] - numbers[1] * 10, 1000) / 100;
+	numbers[3] = fmod(a - numbers[0] - numbers[1] * 10 - numbers[2] * 100, 10000) / 1000;
+	numbers[4] = fmod(a - numbers[0] - numbers[1] * 10 - numbers[2] * 100 - numbers[3] * 1000, 100000) / 10000;
+	setcolor(EGEARGB(0xff, 255, 51, 255));
+	if (metre > 10000) {
+		for (int i = 0;i < 5;i++) {
+			outtextxy(x - num_width * (i + 1), y - side * 0.009, num[numbers[i] + 1]);
+		}
+	}
+	else if (metre > 1000) {
+		for (int i = 0;i < 4;i++) {
+			outtextxy(x - num_width * (i + 1), y - side * 0.009, num[numbers[i] + 1]);
+		}
+	}
+	else {
+		for (int i = 0;i < 3;i++) {
+			outtextxy(x - num_width * (i + 1), y - side * 0.009, num[numbers[i] + 1]);
+		}
+	}
+	if (negative) {
+		
+	}
+	
 }
 
 //绘制主函数
@@ -1543,11 +1659,9 @@ void draw_PFD_alt(double center_x, double center_y, double side) {
 	
 	draw_PFD_alt_wireframe(side, center_x, center_y);//画固定的白色线框
 	
-	draw_PFD_alt10(height, side, center_x, center_y);
+	draw_PFD_alt10(height,side, center_x, center_y);
 	
 	draw_PFD_alt10_shadow(side, center_x, center_y);
-	
-	
 	
 	draw_PFD_alt_STD(side, center_x, center_y);//绘制STD
 	
@@ -1565,7 +1679,13 @@ void draw_PFD_alt(double center_x, double center_y, double side) {
 	else {
 		draw_PFD_alt10000(side, center_x, center_y);
 	}
+	
+	if (MTRS) {
+		draw_PFD_alt_metre(side, center_x, center_y);
+		draw_PFD_indicatedMetre(side, center_x, center_y);
+	}
 }
+
 
 
 

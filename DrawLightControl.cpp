@@ -1119,3 +1119,582 @@ void draw_Light_contral(double leftPanel_x, double leftPanel_y, double side) {
 }
 
 
+
+
+//===================================================================================//
+
+
+
+extern double MainpanelDU;
+extern double LOWERDU;
+extern int MainPanelLight;
+extern int MainpanelDU_gear;
+extern int LOWERDU_gear;
+
+void draw_TopContral(double topContral_x, double topContral_y, double side) {
+	double Ulength = side / 130;
+	double knob_R1 = 12 * Ulength;
+	double linewidth = Ulength;
+	
+	
+	int x, y;
+	mousepos(&x, &y);
+	
+	ege_enable_aa(false);
+	setcolor(EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	int frame_TopContral = 28;
+	ege_point frame_TopContralploy[28] = {
+		{topContral_x - 65 * Ulength , topContral_y - 30.5 * Ulength},
+		{topContral_x - 65 * Ulength , topContral_y - 31.5* Ulength},
+		{topContral_x - 64 * Ulength , topContral_y - 32.5 * Ulength},
+		{topContral_x - 63 * Ulength , topContral_y - 32.5 * Ulength},
+		
+		{topContral_x - 25 * Ulength , topContral_y - 37.5 * Ulength},
+		{topContral_x - 25 * Ulength , topContral_y - 37.5 * Ulength},
+		{topContral_x - 25 * Ulength , topContral_y - 37.5 * Ulength},
+		
+		{topContral_x + 63 * Ulength , topContral_y - 37.5 * Ulength},
+		{topContral_x + 63 * Ulength , topContral_y - 37.5 * Ulength},
+		{topContral_x + 63 * Ulength , topContral_y - 37.5 * Ulength},
+		
+		{topContral_x + 64 * Ulength , topContral_y - 37.5 * Ulength},
+		{topContral_x + 65 * Ulength , topContral_y - 36.5 * Ulength},
+		{topContral_x + 65 * Ulength , topContral_y - 35.5 * Ulength},
+		
+		
+		{topContral_x + 65 * Ulength , topContral_y + 30.5 * Ulength},
+		{topContral_x + 65 * Ulength , topContral_y + 30.5 * Ulength},
+		{topContral_x + 65 * Ulength , topContral_y + 30.5 * Ulength},
+		
+		
+		{topContral_x + 65 * Ulength , topContral_y + 31.5 * Ulength},
+		{topContral_x + 64 * Ulength , topContral_y + 32.5 * Ulength},
+		{topContral_x + 63 * Ulength , topContral_y + 32.5 * Ulength},
+		
+		{topContral_x - 63 * Ulength , topContral_y + 32.5 * Ulength},
+		{topContral_x - 63 * Ulength , topContral_y + 32.5 * Ulength},
+		{topContral_x - 63 * Ulength , topContral_y + 32.5 * Ulength},
+		
+		{topContral_x - 64 * Ulength , topContral_y + 32.5 * Ulength},
+		{topContral_x - 65 * Ulength , topContral_y + 31.5 * Ulength},
+		{topContral_x - 65 * Ulength , topContral_y + 30.5 * Ulength},
+		
+		{topContral_x - 65 * Ulength , topContral_y - 30.5 * Ulength},
+		{topContral_x - 65 * Ulength , topContral_y - 30.5 * Ulength},
+		{topContral_x - 65 * Ulength , topContral_y - 30.5 * Ulength}
+		
+	};
+	ege_bezier(frame_TopContral, frame_TopContralploy);
+	
+	setfillcolor(EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	floodfill(topContral_x - 64 * Ulength, topContral_y - 30.5 * Ulength, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	floodfill(topContral_x + 64 * Ulength, topContral_y - 36.5 * Ulength, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	floodfill(topContral_x - 64 * Ulength, topContral_y + 30.5 * Ulength, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	floodfill(topContral_x + 64 * Ulength, topContral_y + 30.5 * Ulength, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	floodfill(topContral_x , topContral_y, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	
+	ege_enable_aa(true);
+	setlinewidth(linewidth / 7 * 4);
+	
+	setcolor(EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	int frame_TopContral_1 = 28;
+	ege_point frame_TopContralploy_1[28] = {
+		{topContral_x - 65 * Ulength , topContral_y - 30.5 * Ulength},
+		{topContral_x - 65 * Ulength , topContral_y - 31.5 * Ulength},
+		{topContral_x - 64 * Ulength , topContral_y - 32.5 * Ulength},
+		{topContral_x - 63 * Ulength , topContral_y - 32.5 * Ulength},
+		
+		{topContral_x - 25 * Ulength , topContral_y - 37.5 * Ulength},
+		{topContral_x - 25 * Ulength , topContral_y - 37.5 * Ulength},
+		{topContral_x - 25 * Ulength , topContral_y - 37.5 * Ulength},
+		
+		{topContral_x + 63 * Ulength , topContral_y - 37.5 * Ulength},
+		{topContral_x + 63 * Ulength , topContral_y - 37.5 * Ulength},
+		{topContral_x + 63 * Ulength , topContral_y - 37.5 * Ulength},
+		
+		{topContral_x + 64 * Ulength , topContral_y - 37.5 * Ulength},
+		{topContral_x + 65 * Ulength , topContral_y - 36.5 * Ulength},
+		{topContral_x + 65 * Ulength , topContral_y - 35.5 * Ulength},
+		
+		
+		{topContral_x + 65 * Ulength , topContral_y + 30.5 * Ulength},
+		{topContral_x + 65 * Ulength , topContral_y + 30.5 * Ulength},
+		{topContral_x + 65 * Ulength , topContral_y + 30.5 * Ulength},
+		
+		
+		{topContral_x + 65 * Ulength , topContral_y + 31.5 * Ulength},
+		{topContral_x + 64 * Ulength , topContral_y + 32.5 * Ulength},
+		{topContral_x + 63 * Ulength , topContral_y + 32.5 * Ulength},
+		
+		{topContral_x - 63 * Ulength , topContral_y + 32.5 * Ulength},
+		{topContral_x - 63 * Ulength , topContral_y + 32.5 * Ulength},
+		{topContral_x - 63 * Ulength , topContral_y + 32.5 * Ulength},
+		
+		{topContral_x - 64 * Ulength , topContral_y + 32.5 * Ulength},
+		{topContral_x - 65 * Ulength , topContral_y + 31.5 * Ulength},
+		{topContral_x - 65 * Ulength , topContral_y + 30.5 * Ulength},
+		
+		{topContral_x - 65 * Ulength , topContral_y - 30.5 * Ulength},
+		{topContral_x - 65 * Ulength , topContral_y - 30.5 * Ulength},
+		{topContral_x - 65 * Ulength , topContral_y - 30.5 * Ulength}
+		
+	};
+	ege_bezier(frame_TopContral_1, frame_TopContralploy_1);
+	
+	setfont(Ulength * 5, Ulength * 2.5, "Bahnschrift");
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	for (int i = 45; i <= 225; i += 45) {
+		ege_line(topContral_x - 30 * Ulength, topContral_y + 2 * Ulength, topContral_x - 30 * Ulength - (knob_R1 + Ulength * 3) * cos(i * PI / 180), topContral_y + 2 * Ulength - (knob_R1 + Ulength * 3) * sin(i * PI / 180));
+	}
+	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
+	for (int i = 45; i <= 225; i += 45) {
+		ege_line(topContral_x - 30 * Ulength, topContral_y + 2 * Ulength, topContral_x - 30 * Ulength - (knob_R1 + Ulength * 3) * cos(i * PI / 180), topContral_y + 2 * Ulength - (knob_R1 + Ulength * 3) * sin(i * PI / 180));
+	}
+	
+	
+	setfillcolor(EGEARGB(0XFF, 0X3A, 0X3A, 0X38));
+	int MainpanelDUnums = 18;
+	ege_point MainpanelDUpoly[18] = {
+		{topContral_x - 30 * Ulength - knob_R1 * cos(0 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(0 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(20 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(20 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(40 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(40 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(60 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(60 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(80 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(80 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(100 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(100 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(120 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(120 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(140 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(140 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(160 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(160 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(180 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(180 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(200 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(200 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(220 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(220 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(240 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(240 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(260 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(260 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(280 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(280 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(300 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(300 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(320 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(320 * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos(340 * PI / 180),topContral_y + 2 * Ulength  - knob_R1 * sin(340 * PI / 180)},
+	};
+	ege_fillpoly(MainpanelDUnums, MainpanelDUpoly);
+	
+	setfont(Ulength * 5, Ulength * 2.5, "Bahnschrift");
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	for (int i = 45; i <= 135; i += 45) {
+		ege_line(topContral_x + 30 * Ulength, topContral_y + 2 * Ulength, topContral_x + 30 * Ulength - (knob_R1 + Ulength * 3) * cos(i * PI / 180), topContral_y + 2 * Ulength - (knob_R1 + Ulength * 3) * sin(i * PI / 180));
+	}
+	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
+	for (int i = 45; i <= 135; i += 45) {
+		ege_line(topContral_x + 30 * Ulength, topContral_y + 2 * Ulength, topContral_x + 30 * Ulength - (knob_R1 + Ulength * 3) * cos(i * PI / 180), topContral_y + 2 * Ulength - (knob_R1 + Ulength * 3) * sin(i * PI / 180));
+	}
+	
+	
+	int LOWERDUnums = 18;
+	ege_point LOWERDUploys[18] = {
+		{topContral_x + 30 * Ulength - knob_R1 * cos(0 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(0 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(20 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(20 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(40 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(40 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(60 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(60 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(80 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(80 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(100 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(100 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(120 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(120 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(140 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(140 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(160 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(160 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(180 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(180 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(200 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(200 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(220 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(220 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(240 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(240 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(260 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(260 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(280 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(280 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(300 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(300 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(320 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(320 * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos(340 * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin(340 * PI / 180)},
+	};
+	ege_fillpoly(LOWERDUnums, LOWERDUploys);
+	
+	
+	setfont(Ulength * 6, Ulength * 3, "Bahnschrift");
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	ege_drawtext("MAIN PANEL DUs" , topContral_x - 29 * Ulength, topContral_y - 26 * Ulength);
+	ege_drawtext("LOWER DU", topContral_x + 30 * Ulength, topContral_y - 26 * Ulength);
+	ege_drawtext("NORM", topContral_x - 30 * Ulength, topContral_y - 15 * Ulength);
+	ege_drawtext("NORM", topContral_x + 31 * Ulength, topContral_y - 15 * Ulength);
+	ege_drawtext("OUTBD", topContral_x - 49 * Ulength, topContral_y - 10 * Ulength);
+	ege_drawtext("PFD", topContral_x - 48 * Ulength, topContral_y - 5 * Ulength);
+	ege_drawtext("ND", topContral_x + 45 * Ulength, topContral_y - 10 * Ulength);
+	ege_drawtext("ENG", topContral_x + 15 * Ulength, topContral_y - 10 * Ulength);
+	ege_drawtext("PRI", topContral_x + 14 * Ulength, topContral_y - 5 * Ulength);
+	ege_drawtext("ENG", topContral_x - 13 * Ulength, topContral_y - 10 * Ulength);
+	ege_drawtext("PRI", topContral_x - 14 * Ulength, topContral_y - 5 * Ulength);
+	ege_drawtext("PFD", topContral_x - 9 * Ulength, topContral_y + 2.5 * Ulength);
+	ege_drawtext("MFD", topContral_x - 14 * Ulength, topContral_y + 15 * Ulength);
+	ege_drawtext("INBD", topContral_x - 2 * Ulength, topContral_y + 12 * Ulength);
+	ege_line(topContral_x - 30 * Ulength - (knob_R1 + Ulength * 19) * cos(135 * PI / 180), topContral_y + 2 * Ulength - (knob_R1 + Ulength * 19) * sin(135 * PI / 180),
+		topContral_x - 30 * Ulength - (knob_R1 + Ulength * 10) * cos(135 * PI / 180), topContral_y + 2 * Ulength - (knob_R1 + Ulength * 10) * sin(135 * PI / 180));
+	ege_line(topContral_x - 30 * Ulength - (knob_R1 + Ulength * 19) * cos(225 * PI / 180), topContral_y + 2 * Ulength - (knob_R1 + Ulength * 19) * sin(225 * PI / 180),
+		topContral_x - 30 * Ulength - (knob_R1 + Ulength * 10) * cos(225 * PI / 180), topContral_y + 2 * Ulength - (knob_R1 + Ulength * 10) * sin(225 * PI / 180));
+	ege_arc(topContral_x - 30 * Ulength - knob_R1 - Ulength * 17, topContral_y + 2 * Ulength - knob_R1 - Ulength * 17
+		, (knob_R1 + Ulength * 16) * 2, (knob_R1 + Ulength * 16) * 2, -42, 57);
+	ege_arc(topContral_x - 30 * Ulength - knob_R1 - Ulength * 17, topContral_y + 2 * Ulength - knob_R1 - Ulength * 17
+		, (knob_R1 + Ulength * 16) * 2, (knob_R1 + Ulength * 16) * 2, 27, 18);
+	
+	setcolor(EGEARGB(MainPanelLight, 0XB2, 0X7E, 0X50));
+	ege_drawtext("MAIN PANEL DUs", topContral_x - 29 * Ulength, topContral_y - 26 * Ulength);
+	ege_drawtext("LOWER DU", topContral_x + 30 * Ulength, topContral_y - 26 * Ulength);
+	ege_drawtext("NORM", topContral_x - 30 * Ulength, topContral_y - 15 * Ulength);
+	ege_drawtext("NORM", topContral_x + 31 * Ulength, topContral_y - 15 * Ulength);
+	ege_drawtext("OUTBD", topContral_x - 49 * Ulength, topContral_y - 10 * Ulength);
+	ege_drawtext("PFD", topContral_x - 48 * Ulength, topContral_y - 5 * Ulength);
+	ege_drawtext("ND", topContral_x + 45 * Ulength, topContral_y - 10 * Ulength);
+	ege_drawtext("ENG", topContral_x + 15 * Ulength, topContral_y - 10 * Ulength);
+	ege_drawtext("PRI", topContral_x + 14 * Ulength, topContral_y - 5 * Ulength);
+	ege_drawtext("ENG", topContral_x - 13 * Ulength, topContral_y - 10 * Ulength);
+	ege_drawtext("PRI", topContral_x - 14 * Ulength, topContral_y - 5 * Ulength);
+	ege_drawtext("PFD", topContral_x - 9 * Ulength, topContral_y + 2.5 * Ulength);
+	ege_drawtext("MFD", topContral_x - 14 * Ulength, topContral_y + 15 * Ulength);
+	ege_drawtext("INBD", topContral_x - 2 * Ulength, topContral_y + 12 * Ulength);
+	ege_line(topContral_x - 30 * Ulength - (knob_R1 + Ulength * 19) * cos(135 * PI / 180), topContral_y + 2 * Ulength - (knob_R1 + Ulength * 19) * sin(135 * PI / 180),
+		topContral_x - 30 * Ulength - (knob_R1 + Ulength * 10) * cos(135 * PI / 180), topContral_y + 2 * Ulength - (knob_R1 + Ulength * 10) * sin(135 * PI / 180));
+	ege_line(topContral_x - 30 * Ulength - (knob_R1 + Ulength * 19) * cos(225 * PI / 180), topContral_y + 2 * Ulength - (knob_R1 + Ulength * 19) * sin(225 * PI / 180),
+		topContral_x - 30 * Ulength - (knob_R1 + Ulength * 10) * cos(225 * PI / 180), topContral_y + 2 * Ulength - (knob_R1 + Ulength * 10) * sin(225 * PI / 180));
+	ege_arc(topContral_x - 30 * Ulength - knob_R1 - Ulength * 17, topContral_y + 2 * Ulength - knob_R1 - Ulength * 17
+		, (knob_R1 + Ulength * 16) * 2, (knob_R1 + Ulength * 16) * 2, -42, 57);
+	ege_arc(topContral_x - 30 * Ulength - knob_R1 - Ulength * 17, topContral_y + 2 * Ulength - knob_R1 - Ulength * 17
+		, (knob_R1 + Ulength * 16) * 2, (knob_R1 + Ulength * 16) * 2, 27, 18);
+	
+	
+	
+	ege_enable_aa(false);
+	setcolor(EGEARGB(0XFF, 0X4E, 0X4F, 0X4E));
+	setlinewidth(linewidth / 2);
+	int MainpanelDUnum = 25;
+	ege_point MainpanelDUPloypoints[25] = {
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-40 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-20 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-20 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-20 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-20 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-20 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-20 + MainpanelDU) * PI / 180)},
+		
+		{topContral_x - 30 * Ulength - (Ulength * 9) * cos((30 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 9) * cos((30 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 9) * cos((30 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + MainpanelDU) * PI / 180)},
+		
+		{topContral_x - 30 * Ulength - (Ulength * 13) * cos((110 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 13) * cos((110 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 13) * cos((110 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + MainpanelDU) * PI / 180)},
+		
+		
+		{topContral_x - 30 * Ulength - (Ulength * 13.5) * cos((110 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13.5) * sin((110 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 14.5) * cos((114 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14.5) * sin((114 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 14.5) * cos((120 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14.5) * sin((120 + MainpanelDU) * PI / 180)},
+		
+		{topContral_x - 30 * Ulength - (Ulength * 14) * cos((167 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 14) * cos((167 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 14) * cos((167 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + MainpanelDU) * PI / 180)},
+		
+		
+		{topContral_x - 30 * Ulength - (Ulength * 14) * cos((173 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((173 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 13.5) * cos((176 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13.5) * sin((176 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 13) * cos((178 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((178 + MainpanelDU) * PI / 180)},
+		
+		
+		{topContral_x - 30 * Ulength - (Ulength * 8.5) * cos((265 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 8.5) * cos((265 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 8.5) * cos((265 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + MainpanelDU) * PI / 180)},
+		
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-40 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-40 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-40 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + MainpanelDU) * PI / 180)},
+		
+		
+	};
+	setfillcolor(EGEARGB(0XFF, 0X4E, 0X4F, 0X4E));
+	ege_bezier(MainpanelDUnum, MainpanelDUPloypoints);
+	floodfill(topContral_x - 30 * Ulength, topContral_y + 2 * Ulength, EGEARGB(0XFF, 0X4E, 0X4F, 0X4E));
+	
+	
+	
+	int LOWERDUnum = 25;
+	ege_point LOWERDUPloypoints[25] = {
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-40 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-20 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-20 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-20 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-20 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-20 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-20 + LOWERDU) * PI / 180)},
+		
+		{topContral_x + 30 * Ulength - (Ulength * 9) * cos((30 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 9) * cos((30 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 9) * cos((30 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + LOWERDU) * PI / 180)},
+		
+		{topContral_x + 30 * Ulength - (Ulength * 13) * cos((110 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 13) * cos((110 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 13) * cos((110 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + LOWERDU) * PI / 180)},
+		
+		
+		{topContral_x + 30 * Ulength - (Ulength * 13.5) * cos((110 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13.5) * sin((110 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 14.5) * cos((114 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14.5) * sin((114 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 14.5) * cos((120 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14.5) * sin((120 + LOWERDU) * PI / 180)},
+		
+		{topContral_x + 30 * Ulength - (Ulength * 14) * cos((167 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 14) * cos((167 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 14) * cos((167 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + LOWERDU) * PI / 180)},
+		
+		
+		{topContral_x + 30 * Ulength - (Ulength * 14) * cos((173 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((173 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 13.5) * cos((176 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13.5) * sin((176 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 13) * cos((178 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((178 + LOWERDU) * PI / 180)},
+		
+		
+		{topContral_x + 30 * Ulength - (Ulength * 8.5) * cos((265 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 8.5) * cos((265 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 8.5) * cos((265 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + LOWERDU) * PI / 180)},
+		
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-40 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-40 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-40 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + LOWERDU) * PI / 180)},
+		
+		
+	};
+	setfillcolor(EGEARGB(0XFF, 0X4E, 0X4F, 0X4E));
+	ege_bezier(LOWERDUnum, LOWERDUPloypoints);
+	floodfill(topContral_x + 30 * Ulength, topContral_y + 2 * Ulength, EGEARGB(0XFF, 0X4E, 0X4F, 0X4E));
+	
+	
+	ege_enable_aa(true);
+	
+	
+	setcolor(EGEARGB(0XFF, 0X4E, 0X4F, 0X4E));
+	setlinewidth(linewidth / 7 * 4);
+	int MainpanelDUnum_1 = 25;
+	ege_point MainpanelDUPloypoints_1[25] = {
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-40 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-20 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-20 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-20 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-20 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-20 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-20 + MainpanelDU) * PI / 180)},
+		
+		{topContral_x - 30 * Ulength - (Ulength * 9) * cos((30 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 9) * cos((30 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 9) * cos((30 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + MainpanelDU) * PI / 180)},
+		
+		{topContral_x - 30 * Ulength - (Ulength * 13) * cos((110 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 13) * cos((110 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 13) * cos((110 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + MainpanelDU) * PI / 180)},
+		
+		
+		{topContral_x - 30 * Ulength - (Ulength * 13.5) * cos((110 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13.5) * sin((110 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 14.5) * cos((114 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14.5) * sin((114 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 14.5) * cos((120 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14.5) * sin((120 + MainpanelDU) * PI / 180)},
+		
+		{topContral_x - 30 * Ulength - (Ulength * 14) * cos((167 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 14) * cos((167 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 14) * cos((167 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + MainpanelDU) * PI / 180)},
+		
+		
+		{topContral_x - 30 * Ulength - (Ulength * 14) * cos((173 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((173 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 13.5) * cos((176 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13.5) * sin((176 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 13) * cos((178 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((178 + MainpanelDU) * PI / 180)},
+		
+		
+		{topContral_x - 30 * Ulength - (Ulength * 8.5) * cos((265 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 8.5) * cos((265 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 8.5) * cos((265 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + MainpanelDU) * PI / 180)},
+		
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-40 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-40 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - knob_R1 * cos((-40 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + MainpanelDU) * PI / 180)},
+		
+		
+	};
+	
+	ege_bezier(MainpanelDUnum_1, MainpanelDUPloypoints_1);
+	
+	
+	
+	int LOWERDUnum_1 = 25;
+	ege_point LOWERDUPloypoints_1[25] = {
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-40 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-20 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-20 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-20 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-20 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-20 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-20 + LOWERDU) * PI / 180)},
+		
+		{topContral_x + 30 * Ulength - (Ulength * 9) * cos((30 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 9) * cos((30 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 9) * cos((30 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + LOWERDU) * PI / 180)},
+		
+		{topContral_x + 30 * Ulength - (Ulength * 13) * cos((110 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 13) * cos((110 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 13) * cos((110 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + LOWERDU) * PI / 180)},
+		
+		
+		{topContral_x + 30 * Ulength - (Ulength * 13.5) * cos((110 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13.5) * sin((110 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 14.5) * cos((114 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14.5) * sin((114 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 14.5) * cos((120 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14.5) * sin((120 + LOWERDU) * PI / 180)},
+		
+		{topContral_x + 30 * Ulength - (Ulength * 14) * cos((167 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 14) * cos((167 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 14) * cos((167 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + LOWERDU) * PI / 180)},
+		
+		
+		{topContral_x + 30 * Ulength - (Ulength * 14) * cos((173 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 14) * sin((173 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 13.5) * cos((176 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13.5) * sin((176 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 13) * cos((178 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((178 + LOWERDU) * PI / 180)},
+		
+		
+		{topContral_x + 30 * Ulength - (Ulength * 8.5) * cos((265 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 8.5) * cos((265 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 8.5) * cos((265 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + LOWERDU) * PI / 180)},
+		
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-40 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-40 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - knob_R1 * cos((-40 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - knob_R1 * sin((-40 + LOWERDU) * PI / 180)},
+		
+		
+	};
+	
+	ege_bezier(LOWERDUnum_1, LOWERDUPloypoints_1);
+	
+	
+	int LOWERDUnum_2 = 4;
+	ege_point LOWERDUPloypoints_2[4] = {
+		{topContral_x + 30 * Ulength - (Ulength * 9) * cos((30 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 13) * cos((110 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 13) * cos((178 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((178 + LOWERDU) * PI / 180)},
+		{topContral_x + 30 * Ulength - (Ulength * 8.5) * cos((265 + LOWERDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + LOWERDU) * PI / 180)}
+	};
+	
+	setfillcolor(EGEARGB(0XFF, 0X36, 0X36, 0X36));
+	ege_setpattern_lineargradient(topContral_x + 30 * Ulength - (Ulength * 13) * cos((110 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + LOWERDU) * PI / 180), EGEARGB(0XFF, 0X30, 0X30, 0X30),
+		topContral_x + 30 * Ulength - (Ulength * 8.5) * cos((265 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + LOWERDU) * PI / 180), EGEARGB(0XFF, 0X4E, 0X4F, 0X4E));
+	ege_fillpoly(LOWERDUnum_2, LOWERDUPloypoints_2);
+	ege_setpattern_none();
+	
+	
+	
+	
+	int MainpanelDUnum_2 = 4;
+	ege_point MainpanelDUPloypoints_2[4] = {
+		{topContral_x - 30 * Ulength - (Ulength * 9) * cos((30 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 13) * cos((110 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 13) * cos((178 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 13) * sin((178 + MainpanelDU) * PI / 180)},
+		{topContral_x - 30 * Ulength - (Ulength * 8.5) * cos((265 + MainpanelDU) * PI / 180),topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + MainpanelDU) * PI / 180)}
+	};
+	
+	setfillcolor(EGEARGB(0XFF, 0X36, 0X36, 0X36));
+	ege_setpattern_lineargradient(topContral_x - 30 * Ulength - (Ulength * 13) * cos((110 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 13) * sin((110 + MainpanelDU) * PI / 180), EGEARGB(0XFF, 0X30, 0X30, 0X30),
+		topContral_x - 30 * Ulength - (Ulength * 8.5) * cos((265 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + MainpanelDU) * PI / 180), EGEARGB(0XFF, 0X4E, 0X4F, 0X4E));
+	ege_fillpoly(MainpanelDUnum_2, MainpanelDUPloypoints_2);
+	ege_setpattern_none();
+	
+	
+	
+	setcolor(EGEARGB(0X20, 0X8D, 0X8F, 0X8B));
+	ege_line(topContral_x - 30 * Ulength - (Ulength * 9) * cos((30 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + MainpanelDU) * PI / 180),
+		topContral_x - 30 * Ulength - (Ulength * 8.5) * cos((265 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + MainpanelDU) * PI / 180));
+	ege_line(topContral_x - 30 * Ulength - (Ulength * 14.5) * cos((120 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 14.5) * sin((120 + MainpanelDU) * PI / 180),
+		topContral_x - 30 * Ulength - (Ulength * 14) * cos((167 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + MainpanelDU) * PI / 180));
+	
+	
+	ege_line(topContral_x + 30 * Ulength - (Ulength * 9) * cos((30 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 9) * sin((30 + LOWERDU) * PI / 180),
+		topContral_x + 30 * Ulength - (Ulength * 8.5) * cos((265 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 8.5) * sin((265 + LOWERDU) * PI / 180));
+	ege_line(topContral_x + 30 * Ulength - (Ulength * 14.5) * cos((120 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 14.5) * sin((120 + LOWERDU) * PI / 180),
+		topContral_x + 30 * Ulength - (Ulength * 14) * cos((167 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 14) * sin((167 + LOWERDU) * PI / 180));
+	
+	
+	
+	
+	
+	setcolor(EGEARGB(0XFF, 0X20, 0X20, 0X20));
+	setlinewidth(linewidth / 7 * 4);
+	
+	ege_line(topContral_x + 30 * Ulength - (Ulength * 2) * cos((110 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 2) * sin((110 + LOWERDU) * PI / 180),
+		topContral_x + 30 * Ulength - (Ulength * 2) * cos((175 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 2) * sin((175 + LOWERDU) * PI / 180));
+	ege_line(topContral_x + 30 * Ulength - (Ulength * 2) * cos((110 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 2) * sin((110 + LOWERDU) * PI / 180),
+		topContral_x + 30 * Ulength - knob_R1 * cos((-25 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - knob_R1 * sin((-25 + LOWERDU) * PI / 180));
+	ege_line(topContral_x + 30 * Ulength - (Ulength * 2) * cos((175 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 2) * sin((175 + LOWERDU) * PI / 180),
+		topContral_x + 30 * Ulength - knob_R1 * cos((-35 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - knob_R1 * sin((-35 + LOWERDU) * PI / 180));
+	
+	
+	
+	ege_line(topContral_x - 30 * Ulength - (Ulength * 2) * cos((110 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 2) * sin((110 + MainpanelDU) * PI / 180),
+		topContral_x - 30 * Ulength - (Ulength * 2) * cos((175 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 2) * sin((175 + MainpanelDU) * PI / 180));
+	ege_line(topContral_x - 30 * Ulength - (Ulength * 2) * cos((110 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 2) * sin((110 + MainpanelDU) * PI / 180),
+		topContral_x - 30 * Ulength - knob_R1 * cos((-25 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - knob_R1 * sin((-25 + MainpanelDU) * PI / 180));
+	ege_line(topContral_x - 30 * Ulength - (Ulength * 2) * cos((175 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 2) * sin((175 + MainpanelDU) * PI / 180),
+		topContral_x - 30 * Ulength - knob_R1 * cos((-35 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - knob_R1 * sin((-35 + MainpanelDU) * PI / 180));
+	
+	setcolor(EGEARGB(0XFF, 0X40, 0X41, 0X42));
+	setlinewidth(linewidth * 1.5);
+	
+	ege_line(topContral_x + 30 * Ulength - (Ulength * 1.5) * cos((142 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 1.5) * sin((142 + LOWERDU) * PI / 180),
+		topContral_x + 30 * Ulength - knob_R1 * cos((-30 + LOWERDU) * PI / 180), topContral_y + 2 * Ulength - knob_R1 * sin((-30 + LOWERDU) * PI / 180));
+	
+	
+	ege_line(topContral_x - 30 * Ulength - (Ulength * 1.5) * cos((142 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - (Ulength * 1.5) * sin((142 + MainpanelDU) * PI / 180),
+		topContral_x - 30 * Ulength - knob_R1 * cos((-30 + MainpanelDU) * PI / 180), topContral_y + 2 * Ulength - knob_R1 * sin((-30 + MainpanelDU) * PI / 180));
+	
+	setlinewidth(linewidth / 7 * 4);
+	
+	
+	
+	
+	
+	if (x > topContral_x - 30 * Ulength - knob_R1 && x< topContral_x - 30 * Ulength  && y>topContral_y + 2 * Ulength - knob_R1 && y < topContral_y + 2 * Ulength + knob_R1) {
+		
+		if (GetAsyncKeyState(0x02) & 0x0001) {
+			
+			if (MainpanelDU > 75&& MainpanelDU_gear>0) {
+				MainpanelDU -= 45;
+				MainpanelDU_gear--;
+			}
+			else {
+				MainpanelDU_gear = 0;
+				MainpanelDU = 75;
+			}
+			
+		}
+	}
+	if (x < topContral_x - 30 * Ulength + knob_R1 && x> topContral_x - 30 * Ulength && y>topContral_y + 2 * Ulength - knob_R1 && y < topContral_y + 2 * Ulength + knob_R1) {
+		
+		if (GetAsyncKeyState(0x02) & 0x0001) {
+			
+			if (MainpanelDU < 255 && MainpanelDU_gear < 4) {
+				MainpanelDU += 45;
+				MainpanelDU_gear++;
+			}
+			else {
+				MainpanelDU_gear = 4;
+				MainpanelDU = 255;
+			}
+			
+		}
+	}
+	
+	if (x > topContral_x + 30 * Ulength - knob_R1 && x< topContral_x + 30 * Ulength && y>topContral_y + 2 * Ulength - knob_R1 && y < topContral_y + 2 * Ulength + knob_R1) {
+		
+		if (GetAsyncKeyState(0x02) & 0x0001) {
+			
+			if (LOWERDU > 75 && LOWERDU_gear > 0) {
+				LOWERDU -= 45;
+				LOWERDU_gear--;
+			}
+			else {
+				LOWERDU_gear = 0;
+				LOWERDU = 75;
+			}
+			
+		}
+	}
+	if (x < topContral_x + 30 * Ulength + knob_R1 && x> topContral_x + 30 * Ulength && y > topContral_y + 2 * Ulength - knob_R1 && y < topContral_y + 2 * Ulength + knob_R1) {
+		
+		if (GetAsyncKeyState(0x02) & 0x0001) {
+			
+			if (LOWERDU < 165 && LOWERDU_gear < 2) {
+				LOWERDU += 45;
+				LOWERDU_gear++;
+			}
+			else {
+				LOWERDU_gear = 2;
+				LOWERDU = 165;
+			}
+			
+		}
+	}
+	
+	
+}

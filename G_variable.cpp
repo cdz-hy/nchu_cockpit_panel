@@ -69,6 +69,28 @@ double Fuelrest_2 = 0.02;
 double Fuelrest_3 = 5.65;
 double Fuelrest_total = Fuelrest_1 + Fuelrest_2 + Fuelrest_3;
 
+
+double N21 = 3.3;
+double N22 = 0.9;
+
+double FF1;
+double FF2;
+
+double oilPress1;
+double oilPress2;
+
+double oilTemp1;
+double oilTemp2;
+
+double oilQTY1;
+double oilQTY2;
+
+double VIB1;
+double VIB2;
+
+
+
+
 //时间相关
 int hour1;
 int minute1;
@@ -201,6 +223,12 @@ int TERR = 0;
 
 int VOR1 = 2;
 int VOR2 = 2;
+
+
+double MainpanelDU = 0;
+double LOWERDU = 0;
+int MainpanelDU_gear = 0;
+int LOWERDU_gear = 0;
 
 
 
