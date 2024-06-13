@@ -64,7 +64,7 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	
 	draw_ND_frame_chassis(ND_x, ND_y, ND_side);
 	
-
+	
 	
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
@@ -99,7 +99,7 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 			draw_ND_app(ND_x, ND_y + ND_side * 32 / 104, ND_side);
 		}
 		else if(EHISMode == 110){
-
+			
 			draw_ND_map(ND_x, ND_y + ND_side * 32 / 104, ND_side);
 			
 		}else if(EHISMode == 135){
@@ -1140,4 +1140,5 @@ void draw_ND_pln(double center_x, double center_y, double side) {
 	ege_line(center_x + side / 34, center_y - big_r / 0.87,// 第一个坐标是靠上的,第二个坐标是靠右的
 		center_x + side / 22, center_y - big_r / 0.89);
 }
+
 

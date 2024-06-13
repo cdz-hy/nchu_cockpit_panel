@@ -29,6 +29,16 @@ int main() {
 	setbkcolor(EGEARGB(0xff, 0x37, 0x37, 0x3d));
 	ege_enable_aa(true);
 
+//	//设置窗口无边框
+//	HWND hwnd = getHWnd();
+//	
+//	LONG style = GetWindowLong(hwnd, GWL_STYLE);
+//	style &= ~(WS_CAPTION | WS_THICKFRAME | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX);
+//	SetWindowLong(hwnd, GWL_STYLE, style);
+//		
+//	// 强制窗口重绘
+//	RedrawWindow(hwnd, NULL, NULL, RDW_INVALIDATE | RDW_FRAME | RDW_ALLCHILDREN);
+	
 	
 	//创建读取文件和绘制表盘(带按钮操作)两个线程
 	

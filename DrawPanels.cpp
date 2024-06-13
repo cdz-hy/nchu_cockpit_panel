@@ -1,3 +1,4 @@
+
 //引用头文件
 #include <stdio.h>
 #include <graphics.h>
@@ -123,6 +124,27 @@ void draw_panels(){
 			}
 		}
 		
+		
+		//实现窗口关闭
+		mousepos(&mouse_x, &mouse_y);
+		if(mouse_x >= 0.0 * height && mouse_y >= 0.0 * length && mouse_x <= 0.06 * height && mouse_y <= 0.06 * length){
+			setfillcolor(EGEARGB(0x77,0xba,0x00,0x0c));
+			if((mouse_x - 0.03 * height) * (mouse_x - 0.03 * height) + (mouse_y - 0.025 * length) * (mouse_y - 0.025 * length) <= (0.01 * height) * (0.01 * height)){
+				setfillcolor(EGEARGB(0x99,0xba,0x00,0x0c));
+				setcolor(EGEARGB(0x30, 0xff, 0xff, 0xff));
+				setlinewidth(0.003 * height);
+				ege_ellipse(0.02 * height, 0.015 * length, 0.02 * height, 0.02 * height);
+			}
+			ege_fillellipse(0.02 * height, 0.015 * length, 0.02 * height, 0.02 * height);
+			if(GetAsyncKeyState(0x01) & 0x8000){
+				is_down = -999;
+			}
+			else if(is_down == -999){
+				is_down = 0;
+				HWND hWnd = getHWnd();
+				SendMessage(hWnd, WM_CLOSE, 0, 0);
+			}
+		}
 		
 		
 		//显示帧率
@@ -826,4 +848,5 @@ void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height)
 	
 	
 }
+
 

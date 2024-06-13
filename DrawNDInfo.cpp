@@ -31,7 +31,7 @@ void draw_waypoint(WAYPOINT nowPos, double dir, double ratio,double x, double y,
 	
 	for(auto wp : waypoints){
 		
-		if(fabs(wp.lat - nowPos.lat) > 0.3 || fabs(wp.lon - nowPos.lon) > 0.3){
+		if(fabs(wp.lat - nowPos.lat) > 0.8 || fabs(wp.lon - nowPos.lon) > 0.8){
 			continue;
 		}
 		
@@ -76,13 +76,14 @@ void draw_waypoint(WAYPOINT nowPos, double dir, double ratio,double x, double y,
 //绘制机场（圆形）
 
 extern vector<WAYPOINT> airports;
+extern int mapDistance;
 void draw_airports(WAYPOINT nowPos, double dir, double ratio,double x, double y, double side){
 	
 	
 	
 	for(auto wp : airports){
 		
-		if(fabs(wp.lat - nowPos.lat) > 0.3 || fabs(wp.lon - nowPos.lon) > 0.3){
+		if(fabs(wp.lat - nowPos.lat) > 3 || fabs(wp.lon - nowPos.lon) > 3){
 			continue;
 		}
 		
@@ -125,7 +126,7 @@ void draw_VORs(WAYPOINT nowPos, double dir, double ratio,double x, double y, dou
 	
 	for(auto wp : VORs){
 		
-		if(fabs(wp.lat - nowPos.lat) > 0.3 || fabs(wp.lon - nowPos.lon) > 0.3){
+		if(fabs(wp.lat - nowPos.lat) > 3 || fabs(wp.lon - nowPos.lon) > 3){
 			continue;
 		}
 		
@@ -423,9 +424,9 @@ void draw_waypoint_map(WAYPOINT nowPos, double dir, double ratio,double x, doubl
 	
 	for(auto wp : waypoints){
 		
-		if(fabs(wp.lat - nowPos.lat) > 0.3 || fabs(wp.lon - nowPos.lon) > 0.3){
-			continue;
-		}
+//		if(fabs(wp.lat - nowPos.lat) > 3 || fabs(wp.lon - nowPos.lon) > 3){
+//			continue;
+//		}
 		
 		double dis = getDistance(nowPos.lat, nowPos.lon, wp.lat, wp.lon);
 		double bearing = getBearing(nowPos.lat, nowPos.lon, wp.lat, wp.lon);

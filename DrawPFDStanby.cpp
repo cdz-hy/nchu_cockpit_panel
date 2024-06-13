@@ -594,7 +594,7 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 	double width = single * 130;
 	double length = single * 126;
 	
-	 
+	
 	setlinewidth(side/100);// 这里是对于表盘上部阴影的处理
 	setcolor(EGEARGB(0Xff, 13, 15, 17));
 	ege_line(center_x - 63 * single, center_y - (63 + 21) * single,//1
@@ -857,7 +857,7 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 	setfont(single * 8, 0, "黑体");
 	ege_drawtext("ATT", center_x - 53 * single, center_y + (75) * single);
 	ege_drawtext("RARO", center_x + 31 * single, center_y + (75) * single);
-
+	
 	
 	
 }
@@ -1478,3 +1478,4 @@ void draw_standy_airSpeed(double center_x, double center_y, double side) {
 	draw_airSpeed_shadow(center_x, center_y, side);
 	draw_airSpeed_shadow_main(center_x, center_y, side);
 }
+

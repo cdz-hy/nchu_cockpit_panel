@@ -6,6 +6,8 @@
 #include "G_variable.h"
 #include "xplaneConnect.h"
 
+double getDis(double latitude1, double longitude1, double latitude2, double longitude2);
+
 void data_receive(){
 	
 	for(;is_run();api_sleep(16)){
@@ -61,6 +63,7 @@ void data_receive(){
 						altitude2 = data[i][4] - 4;
 						latitude = data[i][1];
 						longitude = data[i][2];
+						
 					}
 					else if(fabs(data[i][0] - 7) <= 0.001){
 						INGH_data = data[i][1];
@@ -73,6 +76,28 @@ void data_receive(){
 					else if(fabs(data[i][0] - 4) <= 0.001){
 						vmo_speed = data[i][1] * 10;
 						verticalRate = data[i][3];
+					}
+					else if(fabs(data[i][0] - 32) <= 0.001){
+						vmo_speed = data[i][1] * 10;
+						verticalRate = data[i][3];
+					}
+					else if(fabs(data[i][0] - 41) <= 0.001){
+						fanSpeed = data[i][1];
+						fanSpeed_1 = data[i][2];
+					}
+					else if(fabs(data[i][0] - 45) <= 0.001){
+						FuelFlowSpeed = data[i][1] / 1000;
+						FuelFlowSpeed_1 = data[i][2] / 1000;
+					}
+					else if(fabs(data[i][0] - 47) <= 0.001){
+						gastemp = data[i][1];
+						gastemp_1 = data[i][2];
+					}
+					else if(fabs(data[i][0] - 62) <= 0.001){
+						Fuelrest_1 = data[i][1] / 1000;
+						Fuelrest_2 = data[i][2] / 1000;
+						Fuelrest_3 = data[i][3] / 1000;
+						Fuelrest_total = Fuelrest_1 + Fuelrest_2 + Fuelrest_3;
 					}
 				}
 				
@@ -104,8 +129,34 @@ void data_receive(){
 		}
 		
 		
+		//判断经纬度是不是在下一个的范围内，如果在就加入已经经过的航线中
+		if(getDis(latitude, longitude, route[nowPos].lat, route[nowPos].lon) <= 1860){
+			routePassed.push_back(route[nowPos]);
+			nowPos ++;
+		}
+		
 	}
 	
 
 }
 
+
+
+
+//转弧度制(临时)
+double toRad(double a) {
+	return a * (PI / 180);
+}
+//Vincenty公式计算两点距离(临时)
+double getDis(double latitude1, double longitude1, double latitude2, double longitude2) {
+	// R is the radius of the earth in meters
+	double R = 6371004;  //EARTH_RADIUS
+	double deltaLatitude = toRad(latitude2-latitude1);
+	double deltaLongitude = toRad(longitude2-longitude1);
+	latitude1 =toRad(latitude1);
+	latitude2 =toRad(latitude2);
+	double a = pow(sin(deltaLatitude/2), 2)+ cos(latitude1)* cos(latitude2)* pow(sin(deltaLongitude/2), 2);
+	double c = 2 * atan2(sqrt(a),sqrt(1-a));
+	double d = R * c;
+	return d;
+}

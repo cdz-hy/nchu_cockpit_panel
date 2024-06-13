@@ -51,15 +51,15 @@ int RMI_change = 0;//左按钮变化
 int RMI_change_1 = 0;//右按钮变化
 
 //发动机相关
-double Oangle_1 = 0;
-double Oangle_2 = 0;
-double Oangle_3 = 0;
-double Oangle_4 = 0;
+double Oangle_1 = 1;
+double Oangle_2 = 2;
+double Oangle_3 = 3;
+double Oangle_4 = 4;
 
-double fanSpeed = 0;
-double fanSpeed_1 = 0;
-double gastemp = 0;
-double gastemp_1 = 0;
+double fanSpeed = 5;
+double fanSpeed_1 = 6;
+double gastemp = 7;
+double gastemp_1 = 8;
 double FuelFlowSpeed = 2.04;
 double FuelFlowSpeed_1 = 1.02;
 
@@ -94,6 +94,7 @@ vector<WAYPOINT> route;
 
 //已经走过的航线
 vector<WAYPOINT> routePassed;
+int nowPos = 0;//目前刚经过第几个航路点
 
 //机场信息
 vector<WAYPOINT> airports;
@@ -200,5 +201,6 @@ int TERR = 0;
 
 int VOR1 = 2;
 int VOR2 = 2;
+
 
 

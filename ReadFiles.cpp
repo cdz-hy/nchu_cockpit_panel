@@ -10,6 +10,7 @@ using namespace std;
 
 #include "G_variable.h"
 
+
 void read_files(){
 	
 	
@@ -24,20 +25,20 @@ void read_files(){
 		while (!feof(file)) {
 			fgets(tmp, 0xFF, file);
 			char *p = NULL;
-			//窗口长
-			if (strstr(tmp, "Length")) {
-				p = strstr(tmp, "=");
-				p += 2;
-				length = stoi(p);
-			}
-			//窗口高（宽）
-			else if (strstr(tmp, "Height")) {
-				p = strstr(tmp, "=");
-				p += 2;
-				height = stoi(p);
-			}
+//			//窗口长
+//			if (strstr(tmp, "Length")) {
+//				p = strstr(tmp, "=");
+//				p += 2;
+//				length = stoi(p);
+//			}
+//			//窗口高（宽）
+//			else if (strstr(tmp, "Height")) {
+//				p = strstr(tmp, "=");
+//				p += 2;
+//				height = stoi(p);
+//			}
 			//是否显示背景等
-			else if (strstr(tmp, "Show Background")) {
+			/*else */if (strstr(tmp, "Show Background")) {
 				p = strstr(tmp, "=");
 				p += 2;
 				
@@ -75,6 +76,19 @@ void read_files(){
 	}
 	
 	
+	//获取设备上下文获取屏幕分辨率
+	HDC screenHDC = GetDC(NULL);
+	if(screenHDC == NULL){
+		
+	}
+	else{
+		length = GetDeviceCaps(screenHDC, HORZRES);
+		height = GetDeviceCaps(screenHDC, VERTRES);
+	}
+	
+	ReleaseDC(NULL, screenHDC); // 释放设备上下文
+	
+	
 	
 	//读取航路点文件
 	
@@ -97,6 +111,7 @@ void read_files(){
 			strcpy(wpTmp.FIRName, stringTmp[2].c_str());
 			strcpy(wpTmp.fullType, stringTmp[3].c_str());
 			wpTmp.num = 1;
+			wpTmp.range = 130;
 			
 			waypoints.push_back(wpTmp);
 			
@@ -151,49 +166,97 @@ void read_files(){
 	
 	//读取机场文件
 	
-	extern vector<WAYPOINT> airports;
-	ifstream inputFile3("arpt_data.dat");
-	
-	if (inputFile3.is_open()) {
-		while (getline(inputFile3,inputTmp)) {
-			
-			WAYPOINT wpTmp;
-			istringstream issTmp(inputTmp);
-			
-			string stringTmp[20];
-			
-//			if(issTmp >> stringTmp[0] >> wpTmp.lat >> wpTmp.lon >> stringTmp[1] >> stringTmp[2] >> stringTmp[3] >> stringTmp[4] >> stringTmp[5] >> stringTmp[6] >> stringTmp[7] >> stringTmp[8] >> stringTmp[9] >> stringTmp[10]){
-//				
-//				
+//	extern vector<WAYPOINT> airports;
+//	ifstream inputFile3("arpt_data.dat");
+//	
+//	if (inputFile3.is_open()) {
+//		while (getline(inputFile3,inputTmp)) {
+//			
+//			WAYPOINT wpTmp;
+//			istringstream issTmp(inputTmp);
+//			
+//			string stringTmp[20];
+//			
+////			if(issTmp >> stringTmp[0] >> wpTmp.lat >> wpTmp.lon >> stringTmp[1] >> stringTmp[2] >> stringTmp[3] >> stringTmp[4] >> stringTmp[5] >> stringTmp[6] >> stringTmp[7] >> stringTmp[8] >> stringTmp[9] >> stringTmp[10]){
+////				
+////				
+////				
+////				strcpy(wpTmp.code, stringTmp[0].c_str());
+////				strcpy(wpTmp.name, stringTmp[6].c_str());
+////				strcpy(wpTmp.fullName, stringTmp[6].c_str());
+////				
+//////				wpTmp.num = 3;
+////				
+////				airports.push_back(wpTmp);
+////				
+////			}
+//			if(issTmp >> stringTmp[0] >> wpTmp.lat >> wpTmp.lon >> stringTmp[1] >> stringTmp[2] >> stringTmp[3] >> stringTmp[4] >> stringTmp[5] >> stringTmp[6] >> stringTmp[7] >> stringTmp[8] >> stringTmp[9]){
 //				
 //				strcpy(wpTmp.code, stringTmp[0].c_str());
 //				strcpy(wpTmp.name, stringTmp[6].c_str());
 //				strcpy(wpTmp.fullName, stringTmp[6].c_str());
 //				
-////				wpTmp.num = 3;
+//				wpTmp.num = 3;
 //				
 //				airports.push_back(wpTmp);
 //				
 //			}
-			if(issTmp >> stringTmp[0] >> wpTmp.lat >> wpTmp.lon >> stringTmp[1] >> stringTmp[2] >> stringTmp[3] >> stringTmp[4] >> stringTmp[5] >> stringTmp[6] >> stringTmp[7] >> stringTmp[8] >> stringTmp[9]){
-				
-				strcpy(wpTmp.code, stringTmp[0].c_str());
-				strcpy(wpTmp.name, stringTmp[6].c_str());
-				strcpy(wpTmp.fullName, stringTmp[6].c_str());
-				
-				wpTmp.num = 3;
-				
-				airports.push_back(wpTmp);
-				
-			}
-			else{
-				continue;
-			}
-			
-		}
+//			else{
+//				continue;
+//			}
+//			
+//		}
+//	}
+//	
+//	inputFile3.close();
+	
+	extern vector<WAYPOINT> airports;
+	FILE* file1;
+	int linenum = 1;
+	char line[1024];
+	
+	// 打开文件，以只读模式（"r"）  
+	file1 = fopen("arpt.dat", "r");
+	if (file1 == NULL) {
+		// 如果文件打开失败，打印错误消息  
+		perror("Error opening file");
+		return; // 如果文件打开失败，返回并退出程序  
 	}
 	
-	inputFile3.close();
+	WAYPOINT wpTmp1;
+	
+	// 逐行读取文件内容  
+	while (fgets(line, sizeof(line), file1) != NULL) {
+		if (linenum % 8 == 2)//读取经度信息
+		{
+			char str[64];
+			if (sscanf(line, "%14c %lf", str, &wpTmp1.lat))
+			{
+				
+			}
+		}
+		else if (linenum % 8 == 3)//读取纬度信息
+		{
+			char str[64];
+			if (sscanf(line, "%14c %lf", str, &wpTmp1.lon))
+			{
+				
+			}
+		}
+		else if (linenum % 8 == 7)//读取机场名
+		{
+			char str[64];
+			if (sscanf(line, "%14c %s", str, wpTmp1.name))
+			{
+				airports.push_back(wpTmp1);
+			}
+		}
+		linenum ++;
+	}
+	// 关闭文件  
+	fclose(file1);
+
+	
 	
 	
 	//读取VOR塔台文件
@@ -232,8 +295,10 @@ void read_files(){
 	
 	
 	
-	extern vector<WAYPOINT> routePassed;
-	WAYPOINT wpTmp2 = {0,"ZSCN", 28.877, 115.91, "ZSCN", "ZSCN", "ZSCN", 100, "ZSCN", "ZSCN"};
-	routePassed.push_back(wpTmp2);
+//	extern vector<WAYPOINT> routePassed;
+//	WAYPOINT wpTmp2 = {0,"ZSCN", 28.877, 115.91, "ZSCN", "ZSCN", "ZSCN", 100, "ZSCN", "ZSCN"};
+//	routePassed.push_back(wpTmp2);
 	
 }
+
+
