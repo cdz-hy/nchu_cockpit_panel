@@ -7,9 +7,14 @@
 
 extern double Oangle_1;
 extern double Oangle_2;
+extern double Oangle_3;
+extern double Oangle_4;
 extern double fanSpeed;
-extern double gastemp;
+extern double fanSpeed_1 ;
+extern double gastemp ;
+extern double gastemp_1 ;
 extern double FuelFlowSpeed;
+extern double FuelFlowSpeed_1;
 extern double Fuelrest_1;
 extern double Fuelrest_2;
 extern double Fuelrest_3;
@@ -43,43 +48,82 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	font.lfWeight = Ulength * 50;
 	font.lfQuality = ANTIALIASED_QUALITY;
 	setfont(&font);
-	char num[64];//      
-	sprintf_s(num, "%.1f", fanSpeed);
-	ege_drawtext(num ,Oilcenterx - Ulength * 24, Oilcentery - Ulength * 30);
-	ege_drawtext(num ,Oilcenterx - Ulength * 1, Oilcentery - Ulength * 30);
+	char num[64];//左上上
+sprintf_s(num, "%.1f", fanSpeed);
+ege_drawtext(num ,Oilcenterx - Ulength * 23.5, Oilcentery - Ulength * 30);
+
+
+char nums[64];//左上上
+sprintf_s(nums, "%.1f", fanSpeed_1);
+
+
+ege_drawtext(nums ,Oilcenterx - Ulength * 0.5, Oilcentery - Ulength * 30);
+
+if (fanSpeed_1 <= 101.5 && fanSpeed_1 >= 0) {
+	Oangle_3 = fanSpeed_1 / 10 * 19;
+}
+else if (fanSpeed_1 > 101.5) {
+	Oangle_3 = 101.5 / 10 * 19;
+}
+else {
+	Oangle_3 = 0;
+}
+
+
+
+if (fanSpeed <= 101.5 && fanSpeed >= 0) {
+	Oangle_1 = fanSpeed / 10 * 19;
+}
+else if (fanSpeed > 101.5) {
+	Oangle_1 = 101.5 / 10 * 19;
+}
+else {
+	Oangle_1 = 0;
+}
+
+if (gastemp < 999) {
+	char num_1[64];//左上中
+	sprintf_s(num_1, "%.0f", gastemp);
+	ege_drawtext(num_1, Oilcenterx - Ulength * 25, Oilcentery - Ulength * 15);
 	
+}
+else 
+{
+	char num_1[64];//左上中
+	ege_drawtext("999", Oilcenterx - Ulength * 25, Oilcentery - Ulength * 15);
 	
-	if (fanSpeed <= 101.5 && fanSpeed >= 0) {
-		Oangle_1 = fanSpeed / 10 * 19;
-	}
-	else if (fanSpeed > 101.5) {
-		Oangle_1 = 101.5 / 10 * 19;
-	}
-	else {
-		Oangle_1 = 0;
-	}
+}
+
+if (gastemp_1 < 999) {
+	char nums_1[64];//左上中
+	sprintf_s(nums_1, "%.0f", gastemp_1);
 	
-	if (gastemp < 999) {
-		char num_1[64];//      
-		sprintf_s(num_1, "%.0f", gastemp);
-		ege_drawtext(num_1, Oilcenterx - Ulength * 25.4, Oilcentery - Ulength * 15);
-		ege_drawtext(num_1, Oilcenterx - Ulength * 2.4, Oilcentery - Ulength * 15);
-	}
-	else 
-	{
-		char num_1[64];//      
-		ege_drawtext("999", Oilcenterx - Ulength * 25.4, Oilcentery - Ulength * 15);
-		ege_drawtext("999", Oilcenterx - Ulength * 2.4, Oilcentery - Ulength * 15);
-	}
-	if (gastemp <= 950 && gastemp >= 0) {
-		Oangle_2 = gastemp * 198 / 950;
-	}
-	else if (gastemp > 950) {
-		Oangle_2 = 198;
-	}
-	else {
-		Oangle_2 = 0;
-	}
+	ege_drawtext(nums_1, Oilcenterx - Ulength * 2, Oilcentery - Ulength * 15);
+}
+else
+{
+	char nums_1[64];//左上中
+	
+	ege_drawtext("999", Oilcenterx - Ulength * 2, Oilcentery - Ulength * 15);
+}
+if (gastemp <= 950 && gastemp >= 0) {
+	Oangle_2 = gastemp * 198 / 950;
+}
+else if (gastemp > 950) {
+	Oangle_2 = 198;
+}
+else {
+	Oangle_2 = 0;
+}
+if (gastemp_1 <= 950 && gastemp_1 >= 0) {
+	Oangle_4 = gastemp_1 * 198 / 950;
+}
+else if (gastemp_1 > 950) {
+	Oangle_4 = 198;
+}
+else {
+	Oangle_4 = 0;
+}
 	
 	
 	
@@ -91,10 +135,14 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	font.lfQuality = ANTIALIASED_QUALITY;
 	setfont(&font);
 	
-	char num_2[64];//      
-	sprintf_s(num_2, "%.2f", FuelFlowSpeed);
-	ege_drawtext(num_2, Oilcenterx - Ulength * 26.5, Oilcentery + Ulength * 7.3);
-	ege_drawtext(num_2, Oilcenterx - Ulength * 3.5, Oilcentery + Ulength * 7.3);
+	char num_2[64];//左上下左
+sprintf_s(num_2, "%.2f", FuelFlowSpeed);
+ege_drawtext(num_2, Oilcenterx - Ulength * 26.5, Oilcentery + Ulength * 7.2);
+
+char num_7[64];//左上下右
+sprintf_s(num_7, "%.2f", FuelFlowSpeed_1);
+
+ege_drawtext(num_7, Oilcenterx - Ulength * 3.5, Oilcentery + Ulength * 7.2);
 	
 	
 	if (fanSpeed > 100) {
