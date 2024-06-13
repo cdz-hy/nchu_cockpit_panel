@@ -37,7 +37,6 @@ void draw_ND_pln(double center_x, double center_y, double side);//
 void draw_ND_frame_chassis(double center_x, double center_y, double side);//
 void draw_ND_smallWhiteCircle(double center_x, double center_y, double side);
 void draw_ND_Speed(double center_x, double center_y, double side);
-
 // 变量声明
 //APP+CENTER  VOR+CENTER 模式:
 double realrotationAngle = 0;
@@ -65,6 +64,7 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	
 	draw_ND_frame_chassis(ND_x, ND_y, ND_side);
 	
+
 	
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
@@ -230,7 +230,6 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	}
 	
 	
-	
 	draw_ND_Speed(ND_x, ND_y, ND_side);
 	
 	//灯光遮盖效果
@@ -260,7 +259,7 @@ APP VOR  MAP  MAP+CENTER 这四个是一种模式
 PLN PLN+CENTER 是一种模式
 */
 
-//===============================关于表框的部分==================================//
+//===============================关于表框及表框内部的部分==================================//
 
 // 绘制表框黑色底盘
 void draw_ND_frame_chassis(double center_x, double center_y, double side){
@@ -376,6 +375,7 @@ void draw_ND_Speed(double center_x, double center_y, double side) {
 		}
 	}
 }
+
 
 //================================APP+CENTER  VOR+CENTER 模式==================================//
 
