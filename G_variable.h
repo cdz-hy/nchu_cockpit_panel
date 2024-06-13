@@ -146,12 +146,14 @@ extern PIMAGE pimg2;
 extern PIMAGE pimg3;
 extern PIMAGE pimg4;
 extern PIMAGE pimg5;
+extern PIMAGE pimg6;
 
 extern PIMAGE pimg1sta;
 extern PIMAGE pimg2sta;
 extern PIMAGE pimg3sta;
 extern PIMAGE pimg4sta;
 extern PIMAGE pimg5sta;
+extern PIMAGE pimg6sta;
 
 //==================================//
 
