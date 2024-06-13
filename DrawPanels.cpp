@@ -617,7 +617,7 @@ void draw_panels(){
 //			//画EHIS的控制面板
 //			draw_EHIS_control(PFD_x, PFD_y - 1 * PFD_side ,PFD_side);
 			
-			
+			draw_Background_2(PFD_x, PFD_y , PFD_side);
 			
 			draw_resizeImage(PFD_x, PFD_y, PFD_side);
 			
