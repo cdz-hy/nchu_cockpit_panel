@@ -53,9 +53,14 @@ extern int RMI_change_1;//右按钮变化
 //发动机相关
 extern double Oangle_1;
 extern double Oangle_2;
+extern double Oangle_3;
+extern double Oangle_4;
 extern double fanSpeed;
-extern double gastemp;
+extern double fanSpeed_1 ;
+extern double gastemp ;
+extern double gastemp_1 ;
 extern double FuelFlowSpeed;
+extern double FuelFlowSpeed_1;
 extern double Fuelrest_1;
 extern double Fuelrest_2;
 extern double Fuelrest_3;
