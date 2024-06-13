@@ -753,6 +753,8 @@ void draw_getImage() {
 	getimage(pimg4, "./res/standbyPFDup.png");
 	pimg5 = newimage();
 	getimage(pimg5, "./res/standbyPFDdown.png");
+	pimg6 = newimage();
+	getimage(pimg6, "./res/737-baffle.png");
 	
 	pimg1sta = newimage();
 	getimage(pimg1sta, "./res/NOSEWHEEL.png");
@@ -764,6 +766,8 @@ void draw_getImage() {
 	getimage(pimg4sta, "./res/standbyPFDup.png");
 	pimg5sta = newimage();
 	getimage(pimg5sta, "./res/standbyPFDdown.png");
+	pimg6sta = newimage();
+	getimage(pimg6sta, "./res/737-baffle.png");
 	
 }
 
@@ -773,7 +777,7 @@ void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side) {
 	getZoomImage(pimg3, pimg3sta, PFD_side * 0.8, PFD_side * 0.5);
 	getZoomImage(pimg4, pimg4sta, PFD_side * 0.52, PFD_side * 0.52);
 	getZoomImage(pimg5, pimg5sta, PFD_side * 0.52, PFD_side * 0.52);
-	
+	getZoomImage(pimg6, pimg6sta, PFD_side*3.4, PFD_side*1.2);
 }
 
 void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side) {
@@ -782,6 +786,7 @@ void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side)
 	putimage_withalpha(NULL, pimg3, PFD_x + 1.13 * PFD_side, PFD_y - 1.12 * PFD_side);
 	putimage_withalpha(NULL, pimg4, PFD_x + 2 * PFD_side, PFD_y - 1.1 * PFD_side);
 	putimage_withalpha(NULL, pimg5, PFD_x + 2 * PFD_side, PFD_y - 0.01* PFD_side);
+	putimage_withalpha(NULL, pimg6, PFD_x - 2.26 * PFD_side, PFD_y - 1.9 * PFD_side);
 }
 
 void  draw_delImage() {
@@ -790,6 +795,7 @@ void  draw_delImage() {
 	delimage(pimg3);
 	delimage(pimg4);
 	delimage(pimg5);
+	delimage(pimg6);
 }
 
 void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height)
