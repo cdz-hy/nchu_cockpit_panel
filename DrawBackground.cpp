@@ -453,11 +453,15 @@ void draw_back(double center_x, double center_y, double unitLength) {
 }
 void draw_Background_2(double Background_2_x , double Background_2_y , double side){
 	double Ulength = 0.01 * side;
+	double linewidth = Ulength;
+	setlinewidth(linewidth / 2);
 	setcolor(BLACK);
-	ege_line(Background_2_x - Ulength * 58 , Background_2_y - Ulength * 90 , Background_2_x - Ulength * 58 , Background_2_y - Ulength * 62 );
-	ege_line(Background_2_x - Ulength * 58 , Background_2_y - Ulength * 62 , Background_2_x + Ulength * 194 , Background_2_y - Ulength * 62);
+	ege_line(Background_2_x - Ulength * 58 , Background_2_y - Ulength * 93.5 , Background_2_x - Ulength * 58 , Background_2_y - Ulength * 62 );
+	setlinewidth(linewidth);
+	ege_line(Background_2_x - Ulength * 58 , Background_2_y - Ulength * 62.6 , Background_2_x + Ulength * 194 , Background_2_y - Ulength * 62.6);
+	setlinewidth(linewidth / 2);
 	ege_line(Background_2_x + Ulength * 194 , Background_2_y - Ulength * 115 , Background_2_x + Ulength * 194 , Background_2_y - Ulength * 62);
-	ege_line(Background_2_x + Ulength * 194 , Background_2_y - Ulength * 115 , Background_2_x + Ulength * 120 , Background_2_y - Ulength * 115);
+	ege_line(Background_2_x + Ulength * 194 , Background_2_y - Ulength * 115 , Background_2_x + Ulength * 102 , Background_2_y - Ulength * 115);
 	ege_line(Background_2_x - Ulength * 132 , Background_2_y - Ulength * 90, Background_2_x - Ulength * 140 , Background_2_y + Ulength * 60);
 	ege_line(Background_2_x - Ulength * 58 , Background_2_y + Ulength * 60, Background_2_x - Ulength * 140 , Background_2_y + Ulength * 60);
 	int num_1 = 4;
