@@ -32,7 +32,7 @@ void draw_Light_contral(double leftPanel_x, double leftPanel_y, double side) {
 	ege_enable_aa(false);
 	
 	
-	setcolor(EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	setcolor(EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
 	int Framenum = 61;
 	ege_point FramePloypoints[61] = {
 		{leftPanel_x - Ulength * 57,leftPanel_y - Ulength * 41},
@@ -119,11 +119,11 @@ void draw_Light_contral(double leftPanel_x, double leftPanel_y, double side) {
 		
 	};
 	ege_bezier(Framenum, FramePloypoints);
-	setfillcolor(EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(leftPanel_x, leftPanel_y, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	setfillcolor(EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(leftPanel_x, leftPanel_y, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
 	
 	ege_enable_aa(true);
-	setcolor(EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	setcolor(EGEARGB(0XFF, 0X10, 0X10, 0X10));
 	setlinewidth(Linewidth / 7 * 4);
 	int Framenum_1 = 61;
 	ege_point FramePloypoints_1[61] = {
@@ -1141,7 +1141,7 @@ void draw_TopContral(double topContral_x, double topContral_y, double side) {
 	mousepos(&x, &y);
 	
 	ege_enable_aa(false);
-	setcolor(EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	setcolor(EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
 	int frame_TopContral = 28;
 	ege_point frame_TopContralploy[28] = {
 		{topContral_x - 65 * Ulength , topContral_y - 30.5 * Ulength},
@@ -1186,17 +1186,17 @@ void draw_TopContral(double topContral_x, double topContral_y, double side) {
 	};
 	ege_bezier(frame_TopContral, frame_TopContralploy);
 	
-	setfillcolor(EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(topContral_x - 64 * Ulength, topContral_y - 30.5 * Ulength, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(topContral_x + 64 * Ulength, topContral_y - 36.5 * Ulength, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(topContral_x - 64 * Ulength, topContral_y + 30.5 * Ulength, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(topContral_x + 64 * Ulength, topContral_y + 30.5 * Ulength, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(topContral_x , topContral_y, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	setfillcolor(EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(topContral_x - 64 * Ulength, topContral_y - 30.5 * Ulength, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(topContral_x + 64 * Ulength, topContral_y - 36.5 * Ulength, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(topContral_x - 64 * Ulength, topContral_y + 30.5 * Ulength, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(topContral_x + 64 * Ulength, topContral_y + 30.5 * Ulength, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(topContral_x , topContral_y, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
 	
 	ege_enable_aa(true);
 	setlinewidth(linewidth / 7 * 4);
 	
-	setcolor(EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	setcolor(EGEARGB(0XFF, 0X10, 0X10, 0X10));
 	int frame_TopContral_1 = 28;
 	ege_point frame_TopContralploy_1[28] = {
 		{topContral_x - 65 * Ulength , topContral_y - 30.5 * Ulength},
