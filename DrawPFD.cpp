@@ -2088,7 +2088,7 @@ void draw_PFD_attackAngle(double x, double y, double side) {
 	double Ulength = side / 96;
 	double linewidth = Ulength / 3;
 	
-	setcolor(EGEARGB(0XFF, 0X75, 0X75, 0X75));
+	setcolor(EGEARGB(0XFF, 0XA5, 0XA5, 0XA5));
 	setlinewidth(linewidth);
 	ege_arc(x - 6 * Ulength, y - 6 * Ulength, 12 * Ulength, 12 * Ulength, 90, -225);
 	
@@ -2124,18 +2124,17 @@ void draw_PFD_attackAngle(double x, double y, double side) {
 	if (attackAngle >= -6 && attackAngle <= 22) {
 		char num[64];
 		sprintf_s(num, "%.1f", attackAngle);
-		ege_drawtext(num, x - 6 * Ulength, y );
+		ege_drawtext(num, x - 5 * Ulength, y + Ulength * 1 );
 	}
 	else if (attackAngle > 22) {
-		ege_drawtext("22.0", x - 6 * Ulength, y );
+		ege_drawtext("22.0", x - 5 * Ulength, y + Ulength * 1);
 	}
 	else if (attackAngle < -6) {
-		ege_drawtext("-6.0", x - 6 * Ulength, y );
+		ege_drawtext("-6.0", x - 5 * Ulength, y + Ulength * 1);
 	}
 }
 
 
 
 //=========================================================================================//
-
 
