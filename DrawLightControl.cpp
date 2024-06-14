@@ -1750,7 +1750,7 @@ void draw_Light_contral_1(double rightPanel_x, double rightPanel_y, double side)
 	ege_enable_aa(false);
 	
 	
-	setcolor(EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	setcolor(EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
 	int Framenum = 61;
 	ege_point FramePloypoints[61] = {
 		{rightPanel_x - Ulength * 57,rightPanel_y - Ulength * 41},
@@ -1837,19 +1837,19 @@ void draw_Light_contral_1(double rightPanel_x, double rightPanel_y, double side)
 		
 	};
 	ege_bezier(Framenum, FramePloypoints);
-	setfillcolor(EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(rightPanel_x, rightPanel_y, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(rightPanel_x - Ulength * 56, rightPanel_y - Ulength * 40, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(rightPanel_x + Ulength * 56, rightPanel_y - Ulength * 40, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(rightPanel_x + Ulength * 56, rightPanel_y + Ulength * 40, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(rightPanel_x - Ulength * 56, rightPanel_y + Ulength * 40, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(rightPanel_x + Ulength * 64, rightPanel_y - Ulength * 24, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(rightPanel_x - Ulength * 64, rightPanel_y - Ulength * 24, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(rightPanel_x - Ulength * 64, rightPanel_y + Ulength * 24, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
-	floodfill(rightPanel_x + Ulength * 64, rightPanel_y + Ulength * 24, EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	setfillcolor(EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(rightPanel_x, rightPanel_y, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(rightPanel_x - Ulength * 56, rightPanel_y - Ulength * 40, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(rightPanel_x + Ulength * 56, rightPanel_y - Ulength * 40, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(rightPanel_x + Ulength * 56, rightPanel_y + Ulength * 40, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(rightPanel_x - Ulength * 56, rightPanel_y + Ulength * 40, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(rightPanel_x + Ulength * 64, rightPanel_y - Ulength * 24, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(rightPanel_x - Ulength * 64, rightPanel_y - Ulength * 24, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(rightPanel_x - Ulength * 64, rightPanel_y + Ulength * 24, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(rightPanel_x + Ulength * 64, rightPanel_y + Ulength * 24, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
 	
 	ege_enable_aa(true);
-	setcolor(EGEARGB(0XFF, 0X16, 0X18, 0X1C));
+	setcolor(EGEARGB(0XFF, 0X20, 0X20, 0X20));
 	setlinewidth(Linewidth / 7 * 4);
 	int Framenum_1 = 61;
 	ege_point FramePloypoints_1[61] = {
