@@ -19,6 +19,7 @@ extern double Fuelrest_1;
 extern double Fuelrest_2;
 extern double Fuelrest_3;
 extern double Fuelrest_total;
+extern int TAT;
 
 
 extern double UPPERangle;
@@ -54,6 +55,7 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	char num[64];//左上上
 	sprintf_s(num, "%.1f", fanSpeed);
 	ege_drawtext(num ,Oilcenterx - Ulength * 23.5, Oilcentery - Ulength * 30);
+	
 	
 	
 	char nums[64];//左上上
@@ -146,9 +148,12 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	sprintf_s(num_7, "%.2f", FuelFlowSpeed_1);
 	
 	ege_drawtext(num_7, Oilcenterx - Ulength * 3.5, Oilcentery + Ulength * 7.2);
+	char num12[64];//最上TAT
+	sprintf_s(num12, "%d", TAT);
+	ege_drawtext(num12 ,Oilcenterx - Ulength * 23.5, Oilcentery - Ulength * 38);
 	
-	
-	if (fanSpeed > 100) {
+	ege_drawtext("C" ,Oilcenterx - Ulength * 20.5, Oilcentery - Ulength * 38);
+	if (fanSpeed > 101) {
 		setfillcolor(EGEARGB(0X9F, 0X7F, 0X06, 0X03));
 	}
 	else {
@@ -232,6 +237,7 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	setfont(Ulength * 2.8, 0, "Calibri");
 	ege_drawtext("ENG 1", Oilcenterx + Ulength * 16, Oilcentery - Ulength * 36.8);
 	ege_drawtext("ENG 2", Oilcenterx + Ulength * 33, Oilcentery - Ulength * 36.8);
+	ege_drawtext("TAT", Oilcenterx - Ulength * 34.5, Oilcentery - Ulength * 37.8);
 	
 	int pointnum = 22;
 	ege_point ploypoint[22] = {
@@ -315,7 +321,7 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	setfont(Ulength * 6.5, 0, "Calibri");
 	char num_6[64];//      
 	sprintf_s(num_6, "%.1f", Fuelrest_total);
-	ege_drawtext(num_6, Oilcenterx + Ulength * 21.5, Oilcentery + Ulength * 39.5);
+	ege_drawtext(num_6, Oilcenterx + Ulength * 22.5, Oilcentery + Ulength * 39.5);
 	
 	
 	setcolor(EGEARGB(0XFF, 0X8F, 0X16, 0X13));
