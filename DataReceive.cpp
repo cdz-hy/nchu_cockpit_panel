@@ -115,6 +115,10 @@ void data_receive(){
 						Fuelrest_3 = data[i][3] / 1000;
 						Fuelrest_total = Fuelrest_1 + Fuelrest_2 + Fuelrest_3;
 					}
+					else if(fabs(data[i][0] - 118) <= 0.001){
+						airSpeed_instruction = data[i][1];
+						indicated_number = data[i][4];
+					}
 				}
 				
 //				pitchAngle = data[3][1] * PI / 180;

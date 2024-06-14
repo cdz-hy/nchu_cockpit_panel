@@ -1,3 +1,4 @@
+
 #include<graphics.h>
 #include <stdio.h>
 #include <math.h>
@@ -910,18 +911,18 @@ void draw_Light_contral(double leftPanel_x, double leftPanel_y, double side) {
 				
 				mousepos(&leftPanel_mouse_x, &leftPanel_mouse_y);
 				if (leftPanel_mouse_y > leftPanel_mouse_y_cur) {
-					if (Brightangle < 260) {
+					if (Brightangle < 255) {
 						Brightangle += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 70;
 //						MainPanelLight += (leftPanel_mouse_y - leftPanel_mouse_y_cur) / 100;
-						if(Brightangle >= 260){
-							Brightangle = 260;
+						if(Brightangle >= 255){
+							Brightangle = 255;
 						}
-						MainPanelLight = (Brightangle + 20 ) * 255.0 / 280 - 255;
+//						MainPanelLight = (Brightangle + 20 ) * 255.0 / 280 - 255;
 					}
-					else if (Brightangle >= 260) {
-						Brightangle = 260;
-						MainPanelLight = 255;
-					}
+//					else if (Brightangle >= 260) {
+//						Brightangle = 260;
+//						MainPanelLight = 255;
+//					}
 				}
 				else {
 					if (Brightangle > -20) {
@@ -930,7 +931,7 @@ void draw_Light_contral(double leftPanel_x, double leftPanel_y, double side) {
 						if(Brightangle <= -20){
 							Brightangle -20;
 						}
-						MainPanelLight = (Brightangle + 20 ) * 255.0 / 280 - 255;
+//						MainPanelLight = (Brightangle + 20 ) * 255.0 / 280 - 255;
 					}
 //					else if (Brightangle <= -20) {
 //						Brightangle = -20;
@@ -939,6 +940,8 @@ void draw_Light_contral(double leftPanel_x, double leftPanel_y, double side) {
 //						
 //					}
 				}
+				
+				
 			}
 		}
 		
@@ -946,6 +949,18 @@ void draw_Light_contral(double leftPanel_x, double leftPanel_y, double side) {
 	else if (leftPanel_speed_is_down == 1) {
 		leftPanel_speed_is_down = 0;
 	}
+	
+	
+	MainPanelLight = fabs((Brightangle + 20 ) * 255.0 / 280 - 255);
+	
+	if( MainPanelLight >= 255){
+		MainPanelLight = 255;
+	}
+	else if(MainPanelLight <= 0){
+		MainPanelLight = 0;
+	}
+	
+	MainPanelLight = -MainPanelLight;
 	
 	//INBD
 	if (GetAsyncKeyState(0x04) & 0x8000) {

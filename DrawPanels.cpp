@@ -855,3 +855,4 @@ void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height)
 	
 }
 
+
