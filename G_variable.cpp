@@ -62,6 +62,7 @@ double gastemp = 7;
 double gastemp_1 = 8;
 double FuelFlowSpeed = 2.04;
 double FuelFlowSpeed_1 = 1.02;
+int TAT = -7;
 
 
 double Fuelrest_1 = 5.65;
@@ -231,5 +232,4 @@ double MainpanelDU = 75;
 double LOWERDU = 75;
 int MainpanelDU_gear = 0;
 int LOWERDU_gear = 0;
-
 
