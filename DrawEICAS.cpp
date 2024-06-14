@@ -139,15 +139,27 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	font.lfWeight = Ulength * 40;
 	font.lfQuality = ANTIALIASED_QUALITY;
 	setfont(&font);
-	
+	if(FuelFlowSpeed<10){
 	char num_2[64];//左上下左
 	sprintf_s(num_2, "%.2f", FuelFlowSpeed);
 	ege_drawtext(num_2, Oilcenterx - Ulength * 26.5, Oilcentery + Ulength * 7.2);
-	
+	}
+	else if(FuelFlowSpeed>=10){
+		char num_2[64];
+		sprintf_s(num_2, "%.1f", FuelFlowSpeed);
+		ege_drawtext(num_2, Oilcenterx - Ulength * 26.5, Oilcentery + Ulength * 7.2);	
+	}
+	if(FuelFlowSpeed_1<10){
 	char num_7[64];//左上下右
 	sprintf_s(num_7, "%.2f", FuelFlowSpeed_1);
-	
 	ege_drawtext(num_7, Oilcenterx - Ulength * 3.5, Oilcentery + Ulength * 7.2);
+	}
+	else if(FuelFlowSpeed_1>=10){
+		char num_7[64];//左上下右
+		sprintf_s(num_7, "%.1f", FuelFlowSpeed_1);
+		ege_drawtext(num_7, Oilcenterx - Ulength * 3.5, Oilcentery + Ulength * 7.2);
+	}
+	
 	char num12[64];//最上TAT
 	sprintf_s(num12, "%d", TAT);
 	ege_drawtext(num12 ,Oilcenterx - Ulength * 23.5, Oilcentery - Ulength * 38);
