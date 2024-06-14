@@ -219,6 +219,9 @@ extern int TERR;
 extern int VOR1;
 extern int VOR2;
 
+extern double backGroundLight ;
+extern double AFDSFLOODLight ;
+
 extern double MainpanelDU;
 extern double LOWERDU;
 extern int MainpanelDU_gear;

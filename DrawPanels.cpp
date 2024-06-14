@@ -667,6 +667,9 @@ void draw_panels(){
 			//灯光控制
 			draw_Light_contral(PFD_x + PFD_side * 0.05, PFD_y + 1.07 * PFD_side, PFD_side*0.8);
 			
+			//灯光控制2
+			draw_Light_contral_1(PFD_x + PFD_side * 0.87, PFD_y + 1.07 * PFD_side, PFD_side*0.8);
+			
 			//显示屏的控制板
 			draw_TopContral(PFD_x + PFD_side * 0.65, PFD_y - 0.83 * PFD_side, PFD_side*0.8);
 			

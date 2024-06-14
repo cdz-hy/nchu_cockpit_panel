@@ -224,6 +224,8 @@ int TERR = 0;
 int VOR1 = 2;
 int VOR2 = 2;
 
+double backGroundLight = -20;
+double AFDSFLOODLight = -20;
 
 double MainpanelDU = 75;
 double LOWERDU = 75;
