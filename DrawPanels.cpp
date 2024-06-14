@@ -662,13 +662,13 @@ void draw_panels(){
 			draw_EICAS2(PFD_x + 3.225 * PFD_side, PFD_y + 1.33 * PFD_side, PFD_side);
 			
 			//画EHIS的控制面板
-			draw_EHIS_control(PFD_x + PFD_side * 1.54, PFD_y - 1.5 * PFD_side, PFD_side*0.8);
+			draw_EHIS_control(PFD_x + PFD_side * 1.54, PFD_y - 1.4 * PFD_side, PFD_side*0.8);
 			
 			//灯光控制
-			draw_Light_contral(PFD_x + PFD_side * 0.65, PFD_y + 1 * PFD_side, PFD_side*0.8);
+			draw_Light_contral(PFD_x + PFD_side * 0.05, PFD_y + 1.07 * PFD_side, PFD_side*0.8);
 			
 			//显示屏的控制板
-			draw_TopContral(PFD_x + PFD_side * 0.65, PFD_y - 0.91 * PFD_side, PFD_side*0.8);
+			draw_TopContral(PFD_x + PFD_side * 0.65, PFD_y - 0.83 * PFD_side, PFD_side*0.8);
 			
 			
 			draw_electricPanel_backgrounds(PFD_x, PFD_y , PFD_side);
@@ -814,7 +814,7 @@ void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side)
 	putimage_withalpha(NULL, pimg3, PFD_x + 1.13 * PFD_side, PFD_y - 1.12 * PFD_side);
 	putimage_withalpha(NULL, pimg4, PFD_x + 2 * PFD_side, PFD_y - 1.1 * PFD_side);
 	putimage_withalpha(NULL, pimg5, PFD_x + 2 * PFD_side, PFD_y - 0.01* PFD_side);
-	putimage_withalpha(NULL, pimg6, PFD_x - 2.26 * PFD_side, PFD_y - 1.9 * PFD_side);
+	putimage_withalpha(NULL, pimg6, PFD_x - 2.26 * PFD_side, PFD_y - 1.8 * PFD_side);
 }
 
 void  draw_delImage() {
@@ -854,5 +854,4 @@ void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height)
 	
 	
 }
-
 
