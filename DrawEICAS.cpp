@@ -37,7 +37,7 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	
 	
 	setlinewidth(linewidth_1 );
-	setcolor(EGEARGB(0XFF, 0X80, 0X80, 0X80));
+	setcolor(EGEARGB(0XFF, 0XE0, 0XE0, 0XE0));
 	
 	
 	setfillcolor(EGEARGB(0XFF, 0X3A, 0X31, 0X38));
@@ -214,7 +214,7 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	ege_rectangle(Oilcenterx - Ulength * 31, Oilcentery + Ulength * 5.5, Ulength * 8.5, Ulength * 3);
 	ege_rectangle(Oilcenterx - Ulength * 8, Oilcentery + Ulength * 5.5, Ulength * 8.5, Ulength * 3);
 	
-	setcolor(EGEARGB(0XFF, 0X2A, 0X21, 0X28));
+	setcolor(EGEARGB(0XFF, 0X3A, 0X31, 0X38));
 	setlinewidth(linewidth_1 * 1.5);
 	ege_rectangle(Oilcenterx + Ulength * 8.5, Oilcentery - Ulength * 36, Ulength * 15, Ulength * 5);
 	ege_rectangle(Oilcenterx + Ulength * 8.5, Oilcentery - Ulength * 31, Ulength * 15, Ulength * 5);
@@ -228,7 +228,7 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	ege_fillrect(Oilcenterx + Ulength * 12.5, Oilcentery - Ulength * 38.2, Ulength * 6.5, Ulength * 2.2);
 	ege_fillrect(Oilcenterx + Ulength * 29.5, Oilcentery - Ulength * 38.2, Ulength * 6.5, Ulength * 2.2);
 	
-	setcolor(EGEARGB(0XFF, 0X07, 0X9F, 0X9B));
+	setcolor(EGEARGB(0XFF, 0X17, 0XAF, 0XAB));
 	setfont(Ulength * 2.8, 0, "Calibri");
 	ege_drawtext("ENG 1", Oilcenterx + Ulength * 16, Oilcentery - Ulength * 36.8);
 	ege_drawtext("ENG 2", Oilcenterx + Ulength * 33, Oilcentery - Ulength * 36.8);
@@ -269,7 +269,7 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 		
 		
 	};
-	setcolor(EGEARGB(0XFF, 0X07, 0X9F, 0XAB));
+	setcolor(EGEARGB(0XFF, 0X17, 0XAF, 0XBB));
 	setlinewidth(linewidth_1);
 	ege_line(Oilcenterx + Ulength * 24, Oilcentery + Ulength * 29, Oilcenterx + Ulength * 22, Oilcentery + Ulength * 29);
 	ege_bezier(pointnum, ploypoint);
@@ -299,7 +299,7 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	f1.lfWidth = 6;
 	f1.lfQuality = ANTIALIASED_QUALITY;
 	setfont(&f1);
-	setcolor(EGEARGB(0XFF, 0X80, 0X80, 0X80));
+	setcolor(EGEARGB(0XFF, 0XE0, 0XE0, 0XE0));
 	char num_3[64];//      1
 	sprintf_s(num_3, "%.2f", Fuelrest_1);
 	ege_drawtext(num_3, Oilcenterx + Ulength * 13.5, Oilcentery + Ulength * 33);
@@ -318,7 +318,7 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	ege_drawtext(num_6, Oilcenterx + Ulength * 21.5, Oilcentery + Ulength * 39.5);
 	
 	
-	setcolor(EGEARGB(0XFF, 0X7F, 0X06, 0X03));
+	setcolor(EGEARGB(0XFF, 0X8F, 0X16, 0X13));
 	ege_line(Oilcenterx - Ulength * 28.5 - R, Oilcentery - Ulength * 21.75 - R, Oilcenterx - Ulength * 30.5 - R, Oilcentery - Ulength * 22.75 - R);
 	
 	ege_line(Oilcenterx - Ulength * 5.5 - R, Oilcentery - Ulength * 21.75 - R, Oilcenterx - Ulength * 7.5 - R, Oilcentery - Ulength * 22.75 - R);
@@ -327,7 +327,7 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	
 	ege_line(Oilcenterx - Ulength * 5.5 - R, Oilcentery - Ulength * 7 - R, Oilcenterx - Ulength * 7.5 - R, Oilcentery - Ulength * 7.75 - R);
 	
-	setcolor(EGEARGB(0XFF, 0X89, 0X4A, 0X03));
+	setcolor(EGEARGB(0XFF, 0X99, 0X5A, 0X13));
 	
 	ege_line(Oilcenterx - Ulength * 29 - R, Oilcentery - Ulength * 6.4 - R, Oilcenterx - Ulength * 30 - R, Oilcentery - Ulength * 6.7 - R);
 	
@@ -335,7 +335,7 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	
 	
 	
-	setcolor(EGEARGB(0XFF, 0X1F, 0X77, 0X0B));
+	setcolor(EGEARGB(0XFF, 0X2F, 0X87, 0X1B));
 	ege_line(Oilcenterx - Ulength * 29 - R, Oilcentery - Ulength * 22 - R, Oilcenterx - Ulength * 30 - R, Oilcentery - Ulength * 22.5 - R);
 	ege_line(Oilcenterx - Ulength * 30 - R, Oilcentery - Ulength * 22.5 - R, Oilcenterx - Ulength * 31 - R, Oilcentery - Ulength * 24 - R);
 	ege_line(Oilcenterx - Ulength * 30 - R, Oilcentery - Ulength * 22.5 - R, Oilcenterx - Ulength * 31.5 - R, Oilcentery - Ulength * 22 - R);
