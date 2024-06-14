@@ -164,7 +164,7 @@ double LOWERangle = 0;
 double LOWERangle_1 = 0;
 double INBDangle_1 = 0;
 double UPPERangle = 0;
-double Brightangle = 220;
+double Brightangle = -20;
 double changecolor = 0;
 int MainPanelLight = 0;
 
@@ -225,10 +225,9 @@ int VOR1 = 2;
 int VOR2 = 2;
 
 
-double MainpanelDU = 0;
-double LOWERDU = 0;
+double MainpanelDU = 75;
+double LOWERDU = 75;
 int MainpanelDU_gear = 0;
 int LOWERDU_gear = 0;
-
 
 
