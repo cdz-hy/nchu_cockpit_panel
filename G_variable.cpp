@@ -115,7 +115,7 @@ double longitude = 115.91;
 vector<WAYPOINT> waypoints;
 vector<WAYPOINT> route;
 
-//已经走过的航线
+//已经走过的航路点
 vector<WAYPOINT> routePassed;
 int nowPos = 0;//目前刚经过第几个航路点
 
@@ -124,6 +124,11 @@ vector<WAYPOINT> airports;
 
 //VOR台信息
 vector<WAYPOINT> VORs;
+
+
+//经过的路线（航线）（显示在地图上）
+vector<WAYPOINT> fullRoute;
+
 
 //==================================//
 
@@ -232,4 +237,5 @@ double MainpanelDU = 75;
 double LOWERDU = 75;
 int MainpanelDU_gear = 0;
 int LOWERDU_gear = 0;
+
 

@@ -59,7 +59,10 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	
 	
 	int ratio = 5;
-	ratio = 5 * pow(2, mapDistance / 30);
+	if(ratio != 0){
+		ratio = 5 * pow(2, mapDistance / 30);	
+	}
+	
 	
 	
 	draw_ND_frame_chassis(ND_x, ND_y, ND_side);
@@ -149,6 +152,14 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 			setfont(ND_side/ 35, 0, "黑体");
 			setcolor(EGEARGB(180, 100, 149, 237));
 			ege_drawtext("STA", ND_x - ND_side / 2.18,ND_y + ND_side / 4.5);
+			
+			
+			if(EHISMode == 135){
+				WAYPOINT nowPos = {0,"", latitude, longitude, "", "", "", 100, "", ""};
+				draw_VORs(nowPos, 0, ratio, ND_x, ND_y, ND_side);
+			}
+			
+			
 		}
 		if(WXR == 1) {
 			setbkmode(TRANSPARENT);
@@ -211,6 +222,11 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 			
 		}
 		if(STA == 1) {
+			
+			if(EHISMode == 135){
+				WAYPOINT nowPos = {0,"", latitude, longitude, "", "", "", 100, "", ""};
+				draw_VORs(nowPos, 0, ratio, ND_x, ND_y, ND_side);
+			}
 			
 		}
 		if(WXR == 1) {

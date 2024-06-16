@@ -65,6 +65,7 @@ extern double Fuelrest_1;
 extern double Fuelrest_2;
 extern double Fuelrest_3;
 extern double Fuelrest_total;
+extern int TAT;
 
 
 extern double N21;
@@ -119,6 +120,9 @@ extern vector<WAYPOINT> airports;
 
 //VOR台信息
 extern vector<WAYPOINT> VORs;
+
+//经过的路线（航线）（显示在地图上）
+extern vector<WAYPOINT> fullRoute;
 
 //==================================//
 

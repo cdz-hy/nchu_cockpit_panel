@@ -9,6 +9,8 @@ void draw_waypoint(WAYPOINT nowPos, double dir, double ratio,double x, double y,
 
 void draw_airports(WAYPOINT nowPos, double dir, double ratio,double x, double y, double side);
 
+void draw_VORs(WAYPOINT nowPos, double dir, double ratio,double x, double y, double side);
+
 void draw_route(WAYPOINT wp, double dir, double ratio,double x, double y, double side);
 
 void draw_waypoint_map(WAYPOINT nowPos, double dir, double ratio,double x, double y, double side);

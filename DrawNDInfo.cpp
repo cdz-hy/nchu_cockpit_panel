@@ -143,9 +143,17 @@ void draw_VORs(WAYPOINT nowPos, double dir, double ratio,double x, double y, dou
 		//当点在圆内时再绘制
 		if(pow(rl, 2) <= pow(side / 104 * 40, 2)){
 			
-			setlinewidth(0.001 * side);
-			setfillcolor(WHITE);
-			ege_ellipse(rx - rhigh / 2, ry - rhigh / 2, rhigh, rhigh);
+			ege_point pointTmp[6] = {
+				{rx + rside / 1.3,ry},
+				{rx + rside / 2.6,ry + rside / 2.6 * 1.732},
+				{rx - rside / 2.6,ry + rside / 2.6 * 1.732},
+				{rx - rside / 1.3,ry},
+				{rx - rside / 2.6,ry - rside / 2.6 * 1.732},
+				{rx + rside / 2.6,ry - rside / 2.6 * 1.732},
+			};
+			
+			setfillcolor(EGEARGB(0x80, 0xff, 0xff, 0xff));
+			ege_fillpoly(6, pointTmp);
 			
 			if(0.01 * side > 5){
 				setcolor(WHITE);
@@ -424,9 +432,9 @@ void draw_waypoint_map(WAYPOINT nowPos, double dir, double ratio,double x, doubl
 	
 	for(auto wp : waypoints){
 		
-//		if(fabs(wp.lat - nowPos.lat) > 3 || fabs(wp.lon - nowPos.lon) > 3){
-//			continue;
-//		}
+		if(fabs(wp.lat - nowPos.lat) > 3 || fabs(wp.lon - nowPos.lon) > 3){
+			continue;
+		}
 		
 		double dis = getDistance(nowPos.lat, nowPos.lon, wp.lat, wp.lon);
 		double bearing = getBearing(nowPos.lat, nowPos.lon, wp.lat, wp.lon);
@@ -586,7 +594,7 @@ void draw_route_map(WAYPOINT wp, double dir, double ratio,double x, double y, do
 		}
 		//两个点都不在时
 		else if((ry < y - side * (71.0 / 104) || ry > y + side * 16 / 104 / 3 || rx > x + side * 48 / 104 || rx < x - side * 48 / 104)
-			|| (ry2 < y - side * (71.0 / 104) || ry2 > y + side * 16 / 104 / 3 || rx2 > x + side * 48 / 104 || rx2 < x - side * 48 / 104)){
+			&& (ry2 < y - side * (71.0 / 104) || ry2 > y + side * 16 / 104 / 3 || rx2 > x + side * 48 / 104 || rx2 < x - side * 48 / 104)){
 			
 			double a[2][3] = {{-(ry2 - ry) / (rx2 - rx) , 1, -(ry2 - ry) / (rx2 - rx) * rx + ry} , {}};
 			

@@ -148,6 +148,11 @@ void data_receive(){
 			closeUDP(sock);
 		}
 		
+		//记录经过的完整航线
+		if(fabs(fmod(fclock(),1)) <= 0.01){
+			WAYPOINT wpTmp = {0, "", latitude, longitude,};
+			fullRoute.push_back(wpTmp);
+		}
 		
 		//判断经纬度是不是在下一个的范围内，如果在就加入已经经过的航线中
 		if(getDis(latitude, longitude, route[nowPos].lat, route[nowPos].lon) <= 1860){
