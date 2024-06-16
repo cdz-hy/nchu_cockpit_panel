@@ -148,6 +148,13 @@ int ND_choice = 3;
 int height = 800;
 int length = 1200;
 
+//新窗口显示范围
+int ifNewWindows = 0;//是否弹窗显示新窗口
+double windwsShow_x = 0;//新窗口需要显示的左上角x坐标
+double windwsShow_y = 0;//新窗口需要显示的左上角y坐标
+double windwsShow_lenth = 0;//新窗口需要显示的x长度
+double windwsShow_height = 0;//新窗口需要显示的y高度
+
 //默认显示背景
 int is_showbk = 1;
 

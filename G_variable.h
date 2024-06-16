@@ -141,6 +141,13 @@ extern int ND_choice;
 extern int height;
 extern int length;
 
+//新窗口显示范围
+extern int ifNewWindows;//是否弹窗显示新窗口
+extern double windwsShow_x;//新窗口需要显示的左上角x坐标
+extern double windwsShow_y;//新窗口需要显示的左上角y坐标
+extern double windwsShow_lenth;//新窗口需要显示的x长度
+extern double windwsShow_height;//新窗口需要显示的y高度
+
 //默认显示背景
 extern int is_showbk;
 
