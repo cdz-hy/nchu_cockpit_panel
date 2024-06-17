@@ -845,15 +845,19 @@ void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side) {
 	getZoomImage(pimg8, pimg8sta, PFD_side*0.4, PFD_side*0.4);
 	getZoomImage(pimg9, pimg9sta, length, height);
 	getZoomImage(pimg10, pimg10sta, PFD_side*0.5, PFD_side*0.55);
-	getZoomImage(pimg11, pimg11sta, PFD_side*0.6, PFD_side*1.6);
-	getZoomImage(pimg12, pimg12sta, PFD_side*0.8, PFD_side*2.6);
+	getZoomImage(pimg11, pimg11sta, PFD_side*1.1, PFD_side*1.5);
+	getZoomImage(pimg12, pimg12sta, PFD_side*3.8, PFD_side*7.2);
+	getZoomImage(pimg13, pimg13sta, PFD_side*7.2, PFD_side*2);
 
 }
 
 void draw_BACKPICTURE(double PFD_x, double PFD_y, double PFD_side){
 	putimage_withalpha(NULL, pimg9, 0 , 0 );
-	putimage_withalpha(NULL, pimg11, PFD_x + 1.85 * PFD_side, PFD_y - 3.3 * PFD_side);
-	putimage_withalpha(NULL, pimg12, PFD_x - 2.5 * PFD_side, PFD_y - 3 * PFD_side);
+	
+	putimage_withalpha(NULL, pimg11, PFD_x + 1.7 * PFD_side, PFD_y - 3.07 * PFD_side);
+	
+	putimage_withalpha(NULL, pimg12, PFD_x - 5.35 * PFD_side, PFD_y - 4.72 * PFD_side);
+putimage_withalpha(NULL, pimg13, PFD_x - 4.15 * PFD_side, PFD_y - 4.62 * PFD_side);
 	
 }
 void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side) {
@@ -885,7 +889,7 @@ void  draw_delImage() {
 	delimage(pimg10);
 	delimage(pimg11);
 	delimage(pimg12);
-
+	delimage(pimg13);
 }
 
 void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height)
@@ -916,4 +920,3 @@ void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height)
 	
 	
 }
-
