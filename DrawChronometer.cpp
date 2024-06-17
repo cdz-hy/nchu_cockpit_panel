@@ -1,4 +1,4 @@
-﻿# include <stdio.h>
+# include <stdio.h>
 # include <graphics.h>
 # include <math.h>
 
@@ -24,7 +24,7 @@ void draw_ChronometerFrame(double center_x, double center_y, double side)
 	double chronometer_r = side * 43 / 108;
 
 	//外框第一层
-	setfillcolor(EGEARGB(0xff, 0x13, 0x15, 0x18));
+	setfillcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
 	ege_point chronometerframe1[9];
 
 	chronometerframe1[0].x = center_x - side * 54 / 108;
