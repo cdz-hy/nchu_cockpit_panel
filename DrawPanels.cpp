@@ -32,6 +32,7 @@ void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side)
 void draw_getImage();
 void  draw_delImage();
 void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side);
+void draw_BACKPICTURE(double PFD_x, double PFD_y, double PFD_side);
 
 
 void draw_panels(){
@@ -638,6 +639,7 @@ void draw_panels(){
 //			
 //			//画EHIS的控制面板
 //			draw_EHIS_control(PFD_x, PFD_y - 1 * PFD_side ,PFD_side);
+			draw_BACKPICTURE(PFD_x, PFD_y , PFD_side);
 			
 			draw_Background_2(PFD_x, PFD_y , PFD_side);
 			
@@ -786,6 +788,21 @@ void draw_getImage() {
 	getimage(pimg5, "./res/standbyPFDdown.png");
 	pimg6 = newimage();
 	getimage(pimg6, "./res/737-baffle.png");
+	pimg7 = newimage();
+	getimage(pimg7, "./res/横杠.png");
+	pimg8 = newimage();
+	getimage(pimg8, "./res/陀螺仪.png");
+	pimg9 = newimage();
+	getimage(pimg9, "./res/背景.jpg");
+	pimg10 = newimage();
+	getimage(pimg10, "./res/陀螺仪旁边.png");
+	pimg11 = newimage();
+	getimage(pimg11, "./res/中间的杠.png");
+	pimg12 = newimage();
+	getimage(pimg12, "./res/左边的杠.png");
+	pimg13 = newimage();
+	getimage(pimg13, "./res/上面的杠.png");
+	
 	
 	pimg1sta = newimage();
 	getimage(pimg1sta, "./res/NOSEWHEEL.png");
@@ -799,6 +816,20 @@ void draw_getImage() {
 	getimage(pimg5sta, "./res/standbyPFDdown.png");
 	pimg6sta = newimage();
 	getimage(pimg6sta, "./res/737-baffle.png");
+	pimg7sta = newimage();
+	getimage(pimg7sta, "./res/横杠.png");
+	pimg8sta = newimage();
+	getimage(pimg8sta, "./res/陀螺仪.png");
+	pimg9sta = newimage();
+	getimage(pimg9sta, "./res/背景.jpg");
+	pimg10sta = newimage();
+	getimage(pimg10sta, "./res/陀螺仪旁边.png");
+	pimg11sta = newimage();
+	getimage(pimg11sta, "./res/中间的杠.png");
+	pimg12sta = newimage();
+	getimage(pimg12sta, "./res/左边的杠.png");
+	pimg13sta = newimage();
+	getimage(pimg13sta, "./res/上面的杠.png");
 	
 }
 
@@ -808,16 +839,34 @@ void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side) {
 	getZoomImage(pimg3, pimg3sta, PFD_side * 0.8, PFD_side * 0.5);
 	getZoomImage(pimg4, pimg4sta, PFD_side * 0.52, PFD_side * 0.52);
 	getZoomImage(pimg5, pimg5sta, PFD_side * 0.52, PFD_side * 0.52);
+	getZoomImage(pimg7, pimg7sta, PFD_side*3.17, PFD_side*0.25);
 	getZoomImage(pimg6, pimg6sta, PFD_side*3.4, PFD_side*1.2);
+	getZoomImage(pimg8, pimg8sta, PFD_side*0.4, PFD_side*0.4);
+	getZoomImage(pimg9, pimg9sta, length, height);
+	getZoomImage(pimg10, pimg10sta, PFD_side*0.5, PFD_side*0.55);
+	getZoomImage(pimg11, pimg11sta, PFD_side*0.6, PFD_side*1.6);
+	getZoomImage(pimg12, pimg12sta, PFD_side*0.8, PFD_side*2.6);
+
 }
 
+void draw_BACKPICTURE(double PFD_x, double PFD_y, double PFD_side){
+	putimage_withalpha(NULL, pimg9, 0 , 0 );
+	putimage_withalpha(NULL, pimg11, PFD_x + 1.85 * PFD_side, PFD_y - 3.3 * PFD_side);
+	putimage_withalpha(NULL, pimg12, PFD_x - 2.5 * PFD_side, PFD_y - 3 * PFD_side);
+	
+}
 void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side) {
+	
 	putimage_withalpha(NULL, pimg1, PFD_x - 1.15 * PFD_side, PFD_y - 0.07 * PFD_side);
 	putimage_withalpha(NULL, pimg2, PFD_x - 1.11 * PFD_side, PFD_y + 0.168 * PFD_side);
 	putimage_withalpha(NULL, pimg3, PFD_x + 1.13 * PFD_side, PFD_y - 1.12 * PFD_side);
 	putimage_withalpha(NULL, pimg4, PFD_x + 2 * PFD_side, PFD_y - 1.1 * PFD_side);
 	putimage_withalpha(NULL, pimg5, PFD_x + 2 * PFD_side, PFD_y - 0.01* PFD_side);
+	putimage_withalpha(NULL, pimg7, PFD_x + 0.7 * PFD_side, PFD_y - 1.835 * PFD_side);
 	putimage_withalpha(NULL, pimg6, PFD_x - 2.26 * PFD_side, PFD_y - 1.8 * PFD_side);
+	putimage_withalpha(NULL, pimg8, PFD_x - 1.26 * PFD_side, PFD_y + 0.9 * PFD_side);
+	putimage_withalpha(NULL, pimg10, PFD_x - 0.85 * PFD_side, PFD_y + 0.8 * PFD_side);
+	
 }
 
 void  draw_delImage() {
@@ -826,7 +875,14 @@ void  draw_delImage() {
 	delimage(pimg3);
 	delimage(pimg4);
 	delimage(pimg5);
+	delimage(pimg7);
 	delimage(pimg6);
+	delimage(pimg8);
+	delimage(pimg9);
+	delimage(pimg10);
+	delimage(pimg11);
+	delimage(pimg12);
+
 }
 
 void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height)
@@ -857,5 +913,4 @@ void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height)
 	
 	
 }
-
 
