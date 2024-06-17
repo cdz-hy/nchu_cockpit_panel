@@ -65,7 +65,6 @@ extern double Fuelrest_1;
 extern double Fuelrest_2;
 extern double Fuelrest_3;
 extern double Fuelrest_total;
-extern int TAT;
 
 
 extern double N21;
@@ -121,9 +120,6 @@ extern vector<WAYPOINT> airports;
 //VOR台信息
 extern vector<WAYPOINT> VORs;
 
-//经过的路线（航线）（显示在地图上）
-extern vector<WAYPOINT> fullRoute;
-
 //==================================//
 
 //==========以下为设置相关==========//
@@ -140,13 +136,6 @@ extern int ND_choice;
 //默认画布大小
 extern int height;
 extern int length;
-
-//新窗口显示范围
-extern int ifNewWindows;//是否弹窗显示新窗口
-extern double windwsShow_x;//新窗口需要显示的左上角x坐标
-extern double windwsShow_y;//新窗口需要显示的左上角y坐标
-extern double windwsShow_lenth;//新窗口需要显示的x长度
-extern double windwsShow_height;//新窗口需要显示的y高度
 
 //默认显示背景
 extern int is_showbk;
@@ -185,6 +174,13 @@ extern PIMAGE pimg3;
 extern PIMAGE pimg4;
 extern PIMAGE pimg5;
 extern PIMAGE pimg6;
+extern PIMAGE pimg7;
+extern PIMAGE pimg8;
+extern PIMAGE pimg9;
+extern PIMAGE pimg10;
+extern PIMAGE pimg11;
+extern PIMAGE pimg12;
+extern PIMAGE pimg13;
 
 extern PIMAGE pimg1sta;
 extern PIMAGE pimg2sta;
@@ -192,6 +188,13 @@ extern PIMAGE pimg3sta;
 extern PIMAGE pimg4sta;
 extern PIMAGE pimg5sta;
 extern PIMAGE pimg6sta;
+extern PIMAGE pimg7sta;
+extern PIMAGE pimg8sta;
+extern PIMAGE pimg9sta;
+extern PIMAGE pimg10sta;
+extern PIMAGE pimg11sta;
+extern PIMAGE pimg12sta;
+extern PIMAGE pimg13sta;
 
 //==================================//
 
