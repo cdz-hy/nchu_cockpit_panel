@@ -60,7 +60,7 @@ double fanSpeed = 5;
 double fanSpeed_1 = 6;
 double gastemp = 7;
 double gastemp_1 = 8;
-double FuelFlowSpeed = 12.04;
+double FuelFlowSpeed = 2.04;
 double FuelFlowSpeed_1 = 1.02;
 int TAT = -7;
 
@@ -115,7 +115,7 @@ double longitude = 115.91;
 vector<WAYPOINT> waypoints;
 vector<WAYPOINT> route;
 
-//已经走过的航线
+//已经走过的航路点
 vector<WAYPOINT> routePassed;
 int nowPos = 0;//目前刚经过第几个航路点
 
@@ -124,6 +124,11 @@ vector<WAYPOINT> airports;
 
 //VOR台信息
 vector<WAYPOINT> VORs;
+
+
+//经过的路线（航线）（显示在地图上）
+vector<WAYPOINT> fullRoute;
+
 
 //==================================//
 
@@ -142,6 +147,13 @@ int ND_choice = 3;
 //默认画布大小
 int height = 800;
 int length = 1200;
+
+//新窗口显示范围
+int ifNewWindows = 0;//是否弹窗显示新窗口
+double windwsShow_x = 0;//新窗口需要显示的左上角x坐标
+double windwsShow_y = 0;//新窗口需要显示的左上角y坐标
+double windwsShow_lenth = 0;//新窗口需要显示的x长度
+double windwsShow_height = 0;//新窗口需要显示的y高度
 
 //默认显示背景
 int is_showbk = 1;
@@ -246,4 +258,5 @@ double MainpanelDU = 75;
 double LOWERDU = 75;
 int MainpanelDU_gear = 0;
 int LOWERDU_gear = 0;
+
 
