@@ -456,6 +456,18 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	double linewidth = Ulength;
 	setlinewidth(linewidth / 2);
 	setcolor(BLACK);
+	setfillcolor(EGEARGB(0xff, 0x14, 0x17, 0x19));
+	int num_6 = 5;
+	ege_point ploynums_6[5] = {
+		{Background_2_x - Ulength * 140 , Background_2_y + Ulength * 60},
+		{Background_2_x + Ulength * 387 , Background_2_y + Ulength * 60},
+		{Background_2_x + Ulength * 387 , Background_2_y - Ulength * 173},
+		{Background_2_x + Ulength * 145 , Background_2_y - Ulength * 173},
+		{Background_2_x - Ulength * 130 , Background_2_y - Ulength * 127.5},
+	};
+	ege_fillpoly(num_6, ploynums_6);
+	
+	
 	ege_line(Background_2_x - Ulength * 58 , Background_2_y - Ulength * 93.5 , Background_2_x - Ulength * 58 , Background_2_y - Ulength * 62 );
 	setlinewidth(linewidth);
 	ege_line(Background_2_x - Ulength * 58 , Background_2_y - Ulength * 62.6 , Background_2_x + Ulength * 194 , Background_2_y - Ulength * 62.6);
