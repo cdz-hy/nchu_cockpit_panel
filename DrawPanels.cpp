@@ -800,7 +800,7 @@ void draw_getImage() {
 	pimg11 = newimage();
 	getimage(pimg11, "./res/中间的杠.png");
 	pimg12 = newimage();
-	getimage(pimg12, "./res/杠.png");
+	getimage(pimg12, "./res/左边的杠.png");
 	pimg13 = newimage();
 	getimage(pimg13, "./res/上面的杠.png");
 	
@@ -828,7 +828,7 @@ void draw_getImage() {
 	pimg11sta = newimage();
 	getimage(pimg11sta, "./res/中间的杠.png");
 	pimg12sta = newimage();
-	getimage(pimg12sta, "./res/gang.png");
+	getimage(pimg12sta, "./res/左边的杠.png");
 	pimg13sta = newimage();
 	getimage(pimg13sta, "./res/上面的杠.png");
 	
