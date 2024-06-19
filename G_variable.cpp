@@ -274,4 +274,42 @@ double LOWERDU = 75;
 int MainpanelDU_gear = 0;
 int LOWERDU_gear = 0;
 
+//老长的控制面板
 
+double COURSE_1 = 0;//0上1下
+double COURSE_2 = 0;
+int FD_1 = 0;
+int FD_2 = 0;
+int COURSE_1NUM = 110;
+int COURSE_2NUM = 110;
+int AT = 1;//0下1上
+
+int N1 = 0;
+int SPEED = 0;
+int LVLCHG = 0;
+int VNAV = 0;
+int LNAV = 0;
+int VORLOC = 0;
+int APP = 0;
+int HDGSEL = 0;
+int CO = 0;//1显示左边，0显示右边
+int CO_1 = 11;
+int CO_2 = 110;//右边数字
+int SPDINTV = 0;
+double INSMACHangle = 0;
+int HEADING = 100;
+double HEADING_1 = 0;//上面那层
+double HEADING_2 = 90;//下面那层
+int ALTHLD = 0;
+int VS = 0;
+double ALTITUDEangle = 0;
+int ALTITUDE = 99400;
+double VERTSPEEDangle = 0;
+int VERTSPEED = -5000;
+int ALTINTV = 0;
+
+
+int CMDA = 0;
+int CWSA = 0;
+int CWSB = 0;
+int CMDB = 0;
