@@ -1,5 +1,8 @@
 #include <vector>
 #include<graphics.h>
+#include <mutex>
+# include <condition_variable>
+# include <functional>
 #include "G_structs.h"
 using namespace std;
 
@@ -148,12 +151,21 @@ int ND_choice = 3;
 int height = 800;
 int length = 1200;
 
+//ege窗口上下文
+HDC egeHDC = nullptr;
+HWND egeHWND = nullptr;
+
 //新窗口显示范围
 int ifNewWindows = 0;//是否弹窗显示新窗口
 double windwsShow_x = 0;//新窗口需要显示的左上角x坐标
 double windwsShow_y = 0;//新窗口需要显示的左上角y坐标
 double windwsShow_lenth = 0;//新窗口需要显示的x长度
 double windwsShow_height = 0;//新窗口需要显示的y高度
+
+//新窗口所需
+std::mutex mtx;
+std::condition_variable cv;
+bool ready = true;
 
 //默认显示背景
 int is_showbk = 1;
@@ -164,6 +176,9 @@ int UDP_transmission = 0;
 //初始IP地址和端口
 char *IP_address = "192.168.0.0";
 int UDP_port = 49001;
+
+//地图更新状态
+int renewMap = 1;
 
 //展示FPS
 int showFPS = 1;
