@@ -1,0 +1,113 @@
+# Project: CurlTestFinal
+# Makefile created by Red Panda C++ 2.26.2249
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = CurlTestFinal_private.res
+OBJ      = DrawRMI.o DrawRCDI.o DrawPanels.o DrawChronometer.o DrawAirspeed.o DrawBackground.o DrawAI.o DrawEICAS.o main.o DrawND.o DrawLight.o NewWindows.o KeyboardControl.o DataReceive.o DrawEHISControl.o ReadFiles.o G_variable.o xplaneConnect.o DrawFrame.o DrawCompass.o DrawPFDStanby.o DrawAlt.o DrawPFD.o DrawLightControl.o MapReceive.o DrawNDInfo.o DrawScrew.o $(RES)
+LINKOBJ  = DrawRMI.o DrawRCDI.o DrawPanels.o DrawChronometer.o DrawAirspeed.o DrawBackground.o DrawAI.o DrawEICAS.o main.o DrawND.o DrawLight.o NewWindows.o KeyboardControl.o DataReceive.o DrawEHISControl.o ReadFiles.o G_variable.o xplaneConnect.o DrawFrame.o DrawCompass.o DrawPFDStanby.o DrawAlt.o DrawPFD.o DrawLightControl.o MapReceive.o DrawNDInfo.o DrawScrew.o CurlTestFinal_private.res
+CLEANOBJ  =  DrawRMI.o DrawRCDI.o DrawPanels.o DrawChronometer.o DrawAirspeed.o DrawBackground.o DrawAI.o DrawEICAS.o main.o DrawND.o DrawLight.o NewWindows.o KeyboardControl.o DataReceive.o DrawEHISControl.o ReadFiles.o G_variable.o xplaneConnect.o DrawFrame.o DrawCompass.o DrawPFDStanby.o DrawAlt.o DrawPFD.o DrawLightControl.o MapReceive.o DrawNDInfo.o DrawScrew.o  CurlTestFinal_private.res CurlTestFinal.exe
+LIBS     =  -L"D:/cURL/curl-8.8.0_2-win64-mingw/lib" -s -lgraphics64 -lws2_32 -mwindows -lgraphics -luuid -lmsimg32 -lgdi32 -limm32 -lole32 -loleaut32 -lwinmm -lgdiplus   -lcurl -g   D:/cURL/curl-8.8.0_2-win64-mingw/lib/libbrotlicommon.a  D:/cURL/curl-8.8.0_2-win64-mingw/lib/libbrotlidec.a  D:/cURL/curl-8.8.0_2-win64-mingw/lib/libcrypto.a  D:/cURL/curl-8.8.0_2-win64-mingw/lib/libcurl.a  D:/cURL/curl-8.8.0_2-win64-mingw/lib/libcurl.dll.a  D:/cURL/curl-8.8.0_2-win64-mingw/lib/libnghttp2.a  D:/cURL/curl-8.8.0_2-win64-mingw/lib/libnghttp3.a  D:/cURL/curl-8.8.0_2-win64-mingw/lib/libngtcp2.a  D:/cURL/curl-8.8.0_2-win64-mingw/lib/libngtcp2_crypto_quictls.a  D:/cURL/curl-8.8.0_2-win64-mingw/lib/libpsl.a  D:/cURL/curl-8.8.0_2-win64-mingw/lib/libssh2.a  D:/cURL/curl-8.8.0_2-win64-mingw/lib/libssl.a  D:/cURL/curl-8.8.0_2-win64-mingw/lib/libz.a  D:/cURL/curl-8.8.0_2-win64-mingw/lib/libzstd.a -static
+INCS     =   -I"D:/cURL/curl-8.8.0_2-win64-mingw/include"
+CXXINCS  =   -I"D:/cURL/curl-8.8.0_2-win64-mingw/include"
+BIN      = CurlTestFinal.exe
+CXXFLAGS = $(CXXINCS)  -O2 -pipe -lgraphics64
+CFLAGS   = $(INCS)  -O2 -pipe -lgraphics64
+RM       = del /q /f
+WINDRESFLAGS  = 
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	-$(RM) $(CLEANOBJ) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+DrawRMI.o: DrawRMI.cpp DrawFrame.h DrawLight.h
+	$(CPP) -c DrawRMI.cpp -o DrawRMI.o $(CXXFLAGS) 
+
+DrawRCDI.o: DrawRCDI.cpp DrawScrew.h
+	$(CPP) -c DrawRCDI.cpp -o DrawRCDI.o $(CXXFLAGS) 
+
+DrawPanels.o: DrawPanels.cpp G_variable.h DrawNDInfo.h DrawFrame.h DrawScrew.h DrawAirspeed.h DrawCompass.h DrawND.h DrawPFDStandby.h DrawEHISControl.h DrawAI.h DrawRCDI.h DrawAlt.h DrawEICAS.h G_structs.h DrawRMI.h DrawBackground.h DrawChronometer.h DrawPFD.h DrawLightControl.h
+	$(CPP) -c DrawPanels.cpp -o DrawPanels.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawChronometer.o: DrawChronometer.cpp
+	$(CPP) -c DrawChronometer.cpp -o DrawChronometer.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawAirspeed.o: DrawAirspeed.cpp DrawScrew.h DrawLight.h
+	$(CPP) -c DrawAirspeed.cpp -o DrawAirspeed.o $(CXXFLAGS) 
+
+DrawBackground.o: DrawBackground.cpp DrawScrew.h
+	$(CPP) -c DrawBackground.cpp -o DrawBackground.o $(CXXFLAGS) 
+
+DrawAI.o: DrawAI.cpp DrawScrew.h
+	$(CPP) -c DrawAI.cpp -o DrawAI.o $(CXXFLAGS) 
+
+DrawEICAS.o: DrawEICAS.cpp DrawFrame.h
+	$(CPP) -c DrawEICAS.cpp -o DrawEICAS.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+main.o: main.cpp G_variable.h ReadFiles.h DrawPanels.h DataReceive.h MapReceive.h NewWindows.h KeyboardControl.h G_structs.h
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawND.o: DrawND.cpp G_variable.h DrawNDInfo.h DrawFrame.h DrawScrew.h G_structs.h
+	$(CPP) -c DrawND.cpp -o DrawND.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawLight.o: DrawLight.cpp
+	$(CPP) -c DrawLight.cpp -o DrawLight.o $(CXXFLAGS) 
+
+NewWindows.o: NewWindows.cpp
+	$(CPP) -c NewWindows.cpp -o NewWindows.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+KeyboardControl.o: KeyboardControl.cpp G_variable.h G_structs.h
+	$(CPP) -c KeyboardControl.cpp -o KeyboardControl.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DataReceive.o: DataReceive.cpp G_variable.h G_structs.h xplaneConnect.h
+	$(CPP) -c DataReceive.cpp -o DataReceive.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawEHISControl.o: DrawEHISControl.cpp
+	$(CPP) -c DrawEHISControl.cpp -o DrawEHISControl.o $(CXXFLAGS) 
+
+ReadFiles.o: ReadFiles.cpp G_variable.h G_structs.h
+	$(CPP) -c ReadFiles.cpp -o ReadFiles.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+G_variable.o: G_variable.cpp G_structs.h
+	$(CPP) -c G_variable.cpp -o G_variable.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+xplaneConnect.o: xplaneConnect.c xplaneConnect.h
+	$(CC) -c xplaneConnect.c -o xplaneConnect.o $(CFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawFrame.o: DrawFrame.cpp
+	$(CPP) -c DrawFrame.cpp -o DrawFrame.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawCompass.o: DrawCompass.cpp DrawScrew.h
+	$(CPP) -c DrawCompass.cpp -o DrawCompass.o $(CXXFLAGS) 
+
+DrawPFDStanby.o: DrawPFDStanby.cpp
+	$(CPP) -c DrawPFDStanby.cpp -o DrawPFDStanby.o $(CXXFLAGS) 
+
+DrawAlt.o: DrawAlt.cpp DrawFrame.h DrawScrew.h DrawLight.h
+	$(CPP) -c DrawAlt.cpp -o DrawAlt.o $(CXXFLAGS) 
+
+DrawPFD.o: DrawPFD.cpp G_variable.h DrawFrame.h G_structs.h
+	$(CPP) -c DrawPFD.cpp -o DrawPFD.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawLightControl.o: DrawLightControl.cpp
+	$(CPP) -c DrawLightControl.cpp -o DrawLightControl.o $(CXXFLAGS) 
+
+MapReceive.o: MapReceive.cpp
+	$(CPP) -c MapReceive.cpp -o MapReceive.o $(CXXFLAGS) 
+
+DrawNDInfo.o: DrawNDInfo.cpp G_structs.h
+	$(CPP) -c DrawNDInfo.cpp -o DrawNDInfo.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawScrew.o: DrawScrew.cpp
+	$(CPP) -c DrawScrew.cpp -o DrawScrew.o $(CXXFLAGS) 
+
+CurlTestFinal_private.res: CurlTestFinal_private.rc 
+	$(WINDRES) -i CurlTestFinal_private.rc --input-format=rc -o CurlTestFinal_private.res -O coff $(WINDRESFLAGS) 
+
