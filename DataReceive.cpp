@@ -10,12 +10,13 @@ double getDis(double latitude1, double longitude1, double latitude2, double long
 
 void data_receive(){
 	
+	XPCSocket sock = aopenUDP(IP_address, UDP_port, UDP_port);
+	
 	for(;is_run();api_sleep(16)){
 		
 		
 		if (UDP_transmission) {
 			
-			XPCSocket sock = aopenUDP(IP_address, UDP_port, UDP_port);
 			
 			//读取接收的信息
 			const int rows = 28;
@@ -59,6 +60,8 @@ void data_receive(){
 					else if(fabs(data[i][0] - 18) <= 0.001){
 						sideSlipAngle = -data[i][8] * PI / 4 / 16 * 0.7;
 						attackAngle = data[i][1];
+						pathAngle = data[i][1];
+						driftAngle = data[i][2];
 					}
 					else if(fabs(data[i][0] - 20) <= 0.001){
 						altitude = data[i][6];
@@ -145,11 +148,11 @@ void data_receive(){
 				
 			}
 			
-			closeUDP(sock);
+			
 		}
 		
 		//记录经过的完整航线
-		if(fabs(fmod(fclock(),1)) <= 0.01){
+		if(fabs(fmod(fclock(),1)) <= 0.05){
 			WAYPOINT wpTmp = {0, "", latitude, longitude,};
 			fullRoute.push_back(wpTmp);
 		}
@@ -162,6 +165,7 @@ void data_receive(){
 		
 	}
 	
+	closeUDP(sock);
 
 }
 

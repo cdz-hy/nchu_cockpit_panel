@@ -4,6 +4,7 @@
 #include<stdio.h>
 
 #include "DrawFrame.h"
+#include "DrawScrew.h"
 
 extern double Oangle_1;
 extern double Oangle_2;
@@ -140,9 +141,9 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	font.lfQuality = ANTIALIASED_QUALITY;
 	setfont(&font);
 	if(FuelFlowSpeed<10){
-	char num_2[64];//左上下左
-	sprintf_s(num_2, "%.2f", FuelFlowSpeed);
-	ege_drawtext(num_2, Oilcenterx - Ulength * 26.5, Oilcentery + Ulength * 7.2);
+		char num_2[64];//左上下左
+		sprintf_s(num_2, "%.2f", FuelFlowSpeed);
+		ege_drawtext(num_2, Oilcenterx - Ulength * 26.5, Oilcentery + Ulength * 7.2);
 	}
 	else if(FuelFlowSpeed>=10){
 		char num_2[64];
@@ -150,9 +151,9 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 		ege_drawtext(num_2, Oilcenterx - Ulength * 26.5, Oilcentery + Ulength * 7.2);	
 	}
 	if(FuelFlowSpeed_1<10){
-	char num_7[64];//左上下右
-	sprintf_s(num_7, "%.2f", FuelFlowSpeed_1);
-	ege_drawtext(num_7, Oilcenterx - Ulength * 3.5, Oilcentery + Ulength * 7.2);
+		char num_7[64];//左上下右
+		sprintf_s(num_7, "%.2f", FuelFlowSpeed_1);
+		ege_drawtext(num_7, Oilcenterx - Ulength * 3.5, Oilcentery + Ulength * 7.2);
 	}
 	else if(FuelFlowSpeed_1>=10){
 		char num_7[64];//左上下右
@@ -371,6 +372,11 @@ void draw_EICAS(double Oilcenterx, double Oilcentery, double side) {
 	
 	draw_PFD_frame(Oilcenterx, Oilcentery, side);
 	
+	//底部螺丝等
+	draw_screw3(Oilcenterx + side / 2, Oilcentery +  side / 1.668,side / 22, 45);
+	setfillcolor(EGEARGB(0xff,79,79,75));
+	ege_fillellipse(Oilcenterx - side / 2.4 - side / 22 / 2,Oilcentery +  side / 1.72 - side / 22 / 2,side / 22,side / 22);
+	
 }
 
 
@@ -398,7 +404,7 @@ void draw_LowerEICAS_frame(double x, double y, double side) {
 }
 
 void draw_LowerEICAS_lineFrames(double x, double y, double side) {
-	setlinewidth(side * 0.007);
+	setlinewidth(side * 0.005);
 	setcolor(WHITE);
 	
 	//第一行两个框
@@ -429,6 +435,8 @@ void draw_LowerEICAS_lineFrames(double x, double y, double side) {
 }
 
 void draw_LowerEICAS_lines(double x, double y, double side) {
+	
+	setlinewidth(side * 0.005);
 	//绘制第一组橙色小横线
 	setcolor(EGEARGB(255, 0X85, 0X49, 0X06));
 	ege_line(x + side * 305.0 / 500, y + side * 585.0 / 500, x + side * 313.0 / 500, y + side * 585.0 / 500);
@@ -443,10 +451,72 @@ void draw_LowerEICAS_lines(double x, double y, double side) {
 	ege_line(x + side * 306.0 / 500, y + side * 456.0 / 500, x + side * 306.0 / 500, y + side * 599.0 / 500);
 	ege_line(x + side * 496.0 / 500, y + side * 456.0 / 500, x + side * 496.0 / 500, y + side * 599.0 / 500);
 	
+	//第一组竖线上的三角方块是0-100，且在29以下不显示
+	//计算左侧三角形的三个坐标值
+	double x_press1 = x + side * 306.0 / 500;
+	double x_press2 = x + side * 496.0 / 500;
+	double x_press1_2 = x + side * 340 / 500;
+	double x_press2_2 = x + side * 463 / 500;
+	
+	double y_press1 = y + side * 599.0 / 500 - (599 - 456) * oilPress1 / 100 * side / 500;
+	double y_press1_1 = y_press1 + side * 13.5 / 500;
+	double y_press1_2 = y_press1 - side * 13.5 / 500;
+	
+	double y_press2 = y + side * 599.0 / 500 - (599 - 456) * oilPress2 / 100 * side / 500;
+	double y_press2_1 = y_press2 + side * 13.5 / 500;
+	double y_press2_2 = y_press2 - side * 13.5 / 500;
+	
+	if (oilPress1 >= 29) {
+		setfillcolor(WHITE);
+		ege_point points[3] = {
+			{x_press1,y_press1},
+			{x_press1_2,y_press1_1},
+			{x_press1_2,y_press1_2},
+		};
+		ege_fillpoly(3, points);
+	}
+	if (oilPress2 >= 29) {
+		setfillcolor(WHITE);
+		ege_point points[3] = {
+			{x_press2,y_press2},
+			{x_press2_2,y_press2_1},
+			{x_press2_2,y_press2_2},
+		};
+		ege_fillpoly(3, points);
+	}
+	
 	//第二组竖线
 	ege_line(x + side * 306.0 / 500, y + side * 698.0 / 500, x + side * 306.0 / 500, y + side * 840.0 / 500);
 	ege_line(x + side * 497.0 / 500, y + side * 698.0 / 500, x + side * 497.0 / 500, y + side * 840.0 / 500);
 	
+	//第二组竖线上的三角形是0-160
+	double x_temp1 = x + side * 306.0 / 500;
+	double x_temp2 = x + side * 497.0 / 500;
+	double x_temp1_2 = x + side * 340 / 500;
+	double x_temp2_2 = x + side * 463 / 500;
+	
+	double y_temp1 = y + side * 840.0 / 500 - (840.0 - 698.0) * oilTemp1 / 180 * side / 500;
+	double y_temp1_1 = y_temp1 + side * 13.5 / 500;
+	double y_temp1_2 = y_temp1 - side * 13.5 / 500;
+	
+	double y_temp2 = y + side * 840.0 / 500 - (840.0 - 698.0) * oilTemp2 / 180 * side / 500;
+	double y_temp2_1 = y_temp2 + side * 13.5 / 500;
+	double y_temp2_2 = y_temp2 - side * 13.5 / 500;
+	
+	setfillcolor(WHITE);
+	ege_point points[3] = {
+		{x_temp1,y_temp1},
+		{x_temp1_2,y_temp1_1},
+		{x_temp1_2,y_temp1_2},
+	};
+	ege_fillpoly(3, points);
+	
+	ege_point points1[3] = {
+		{x_temp2,y_temp2},
+		{x_temp2_2,y_temp2_1},
+		{x_temp2_2,y_temp2_2},
+	};
+	ege_fillpoly(3, points1);
 	//第三组竖线
 	ege_line(x + side * 306.0 / 500, y + side * 998.0 / 500, x + side * 306.0 / 500, y + side * 1147.0 / 500);
 	ege_line(x + side * 497.0 / 500, y + side * 998.0 / 500, x + side * 497.0 / 500, y + side * 1147.0 / 500);
@@ -476,12 +546,14 @@ void draw_LowerEICAS_arc(double x, double y, double side) {
 	ege_arc(x + 567.0 / 500 * side - 112.0 / 500 * side, y + 169.0 / 500 * side - 112.0 / 500 * side, side * 224.0 / 500, side * 224.0 / 500, 0, 210);
 	
 }
+
 void draw_LowerEICAS_arcIn(double x, double y, double side) {
 	setfillcolor(EGEARGB(255, 0X27, 0X22, 0X29));
 	setcolor(BLACK);
 	sector(x + side * 229.0 / 500, y + side * 169 / 500, - N21 * 2 - 2, 0, 112 * side / 500, 112 * side / 500);
 	sector(x + side * 567.0 / 500, y + side * 169 / 500, - N22 * 2 - 2, 0, 112 * side / 500, 112 * side / 500);
 }
+
 void draw_LowerEICAS_pointer(double x, double y, double side) {
 	side = side / 500;
 	double r = 112 * side;
@@ -497,6 +569,10 @@ void draw_LowerEICAS_words(double x, double y, double side) {
 	double number_width = 13 * side * 2.0;
 	setcolor(EGEARGB(255,0X3B,0X82,0X8F));
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
+	LOGFONTW FMC_font;
+	getfont(&FMC_font);
+	FMC_font.lfWeight = side * 3;
+	setfont(&FMC_font);
 	outtextxy(x + side * 379, y + side * 255, 'N');
 	outtextxy(x + side * 410, y + side * 268, '2');
 	
@@ -524,12 +600,16 @@ void draw_LowerEICAS_words(double x, double y, double side) {
 	//绘制OIL
 	ege_drawtext("VIB", x + 400 * side, y + 1073 * side);
 }
+
 void draw_LowerEICAS_numbers(double x, double y, double side) {
 	side = side / 500;
 	double number_height = 25 * side * 2.2 * 1.5;
 	double number_width = 13 * side * 2.0 * 1.5;
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
-	
+	LOGFONTW FMC_font;
+	getfont(&FMC_font);
+	FMC_font.lfWeight = side * 3;
+	setfont(&FMC_font);
 	setcolor(WHITE);
 	char N21num[64];
 	char N22num[64];
@@ -612,6 +692,9 @@ void draw_LowerEICAS_numbers(double x, double y, double side) {
 	
 }
 
+
+extern double LOWERangle;
+
 void draw_EICAS2(double x, double y, double side) {
 	
 	side /= 2.35;
@@ -627,4 +710,15 @@ void draw_EICAS2(double x, double y, double side) {
 	draw_LowerEICAS_pointer(x, y, side);//绘制指针
 	draw_LowerEICAS_words(x, y, side);//绘制所有的英文字母
 	draw_LowerEICAS_numbers(x, y, side);//绘制所有的数字
+	
+	
+	side *= 2.35;
+	
+	//灯光遮盖效果
+	setfillcolor(EGEARGB(255 - (int)LOWERangle, 0x00, 0x00, 0x00));
+	ege_fillrect(x, y, side ,side);
+	
+	//边框
+	draw_PFD_frame(x + side / 1.90, y + side / 2 ,side);
+	
 }         

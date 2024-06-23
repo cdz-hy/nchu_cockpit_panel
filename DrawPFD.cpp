@@ -4,6 +4,7 @@
 #include <math.h>
 
 #include "DrawFrame.h"
+#include "DrawScrew.h"
 #include "G_variable.h"
 
 //函数声明
@@ -47,6 +48,11 @@ void draw_PFD(double PFD_x, double PFD_y, double PFD_side){
 	
 	draw_PFD_frame(PFD_x + 0.06 * PFD_side, PFD_y ,PFD_side);
 	
+	//底部螺丝等
+	draw_screw3(PFD_x + PFD_side / 1.79, PFD_y +  PFD_side / 1.668,PFD_side / 22, 45);
+	setfillcolor(EGEARGB(0xff,79,79,75));
+	ege_fillellipse(PFD_x - PFD_side / 2.80 - PFD_side / 22 / 2,PFD_y +  PFD_side / 1.72 - PFD_side / 22 / 2,PFD_side / 22,PFD_side / 22);
+
 }
 //==========================================================================================//
 
@@ -68,6 +74,7 @@ void draw_PFD_AI_gear();
 void draw_PFD_AI_pointer();
 void draw_PFD_AI_occlusion();
 void draw_PFD_AI_alt();
+void draw_AI_FPV();
 
 //引用全局变量
 extern double pitchAngle;
@@ -100,6 +107,11 @@ void draw_PFD_AI(double x, double y, double side){
 	//绘制周围遮挡的（黑边）
 	draw_PFD_AI_occlusion();
 	
+	//绘制速度矢量（FPV）
+	if(FPV == 1){
+		draw_AI_FPV();
+	}
+	
 	//绘制高度警告（对地）
 	draw_PFD_AI_alt();
 //	if (GetAsyncKeyState(0x41) & 0x8000)
@@ -110,6 +122,7 @@ void draw_PFD_AI(double x, double y, double side){
 //		pitchAngle += 0.002;
 //	if (GetAsyncKeyState(0x53) & 0x8000)
 //		pitchAngle -= 0.002;
+	
 	
 }
 
@@ -476,6 +489,36 @@ void draw_PFD_AI_occlusion(){
 	
 }
 
+
+void draw_AI_FPV(){
+	
+	
+	double FPV_centerx = AI_x - 0.65 * AI_side * (driftAngle / 10);
+	double FPV_centery = AI_y + 0.8 * AI_side * (pathAngle / 20);
+	double FPV_side = 0.11 * AI_side; 
+	
+	if(driftAngle >= 10){
+		FPV_centerx = AI_x - 0.65 * AI_side;
+	}
+	if(pathAngle >= 20){
+		FPV_centery = AI_y + 0.8 * AI_side;
+	}
+	
+	if(driftAngle <= -10){
+		FPV_centerx = AI_x + 0.65 * AI_side;
+	}
+	if(pathAngle <= -20){
+		FPV_centery = AI_y - 0.8 * AI_side;
+	}
+	
+	setcolor(WHITE);
+	setlinewidth(0.018 * AI_side);
+	ege_ellipse(FPV_centerx - FPV_side / 2, FPV_centery - FPV_side / 2, FPV_side, FPV_side);
+	ege_line(FPV_centerx + FPV_side / 2, FPV_centery, FPV_centerx + FPV_side / 2 + 0.13 * AI_side, FPV_centery);
+	ege_line(FPV_centerx - FPV_side / 2, FPV_centery, FPV_centerx - FPV_side / 2 - 0.13 * AI_side, FPV_centery);
+	ege_line(FPV_centerx, FPV_centery - FPV_side / 2 - 0.05 * AI_side, FPV_centerx, FPV_centery- FPV_side / 2);
+	
+}
 
 void draw_PFD_AI_alt() {
 	

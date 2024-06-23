@@ -1,13 +1,13 @@
 #include <windows.h> 
 #include <math.h> 
-//#include <graphics.h> 
+#include <graphics.h> 
 
 #include "G_variable.h"
 
 void get_keymsg() {
 		
 	
-//	for(;;Sleep(16)){
+	for(;is_run();api_sleep(16)){
 		
 		//键盘模拟操作测试
 		
@@ -116,7 +116,7 @@ void get_keymsg() {
 		}
 		
 		
-//	}
+	}
 	
 		
 

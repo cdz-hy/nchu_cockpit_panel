@@ -43,11 +43,16 @@ void draw_PFD_standby(double PFD_x, double PFD_y, double PFD_side){
 	//绘制备用PFD空速
 	draw_standy_airSpeed(PFD_x - 0.8 * PFD_side, PFD_y + 0.02 * PFD_side, PFD_side / 1.65);
 	
+	//灯光遮盖效果
+	setfillcolor(EGEARGB(0x23, 0x00, 0x00, 0x00));
+	ege_fillrect(PFD_x - PFD_side * 1.2, PFD_y - PFD_side * 1.1,2.4 * PFD_side ,2.3 * PFD_side);
+	
 	//绘制PFD边框
 	draw_smallpfd_frame(PFD_x + PFD_side/20, PFD_y +PFD_side/20, PFD_side*2.3);
 	
 	//绘制pfd右上角的气压指示
 	drwa_ND_atmosphericPressure(PFD_x,PFD_y,PFD_side);
+	
 }
 
 
@@ -904,15 +909,13 @@ void draw_alt_standy_frame(double center_x, double center_y, double side) {
 //绘制线框和黑色填充
 
 void draw_alt_standy_wireframe(double center_x, double center_y, double side) {
-	setcolor(EGEARGB(250, 177, 177, 178));
+	setcolor(EGEARGB(200, 177, 177, 178));
 	double x = center_x + 31.5 / 96 * side - 78.0 / 96 * side;
 	double y = center_y - 24.0 / 96 * side;
 	
 	double wide = side * 78 / 96;
 	double height = side * 48 / 96;
-	
-	setcolor(EGEARGB(250,177,177,178));
-	setlinewidth(side * 0.02);
+	setlinewidth(side * 0.01);
 	setfillcolor(BLACK);
 	ege_fillrect(x, y, wide, height);
 	ege_rectangle(x, y, wide, height);
@@ -922,7 +925,7 @@ void draw_alt_standy_wireframe(double center_x, double center_y, double side) {
 //画其他的数字
 
 void draw_alt_else(double center_x, double center_y, double side, double height) {
-	setcolor(WHITE);
+	setcolor(EGEARGB(200, 177, 177, 178));
 	double y = center_y - side * 0.17;
 	double x = center_x;
 	double number_height = side * 2.5 / 96.0 * 2 * 6.5;
@@ -937,14 +940,20 @@ void draw_alt_else(double center_x, double center_y, double side, double height)
 	double thou = fmod(height, 10000);
 	thou = thou / 1000;
 	setfont(number_height * 1.2, number_width * 1.2, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
-	
+	LOGFONTW FMC_font;
+	getfont(&FMC_font);
+	FMC_font.lfWeight = side * 3;
+	setfont(&FMC_font);
 	outtextxy(center_x - number_width * 2.0, y - number_height * 0.125, num[(int)thou + 1]);
 	
 	if (height > 9999.9) {
 		double tenThou = fmod(height, 100000);
 		tenThou = tenThou / 10000;
 		setfont(number_height * 1.2, number_width * 1.2, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
-		
+		LOGFONTW FMC_font;
+		getfont(&FMC_font);
+		FMC_font.lfWeight = side * 3;
+		setfont(&FMC_font);
 		outtextxy(center_x - number_width * 3.25, y - number_height * 0.125, num[(int)tenThou + 1]);
 	}
 	else {
@@ -995,7 +1004,7 @@ void draw_alt_else(double center_x, double center_y, double side, double height)
 //画十位和个位
 
 void draw_alt_10(double center_x,double center_y,double side,double height) {
-	setcolor(WHITE);
+	setcolor(EGEARGB(200, 177, 177, 178));
 	double y = center_y - side * 0.17;
 	double x = center_x;
 	double number_height = side  * 2.5 / 96.0 * 2 * 6.5;
@@ -1028,7 +1037,10 @@ void draw_alt_10(double center_x,double center_y,double side,double height) {
 	//设定字体
 	settextjustify(LEFT_TEXT, TOP_TEXT);
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
-	
+	LOGFONTW FMC_font;
+	getfont(&FMC_font);
+	FMC_font.lfWeight = side * 3;
+	setfont(&FMC_font);
 	//将背景颜色设置成透明
 	
 	setbkmode(1);
@@ -1069,7 +1081,7 @@ void draw_alt_NumShadow(double center_x, double center_y, double side) {
 }
 
 void draw_alt_lines(double center_x, double center_y, double side) {
-	setcolor(WHITE);
+	setcolor(EGEARGB(200, 177, 177, 178));
 	
 	setlinewidth(side * 0.005);
 	int datas[11] = {};
@@ -1095,35 +1107,38 @@ void draw_alt_lines(double center_x, double center_y, double side) {
 	
 	//画数字
 	settextjustify(LEFT_TEXT, TOP_TEXT);
-	double number_height = side * 2.5 / 96.0 * 2 * 6.5 * 0.7;
-	double number_width = side * 2.5 / 96.0 * 5 * 0.7;
+	double number_height = side * 2.5 / 96.0 * 2 * 6.5 * 0.9;
+	double number_width = side * 2.5 / 96.0 * 5 * 0.9;
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
-	
+	LOGFONTW FMC_font;
+	getfont(&FMC_font);
+	FMC_font.lfWeight = side * 3;
+	setfont(&FMC_font);
 	for (int i = 0;i < 11;i++) {
 		double y = center_y - 165.5 / 96 * side + ten / 100 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
-		double x = center_x + 14.0 / 96 * side;
+		double x = center_x + 11.0 / 96 * side;
 		int h = datas[i] / 100;
 		if (datas[10 - i] == 0) {
 			double x1 = center_x + 14.0 / 96 * side;
 			ege_drawtext("000", x1, y);
 		}
-		else if (fmod(datas[10 - i], 200) == 0) 
+		else if (fmod(datas[10 - i], 200) == 0)
 		{	
 			if (datas[10 - i] < 1000 && datas[10 - i] > -1000) {
 				char str[64];
 				snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
 				ege_drawtext(str, x, y);
 			}
-			else if (datas[10 - i] >= 1000 && datas[10 - i] <=  10000)
+			else if (datas[10 - i] >= 1000 && datas[10 - i] <  10000)
 			{
-				double x1 = center_x + 11.0 / 96 * side;
+				double x1 = center_x + 8.0 / 96 * side;
 				char str[64];
 				snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
 				ege_drawtext(str, x1, y);
 			}
 			else
 			{
-				double x1 = center_x + 6.5 / 96 * side;
+				double x1 = center_x + 2.5 / 96 * side;
 				char str[64];
 				snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
 				ege_drawtext(str, x1, y);
@@ -1150,9 +1165,21 @@ void draw_alt_Standy_shadow(double center_x, double center_y, double side) {
 	
 	wide = side * 78 / 96;
 	height = side * 48 / 96;
-	setcolor(EGEARGB(200,177,177,178));
-	setlinewidth(side * 0.02);
+	setcolor(WHITE);
 	ege_rectangle(x, y, wide, height);
+	
+}
+
+void draw_standy_alt_main(double center_x, double center_y, double side) {
+	double frame_wide = side * 63 / 96;//底框的宽度
+	double frame_height = side * 331 / 96;//底框的长度
+	
+	double frame_x = center_x - 31.5 / 96 * side;
+	double frame_y = center_y - 165.5 / 96.0 * side;
+	setfillcolor(BLACK);
+	double lenth = side * 0.5;
+	ege_fillrect(frame_x, frame_y - lenth, frame_wide, lenth);
+	ege_fillrect(frame_x, frame_y + frame_height, frame_wide, lenth);
 }
 
 //总绘制函数
@@ -1167,14 +1194,18 @@ void draw_standy_alt(double center_x, double center_y, double side) {
 		height = altitude;
 	}
 	draw_alt_standy_frame(center_x, center_y, side);//底框
+	
 	draw_alt_lines(center_x, center_y, side);//绘制下层表的所有刻度线
 	draw_alt_standy_wireframe(center_x, center_y, side);//线框和线框下的底色
 	draw_alt_10(center_x, center_y, side,height);//十位及个位
 	draw_alt_else(center_x, center_y, side, height);//其他位
 	draw_alt_NumShadow(center_x, center_y, side);//数字的遮盖
-	draw_alt_Standy_shadow(center_x, center_y, side);
-	
+	draw_alt_Standy_shadow(center_x, center_y, side);//数字显示的上下的小阴影
+	draw_standy_alt_main(center_x, center_y, side);//总遮挡
 }
+
+
+
 
 
 
@@ -1204,7 +1235,6 @@ void draw_standy_airSpeed_frame(double center_x, double center_y, double side) {
 }
 
 void draw_standy_airSpeed_wireframe(double center_x, double center_y, double side) {
-	
 	double x = center_x - 24.5 / 96.0 * side;
 	double y = center_y - 24.0 / 96.0 * side;
 	double lenth = 48.0 / 96.0 * side;
@@ -1212,8 +1242,9 @@ void draw_standy_airSpeed_wireframe(double center_x, double center_y, double sid
 	setfillcolor(BLACK);
 	ege_fillrect(x, y, width, lenth);
 	
-	setcolor(EGEARGB(200,177,177,178));
-	setlinewidth(side * 0.02);
+	setlinewidth(side * 0.01);
+	
+	setcolor(EGEARGB(200, 177, 177, 178));
 	ege_rectangle(x, y, width, lenth);
 	
 	setcolor(BLACK);
@@ -1221,7 +1252,7 @@ void draw_standy_airSpeed_wireframe(double center_x, double center_y, double sid
 }
 
 void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
-	setcolor(WHITE);
+	setcolor(EGEARGB(200, 177, 177, 178));
 	
 	setlinewidth(side * 0.005);
 	int datas[11] = {};
@@ -1263,6 +1294,10 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 				{
 					if (datas[10 - i] < 1000 && datas[10 - i] > -1000) {
 						setfont(number_height * 0.8, number_width * 0.8, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
+						LOGFONTW FMC_font;
+						getfont(&FMC_font);
+						FMC_font.lfWeight = side * 3;
+						setfont(&FMC_font);
 						char str[64];
 						snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
 						ege_drawtext(str, x + side * 0.08, y);
@@ -1270,6 +1305,10 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 					else if (datas[10 - i] >= 1000 && datas[10 - i] <= 10000)
 					{
 						setfont(number_height * 0.8, number_width * 0.8, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
+						LOGFONTW FMC_font;
+						getfont(&FMC_font);
+						FMC_font.lfWeight = side * 3;
+						setfont(&FMC_font);
 						double x1 = center_x + 11.0 / 96 * side;
 						char str[64];
 						snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
@@ -1305,6 +1344,10 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 				}
 			}
 			setfont(number_height * 0.8, number_width * 0.8, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
+			LOGFONTW FMC_font;
+			getfont(&FMC_font);
+			FMC_font.lfWeight = side * 3;
+			setfont(&FMC_font);
 			for (int i = 0;i < 11;i++) {
 				double y = center_y - 165.5 / 96 * side + 0 / 10 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
 				double x = center_x - 5.0 / 96 * side;
@@ -1340,11 +1383,14 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 	number_height = side * 2.5 / 96.0 * 2 * 6.5 * 0.7;
 	number_width = side * 2.5 / 96.0 * 5 * 0.7;
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
-	
+	LOGFONTW FMC_font;
+	getfont(&FMC_font);
+	FMC_font.lfWeight = side * 3;
+	setfont(&FMC_font);
 }
 
 void draw_airSpeed_10(double center_x, double center_y, double side,double speed) {
-	setcolor(WHITE);
+	setcolor(EGEARGB(200, 177, 177, 178));
 	double y = center_y - side * 0.17;
 	double x = center_x;
 	double number_height = side * 2.5 / 96.0 * 2 * 6.5;
@@ -1377,7 +1423,10 @@ void draw_airSpeed_10(double center_x, double center_y, double side,double speed
 	//设定字体
 	settextjustify(LEFT_TEXT, TOP_TEXT);
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
-	
+	LOGFONTW FMC_font;
+	getfont(&FMC_font);
+	FMC_font.lfWeight = side * 3;
+	setfont(&FMC_font);
 	//将背景颜色设置成透明
 	
 	setbkmode(1);
@@ -1385,19 +1434,19 @@ void draw_airSpeed_10(double center_x, double center_y, double side,double speed
 	double judge = fmod(speed, 1);
 	if (judge >= 0 && judge < 0.35) {
 		for (int i = 0;i < 3;i++) {
-			outtextxy(x + 7.0 / 96.0 * side, y_100 + number_height * 0.6 * -(i - 1), nums[i + 1]);
+			outtextxy(x + 10.0 / 96.0 * side, y_100 + number_height * 0.6 * -(i - 1), nums[i + 1]);
 		}
 	}
 	else if (judge >= 0.35 && judge <= 0.75)
 	{
 		for (int i = 0;i < 4;i++) {
-			outtextxy(x + 7.0 / 96.0 * side, y_100 + number_height * 0.6 * -(i - 1), nums[i + 1]);
+			outtextxy(x + 10.0 / 96.0 * side, y_100 + number_height * 0.6 * -(i - 1), nums[i + 1]);
 		}
 	}
 	else
 	{
 		for (int i = 0;i < 3;i++) {
-			outtextxy(x + 7.0 / 96.0 * side, y_100 + number_height * 0.6 * -(i), nums[i + 2]);
+			outtextxy(x + 10.0 / 96.0 * side, y_100 + number_height * 0.6 * -(i), nums[i + 2]);
 		}
 	}
 }
@@ -1409,11 +1458,15 @@ void draw_airSpeed_else(double center_x, double center_y, double side, double sp
 	double number_width = side * 2.5 / 96.0 * 5;
 	
 	setfont(number_height, number_width, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
+	LOGFONTW FMC_font;
+	getfont(&FMC_font);
+	FMC_font.lfWeight = side * 3;
+	setfont(&FMC_font);
 	int hun = speed / 100;
 	int ten = speed / 10;
 	ten = ten % 10;
 	if (speed >= 100) {
-		outtextxy(center_x - number_width * 1.5, y - number_height * 0.025,num[hun + 1]);
+		outtextxy(center_x - number_width * 1.7, y - number_height * 0.025,num[hun + 1]);
 		outtextxy(center_x - number_width * 0.5, y - number_height * 0.025, num[ten + 1]);
 	}
 	else {
@@ -1423,7 +1476,6 @@ void draw_airSpeed_else(double center_x, double center_y, double side, double sp
 }
 
 void draw_airSpeed_shadow(double center_x, double center_y, double side) {
-	
 	double number_height = side * 2.5 / 96.0 * 2 * 6.5;
 	double number_width = side * 2.5 / 96.0 * 5;
 	setfillcolor(EGEARGB(0Xff, 59, 59, 59));
@@ -1443,8 +1495,6 @@ void draw_airSpeed_shadow(double center_x, double center_y, double side) {
 	y = center_y - 24.0 / 96.0 * side;
 	lenth = 48.0 / 96.0 * side;
 	width = 53.0 / 96.0 * side;
-	setcolor(EGEARGB(200,177,177,178));
-	setlinewidth(side * 0.02);
 	ege_rectangle(x, y, width, lenth);
 }
 

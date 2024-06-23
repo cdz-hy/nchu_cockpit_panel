@@ -16,7 +16,9 @@ extern double rollAngle;
 extern double sideSlipAngle;
 extern double headingIndication;
 extern double glideIndication;
-extern double ndpointrotationangle;
+extern double ndpointrotationangle; 
+extern double driftAngle;//偏流角（左右）
+extern double pathAngle;//航迹角（上下）
 
 extern double RCDI_speed;
 extern double verticalRate;
@@ -127,6 +129,9 @@ extern vector<WAYPOINT> VORs;
 //经过的路线（航线）（显示在地图上）
 extern vector<WAYPOINT> fullRoute;
 
+//FMC表需要打开的文件名
+extern char FMCFileName[20];
+
 //==================================//
 
 //==========以下为设置相关==========//
@@ -134,6 +139,9 @@ extern vector<WAYPOINT> fullRoute;
 //显示的界面（线程）
 //// 1 - 机械表	 2 - 电子 
 //extern int Page;
+
+//程序所在绝对路径
+extern WCHAR path[MAX_PATH];
 
 //当前界面	0为默认六个机械仪表
 extern int show;
@@ -160,15 +168,26 @@ extern std::mutex mtx;
 extern std::condition_variable cv;
 extern bool ready;
 
+extern mutex g_globalMutex;
+
 //默认显示背景
 extern int is_showbk;
 
 //默认不开启UDP通信
 extern int UDP_transmission;
 
+//是否显示地图
+extern int showMap;
+
+//地图更新状态
+extern int renewMap;
+
 //初始IP地址和端口
 extern char* IP_address;
 extern int UDP_port;
+
+//地图更新状态
+extern int renewMap;
 
 //地图更新状态
 extern int renewMap;
@@ -264,3 +283,41 @@ extern double MainpanelDU;
 extern double LOWERDU;
 extern int MainpanelDU_gear;
 extern int LOWERDU_gear;
+
+//自动驾驶控制板
+extern int MainPanelLight;
+extern double COURSE_1;
+extern double COURSE_2;
+extern int FD_1;
+extern int FD_2;
+extern int COURSE_1NUM;//左边course示数
+extern int COURSE_2NUM;//右边course示数
+extern int AT;
+extern int N1;
+extern int SPEED;
+extern int LVLCHG;
+extern int VNAV;
+extern int LNAV;
+extern int VORLOC;
+extern int APP;
+extern int HDGSEL;
+extern int CO;//1为左，0为右
+extern int CO_1;//左边显示
+extern int CO_2 ;//右边显示
+extern int SPDINTV;
+extern double INSMACHangle;
+extern int HEADING;
+extern double HEADING_1;
+extern double HEADING_2;
+extern int ALTHLD;
+extern int VS;
+extern double ALTITUDEangle;
+extern int ALTITUDE;
+extern double VERTSPEEDangle;
+extern int VERTSPEED;
+extern int ALTINTV;
+
+extern int CMDA ;
+extern int CWSA ;
+extern int CWSB ;
+extern int CMDB ;

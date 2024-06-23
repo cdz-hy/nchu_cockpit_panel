@@ -94,7 +94,7 @@ void read_files(){
 	
 	extern vector<WAYPOINT> waypoints;
 	string inputTmp;
-	ifstream inputFile("fix_data.dat");
+	ifstream inputFile("earth_fix.dat");
 	
 	if (inputFile.is_open()) {
 		while (getline(inputFile,inputTmp)) {
@@ -162,7 +162,7 @@ void read_files(){
 	
 	inputFile2.close();
 	
-	
+	route.clear();
 	
 	//读取机场文件
 	
@@ -262,7 +262,7 @@ void read_files(){
 	//读取VOR塔台文件
 	
 	extern vector<WAYPOINT> VORs;
-	ifstream inputFile4("nav_data.dat");
+	ifstream inputFile4("earth_nav.dat");
 	
 	if (inputFile4.is_open()) {
 		while (getline(inputFile4,inputTmp)) {
@@ -275,8 +275,8 @@ void read_files(){
 			if(issTmp >> stringTmp[0] >> wpTmp.lat >> wpTmp.lon >> stringTmp[1] >> stringTmp[2] >> wpTmp.range >> stringTmp[4] >> stringTmp[5] >> stringTmp[6] >> stringTmp[7] >> stringTmp[8] >> stringTmp[9]){
 				
 				strcpy(wpTmp.code, stringTmp[0].c_str());
-				strcpy(wpTmp.name, stringTmp[6].c_str());
-				strcpy(wpTmp.fullName, stringTmp[6].c_str());
+				strcpy(wpTmp.name, stringTmp[5].c_str());
+				strcpy(wpTmp.fullName, stringTmp[5].c_str());
 				
 				wpTmp.num = 3;
 				
@@ -302,3 +302,72 @@ void read_files(){
 }
 
 
+
+
+
+void read_routeWays(){
+	
+	for(;is_run();api_sleep(60)){
+		
+		
+//		printf("%s\n",FMCFileName);
+		
+		if(strlen(FMCFileName) > 2){
+			
+			
+			//读取航路文件
+			
+			extern vector<WAYPOINT> route;
+			ifstream inputFile2(FMCFileName);
+			string inputTmp;
+			
+//			printf("%s\n",FMCFileName);
+			
+			route.clear();
+			
+			strcpy(FMCFileName,"");
+			
+			if (inputFile2.is_open()) {
+				while (getline(inputFile2,inputTmp)) {
+					
+					WAYPOINT wpTmp;
+					istringstream issTmp(inputTmp);
+					
+					string stringTmp[10];
+					
+					if(issTmp >> stringTmp[0] >> stringTmp[1] >> stringTmp[2] >> wpTmp.lat >> wpTmp.lon ){
+						
+						strcpy(wpTmp.code, stringTmp[0].c_str());
+						strcpy(wpTmp.name, stringTmp[1].c_str());
+						strcpy(wpTmp.fullName, stringTmp[1].c_str());
+						
+						if(stringTmp[1].length() == 3){
+							wpTmp.num = 2;//VOR
+						}
+						else if(stringTmp[1].length() == 5){
+							wpTmp.num = 1;//waypoint
+						}
+						else if(stringTmp[1].length() == 4){
+							wpTmp.num = 3;//airport
+						}
+						
+						route.push_back(wpTmp);
+						
+					}
+					else{
+						continue;
+					}
+					
+				}
+			}
+			
+			inputFile2.close();
+			
+		}
+			
+		
+			
+	}
+	
+	
+}

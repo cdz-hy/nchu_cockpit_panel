@@ -17,6 +17,8 @@ double sideSlipAngle = 0;
 double headingIndication = 0;
 double glideIndication = 0;
 double ndpointrotationangle = 0;
+double driftAngle = 0;//偏流角（左右）
+double pathAngle = 0;//航迹角（上下）
 
 double RCDI_speed = 7866;
 double verticalRate = -7866;
@@ -132,6 +134,8 @@ vector<WAYPOINT> VORs;
 //经过的路线（航线）（显示在地图上）
 vector<WAYPOINT> fullRoute;
 
+//FMC表需要打开的文件名
+char FMCFileName[20];
 
 //==================================//
 
@@ -140,6 +144,9 @@ vector<WAYPOINT> fullRoute;
 ////显示的界面（线程）
 //// 1 - 机械表	 2 - 电子 
 //int Page = 2;
+
+//程序所在绝对路径
+WCHAR path[MAX_PATH];
 
 //当前界面	0为默认六个机械仪表
 // 仅限于机械表时不同表的切换
@@ -167,6 +174,8 @@ std::mutex mtx;
 std::condition_variable cv;
 bool ready = true;
 
+mutex g_globalMutex;
+
 //默认显示背景
 int is_showbk = 1;
 
@@ -176,6 +185,9 @@ int UDP_transmission = 0;
 //初始IP地址和端口
 char *IP_address = "192.168.0.0";
 int UDP_port = 49001;
+
+//是否显示地图
+int showMap = 0;
 
 //地图更新状态
 int renewMap = 1;
@@ -188,11 +200,11 @@ int G_light = 0x00;
 
 double OUTBDangle = 200;
 double INBDangle = 200;
-double LOWERangle = 0;
+double LOWERangle = 200;
 double LOWERangle_1 = 0;
 double INBDangle_1 = 0;
-double UPPERangle = 0;
-double Brightangle = -20;
+double UPPERangle = 200;
+double Brightangle = 200;
 double changecolor = 0;
 int MainPanelLight = 0;
 
@@ -269,13 +281,12 @@ int VOR2 = 2;
 double backGroundLight = -20;
 double AFDSFLOODLight = -20;
 
-double MainpanelDU = 75;
-double LOWERDU = 75;
-int MainpanelDU_gear = 0;
-int LOWERDU_gear = 0;
+double MainpanelDU = 120;
+double LOWERDU = 120;
+int MainpanelDU_gear = 1;
+int LOWERDU_gear = 1;
 
-//老长的控制面板
-
+//自动驾驶控制板
 double COURSE_1 = 0;//0上1下
 double COURSE_2 = 0;
 int FD_1 = 0;
@@ -313,3 +324,4 @@ int CMDA = 0;
 int CWSA = 0;
 int CWSB = 0;
 int CMDB = 0;
+

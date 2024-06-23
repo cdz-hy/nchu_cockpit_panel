@@ -10,14 +10,16 @@ using namespace std;
 
 #include "DrawPanels.h"
 #include "DataReceive.h"
+#include "MapReceive.h"
 #include "G_variable.h"
 #include "G_structs.h"
 #include "KeyboardControl.h"
 #include "ReadFiles.h"
-
+#include "NewWindows.h"
+#include "ShowMap.h"
 
 int main() {
-
+	
 	//读取文件初始化环境
 	read_files();
 	
@@ -27,9 +29,14 @@ int main() {
 	setrendermode(RENDER_MANUAL);
 	setbkcolor(EGEARGB(0xff, 0x1b, 0x20, 0x25));
 	setbkcolor(EGEARGB(0xff, 0x37, 0x37, 0x3d));
-	//setbkcolor(EGEARGB(0xff, 0x14, 0x17, 0x19));
+	setbkcolor(EGEARGB(0xff, 0x14, 0x17, 0x19));
 	ege_enable_aa(true);
 
+//	egeHDC = getHDC();
+	egeHWND = getHWnd();
+
+	DWORD dwLength = GetModuleFileNameW(NULL, path, MAX_PATH);
+	
 //	//设置窗口无边框
 //	HWND hwnd = getHWnd();
 //	
@@ -45,11 +52,19 @@ int main() {
 	
 	thread panels(draw_panels);
 	thread datas(data_receive);		
-	thread control(get_keymsg);	
+//	thread control(get_keymsg);	
+	thread maps(map_receive);
+	thread newWindows(create_new_windows);
+	thread showMap(show_map);
+	thread routeWay(read_routeWays);
 	
 	panels.join();
 	datas.join();
-	control.join();
+//	control.join();
+	maps.join();
+	newWindows.join();
+	showMap.join();
+	routeWay.join();
 	
 	closegraph();
 	return 0;

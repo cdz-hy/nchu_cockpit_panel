@@ -252,7 +252,7 @@ void draw_ND(double ND_x, double ND_y, double ND_side)  {
 	
 	//灯光遮盖效果
 	setfillcolor(EGEARGB(255 - (int)INBDangle, 0x00, 0x00, 0x00));
-	ege_fillrect(ND_x - ND_side / 2 / 1.05, ND_y - ND_side / 1.95, ND_side * 1.05 ,ND_side * 1.05);
+	ege_fillrect(ND_x - ND_side / 2 / 0.95, ND_y - ND_side / 1.95, ND_side * 1.05 ,ND_side * 1.05);
 	
 	draw_PFD_frame(ND_x, ND_y, ND_side);
 	
@@ -410,7 +410,7 @@ void draw_smallCircle(double x, double y, double r) {
 }
 
 void draw_ND_app_center(double center_x, double center_y, double side) {
-
+	
 	// 初始数据设置
 	double r = side / 115 * 37.5;
 	realrotationAngle = 360 - rotationangle;
@@ -585,7 +585,7 @@ void draw_ND_app_center(double center_x, double center_y, double side) {
 void draw_ndcourse2(double compass_x, double compass_y, double side) 
 {   
 	double compass_r = side / 115 * 37.5;//表盘的半径
-
+	
 	//画指示标志
 	setcolor(EGEARGB(0x99, 0xDE, 0x58, 0xC5));
 	setlinewidth(compass_r * 0.007);
@@ -1241,5 +1241,6 @@ void draw_ND_pln(double center_x, double center_y, double side) {
 	ege_line(center_x + side / 34, center_y - big_r / 0.87,// 第一个坐标是靠上的,第二个坐标是靠右的
 		center_x + side / 22, center_y - big_r / 0.89);
 }
+
 
 

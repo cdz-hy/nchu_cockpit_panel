@@ -394,12 +394,12 @@ void draw_back(double center_x, double center_y, double unitLength) {
 		ege_fillrect(center_x + unitLength * 5 + unitLength / 20 * 5, center_y - unitLength * 13 - unitLength / 20 * 4, unitLength * 2.16, unitLength * 2.1);
 	}
 	if (alert_autoPilot == 1) {
-		//		setfillcolor(EGEARGB(0X40, 0X72, 0X55, 0X34));
+		//        setfillcolor(EGEARGB(0X40, 0X72, 0X55, 0X34));
 		setfillcolor(EGEARGB(0XFF, 0X4d, 0X07, 0X07));
 		ege_fillrect(center_x - unitLength * 13 + unitLength / 20 * 5, center_y - unitLength * 10 - unitLength / 20 * 4, unitLength * 2.16, unitLength * 2.1);
 	}
 	else {
-		//		setfillcolor(EGEARGB(0XFF, 0X32, 0X15, 0X04));
+		//        setfillcolor(EGEARGB(0XFF, 0X32, 0X15, 0X04));
 		setfillcolor(EGEARGB(0XFF, 0X38, 0X05, 0X05));
 		ege_fillrect(center_x - unitLength * 13 + unitLength / 20 * 5, center_y - unitLength * 10 - unitLength / 20 * 4, unitLength * 2.16, unitLength * 2.1);
 	}
@@ -456,12 +456,23 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	double linewidth = Ulength;
 	setlinewidth(linewidth / 2);
 	setcolor(BLACK);
+	
+	setfillcolor(EGEARGB(0xff, 0x3B, 0x39, 0X38));
+	int num_7 = 4;
+	ege_point polynums_7[4] = {
+		{Background_2_x + Ulength * 774 , Background_2_y + Ulength * 248},
+		{Background_2_x + Ulength * 774 , Background_2_y - Ulength * 127.5},
+		{Background_2_x - Ulength * 175 , Background_2_y - Ulength * 127.5},
+		{Background_2_x - Ulength * 175 , Background_2_y + Ulength * 248},
+	};
+	ege_fillpoly(num_7,polynums_7);
+	
 	setfillcolor(EGEARGB(0xff, 0x14, 0x17, 0x19));
 	int num_6 = 5;
 	ege_point ploynums_6[5] = {
 		{Background_2_x - Ulength * 140 , Background_2_y + Ulength * 60},
-		{Background_2_x + Ulength * 387 , Background_2_y + Ulength * 60},
-		{Background_2_x + Ulength * 387 , Background_2_y - Ulength * 173},
+		{Background_2_x + Ulength * 774 , Background_2_y + Ulength * 60},
+		{Background_2_x + Ulength * 774 , Background_2_y - Ulength * 173},
 		{Background_2_x + Ulength * 145 , Background_2_y - Ulength * 173},
 		{Background_2_x - Ulength * 130 , Background_2_y - Ulength * 127.5},
 	};

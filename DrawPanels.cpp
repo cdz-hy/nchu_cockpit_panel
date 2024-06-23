@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <graphics.h>
 #include <windows.h>
+#include <math.h>
 
 #include "DrawAI.h"
 #include "DrawAirspeed.h"
@@ -24,7 +25,8 @@
 #include "DrawND.h"
 #include "DrawNDInfo.h"
 #include "DrawLightControl.h"
-
+#include "DrawFMC.h"
+#include "DrawAutoControl.h"
 
 
 void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height);
@@ -34,10 +36,67 @@ void  draw_delImage();
 void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side);
 void draw_BACKPICTURE(double PFD_x, double PFD_y, double PFD_side);
 
+void draw_map();
+
+
+extern std::mutex mtx;
+extern std::condition_variable cv;
+extern bool ready;
+
+//===map所需变量=====//
+
+
+//实现移动
+int is_down = 0;
+double pos_x_move = 0;
+double pos_y_move = 0;
+double pos_x_move_tmp = 0;
+double pos_y_move_tmp = 0;
+double pos_x_move_plane = 0;
+double pos_y_move_plane = 0;
+
+//记录鼠标
+int map_mouse_x = 0;
+int map_mouse_y = 0;
+int map_mouse_x_cur = 0;
+int map_mouse_y_cur = 0;
+
+//地图中心点坐标
+WAYPOINT map_center = {0, "", 28.877, 115.91,};
+
+//临时地图中心点坐标
+WAYPOINT map_centerTmp = {0, "", 28.877, 115.91,};
+
+PIMAGE img;
+PIMAGE mapShow;
+
+//图片显示范围(在原图上)
+double side = 500;
+double pos_x = 2048 / 2 - side / 2;
+double pos_y = 2048 / 2 - side / 2;
+
+//地图显示位置和大小（在窗口上）
+double map_x = 0;
+double map_y = 0;
+double map_side = 480;
+
+
+//==================//
+
 
 void draw_panels(){
 	
 	
+	
+	img = newimage();
+	mapShow = newimage();
+	
+	
+//	//读取图片
+//	if(renewMap == 2){
+//		getimage(img, "map.png");
+//		renewMap = 0;
+//	}
 	
 	//鼠标位置
 	int mouse_x = 0;
@@ -124,6 +183,7 @@ void draw_panels(){
 				xyprintf(length - 50, height - 25, "本地");
 			}
 		}
+
 		
 		
 		//实现窗口关闭
@@ -616,29 +676,9 @@ void draw_panels(){
 			
 			mousepos(&mouse_x, &mouse_y);
 			
-//			if(mouse_x >= PFD_x - PFD_side / 2 && mouse_y >= PFD_y - PFD_side / 2 && mouse_x <= PFD_x + 0.57 * PFD_side && mouse_y <= PFD_y + PFD_side / 2){
-//				setcolor(EGEARGB(0x50, 0xff, 0xff, 0xff));
-//				setlinewidth(0.05 * unit_side_static);
-//				ege_rectangle(PFD_x - PFD_side / 2, PFD_y - PFD_side / 2,1.07 * PFD_side, PFD_side);
-//			}
+			std::lock_guard<std::mutex> guard(mtx);
+			ready = true;
 			
-//			//画PFD
-//			draw_PFD(PFD_x, PFD_y ,PFD_side);
-//		
-//			//画ND
-//			draw_ND(PFD_x + 1.4 * PFD_side, PFD_y ,PFD_side);
-//			
-//			//备用表
-//			draw_PFD_standby(PFD_x + 3.8 * PFD_side, PFD_y ,PFD_side / 5);
-//			
-//			//画计时器
-//			draw_Chronometer(PFD_x - 0.85 * PFD_side, PFD_y - 0.3 * PFD_side,0.45 * PFD_side);
-//			
-//			//画EICAS
-//			draw_EICAS(PFD_x + 2.7 * PFD_side, PFD_y ,PFD_side);
-//			
-//			//画EHIS的控制面板
-//			draw_EHIS_control(PFD_x, PFD_y - 1 * PFD_side ,PFD_side);
 			
 			
 			draw_resizeImage(PFD_x, PFD_y, PFD_side);
@@ -646,11 +686,48 @@ void draw_panels(){
 			
 			draw_Background_2(PFD_x, PFD_y , PFD_side);
 			
-			//画PFD
-			draw_PFD(PFD_x, PFD_y, PFD_side);
 			
-			//ND表
-			draw_ND(PFD_x + 1.3 * PFD_side, PFD_y, PFD_side);
+			extern int MainpanelDU_gear;
+			extern int LOWERDU_gear;
+			
+			if(MainpanelDU_gear == 0){
+				
+				//ND表
+				draw_ND(PFD_x + 0.06 * PFD_side, PFD_y, PFD_side);
+				
+				//画PFD
+				draw_PFD(PFD_x + 1.24 * PFD_side, PFD_y, PFD_side);
+			}
+			else if(MainpanelDU_gear == 1){
+		
+			//画PFD
+				draw_PFD(PFD_x, PFD_y, PFD_side);
+				
+				//ND表
+				draw_ND(PFD_x + 1.3 * PFD_side, PFD_y, PFD_side);
+				
+			}
+			else if(MainpanelDU_gear == 2){
+				
+				
+				//画PFD
+				draw_PFD(PFD_x + 0 * PFD_side, PFD_y, PFD_side);
+				
+				//画EICAS
+				draw_EICAS(PFD_x + 1.3 * PFD_side, PFD_y, PFD_side);
+				
+				
+				
+			}
+			else if(MainpanelDU_gear == 3){
+				
+				//画PFD
+				draw_PFD(PFD_x + 0 * PFD_side, PFD_y, PFD_side);
+				
+				//画EICAS
+				draw_PFD(PFD_x + 1.24 * PFD_side, PFD_y, PFD_side);
+				
+			}
 			
 			//备用表
 			draw_PFD_standby(PFD_x + 2.26 * PFD_side, PFD_y - 0.3 * PFD_side, 0.35/2 * PFD_side);
@@ -676,8 +753,37 @@ void draw_panels(){
 			//显示屏的控制板
 			draw_TopContral(PFD_x + PFD_side * 0.65, PFD_y - 0.83 * PFD_side, PFD_side*0.8);
 			
+			//画FMC
+			draw_FMC(PFD_x + PFD_side * 2.14, PFD_y + 1.62 * PFD_side, PFD_side * 0.6);
+			
+			//画自动驾驶控制板
+			draw_auto_control(PFD_x + PFD_side * 3.5, PFD_y - 1.4 * PFD_side, PFD_side*3);
 			
 			draw_electricPanel_backgrounds(PFD_x, PFD_y , PFD_side);
+			
+//			//直接显示的地图（暂时不用）
+//			if(showMap == 1)
+//				draw_map();
+			
+			
+			if(GetAsyncKeyState(0x41)&0x0001){
+				ifNewWindows = 1;
+				ifNewWindows = 1;
+				
+			}
+			
+			
+//			//调试用
+//			printf("%d",showMap);
+			
+//			egeHDC = getHDC();
+			cv.notify_one();
+			
+			windwsShow_x = PFD_x - PFD_side / 2;
+			windwsShow_y = PFD_y - PFD_side / 2;
+			windwsShow_lenth = PFD_side;
+			windwsShow_height = PFD_side;
+			
 			
 			
 			//实现移动
@@ -769,9 +875,15 @@ void draw_panels(){
 				show = 0;
 		}
 		
+		if(GetAsyncKeyState(0x4d) & 0x0001){
+			showMap += 1;
+			showMap %= 2;
+		}
+		
 	}
 	
 	draw_delImage();
+	delimage(img);
 }
 
 
@@ -794,7 +906,7 @@ void draw_getImage() {
 	pimg8 = newimage();
 	getimage(pimg8, "./res/陀螺仪.png");
 	pimg9 = newimage();
-	getimage(pimg9, "./res/背景.jpg");
+	getimage(pimg9, "./res/back.jpg");
 	pimg10 = newimage();
 	getimage(pimg10, "./res/陀螺仪旁边.png");
 	pimg11 = newimage();
@@ -832,6 +944,9 @@ void draw_getImage() {
 	pimg13sta = newimage();
 	getimage(pimg13sta, "./res/上面的杠.png");
 	
+	
+	
+	
 }
 
 void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side) {
@@ -848,16 +963,15 @@ void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side) {
 	getZoomImage(pimg11, pimg11sta, PFD_side*1.1, PFD_side*1.5);
 	getZoomImage(pimg12, pimg12sta, PFD_side*3.8, PFD_side*7.2);
 	getZoomImage(pimg13, pimg13sta, PFD_side*7.2, PFD_side*2);
-
+	
 }
 
 void draw_BACKPICTURE(double PFD_x, double PFD_y, double PFD_side){
 	putimage_withalpha(NULL, pimg9, 0 , 0 );
-	
 	putimage_withalpha(NULL, pimg11, PFD_x + 1.7 * PFD_side, PFD_y - 3.07 * PFD_side);
 	
 	putimage_withalpha(NULL, pimg12, PFD_x - 5.35 * PFD_side, PFD_y - 4.72 * PFD_side);
-putimage_withalpha(NULL, pimg13, PFD_x - 4.15 * PFD_side, PFD_y - 4.62 * PFD_side);
+	putimage_withalpha(NULL, pimg13, PFD_x - 4.15 * PFD_side, PFD_y - 4.62 * PFD_side);
 	
 }
 void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side) {
@@ -889,6 +1003,7 @@ void  draw_delImage() {
 	delimage(pimg10);
 	delimage(pimg11);
 	delimage(pimg12);
+	
 	delimage(pimg13);
 }
 
@@ -918,5 +1033,292 @@ void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height)
 	
 	pimg = zoomImage;
 	
+	
+}
+
+
+
+
+//=====================================================//
+
+
+
+
+void change_size(PIMAGE& pimg, int width, int height){
+	
+	//pimg为空，或目标图像大小和原图像一样，则不用缩放，直接返回
+	if ((pimg == NULL) || (width == getwidth(pimg) && height == getheight(pimg)))
+		return;
+	
+	PIMAGE tmp = newimage(width, height);
+	putimage(tmp, 0, 0, width, height, pimg, 0, 0, getwidth(pimg), getheight(pimg));
+	delimage(pimg);
+	
+	pimg = tmp;
+}
+
+
+double toRadians1(double a) {
+	return a * (PI / 180);
+}
+
+//===============地图工具类函数===========//
+
+
+//Vincenty公式计算两点距离
+//return the distance of two point, unit is meter
+double getDistance1(double latitude1, double longitude1, double latitude2, double longitude2) {
+	// R is the radius of the earth in meters
+	double R = 6371004;  //EARTH_RADIUS
+	double deltaLatitude = toRadians1(latitude2-latitude1);
+	double deltaLongitude = toRadians1(longitude2-longitude1);
+	latitude1 =toRadians1(latitude1);
+	latitude2 =toRadians1(latitude2);
+	double a = pow(sin(deltaLatitude/2), 2)+ cos(latitude1)* cos(latitude2)* pow(sin(deltaLongitude/2), 2);
+	double c = 2 * atan2(sqrt(a),sqrt(1-a));
+	
+	double d = R * c;
+	return d;
+}
+
+double getBearing1(double lat1, double lon1, double lat2, double lon2){
+	lat1 = toRadians1(lat1);
+	lat2 = toRadians1(lat2);
+	lon1 = toRadians1(lon1);
+	lon2 = toRadians1(lon2);
+	double dLon = lon2 - lon1;
+	double y = sin(dLon) * cos(lat2);
+	double x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos( dLon);
+	double brng = atan2(y, x);
+	brng=brng * 180 / PI;
+	brng = fmod((brng + 360), 360);
+	return brng;
+}
+
+//==================================//
+
+
+void draw_plane(double center_x, double center_y, double side,double angle)
+{
+	//对参数的说明：
+	//center_x ，center_y 是中心点的坐标，side 是这个飞机的长（机头到机尾）
+	
+	angle = angle * PI / 180;
+	
+	double single = side / 15;
+	
+	setfillcolor(EGEARGB(0xff, 0xba, 0x3c, 0x1a));
+	
+	double x01 = 0, y01 =  - single * 7.9;
+	double x02 =  - single * 1.25, y02 =  - single * 7;
+	double x03 =  - single * 1.25, y03 =  + single * 4.5;
+	double x04 =  - single * 4, y04 =  + single * 7.5;
+	double x05 =  - single * 3, y05 =  + single * 8.5;
+	double x06 = 0, y06 =  + single * 6.7;
+	double x07 =  + single * 3, y07 =  + single * 8.5;
+	double x08 =  + single * 4, y08 =  + single * 7.5;
+	double x09 =  + single * 1.25, y09 =  + single * 4.5;
+	double x010 =  + single * 1.25, y010 =  - single * 7;
+	
+	ege_point points1[11] = {
+		{x01 * cos(angle) - y01 * sin(angle) + center_x,x01 * sin(angle) + y01 * cos(angle) + center_y},
+		{x02 * cos(angle) - y02 * sin(angle) + center_x,x02 * sin(angle) + y02 * cos(angle) + center_y},
+		{x03 * cos(angle) - y03 * sin(angle) + center_x,x03 * sin(angle) + y03 * cos(angle) + center_y},
+		{x04 * cos(angle) - y04 * sin(angle) + center_x,x04 * sin(angle) + y04 * cos(angle) + center_y},
+		{x05 * cos(angle) - y05 * sin(angle) + center_x,x05 * sin(angle) + y05 * cos(angle) + center_y},
+		{x06 * cos(angle) - y06 * sin(angle) + center_x,x06 * sin(angle) + y06 * cos(angle) + center_y},
+		{x07 * cos(angle) - y07 * sin(angle) + center_x,x07 * sin(angle) + y07 * cos(angle) + center_y},
+		{x08 * cos(angle) - y08 * sin(angle) + center_x,x08 * sin(angle) + y08 * cos(angle) + center_y},
+		{x09 * cos(angle) - y09 * sin(angle) + center_x,x09 * sin(angle) + y09 * cos(angle) + center_y},
+		{x010 * cos(angle) - y010 * sin(angle) + center_x,x010 * sin(angle) + y010 * cos(angle) + center_y},
+		{x01 * cos(angle) - y01 * sin(angle) + center_x,x01 * sin(angle) + y01 * cos(angle) + center_y}
+	};
+	ege_fillpoly(11,points1);
+	
+	double x11 = -single * 1.25, y11 = -single * 3;
+	double x12 = -single * 7, y12 = -single * 0.5;
+	double x13 = -single * 7, y13 = +single + 1.5;
+	double x14 = -single * 1.25, y14 = 0;
+	ege_point points2[5] = {
+		{x11 * cos(angle) - y11 * sin(angle) + center_x,x11 * sin(angle) + y11 * cos(angle) + center_y},
+		{x12 * cos(angle) - y12 * sin(angle) + center_x,x12 * sin(angle) + y12 * cos(angle) + center_y},
+		{x13 * cos(angle) - y13 * sin(angle) + center_x,x13 * sin(angle) + y13 * cos(angle) + center_y},
+		{x14 * cos(angle) - y14 * sin(angle) + center_x,x14 * sin(angle) + y14 * cos(angle) + center_y},
+		{x11 * cos(angle) - y11 * sin(angle) + center_x,x11 * sin(angle) + y11 * cos(angle) + center_y}
+	};
+	ege_fillpoly(5,points2);
+	
+	double x21 = single * 1.25, y21 = -single * 3;
+	double x22 = single * 7, y22 = -single * 0.5;
+	double x23 = single * 7, y23 = +single + 1.5;
+	double x24 = single * 1.25, y24 = 0;
+	
+	ege_point points3[5] = {
+		{x21 * cos(angle) - y21 * sin(angle) + center_x,x21 * sin(angle) + y21 * cos(angle) + center_y},
+		{x22 * cos(angle) - y22 * sin(angle) + center_x,x22 * sin(angle) + y22 * cos(angle) + center_y},
+		{x23 * cos(angle) - y23 * sin(angle) + center_x,x23 * sin(angle) + y23 * cos(angle) + center_y},
+		{x24 * cos(angle) - y24 * sin(angle) + center_x,x24 * sin(angle) + y24 * cos(angle) + center_y},
+		{x21 * cos(angle) - y21 * sin(angle) + center_x,x21 * sin(angle) + y21 * cos(angle) + center_y}
+	};
+	ege_fillpoly(5, points3);
+}
+
+
+
+extern int renewMap;
+extern vector<WAYPOINT> fullRoute;
+
+void draw_map(){
+	
+	setfillcolor(WHITE);
+	ege_fillrect(map_x,map_y,map_side,map_side);
+	
+	//对更新信号进行更新 2是更新完成，1是需要更新，0保持不变
+	if(renewMap == 2){
+		PIMAGE imgTmp = newimage();
+		getimage(imgTmp, "./map.png");
+		delimage(img);
+		img = imgTmp;
+		renewMap = 0;
+		map_center.lat = map_centerTmp.lat;
+		map_center.lon = map_centerTmp.lon;
+	}
+	
+	//快要出边界发出更新信号
+	if(pos_x + pos_x_move_plane + side >= 1800 || pos_y + pos_y_move_plane + side >= 1800 ||
+		pos_x + pos_x_move_plane <= 100 || pos_y + pos_y_move_plane <= 100){
+		
+		renewMap = 1;
+		map_centerTmp.lat = latitude;
+		map_centerTmp.lon = longitude;
+	}
+	
+	
+	//截取原图一部分
+	getimage(mapShow, img, pos_x + pos_x_move + pos_x_move_plane, pos_y + pos_y_move + pos_y_move_plane, side, side);
+	
+	//调整大小，正好显示下
+	change_size(mapShow, map_side, map_side);
+	
+	//显示图片
+	putimage_withalpha(NULL, mapShow, map_x, map_y);
+	
+
+	
+	
+	
+	//在按下shift时进行地图的移动和放大
+	if (GetAsyncKeyState(0x10) & 0x8000) {
+		
+		//实现移动
+		if (GetAsyncKeyState(0x01) & 0x8000) {
+			
+			if (is_down == 0) {
+				mousepos(&map_mouse_x, &map_mouse_y);
+				is_down = 100;
+				map_mouse_x_cur = map_mouse_x;
+				map_mouse_y_cur = map_mouse_y;
+			}
+			if (is_down == 100) {
+				mousepos(&map_mouse_x, &map_mouse_y);
+				pos_x_move = -(map_mouse_x - map_mouse_x_cur);
+				pos_y_move = -(map_mouse_y - map_mouse_y_cur);
+				pos_x_move += pos_x_move_tmp;
+				pos_y_move += pos_y_move_tmp;
+			}
+		} else if (is_down == 100) {
+			is_down = 0;
+			pos_x_move_tmp = pos_x_move;
+			pos_y_move_tmp = pos_y_move;
+		}
+		
+		//滚轮实现放大缩小
+		mouse_msg msgRecord = { 0 };
+		bool redraw = true;
+		
+		while (mousemsg()) {
+			//getmouse 获取鼠标消息
+			msgRecord = getmouse();
+			redraw = true;
+		}
+		if (redraw) {
+			
+			if (msgRecord.is_wheel()) {
+				if (msgRecord.wheel < 0 && side < 1024) {
+					side -= msgRecord.wheel / 10;
+				} else if (msgRecord.wheel > 0 && side > 15) {
+					side -= msgRecord.wheel / 10;
+				}
+			}
+			
+		}
+		
+	}
+	
+	//地图大小始终2048不需要设置为变量
+	pos_x = 2048 / 2 - side / 2;
+	pos_y = 2048 / 2 - side / 2;
+	
+	//改变显示范围，始终以飞机为中心
+	//323.148572641130506974593（原图2048*2048） 对应21784.4393 m
+	//即每个像素对应67.413076041 m
+	//则图形变换后在ege中 每个像素对应500 / 480 * 67.413076041 m  即 70.221954209375 m  //主要看缩放那里
+	double angle = getBearing1(map_center.lat, map_center.lon, latitude, longitude);
+	double dis = getDistance1(map_center.lat, map_center.lon, latitude, longitude);
+	pos_x_move_plane =  dis * sin(toRadians1(angle)) / 70.22195420;//实际上这个67好像就是ege窗口上每个像素对应的距离
+	pos_y_move_plane = - dis * cos(toRadians1(angle)) / 70.22195420;
+	
+	
+	double plane_x = map_x + map_side / 2 - pos_x_move * (500.0 / side);
+	double plane_y = map_y + map_side / 2 - pos_y_move * (500.0 / side);
+	
+//	setfillcolor(EGEARGB(0x90, 0x00, 0x00, 0x00));
+//	ege_fillellipse(plane_x - 10 , plane_y - 10, 20, 20);
+//	setlinewidth(3);
+//	setcolor(BLACK);
+//	ege_ellipse(plane_x - 10 , plane_y - 10, 20, 20);
+	if(plane_x > map_x + map_side || plane_y >= map_y + map_side){
+	}
+	else{
+		draw_plane(plane_x, plane_y, 30, rotationangle);
+	}
+	
+//	//显示更新信号
+//	char tmp[10];
+//	sprintf(tmp, "%d", renewMap);
+//	xyprintf(100, 100 ,tmp);
+	
+	
+	//绘制已经走过的航线
+	for(auto it = fullRoute.begin(); it + 1 != fullRoute.end(); it ++){
+		
+		WAYPOINT wp1 = *(it);
+		WAYPOINT wp2 = *(it + 1);
+		
+		
+		double dis = getDistance1(latitude, longitude, wp1.lat, wp1.lon);
+		double bearing = getBearing1(latitude, longitude, wp1.lat, wp1.lon);
+		
+		
+		double rl = dis / ((1.0 * side / map_side) * 67.413076041);
+		double rx = (cos(toRadians1(bearing - 90)) * rl) + (map_x + map_side / 2);
+		double ry = (sin(toRadians1(bearing - 90)) * rl) + (map_y + map_side / 2);
+		
+		
+		double dis2 = getDistance1(latitude, longitude, wp2.lat, wp2.lon);
+		double bearing2 = getBearing1(latitude, longitude, wp2.lat, wp2.lon);
+		
+		double rl2 = dis2 / ((1.0 * side / map_side) * 67.413076041);
+		double rx2 = (cos(toRadians1(bearing2 - 90)) * rl2) + (map_x + map_side / 2);
+		double ry2 = (sin(toRadians1(bearing2 - 90)) * rl2) + (map_y + map_side / 2);
+		
+		setlinewidth(0.003 * side);
+		
+		if(rx > map_x + map_side || ry >= map_y + map_side || rx2 > map_x + map_side || ry2 >= map_y + map_side){
+			continue;
+		}
+		ege_line(rx - pos_x_move * (500.0 / side), ry - pos_y_move * (500.0 / side), rx2 - pos_x_move * (500.0 / side), ry2 - pos_y_move * (500.0 / side));
+			
+	}
 	
 }
