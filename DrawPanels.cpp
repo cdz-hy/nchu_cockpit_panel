@@ -722,7 +722,8 @@ void draw_panels(){
 			draw_EICAS2(PFD_x + 3.125 * PFD_side, PFD_y + 1.38 * PFD_side, PFD_side * 1.07);
 			
 			//画EHIS的控制面板
-			draw_EHIS_control(PFD_x + PFD_side * 1.54, PFD_y - 1.4 * PFD_side, PFD_side*0.8);
+			draw_EHIS_control(PFD_x + PFD_side * 1.44, PFD_y - 1.4 * PFD_side, PFD_side*0.8);
+			draw_EHIS_control(PFD_x + PFD_side * 5.36, PFD_y - 1.4 * PFD_side, PFD_side*0.8);
 			
 			//灯光控制
 			draw_Light_contral(PFD_x + PFD_side * 0.15, PFD_y + 1.03 * PFD_side, PFD_side*0.67);
@@ -738,6 +739,9 @@ void draw_panels(){
 			
 			//画自动驾驶控制板
 			draw_auto_control(PFD_x + PFD_side * 3.45, PFD_y - 1.4 * PFD_side, PFD_side*3);
+			
+			draw_ND(PFD_x + 4.81 * PFD_side, PFD_y, PFD_side);
+			draw_PFD(PFD_x + 6 * PFD_side, PFD_y, PFD_side);
 			
 			draw_electricPanel_backgrounds(PFD_x, PFD_y , PFD_side);
 			
