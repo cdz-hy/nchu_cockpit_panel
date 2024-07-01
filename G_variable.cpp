@@ -228,6 +228,9 @@ PIMAGE pimg17;
 PIMAGE pimg18;
 PIMAGE pimg19;
 PIMAGE pimg20;
+PIMAGE pimg21;
+PIMAGE pimg22;
+PIMAGE pimg23;
 
 PIMAGE pimg1sta;
 PIMAGE pimg2sta;
@@ -249,6 +252,9 @@ PIMAGE pimg17sta;
 PIMAGE pimg18sta;
 PIMAGE pimg19sta;
 PIMAGE pimg20sta;
+PIMAGE pimg21sta;
+PIMAGE pimg22sta;
+PIMAGE pimg23sta;
 //==================================//
 
 //==========以下为警告信息==========//
