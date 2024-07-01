@@ -4,12 +4,14 @@
 
 
 extern int MainPanelLight;
-extern double COURSE_1;
-extern double COURSE_2;
+extern double COURSE_1;//angle左
+extern double COURSE_2;//angle右
 extern int FD_1;
 extern int FD_2;
-extern int COURSE_1NUM;//左边course示数
-extern int COURSE_2NUM;//右边course示数
+extern int COURSE_1NUM;//左边course示数//A
+extern int change_COURSE_1NUM;//B
+extern int COURSE_2NUM;//右边course示数//A
+extern int change_COURSE_2NUM;//B
 extern int AT;
 extern int N1;
 extern int SPEED;
@@ -20,19 +22,24 @@ extern int VORLOC;
 extern int APP;
 extern int HDGSEL;
 extern int CO;//1为左，0为右
-extern int CO_1;//左边显示
-extern int CO_2 ;//右边显示
+extern int CO_1;//左边显示//A
+extern int CO_1_change;//B
+extern int CO_2 ;//右边显示//A
+extern int CO_2_change;//B
 extern int SPDINTV;
 extern double INSMACHangle;
-extern int HEADING;
+extern int HEADING;//A
 extern double HEADING_1;
+extern int HEADING_1_change;//B
 extern double HEADING_2;
 extern int ALTHLD;
 extern int VS;
 extern double ALTITUDEangle;
-extern int ALTITUDE;
+extern int ALTITUDE;//A
+extern int ALTITUDE_change;//B
 extern double VERTSPEEDangle;
-extern int VERTSPEED;
+extern int VERTSPEED;//A
+extern int VERTSPEED_change;//B
 extern int ALTINTV;
 
 extern int CMDA ;
@@ -322,11 +329,10 @@ void draw_auto_control(double center_x, double center_y, double side) {
 					
 					COURSE_1 += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
 					
-					
+				
 				}
 				else {
 					COURSE_1 += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
-					
 				}
 			}
 		}
@@ -335,7 +341,24 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	else if (longPanel_speed_is_down == 1) {
 		longPanel_speed_is_down = 0;
 	}
-	
+	if(COURSE_1NUM + change_COURSE_1NUM<360&&COURSE_1NUM + change_COURSE_1NUM>0 ){
+		change_COURSE_1NUM = (int)(COURSE_1 / 360 * 90);
+	}else if(COURSE_1NUM + change_COURSE_1NUM>=360){
+		change_COURSE_1NUM = 1-COURSE_1NUM;
+		COURSE_1 = change_COURSE_1NUM / 90.0 * 360;
+	}else if(COURSE_1NUM + change_COURSE_1NUM<=0){
+		change_COURSE_1NUM = 359 -	COURSE_1NUM;
+		COURSE_1 = change_COURSE_1NUM / 90.0 * 360;
+	}
+	if(COURSE_2NUM + change_COURSE_2NUM<360&&COURSE_2NUM + change_COURSE_2NUM>0 ){
+		change_COURSE_2NUM = (int)(COURSE_2 / 360 * 90);
+	}else if(COURSE_2NUM + change_COURSE_2NUM>=360){
+		change_COURSE_2NUM = 1-COURSE_2NUM;
+		COURSE_2 = change_COURSE_2NUM / 90.0 * 360;
+	}else if(COURSE_2NUM + change_COURSE_2NUM<=0){
+		change_COURSE_2NUM = 359 -	COURSE_2NUM;
+		COURSE_2 = change_COURSE_2NUM / 90.0 * 360;
+	}
 	
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	ege_rectangle(center_x - 149 * Ulength , center_y + 10 * Ulength , Ulength * 7 , Ulength * 11);
@@ -451,7 +474,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	setfont(Ulength * 10, Ulength * 2.5, "DigifaceWide");
 	char nums_1[64];//左上上
-	sprintf_s(nums_1, "%d", COURSE_1NUM);
+	sprintf_s(nums_1, "%d", COURSE_1NUM + change_COURSE_1NUM);
 	ege_drawtext(nums_1, center_x - Ulength * 154, center_y - 16 * Ulength);
 	
 	setlinewidth(Linewidth / 7 * 4);
@@ -694,20 +717,22 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	//1显示左边，0显示右边
 	if (CO == 0) {
 		
+		
 		setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 		setfont(Ulength * 10, Ulength * 2.5, "DigifaceWide");
-		char nums_2[64];//左上上
-		sprintf_s(nums_2, "%d", CO_2);
+		char nums_2[64];//右
+		sprintf_s(nums_2, "%d", CO_2 + CO_2_change);
 		ege_drawtext(nums_2, center_x - Ulength * 84, center_y - 16 * Ulength);
+		
 		
 	}
 	if (CO == 1) {
 		
 		setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 		setfont(Ulength * 10, Ulength * 2.5, "DigifaceWide");
-		char nums_2[64];//左上上
+		char nums_2[64];//左
 		ege_drawtext(".", center_x - Ulength * 110, center_y - 16 * Ulength);
-		sprintf_s(nums_2, "%d", CO_1);
+		sprintf_s(nums_2, "%d", CO_1 + CO_1_change);
 		ege_drawtext(nums_2, center_x - Ulength * 103, center_y - 16 * Ulength);
 		
 	}
@@ -763,6 +788,31 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	else if (longPanel_speed_is_down == 1) {
 		longPanel_speed_is_down = 0;
 	}
+	if(CO == 0){
+		if(CO_2 + CO_2_change<392&&CO_2 + CO_2_change>0){
+			CO_2_change = (int)(INSMACHangle / 2);
+			CO_1_change = (int)((CO_2 + CO_2_change)/392.0 * 61) - CO_1;
+		}else if(CO_2 + CO_2_change>=392){
+			CO_2_change = 392 - CO_2;
+			INSMACHangle = CO_2_change * 2;
+		}else if(CO_2 + CO_2_change<=0){
+			CO_2_change = -CO_2;
+			INSMACHangle = CO_2_change * 2;
+		}
+	}
+	if(CO == 1){
+		if(CO_2 + CO_2_change<538&&CO_2 + CO_2_change>0){
+			CO_2_change = (int)(INSMACHangle / 2);
+			CO_1_change = (int)((CO_2 + CO_2_change)/538.0 * 84) - CO_1;
+		}else if(CO_2 + CO_2_change>=538){
+			CO_2_change = 538 - CO_2;
+			INSMACHangle = CO_2_change * 2;
+		}else if(CO_2 + CO_2_change<=0){
+			CO_2_change = -CO_2;
+			INSMACHangle = CO_2_change * 2;
+		}
+	}
+	
 	
 	setfillcolor(BLACK);
 	
@@ -990,7 +1040,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	setfont(Ulength * 10, Ulength * 2.5, "DigifaceWide");
 	char nums_3[64];//左上上
-	sprintf_s(nums_3, "%d", HEADING);
+	sprintf_s(nums_3, "%d", HEADING + HEADING_1_change);
 	ege_drawtext(nums_3, center_x - Ulength * 37, center_y - 16 * Ulength);
 	
 	
@@ -1185,6 +1235,16 @@ void draw_auto_control(double center_x, double center_y, double side) {
 		longPanel_speed_is_down = 0;
 	}
 	
+	if(HEADING + HEADING_1_change<360&&HEADING + HEADING_1_change>0 ){
+		HEADING_1_change = (int)(HEADING_1 / 2.0);
+	}else if(HEADING + HEADING_1_change>=360){
+		HEADING_1_change = 1-HEADING;
+		HEADING_1 = HEADING_1_change * 2;
+	}else if(HEADING + HEADING_1_change<=0){
+		HEADING_1_change = 359 - HEADING;
+		HEADING_1 = HEADING_1_change * 2;
+	}
+	
 	setfillcolor(EGEARGB(0XFF, 0X26, 0X2B, 0X2C));
 	ege_fillrect(center_x + Ulength * 3, center_y - 24 * Ulength, Ulength * 43, Ulength * 13);
 	
@@ -1349,15 +1409,35 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	else if (longPanel_speed_is_down == 1) {
 		longPanel_speed_is_down = 0;
 	}
-	
+	if(ALTITUDE + ALTITUDE_change<=100000&&ALTITUDE + ALTITUDE_change>=-1000){
+		ALTITUDE_change = (int)(ALTITUDEangle * 100);
+	}else if(ALTITUDE + ALTITUDE_change>100000){
+		ALTITUDE_change = 100000 - ALTITUDE;
+		ALTITUDEangle = ALTITUDE_change / 100.0;
+	}else if(ALTITUDE + ALTITUDE_change<-1000){
+		ALTITUDE_change = -1000 - ALTITUDE;
+		ALTITUDEangle = ALTITUDE_change / 100.0;
+	}
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	setfont(Ulength * 10, Ulength * 2.5, "DigifaceWide");
 	char nums_4[64];//ALTITUDE
-	sprintf_s(nums_4, "%d", ALTITUDE);
+	sprintf_s(nums_4, "%d", ALTITUDE + ALTITUDE_change);
 	ege_drawtext(nums_4, center_x + Ulength * 26, center_y - 16 * Ulength);
 	
+	
+	
+	if(VERTSPEED + VERTSPEED_change<=5000&&VERTSPEED + VERTSPEED_change>=-5000){
+		VERTSPEED_change = (int)(VERTSPEEDangle * 100);
+	}else if(VERTSPEED + VERTSPEED_change>5000){
+		VERTSPEED_change = 5000 - VERTSPEED;
+		VERTSPEEDangle = VERTSPEED_change / 100.0;
+	}else if(VERTSPEED + VERTSPEED_change<-5000){
+		VERTSPEED_change = -5000 - VERTSPEED;
+		VERTSPEEDangle = VERTSPEED_change / 100.0;
+	}
+	
 	char nums_5[64];//VERTSPEED
-	sprintf_s(nums_5, "%d", VERTSPEED);
+	sprintf_s(nums_5, "%d", VERTSPEED + VERTSPEED_change);
 	ege_drawtext(nums_5, center_x + Ulength * 80, center_y - 16 * Ulength);
 	
 	
@@ -1674,7 +1754,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	setfont(Ulength * 10, Ulength * 2.5, "DigifaceWide");
 	char nums_7[64];//左上上
-	sprintf_s(nums_7, "%d", COURSE_2NUM);
+	sprintf_s(nums_7, "%d", COURSE_2NUM + change_COURSE_2NUM);
 	ege_drawtext(nums_7, center_x + Ulength * 156, center_y - 16 * Ulength);
 	
 	
