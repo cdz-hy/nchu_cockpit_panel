@@ -154,6 +154,10 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	ege_bezier(Framenum, FramePloypoints);
 	setfillcolor(EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
 	floodfill(center_x, center_y, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(center_x - 170 * Ulength, center_y - 24 * Ulength, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(center_x + 170 * Ulength, center_y - 24 * Ulength, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(center_x - 170 * Ulength, center_y + 24 * Ulength, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
+	floodfill(center_x + 170 * Ulength, center_y + 24 * Ulength, EGEARGB(0XFF, 0X1B, 0X1E, 0X21));
 	
 	ege_enable_aa(true);
 	setcolor(EGEARGB(0XFF, 0X10, 0X10, 0X10));
