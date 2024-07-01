@@ -17,8 +17,8 @@ double sideSlipAngle = 0;
 double headingIndication = 0;
 double glideIndication = 0;
 double ndpointrotationangle = 0;
-double driftAngle = 5;//偏流角（左右）
-double pathAngle = 8;//航迹角（上下）
+double driftAngle = 0;//偏流角（左右）
+double pathAngle = 0;//航迹角（上下）
 
 double RCDI_speed = 7866;
 double verticalRate = -7866;
@@ -221,6 +221,13 @@ PIMAGE pimg10;
 PIMAGE pimg11;
 PIMAGE pimg12;
 PIMAGE pimg13;
+PIMAGE pimg14;
+PIMAGE pimg15;
+PIMAGE pimg16;
+PIMAGE pimg17;
+PIMAGE pimg18;
+PIMAGE pimg19;
+PIMAGE pimg20;
 
 PIMAGE pimg1sta;
 PIMAGE pimg2sta;
@@ -235,7 +242,13 @@ PIMAGE pimg10sta;
 PIMAGE pimg11sta;
 PIMAGE pimg12sta;
 PIMAGE pimg13sta;
-
+PIMAGE pimg14sta;
+PIMAGE pimg15sta;
+PIMAGE pimg16sta;
+PIMAGE pimg17sta;
+PIMAGE pimg18sta;
+PIMAGE pimg19sta;
+PIMAGE pimg20sta;
 //==================================//
 
 //==========以下为警告信息==========//
@@ -324,4 +337,3 @@ int CMDA = 0;
 int CWSA = 0;
 int CWSB = 0;
 int CMDB = 0;
-
