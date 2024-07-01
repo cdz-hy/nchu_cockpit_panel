@@ -923,7 +923,7 @@ void draw_getImage() {
 	pimg12 = newimage();
 	getimage(pimg12, "./res/左边的杠.png");
 	pimg13 = newimage();
-	getimage(pimg13, "./res/上面的杠.png");
+	getimage(pimg13, "./res/左上面的杠.png");
 	pimg14 = newimage();
 	getimage(pimg14, "./res/k1.png");
 	pimg15 = newimage();
@@ -946,6 +946,12 @@ void draw_getImage() {
 	getimage(pimg23, "./res/rk.png");
 	pimg24 = newimage();
 	getimage(pimg24, "./res/B1776_1.png");
+	pimg25 = newimage();
+	getimage(pimg25, "./res/4.png");
+	pimg26 = newimage();
+	getimage(pimg26, "./res/右上面的杠.png");
+	pimg27 = newimage();
+	getimage(pimg27, "./res/右门.png");
 	
 	
 	pimg1sta = newimage();
@@ -973,7 +979,7 @@ void draw_getImage() {
 	pimg12sta = newimage();
 	getimage(pimg12sta, "./res/左边的杠.png");
 	pimg13sta = newimage();
-	getimage(pimg13sta, "./res/上面的杠.png");
+	getimage(pimg13sta, "./res/左上面的杠.png");
 	pimg14sta = newimage();
 	getimage(pimg14sta, "./res/k1.png");
 	pimg15sta = newimage();
@@ -996,6 +1002,12 @@ void draw_getImage() {
 	getimage(pimg23sta, "./res/rk.png");
 	pimg24sta = newimage();
 	getimage(pimg24sta, "./res/B1776_1.png");
+	pimg25sta = newimage();
+	getimage(pimg25sta, "./res/4.png");
+	pimg26sta = newimage();
+	getimage(pimg26sta, "./res/右上面的杠.png");
+	pimg27sta = newimage();
+	getimage(pimg27sta, "./res/右门.png");
 	
 }
 
@@ -1010,9 +1022,9 @@ void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side) {
 	getZoomImage(pimg8, pimg8sta, PFD_side*0.38, PFD_side*0.38);
 	getZoomImage(pimg9, pimg9sta, length, height);
 	getZoomImage(pimg10, pimg10sta, PFD_side*0.54, PFD_side*0.46);
-	getZoomImage(pimg11, pimg11sta, PFD_side*1., PFD_side*2.1);
+	getZoomImage(pimg11, pimg11sta, PFD_side*1.2, PFD_side*2.5);
 	getZoomImage(pimg12, pimg12sta, PFD_side*3.8, PFD_side*7.2);
-	getZoomImage(pimg13, pimg13sta, PFD_side*7.2, PFD_side*2);
+	getZoomImage(pimg13, pimg13sta, PFD_side*8.4, PFD_side*1.2);
 	getZoomImage(pimg14, pimg14sta, PFD_side*0.9, PFD_side*0.55);
 	getZoomImage(pimg15, pimg15sta, PFD_side*0.35, PFD_side*0.35);
 	getZoomImage(pimg16, pimg16sta, PFD_side*0.36, PFD_side*1.44);
@@ -1024,15 +1036,21 @@ void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side) {
 	getZoomImage(pimg22, pimg22sta, PFD_side*0.15, PFD_side*0.15);
 	getZoomImage(pimg23, pimg23sta, PFD_side*0.15, PFD_side*0.15);
 	getZoomImage(pimg24, pimg24sta, PFD_side * 0.5, PFD_side * 0.18);
+	getZoomImage(pimg25, pimg25sta, PFD_side * 3.36, PFD_side * 1.4);
+	getZoomImage(pimg26, pimg26sta, PFD_side * 7.5, PFD_side * 1.1);
+	getZoomImage(pimg27, pimg27sta, PFD_side * 6.2, PFD_side * 6.82);
 	
 }
 
 void draw_BACKPICTURE(double PFD_x, double PFD_y, double PFD_side){
 	putimage_withalpha(NULL, pimg9, 0 , 0 );
-	putimage_withalpha(NULL, pimg11, PFD_x + 2.7 * PFD_side, PFD_y - 3.8 * PFD_side);
+	putimage_withalpha(NULL, pimg13, PFD_x - 5.05 * PFD_side, PFD_y - 4.35 * PFD_side);
+	putimage_withalpha(NULL, pimg26, PFD_x + 3.05 * PFD_side, PFD_y - 4.35 * PFD_side);
+	putimage_withalpha(NULL, pimg11, PFD_x + 2.7 * PFD_side, PFD_y - 4.22 * PFD_side);
 	
 	putimage_withalpha(NULL, pimg12, PFD_x - 5.35 * PFD_side, PFD_y - 4.72 * PFD_side);
-	putimage_withalpha(NULL, pimg13, PFD_x - 4.15 * PFD_side, PFD_y - 4.62 * PFD_side);
+	putimage_withalpha(NULL, pimg27, PFD_x + 7.7 * PFD_side, PFD_y - 4.33 * PFD_side);
+//	putimage_withalpha(NULL, pimg13, PFD_x - 4.15 * PFD_side, PFD_y - 4.62 * PFD_side);
 	
 }
 void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side) {
@@ -1057,6 +1075,7 @@ void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side)
 	putimage_withalpha(NULL, pimg22, PFD_x + 3.98 * PFD_side, PFD_y - 1.11 * PFD_side);
 	putimage_withalpha(NULL, pimg23, PFD_x + 4.06 * PFD_side, PFD_y - 0.95 * PFD_side);
 	putimage_withalpha(NULL, pimg24, PFD_x + 6.76 * PFD_side, PFD_y + 0.2 * PFD_side);
+	putimage_withalpha(NULL, pimg25, PFD_x + 5.65 * PFD_side, PFD_y - 1.9 * PFD_side);
 }
 
 void  draw_delImage() {
@@ -1084,6 +1103,9 @@ void  draw_delImage() {
 	delimage(pimg22);
 	delimage(pimg23);
 	delimage(pimg24);
+	delimage(pimg25);
+	delimage(pimg26);
+	delimage(pimg27);
 }
 
 void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height)
