@@ -231,6 +231,9 @@ extern PIMAGE pimg17;
 extern PIMAGE pimg18;
 extern PIMAGE pimg19;
 extern PIMAGE pimg20;
+extern PIMAGE pimg21;
+extern PIMAGE pimg22;
+extern PIMAGE pimg23;
 
 extern PIMAGE pimg1sta;
 extern PIMAGE pimg2sta;
@@ -252,6 +255,9 @@ extern PIMAGE pimg17sta;
 extern PIMAGE pimg18sta;
 extern PIMAGE pimg19sta;
 extern PIMAGE pimg20sta;
+extern PIMAGE pimg21sta;
+extern PIMAGE pimg22sta;
+extern PIMAGE pimg23sta;
 
 //==================================//
 
