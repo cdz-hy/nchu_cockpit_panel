@@ -224,6 +224,13 @@ extern PIMAGE pimg10;
 extern PIMAGE pimg11;
 extern PIMAGE pimg12;
 extern PIMAGE pimg13;
+extern PIMAGE pimg14;
+extern PIMAGE pimg15;
+extern PIMAGE pimg16;
+extern PIMAGE pimg17;
+extern PIMAGE pimg18;
+extern PIMAGE pimg19;
+extern PIMAGE pimg20;
 
 extern PIMAGE pimg1sta;
 extern PIMAGE pimg2sta;
@@ -238,6 +245,13 @@ extern PIMAGE pimg10sta;
 extern PIMAGE pimg11sta;
 extern PIMAGE pimg12sta;
 extern PIMAGE pimg13sta;
+extern PIMAGE pimg14sta;
+extern PIMAGE pimg15sta;
+extern PIMAGE pimg16sta;
+extern PIMAGE pimg17sta;
+extern PIMAGE pimg18sta;
+extern PIMAGE pimg19sta;
+extern PIMAGE pimg20sta;
 
 //==================================//
 
