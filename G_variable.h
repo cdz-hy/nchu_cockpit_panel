@@ -234,6 +234,7 @@ extern PIMAGE pimg20;
 extern PIMAGE pimg21;
 extern PIMAGE pimg22;
 extern PIMAGE pimg23;
+extern PIMAGE pimg24;
 
 extern PIMAGE pimg1sta;
 extern PIMAGE pimg2sta;
@@ -258,7 +259,7 @@ extern PIMAGE pimg20sta;
 extern PIMAGE pimg21sta;
 extern PIMAGE pimg22sta;
 extern PIMAGE pimg23sta;
-
+extern PIMAGE pimg24sta;
 //==================================//
 
 //==========以下为警告信息==========//
