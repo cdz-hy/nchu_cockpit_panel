@@ -312,7 +312,9 @@ extern double COURSE_2;
 extern int FD_1;
 extern int FD_2;
 extern int COURSE_1NUM;//左边course示数
+extern int change_COURSE_1NUM;
 extern int COURSE_2NUM;//右边course示数
+extern int change_COURSE_2NUM;
 extern int AT;
 extern int N1;
 extern int SPEED;
@@ -324,18 +326,23 @@ extern int APP;
 extern int HDGSEL;
 extern int CO;//1为左，0为右
 extern int CO_1;//左边显示
+extern int CO_1_change;
 extern int CO_2 ;//右边显示
+extern int CO_2_change;
 extern int SPDINTV;
 extern double INSMACHangle;
 extern int HEADING;
 extern double HEADING_1;
+extern int HEADING_1_change;
 extern double HEADING_2;
 extern int ALTHLD;
 extern int VS;
 extern double ALTITUDEangle;
 extern int ALTITUDE;
+extern int ALTITUDE_change;
 extern double VERTSPEEDangle;
 extern int VERTSPEED;
+extern int VERTSPEED_change;
 extern int ALTINTV;
 
 extern int CMDA ;
