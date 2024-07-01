@@ -714,7 +714,7 @@ void draw_panels(){
 			
 			//画计时器
 			draw_Chronometer(PFD_x - 0.85 * PFD_side, PFD_y - 0.3 * PFD_side, 0.45 * PFD_side);
-			
+			draw_Chronometer(PFD_x + 7 * PFD_side, PFD_y - 0.3 * PFD_side, 0.45 * PFD_side);
 			//画EICAS
 			draw_EICAS(PFD_x + 3.225 * PFD_side, PFD_y, PFD_side);
 			
@@ -722,8 +722,8 @@ void draw_panels(){
 			draw_EICAS2(PFD_x + 3.125 * PFD_side, PFD_y + 1.38 * PFD_side, PFD_side * 1.07);
 			
 			//画EHIS的控制面板
-			draw_EHIS_control(PFD_x + PFD_side * 1.44, PFD_y - 1.4 * PFD_side, PFD_side*0.8);
-			draw_EHIS_control(PFD_x + PFD_side * 5.36, PFD_y - 1.4 * PFD_side, PFD_side*0.8);
+			draw_EHIS_control(PFD_x + PFD_side * 1.5, PFD_y - 1.4 * PFD_side, PFD_side*0.8);
+			draw_EHIS_control(PFD_x + PFD_side * 5.32, PFD_y - 1.4 * PFD_side, PFD_side*0.8);
 			
 			//灯光控制
 			draw_Light_contral(PFD_x + PFD_side * 0.15, PFD_y + 1.03 * PFD_side, PFD_side*0.67);
@@ -738,7 +738,7 @@ void draw_panels(){
 			draw_FMC(PFD_x + PFD_side * 1.99, PFD_y + 1.67 * PFD_side, PFD_side * 0.63);
 			
 			//画自动驾驶控制板
-			draw_auto_control(PFD_x + PFD_side * 3.45, PFD_y - 1.4 * PFD_side, PFD_side*3);
+			draw_auto_control(PFD_x + PFD_side * 3.41, PFD_y - 1.4 * PFD_side, PFD_side*3);
 			
 			draw_ND(PFD_x + 4.81 * PFD_side, PFD_y, PFD_side);
 			draw_PFD(PFD_x + 6 * PFD_side, PFD_y, PFD_side);
@@ -944,6 +944,8 @@ void draw_getImage() {
 	getimage(pimg22, "./res/ck.png");
 	pimg23 = newimage();
 	getimage(pimg23, "./res/rk.png");
+	pimg24 = newimage();
+	getimage(pimg24, "./res/B1776_1.png");
 	
 	
 	pimg1sta = newimage();
@@ -992,6 +994,8 @@ void draw_getImage() {
 	getimage(pimg22sta, "./res/ck.png");
 	pimg23sta = newimage();
 	getimage(pimg23sta, "./res/rk.png");
+	pimg24sta = newimage();
+	getimage(pimg24sta, "./res/B1776_1.png");
 	
 }
 
@@ -1019,6 +1023,7 @@ void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side) {
 	getZoomImage(pimg21, pimg21sta, PFD_side*0.15, PFD_side*0.15);
 	getZoomImage(pimg22, pimg22sta, PFD_side*0.15, PFD_side*0.15);
 	getZoomImage(pimg23, pimg23sta, PFD_side*0.15, PFD_side*0.15);
+	getZoomImage(pimg24, pimg24sta, PFD_side * 0.5, PFD_side * 0.18);
 	
 }
 
@@ -1051,6 +1056,7 @@ void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side)
 	putimage_withalpha(NULL, pimg21, PFD_x + 3.9 * PFD_side, PFD_y - 0.95 * PFD_side);
 	putimage_withalpha(NULL, pimg22, PFD_x + 3.98 * PFD_side, PFD_y - 1.11 * PFD_side);
 	putimage_withalpha(NULL, pimg23, PFD_x + 4.06 * PFD_side, PFD_y - 0.95 * PFD_side);
+	putimage_withalpha(NULL, pimg24, PFD_x + 6.76 * PFD_side, PFD_y + 0.2 * PFD_side);
 }
 
 void  draw_delImage() {
@@ -1077,6 +1083,7 @@ void  draw_delImage() {
 	delimage(pimg21);
 	delimage(pimg22);
 	delimage(pimg23);
+	delimage(pimg24);
 }
 
 void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height)
