@@ -38,6 +38,7 @@ double FMC_origin_center_x_up;
 double FMC_origin_center_y_up;
 char inputment[64];
 char FMC_button_mode = 0;
+extern int MainPanelLight;
 
 struct FMC_buttoninformation {
 	double FMC_button_x;
@@ -193,8 +194,22 @@ void draw_RouteTable_up(double center_x, double center_y, double side) {//side�
 	draw_RouteTable_Side_Button(center_x - single * 42, center_y + single * 6, side / 13.33333333);
 	draw_RouteTable_Side_Button(center_x - single * 42, center_y + single * 13, side / 13.33333333);
 	draw_RouteTable_Side_Button(center_x - single * 42, center_y + single * 20, side / 13.33333333);
+	setcolor(EGEARGB(0XFF,0X50,0X50,0X50));
+	setlinewidth(side / 200);
+	ege_line(center_x - single * 38.5, center_y - single * 15, center_x - single * 37, center_y - single * 15);//1
+	ege_line(center_x - single * 37, center_y - single * 15, center_x - single * 31.6, center_y - single * 14.6);
+	ege_line(center_x - single * 38.5, center_y - single * 8, center_x - single * 37, center_y - single * 8);//2
+	ege_line(center_x - single * 37, center_y - single * 8, center_x - single * 31.6, center_y - single * 7.7);
+	ege_line(center_x - single * 38.5, center_y - single * 1, center_x - single * 37, center_y - single * 1);//3
+	ege_line(center_x - single * 37, center_y - single * 1, center_x - single * 31.6, center_y - single * 0.7);
+	ege_line(center_x - single * 38.5, center_y + single * 6, center_x - single * 37, center_y + single * 6);//4
+	ege_line(center_x - single * 37, center_y + single * 6, center_x - single * 31.6, center_y + single * 6.3);
+	ege_line(center_x - single * 38.5, center_y + single * 13, center_x - single * 37, center_y + single * 13);//5
+	ege_line(center_x - single * 37, center_y + single * 13, center_x - single * 31.6, center_y + single * 13.2);
+	ege_line(center_x - single * 38.5, center_y + single * 20, center_x - single * 37, center_y + single * 20);//6
+	ege_line(center_x - single * 37, center_y + single * 20, center_x - single * 31.6, center_y + single * 20.2);
 
-	setcolor(EGEARGB(100, 124, 124, 128));
+	setcolor(EGEARGB(MainPanelLight, 124, 124, 128));
 	setlinewidth(side / 200);
 	ege_line(center_x - single * 38.5, center_y - single * 15, center_x - single * 37, center_y - single * 15);//1
 	ege_line(center_x - single * 37, center_y - single * 15, center_x - single * 31.6, center_y - single * 14.6);
@@ -217,7 +232,22 @@ void draw_RouteTable_up(double center_x, double center_y, double side) {//side�
 	draw_RouteTable_Side_Button(center_x + single * 42, center_y + single * 13, side / 13.33333333);
 	draw_RouteTable_Side_Button(center_x + single * 42, center_y + single * 20, side / 13.33333333);
 
-	setcolor(EGEARGB(100, 124, 124, 128));
+	setcolor(EGEARGB(0XFF,0X50,0X50,0X50));
+	setlinewidth(side / 200);
+	ege_line(center_x + single * 38.5, center_y - single * 15, center_x + single * 37, center_y - single * 15);//1
+	ege_line(center_x + single * 37, center_y - single * 15, center_x + single * 31.6, center_y - single * 14.6);
+	ege_line(center_x + single * 38.5, center_y - single * 8, center_x + single * 37, center_y - single * 8);//2
+	ege_line(center_x + single * 37, center_y - single * 8, center_x + single * 31.6, center_y - single * 7.7);
+	ege_line(center_x + single * 38.5, center_y - single * 1, center_x + single * 37, center_y - single * 1);//3
+	ege_line(center_x + single * 37, center_y - single * 1, center_x + single * 31.6, center_y - single * 0.7);
+	ege_line(center_x + single * 38.5, center_y + single * 6, center_x + single * 37, center_y + single * 6);//4
+	ege_line(center_x + single * 37, center_y + single * 6, center_x + single * 31.6, center_y + single * 6.3);
+	ege_line(center_x + single * 38.5, center_y + single * 13, center_x + single * 37, center_y + single * 13);//5
+	ege_line(center_x + single * 37, center_y + single * 13, center_x + single * 31.6, center_y + single * 13.2);
+	ege_line(center_x + single * 38.5, center_y + single * 20, center_x + single * 37, center_y + single * 20);//6
+	ege_line(center_x + single * 37, center_y + single * 20, center_x + single * 31.6, center_y + single * 20.2);
+	
+	setcolor(EGEARGB(MainPanelLight, 124, 124, 128));
 	setlinewidth(side / 200);
 	ege_line(center_x + single * 38.5, center_y - single * 15, center_x + single * 37, center_y - single * 15);//1
 	ege_line(center_x + single * 37, center_y - single * 15, center_x + single * 31.6, center_y - single * 14.6);
@@ -374,9 +404,10 @@ void draw_RouteTable_Side_Button(double center_x, double center_y, double side) 
 	FMC_mouse_real_y = FMC_mouse_y;
 	
 	ege_fillrect(center_x - length / 2, center_y - width / 2, length, width);
-
-	setcolor(EGEARGB(0xff, 136, 97, 67));//橙色
 	setlinewidth(side / 7.5);
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	ege_line(center_x - single * 2, center_y, center_x + single * 2, center_y);
+	setcolor(EGEARGB(MainPanelLight, 136, 97, 67));//橙色
 	ege_line(center_x - single * 2, center_y, center_x + single * 2, center_y);
 
 	if (FMC_mouse_real_x >= center_x - length / 2 && FMC_mouse_real_x <= center_x + length / 2 && FMC_mouse_real_y >= center_y - width / 2 && FMC_mouse_real_y <= center_y + width / 2) {
@@ -706,7 +737,35 @@ void draw_RouteTable_down1(double center_x, double center_y, double side) {
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	setfont(single * 3, 0, "黑体");
-	setcolor(EGEARGB(0xff, 136, 97, 67));
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	ege_drawtext("INIT", center_x - single * 31, center_y - single * 14.2);//(1,1) 移0.7 移1.5
+	ege_drawtext("REF", center_x - single * 31, center_y - single * 12);//
+	ege_drawtext("DIR", center_x - single * 31, center_y - single * 5.6);//(1,2)
+	ege_drawtext("INTC", center_x - single * 31, center_y - single * 3.4);
+	ege_drawtext("FIX", center_x - single * 31, center_y + single * 3.8);//(1.3)
+	ege_drawtext("PREV", center_x - single * 31, center_y + single * 11.6);//(1,4)
+	ege_drawtext("PAGE", center_x - single * 31, center_y + single * 13.8);
+	ege_drawtext("RTE", center_x - single * 19, center_y - single * 13.4);//(2,1)
+	ege_drawtext("LEGS", center_x - single * 19, center_y - single * 4.8);//(2,2)
+	ege_drawtext("NAV", center_x - single * 19, center_y + single * 3);//(2,3)
+	ege_drawtext("RAD", center_x - single * 19, center_y + single * 5.2);
+	ege_drawtext("NEXT", center_x - single * 19, center_y + single * 11.6);//(2,4)
+	ege_drawtext("PAGE", center_x - single * 19, center_y + single * 13.8);
+	ege_drawtext("CLB", center_x - single * 7, center_y - single * 13.4);//(3,1)
+	ege_drawtext("DEP", center_x - single * 7, center_y - single * 5.5);//(3,2)
+	ege_drawtext("ARR", center_x - single * 7, center_y - single * 3.4);
+	ege_drawtext("CRZ", center_x + single * 5, center_y - single * 13.4);//(4,1)
+	ege_drawtext("HOLD", center_x + single * 5, center_y - single * 4.8);//(4,2)
+	ege_drawtext("DES", center_x + single * 17, center_y - single * 13.4);//(5,1)
+	ege_drawtext("PROG", center_x + single * 17, center_y - single * 4.8);//(5,2)
+	ege_drawtext("EXEC", center_x + single * 31, center_y - single * 3.8);
+	setfont(single * 2.5, 0, "黑体");
+	ege_drawtext("B", center_x + single * 25, center_y - single * 17);
+	ege_drawtext("R", center_x + single * 25, center_y - single * 15);
+	ege_drawtext("T", center_x + single * 25, center_y - single * 13);
+	
+	setfont(single * 3, 0, "黑体");
+	setcolor(EGEARGB(MainPanelLight, 136, 97, 67));
 	ege_drawtext("INIT", center_x - single * 31, center_y - single * 14.2);//(1,1) 移0.7 移1.5
 	ege_drawtext("REF", center_x - single * 31, center_y - single * 12);//
 	ege_drawtext("DIR", center_x - single * 31, center_y - single * 5.6);//(1,2)
@@ -867,7 +926,25 @@ void draw_RouteTable_down2(double center_x, double center_y, double side) {
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	setfont(single * 5, 0, "黑体");
-	setcolor(EGEARGB(0xff, 136, 97, 67));
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
+	ege_drawtext("1", center_x - single * 33.5, center_y + single * 5.1);
+	ege_drawtext("4", center_x - single * 33.6, center_y + single * 14.2);
+	ege_drawtext("7", center_x - single * 33.6, center_y + single * 23.2);
+	ege_drawtext(".", center_x - single * 33.1, center_y + single * 30.8);
+	ege_drawtext("2", center_x - single * 24.4, center_y + single * 5.1);
+	ege_drawtext("5", center_x - single * 24.4, center_y + single * 14.2);
+	ege_drawtext("8", center_x - single * 24.4, center_y + single * 23.2);
+	ege_drawtext("0", center_x - single * 24.4, center_y + single * 32.2);
+	ege_drawtext("3", center_x - single * 15.3, center_y + single * 5.1);
+	ege_drawtext("6", center_x - single * 15.3, center_y + single * 14.2);
+	ege_drawtext("9", center_x - single * 15.3, center_y + single * 23.2);
+	setfont(single * 4, 0, "黑体");
+	ege_drawtext("+", center_x - single * 16.3, center_y + single * 31.5);
+	ege_drawtext("/", center_x - single * 15, center_y + single * 32.4);
+	ege_drawtext("-", center_x - single * 14, center_y + single * 33.4);
+	
+	setfont(single * 5, 0, "黑体");
+	setcolor(EGEARGB(MainPanelLight, 136, 97, 67));
 	ege_drawtext("1", center_x - single * 33.5, center_y + single * 5.1);
 	ege_drawtext("4", center_x - single * 33.6, center_y + single * 14.2);
 	ege_drawtext("7", center_x - single * 33.6, center_y + single * 23.2);
@@ -917,8 +994,44 @@ void draw_RouteTable_down2(double center_x, double center_y, double side) {
 
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
+	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	setfont(single * 5, 0, "黑体");
-	setcolor(EGEARGB(0xff, 136, 97, 67));
+	ege_drawtext("A", center_x - single * 4.8, center_y - single * 12.9);
+	ege_drawtext("F", center_x - single * 4.8, center_y - single * 4);
+	ege_drawtext("K", center_x - single * 4.8, center_y + single * 4.8);
+	ege_drawtext("P", center_x - single * 4.8, center_y + single * 14.1);
+	ege_drawtext("U", center_x - single * 4.8, center_y + single * 23.1);
+	ege_drawtext("Z", center_x - single * 4.8, center_y + single * 32.1);
+	ege_drawtext("B", center_x + single * 5.2, center_y - single * 12.9);
+	ege_drawtext("G", center_x + single * 5.2, center_y - single * 4);
+	ege_drawtext("L", center_x + single * 5.2, center_y + single * 4.8);
+	ege_drawtext("Q", center_x + single * 5.2, center_y + single * 14.1);
+	ege_drawtext("V", center_x + single * 5.2, center_y + single * 23.1);
+	ege_drawtext("", center_x + single * 5.2, center_y + single * 32.1);
+	ege_drawtext("C", center_x + single * 15.2, center_y - single * 12.9);
+	ege_drawtext("H", center_x + single * 15.2, center_y - single * 4);
+	ege_drawtext("M", center_x + single * 15.2, center_y + single * 4.8);
+	ege_drawtext("R", center_x + single * 15.2, center_y + single * 14.1);
+	ege_drawtext("W", center_x + single * 15.2, center_y + single * 23.1);
+	setfont(single * 3, 0, "黑体");
+	ege_drawtext("DEL", center_x + single * 15.2, center_y + single * 32.1);
+	setfont(single * 5, 0, "黑体");
+	ege_drawtext("D", center_x + single * 24.8, center_y - single * 12.9);
+	ege_drawtext("I", center_x + single * 24.8, center_y - single * 4);
+	ege_drawtext("N", center_x + single * 24.8, center_y + single * 4.8);
+	ege_drawtext("S", center_x + single * 24.8, center_y + single * 14.1);
+	ege_drawtext("X", center_x + single * 24.8, center_y + single * 23.1);
+	ege_drawtext("/", center_x + single * 24.8, center_y + single * 32.1);
+	ege_drawtext("E", center_x + single * 34.4, center_y - single * 12.9);
+	ege_drawtext("J", center_x + single * 34.4, center_y - single * 4);
+	ege_drawtext("O", center_x + single * 34.4, center_y + single * 4.8);
+	ege_drawtext("T", center_x + single * 34.4, center_y + single * 14.1);
+	ege_drawtext("Y", center_x + single * 34.4, center_y + single * 23.1);
+	setfont(single * 3, 0, "黑体");
+	ege_drawtext("CLR", center_x + single * 34.4, center_y + single * 32.1);
+	
+	setfont(single * 5, 0, "黑体");
+	setcolor(EGEARGB(MainPanelLight, 136, 97, 67));
 	ege_drawtext("A", center_x - single * 4.8, center_y - single * 12.9);
 	ege_drawtext("F", center_x - single * 4.8, center_y - single * 4);
 	ege_drawtext("K", center_x - single * 4.8, center_y + single * 4.8);
@@ -1049,7 +1162,17 @@ void draw_RouteTable_down2_square(double center_x, double center_y, double side)
 // 下半部分的最下一层的正方形中间的线框
 void draw_RouteTable_down2_square_poly(double center_x, double center_y, double side) {
 	setlinewidth(side / 11.1940298);
-	setcolor(EGEARGB(0xff, 136, 97, 67));
+	setcolor(EGEARGB(0XFF,0X50,0X50,0X50));
+	ege_point points1[5] = {
+		center_x - side,center_y - side,
+		center_x - side,center_y + side,
+		center_x + side,center_y + side,
+		center_x + side,center_y - side,
+		center_x - side,center_y - side
+	};
+	ege_drawpoly(5, points1);
+	
+	setcolor(EGEARGB(MainPanelLight, 136, 97, 67));
 	ege_point points[5] = {
 		center_x - side,center_y - side,
 		center_x - side,center_y + side,
@@ -1186,5 +1309,4 @@ void draw_FMC(double center_x, double center_y, double side) {
 
 	FMC_Scanner(FMC_letterbutton, side);
 }
-
 
