@@ -111,8 +111,11 @@ void draw_panels(){
 	//默认六个表盘的拟合中心是正中心
 	double center_x = getwidth() / 2;
 	double center_y = getheight() / 2;
+	double center_x1 = getwidth() / 2;
+	double center_y1 = getheight() / 2;
 	//单位长度，初始为0.05高
 	double unit_side = getheight() / 20;
+	double unit_side1 = getheight() / 20;
 	
 	
 	//各个表盘移动的距离
@@ -183,29 +186,6 @@ void draw_panels(){
 				xyprintf(length - 50, height - 25, "本地");
 			}
 		}
-
-		
-		
-		//实现窗口关闭
-		mousepos(&mouse_x, &mouse_y);
-		if(mouse_x >= 0.0 * height && mouse_y >= 0.0 * length && mouse_x <= 0.06 * height && mouse_y <= 0.06 * length){
-			setfillcolor(EGEARGB(0x77,0xba,0x00,0x0c));
-			if((mouse_x - 0.03 * height) * (mouse_x - 0.03 * height) + (mouse_y - 0.025 * length) * (mouse_y - 0.025 * length) <= (0.01 * height) * (0.01 * height)){
-				setfillcolor(EGEARGB(0x99,0xba,0x00,0x0c));
-				setcolor(EGEARGB(0x30, 0xff, 0xff, 0xff));
-				setlinewidth(0.003 * height);
-				ege_ellipse(0.02 * height, 0.015 * length, 0.02 * height, 0.02 * height);
-			}
-			ege_fillellipse(0.02 * height, 0.015 * length, 0.02 * height, 0.02 * height);
-			if(GetAsyncKeyState(0x01) & 0x8000){
-				is_down = -999;
-			}
-			else if(is_down == -999){
-				is_down = 0;
-				HWND hWnd = getHWnd();
-				SendMessage(hWnd, WM_CLOSE, 0, 0);
-			}
-		}
 		
 		
 		//显示帧率
@@ -248,9 +228,9 @@ void draw_panels(){
 		double alt_y = center_y - 3.55 * unit_side + alt_move_y * unit_side;
 		
 		//PFD
-		double PFD_side = 15 * unit_side;
-		double PFD_x = center_x + PFD_move_x * unit_side;
-		double PFD_y = center_y + PFD_move_y * unit_side;
+		double PFD_side = 15 * unit_side1;
+		double PFD_x = center_x1 + PFD_move_x * unit_side1;
+		double PFD_y = center_y1 + PFD_move_y * unit_side1;
 		
 //		//ND
 //		double ND_side = 15 * unit_side;
@@ -795,8 +775,8 @@ void draw_panels(){
 				}
 				if (is_down == 11) {
 					mousepos(&mouse_x, &mouse_y);
-					PFD_move_x = (mouse_x - mouse_x_cur) / unit_side;
-					PFD_move_y = (mouse_y - mouse_y_cur) / unit_side;
+					PFD_move_x = (mouse_x - mouse_x_cur) / unit_side1;
+					PFD_move_y = (mouse_y - mouse_y_cur) / unit_side1;
 					PFD_move_x += PFD_move_x_tmp;
 					PFD_move_y += PFD_move_y_tmp;
 				}
@@ -832,10 +812,10 @@ void draw_panels(){
 				if (redraw) {
 					
 					if (msgRecord.is_wheel()) {
-						if (msgRecord.wheel > 0 && unit_side < 130) {
-							unit_side += msgRecord.wheel / 30;
-						} else if (msgRecord.wheel < 0 && unit_side > 15) {
-							unit_side += msgRecord.wheel / 30;
+						if (msgRecord.wheel > 0 && unit_side1 < 130) {
+							unit_side1 += msgRecord.wheel / 30;
+						} else if (msgRecord.wheel < 0 && unit_side1 > 15) {
+							unit_side1 += msgRecord.wheel / 30;
 						}
 					}
 					
@@ -879,8 +859,32 @@ void draw_panels(){
 			showMap += 1;
 			showMap %= 2;
 		}
+	
+		
+		//实现窗口关闭
+		mousepos(&mouse_x, &mouse_y);
+		if(mouse_x >= 0.0 * height && mouse_y >= 0.0 * length && mouse_x <= 0.06 * height && mouse_y <= 0.06 * length){
+			setfillcolor(EGEARGB(0x77,0xba,0x00,0x0c));
+			if((mouse_x - 0.03 * height) * (mouse_x - 0.03 * height) + (mouse_y - 0.025 * length) * (mouse_y - 0.025 * length) <= (0.01 * height) * (0.01 * height)){
+				setfillcolor(EGEARGB(0x99,0xba,0x00,0x0c));
+				setcolor(EGEARGB(0x30, 0xff, 0xff, 0xff));
+				setlinewidth(0.003 * height);
+				ege_ellipse(0.02 * height, 0.015 * length, 0.02 * height, 0.02 * height);
+			}
+			ege_fillellipse(0.02 * height, 0.015 * length, 0.02 * height, 0.02 * height);
+			if(GetAsyncKeyState(0x01) & 0x8000){
+				is_down = -999;
+			}
+			else if(is_down == -999){
+				is_down = 0;
+				HWND hWnd = getHWnd();
+				SendMessage(hWnd, WM_CLOSE, 0, 0);
+			}
+		}
+		
 		
 	}
+	
 	
 	draw_delImage();
 	delimage(img);

@@ -17,8 +17,8 @@ double sideSlipAngle = 0;
 double headingIndication = 0;
 double glideIndication = 0;
 double ndpointrotationangle = 0;
-double driftAngle = 0;//偏流角（左右）
-double pathAngle = 0;//航迹角（上下）
+double driftAngle = 5;//偏流角（左右）
+double pathAngle = 8;//航迹角（上下）
 
 double RCDI_speed = 7866;
 double verticalRate = -7866;
