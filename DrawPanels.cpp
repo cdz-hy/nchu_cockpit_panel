@@ -679,8 +679,8 @@ void draw_panels(){
 				draw_PFD(PFD_x + 1.24 * PFD_side, PFD_y, PFD_side);
 			}
 			else if(MainpanelDU_gear == 1){
-		
-			//画PFD
+				
+				//画PFD
 				draw_PFD(PFD_x, PFD_y, PFD_side);
 				
 				//ND表
@@ -719,27 +719,28 @@ void draw_panels(){
 			draw_EICAS(PFD_x + 3.225 * PFD_side, PFD_y, PFD_side);
 			
 			//画EICAS2
-			draw_EICAS2(PFD_x + 3.225 * PFD_side, PFD_y + 1.33 * PFD_side, PFD_side);
+			draw_EICAS2(PFD_x + 3.125 * PFD_side, PFD_y + 1.38 * PFD_side, PFD_side * 1.07);
 			
 			//画EHIS的控制面板
 			draw_EHIS_control(PFD_x + PFD_side * 1.54, PFD_y - 1.4 * PFD_side, PFD_side*0.8);
 			
 			//灯光控制
-			draw_Light_contral(PFD_x + PFD_side * 0.05, PFD_y + 1.07 * PFD_side, PFD_side*0.8);
+			draw_Light_contral(PFD_x + PFD_side * 0.15, PFD_y + 1.03 * PFD_side, PFD_side*0.67);
 			
 			//灯光控制2
-			draw_Light_contral_1(PFD_x + PFD_side * 0.87, PFD_y + 1.07 * PFD_side, PFD_side*0.8);
+			draw_Light_contral_1(PFD_x + PFD_side * 0.87, PFD_y + 1.03 * PFD_side, PFD_side*0.67);
 			
 			//显示屏的控制板
 			draw_TopContral(PFD_x + PFD_side * 0.65, PFD_y - 0.83 * PFD_side, PFD_side*0.8);
 			
 			//画FMC
-			draw_FMC(PFD_x + PFD_side * 2.14, PFD_y + 1.62 * PFD_side, PFD_side * 0.6);
+			draw_FMC(PFD_x + PFD_side * 1.99, PFD_y + 1.67 * PFD_side, PFD_side * 0.63);
 			
 			//画自动驾驶控制板
-			draw_auto_control(PFD_x + PFD_side * 3.5, PFD_y - 1.4 * PFD_side, PFD_side*3);
+			draw_auto_control(PFD_x + PFD_side * 3.45, PFD_y - 1.4 * PFD_side, PFD_side*3);
 			
 			draw_electricPanel_backgrounds(PFD_x, PFD_y , PFD_side);
+			
 			
 //			//直接显示的地图（暂时不用）
 //			if(showMap == 1)
@@ -859,7 +860,7 @@ void draw_panels(){
 			showMap += 1;
 			showMap %= 2;
 		}
-	
+		
 		
 		//实现窗口关闭
 		mousepos(&mouse_x, &mouse_y);
@@ -919,6 +920,20 @@ void draw_getImage() {
 	getimage(pimg12, "./res/左边的杠.png");
 	pimg13 = newimage();
 	getimage(pimg13, "./res/上面的杠.png");
+	pimg14 = newimage();
+	getimage(pimg14, "./res/k1.png");
+	pimg15 = newimage();
+	getimage(pimg15, "./res/k1d.png");
+	pimg16 = newimage();
+	getimage(pimg16, "./res/gan.png");
+	pimg17 = newimage();
+	getimage(pimg17, "./res/k2d.png");
+	pimg18 = newimage();
+	getimage(pimg18, "./res/k2.png");
+	pimg19 = newimage();
+	getimage(pimg19, "./res/k2x.png");
+	pimg20 = newimage();
+	getimage(pimg20, "./res/k3.png");
 	
 	
 	pimg1sta = newimage();
@@ -947,9 +962,20 @@ void draw_getImage() {
 	getimage(pimg12sta, "./res/左边的杠.png");
 	pimg13sta = newimage();
 	getimage(pimg13sta, "./res/上面的杠.png");
-	
-	
-	
+	pimg14sta = newimage();
+	getimage(pimg14sta, "./res/k1.png");
+	pimg15sta = newimage();
+	getimage(pimg15sta, "./res/k1d.png");
+	pimg16sta = newimage();
+	getimage(pimg16sta, "./res/gan.png");
+	pimg17sta = newimage();
+	getimage(pimg17sta, "./res/k2d.png");
+	pimg18sta = newimage();
+	getimage(pimg18sta, "./res/k2.png");
+	pimg19sta = newimage();
+	getimage(pimg19sta, "./res/k2x.png");
+	pimg20sta = newimage();
+	getimage(pimg20sta, "./res/k3.png");
 	
 }
 
@@ -961,12 +987,19 @@ void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side) {
 	getZoomImage(pimg5, pimg5sta, PFD_side * 0.52, PFD_side * 0.52);
 	getZoomImage(pimg7, pimg7sta, PFD_side*3.17, PFD_side*0.25);
 	getZoomImage(pimg6, pimg6sta, PFD_side*3.4, PFD_side*1.2);
-	getZoomImage(pimg8, pimg8sta, PFD_side*0.4, PFD_side*0.4);
+	getZoomImage(pimg8, pimg8sta, PFD_side*0.38, PFD_side*0.38);
 	getZoomImage(pimg9, pimg9sta, length, height);
-	getZoomImage(pimg10, pimg10sta, PFD_side*0.5, PFD_side*0.55);
+	getZoomImage(pimg10, pimg10sta, PFD_side*0.54, PFD_side*0.46);
 	getZoomImage(pimg11, pimg11sta, PFD_side*1.1, PFD_side*1.5);
 	getZoomImage(pimg12, pimg12sta, PFD_side*3.8, PFD_side*7.2);
 	getZoomImage(pimg13, pimg13sta, PFD_side*7.2, PFD_side*2);
+	getZoomImage(pimg14, pimg14sta, PFD_side*0.9, PFD_side*0.55);
+	getZoomImage(pimg15, pimg15sta, PFD_side*0.35, PFD_side*0.35);
+	getZoomImage(pimg16, pimg16sta, PFD_side*0.36, PFD_side*1.44);
+	getZoomImage(pimg17, pimg17sta, PFD_side*0.28, PFD_side*0.28);
+	getZoomImage(pimg18, pimg18sta, PFD_side*0.58, PFD_side*0.29);
+	getZoomImage(pimg19, pimg19sta, PFD_side*0.8, PFD_side*0.16);
+	getZoomImage(pimg20, pimg20sta, PFD_side*0.8, PFD_side*0.4);
 	
 }
 
@@ -987,11 +1020,15 @@ void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side)
 	putimage_withalpha(NULL, pimg5, PFD_x + 2 * PFD_side, PFD_y - 0.01* PFD_side);
 	putimage_withalpha(NULL, pimg7, PFD_x + 0.7 * PFD_side, PFD_y - 1.835 * PFD_side);
 	putimage_withalpha(NULL, pimg6, PFD_x - 2.26 * PFD_side, PFD_y - 1.8 * PFD_side);
-	putimage_withalpha(NULL, pimg8, PFD_x - 1.26 * PFD_side, PFD_y + 0.9 * PFD_side);
-	putimage_withalpha(NULL, pimg10, PFD_x - 0.85 * PFD_side, PFD_y + 0.8 * PFD_side);
-//	putimage_withalpha(NULL, pimg11, PFD_x + 1.85 * PFD_side, PFD_y - 3.3 * PFD_side);
-//	putimage_withalpha(NULL, pimg12, PFD_x - 2.5 * PFD_side, PFD_y - 3 * PFD_side);
-	
+	putimage_withalpha(NULL, pimg8, PFD_x - 1.25 * PFD_side, PFD_y + 0.85 * PFD_side);
+	putimage_withalpha(NULL, pimg10, PFD_x - 0.80 * PFD_side, PFD_y + 0.8 * PFD_side);
+	putimage_withalpha(NULL, pimg14, PFD_x + 2.55 * PFD_side, PFD_y - 1.17 * PFD_side);
+	putimage_withalpha(NULL, pimg15, PFD_x + 3.45 * PFD_side, PFD_y - 1.15 * PFD_side);
+	putimage_withalpha(NULL, pimg16, PFD_x + 3.87 * PFD_side, PFD_y - 0.79 * PFD_side);
+	putimage_withalpha(NULL, pimg17, PFD_x + 4.28 * PFD_side, PFD_y - 1.05 * PFD_side);
+	putimage_withalpha(NULL, pimg18, PFD_x + 4.62 * PFD_side, PFD_y - 1.05 * PFD_side);
+	putimage_withalpha(NULL, pimg19, PFD_x + 4.42 * PFD_side, PFD_y - 0.79 * PFD_side);
+	putimage_withalpha(NULL, pimg20, PFD_x + 5.2 * PFD_side, PFD_y - 1.05 * PFD_side);
 }
 
 void  draw_delImage() {
@@ -1007,8 +1044,14 @@ void  draw_delImage() {
 	delimage(pimg10);
 	delimage(pimg11);
 	delimage(pimg12);
-	
 	delimage(pimg13);
+	delimage(pimg14);
+	delimage(pimg15);
+	delimage(pimg16);
+	delimage(pimg17);
+	delimage(pimg18);
+	delimage(pimg19);
+	delimage(pimg20);
 }
 
 void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height)
@@ -1207,7 +1250,7 @@ void draw_map(){
 	//显示图片
 	putimage_withalpha(NULL, mapShow, map_x, map_y);
 	
-
+	
 	
 	
 	
@@ -1322,7 +1365,7 @@ void draw_map(){
 			continue;
 		}
 		ege_line(rx - pos_x_move * (500.0 / side), ry - pos_y_move * (500.0 / side), rx2 - pos_x_move * (500.0 / side), ry2 - pos_y_move * (500.0 / side));
-			
+		
 	}
 	
 }
