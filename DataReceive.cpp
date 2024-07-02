@@ -10,13 +10,15 @@ double getDis(double latitude1, double longitude1, double latitude2, double long
 
 void data_receive(){
 	
-	XPCSocket sock = aopenUDP(IP_address, UDP_port, UDP_port);
+	XPCSocket sock = aopenUDP("", UDP_port, UDP_port);
+	
+//	XPCSocket sock2 = aopenUDP(IP_address, 49007, 49007);
+	
+	XPCSocket sock2 = openUDP("10.83.9.99");
 	
 	for(;is_run();api_sleep(16)){
 		
-		
 		if (UDP_transmission) {
-			
 			
 			//读取接收的信息
 			const int rows = 28;
@@ -75,12 +77,26 @@ void data_receive(){
 						MILLIBARS_data = INGH_data * 33.8639;
 					}
 					else if(fabs(data[i][0] - 3) <= 0.001){
+						
+//						double airSpeedTmp = airSpeed;
+						
 						airSpeed = data[i][1];
+						
+//						double airSpeed_accelerationTmp = airSpeed_acceleration;
+//						airSpeed_accelerationTmp = airSpeed_acceleration;
+//						if(fabs(airSpeed_accelerationTmp - ((airSpeed - airSpeedTmp) / (0.064))) <= 2.5){
+//							airSpeed_acceleration = (airSpeed_accelerationTmp + ((airSpeed - airSpeedTmp) / (0.064))) / 2;
+//						}
+						
+						
 						TAS = data[i][3];
 					}
 					else if(fabs(data[i][0] - 4) <= 0.001){
 						vmo_speed = data[i][1] * 10;
 						verticalRate = data[i][3];
+					}
+					else if(fabs(data[i][0] - 6) <= 0.001){
+						TAT = data[i][2];
 					}
 					else if(fabs(data[i][0] - 32) <= 0.001){
 						vmo_speed = data[i][1] * 10;
@@ -120,7 +136,9 @@ void data_receive(){
 					}
 					else if(fabs(data[i][0] - 118) <= 0.001){
 						airSpeed_instruction = data[i][1];
+						CO_2 = data[i][1];
 						indicated_number = data[i][4];
+						ALTITUDE = data[i][4];
 					}
 				}
 				
@@ -146,7 +164,67 @@ void data_receive(){
 //				latitude = data[6][1];
 //				longitude = data[6][2];
 				
+				
+//				const char* drefs[1] =
+//				{
+//					"sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_copilot",
+//				};
+//				float* results[1];
+//				int sizes[1] = { 20, };
+//				for (int i = 0; i < 1; ++i)
+//				{
+//					results[i] = (float*)malloc(20 * sizeof(float));
+//				}
+//				if(getDREFs(sock2, drefs, results, 1, sizes) == 0){
+//					getDREFs(sock2, drefs, results, 1, sizes);
+//					airSpeed_acceleration = results[0][0];
+//				}
+				
+//			printf("%f\n",airSpeed_acceleration);
+				
+				
+				
 			}
+			
+			
+			
+			
+			
+			//============================//
+			
+			
+			//回传数据
+			
+			const int rows2 = 1;
+			float dataBack[rows2][9] = {0, };
+			
+//			if(CO_2_change){
+//				dataBack[0][0] = 118;
+//				dataBack[0][1] = 88;
+//				sendDATA(sock2, dataBack, rows2);
+////				CO_2_change = 0;
+////				CO_2 = CO_2 + CO_2_change;
+//				
+////				dataBack[1][0] = 20;
+////				dataBack[1][1] = 3000;
+////				sendDATA(sock2, dataBack, rows2);
+//				
+//			}
+			dataBack[0][0] = 118;
+			dataBack[0][1] = 200;
+			sendDATA(sock2, dataBack, rows2);
+			
+//			const char* dref = "sim/cockpit/autopilot/current_altitude";
+//			if(ALTITUDE_change){
+////				dataBack[0][0] = 118;
+////				dataBack[0][1] = ALTITUDE + ALTITUDE_change;
+////				ALTITUDE_change = 0;
+//				float tmp = ALTITUDE + ALTITUDE_change;
+//				sendDREF(sock2, dref,&tmp,1);
+//				ALTITUDE_change = 0;
+//			}
+//			float tmp = 0;
+//			sendDREF(sock2, dref,&tmp,1);
 			
 			
 		}
@@ -158,13 +236,14 @@ void data_receive(){
 		}
 		
 		//判断经纬度是不是在下一个的范围内，如果在就加入已经经过的航线中
-		if(getDis(latitude, longitude, route[nowPos].lat, route[nowPos].lon) <= 1860){
+		if(getDis(latitude, longitude, route[nowPos].lat, route[nowPos].lon) <= 3060){
 			routePassed.push_back(route[nowPos]);
 			nowPos ++;
 		}
 		
 	}
 	
+	closeUDP(sock2);	
 	closeUDP(sock);
 
 }
