@@ -251,6 +251,9 @@ PIMAGE pimg24;
 PIMAGE pimg25;
 PIMAGE pimg26;
 PIMAGE pimg27;
+PIMAGE pimg28;
+PIMAGE pimg29;
+PIMAGE pimg30;
 
 PIMAGE pimg1sta;
 PIMAGE pimg2sta;
@@ -279,6 +282,9 @@ PIMAGE pimg24sta;
 PIMAGE pimg25sta;
 PIMAGE pimg26sta;
 PIMAGE pimg27sta;
+PIMAGE pimg28sta;
+PIMAGE pimg29sta;
+PIMAGE pimg30sta;
 
 //==================================//
 
