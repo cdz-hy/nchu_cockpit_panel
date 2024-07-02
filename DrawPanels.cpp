@@ -860,9 +860,38 @@ void draw_panels(){
 				show = 0;
 		}
 		
+		// M键，控制MAP显示的
 		if(GetAsyncKeyState(0x4d) & 0x0001){
 			showMap += 1;
 			showMap %= 2;
+		}
+		
+		// P键 控制pfd显示的
+		if(GetAsyncKeyState(0x50) & 0x0001){
+			if(showPFDJudge == 0){
+				showPFDJudge = 1;
+			}
+		}
+		
+		// N键 控制ND表显示
+		if(GetAsyncKeyState(0x4E) & 0x0001){
+			if(showNDJudge == 0){
+				showNDJudge = 1;
+			}
+		}
+		
+		//E键 控制EICAS表显示
+		if(GetAsyncKeyState(0x45) & 0x0001){
+			if(showEICASJudge == 0){
+				showEICASJudge = 1;
+			}
+		}
+		
+		//R键 控制EICAS2表显示
+		if(GetAsyncKeyState(0x52) & 0x0001){
+			if(showEICAS2Judge == 0){
+				showEICAS2Judge = 1;
+			}
 		}
 		
 		
