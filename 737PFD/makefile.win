@@ -1,0 +1,40 @@
+# Project: 737PFD
+# Makefile created by Red Panda C++ 3.0.2815
+
+CXX      = "g++.exe"
+CC       = "gcc.exe"
+WINDRES  = "windres.exe"
+RM       = del /q /f
+CD       = cd /d
+LIBS     = "-Wl,--stack,12582912" "-s" "-lws2_32" "-lgraphics64" "-mwindows" "-lgraphics" "-luuid" "-lmsimg32" "-lgdi32" "-limm32" "-lole32" "-loleaut32" "-lwinmm" "-lgdiplus" "-static"
+INCS     = 
+CXXINCS  = "-ID:/cURL/curl-8.8.0_2-win64-mingw/include"
+CXXFLAGS = $(CXXINCS) "-O2" "-pipe" "-lgraphics64"
+CFLAGS   = $(INCS) "-O2" "-pipe" "-lgraphics64"
+WINDRESFLAGS = 
+RES      = 737PFD_private.res
+OBJ      = main.o DrawFrame.o $(RES)
+BIN      = 737PFD.exe
+LINKOBJ  = "main.o" "DrawFrame.o" "737PFD_private.res"
+CLEANOBJ = "main.o" "DrawFrame.o" "737PFD_private.res" "737PFD.exe"
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	-$(RM) $(CLEANOBJ) >NUL 2>&1
+
+737PFD.exe: $(OBJ)
+
+	$(CXX) $(LINKOBJ) -o "737PFD.exe" $(LIBS)
+
+main.o: main.cpp DrawFrame.h
+	$(CXX) -c "main.cpp" -o "main.o" $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+DrawFrame.o: DrawFrame.cpp
+	$(CXX) -c "DrawFrame.cpp" -o "DrawFrame.o" $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+
+737PFD_private.res: 737PFD_private.rc 
+	$(WINDRES) -i "737PFD_private.rc" --input-format=rc -o "737PFD_private.res" -O coff $(WINDRESFLAGS) 
+
