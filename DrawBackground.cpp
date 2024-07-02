@@ -473,7 +473,7 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		{Background_2_x - Ulength * 140 , Background_2_y + Ulength * 60},
 		{Background_2_x + Ulength * 774 , Background_2_y + Ulength * 60},
 		{Background_2_x + Ulength * 766 , Background_2_y - Ulength * 123},
-		{Background_2_x + Ulength * 610 , Background_2_y - Ulength * 173},
+		{Background_2_x + Ulength * 540 , Background_2_y - Ulength * 173},
 		{Background_2_x + Ulength * 145 , Background_2_y - Ulength * 173},
 		{Background_2_x - Ulength * 130 , Background_2_y - Ulength * 127.5},
 	};
@@ -492,8 +492,8 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	ege_point ploynums_1[4] = {
 		{Background_2_x - Ulength * 140 , Background_2_y + Ulength * 60},
 		{Background_2_x - Ulength * 143 , Background_2_y + Ulength * 64},
-		{Background_2_x + Ulength * 755 , Background_2_y + Ulength * 64},
-		{Background_2_x + Ulength * 750 , Background_2_y + Ulength * 60}
+		{Background_2_x + Ulength * 778 , Background_2_y + Ulength * 64},
+		{Background_2_x + Ulength * 773 , Background_2_y + Ulength * 60}
 	};
 	ege_setpattern_lineargradient(Background_2_x - Ulength * 100 , Background_2_y + Ulength * 60, EGEARGB(0XFF, 0X00, 0X00, 0X00),
 		Background_2_x - Ulength * 100 , Background_2_y + Ulength * 64, EGEARGB(0XFF, 0X20, 0X20, 0X20));
@@ -504,8 +504,8 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	ege_point ploynums_2[4] = {
 		{Background_2_x - Ulength * 143 , Background_2_y + Ulength * 64},
 		{Background_2_x - Ulength * 144 , Background_2_y + Ulength * 66},
-		{Background_2_x + Ulength * 757 , Background_2_y + Ulength * 66},
-		{Background_2_x + Ulength * 755 , Background_2_y + Ulength * 64}
+		{Background_2_x + Ulength * 780 , Background_2_y + Ulength * 66},
+		{Background_2_x + Ulength * 778 , Background_2_y + Ulength * 64}
 	};
 	//setfillcolor(EGEARGB(0X60,0X60,0X60,0X60));
 	ege_setpattern_lineargradient(Background_2_x - Ulength * 100 , Background_2_y + Ulength * 64, EGEARGB(0XFF, 0X20, 0X20, 0X20),
@@ -517,8 +517,8 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	ege_point ploynums_3[4] = {
 		{Background_2_x - Ulength * 144 , Background_2_y + Ulength * 66},
 		{Background_2_x - Ulength * 144 , Background_2_y + Ulength * 68},
-		{Background_2_x + Ulength * 756 , Background_2_y + Ulength * 68},
-		{Background_2_x + Ulength * 757 , Background_2_y + Ulength * 66}
+		{Background_2_x + Ulength * 779 , Background_2_y + Ulength * 68},
+		{Background_2_x + Ulength * 780 , Background_2_y + Ulength * 66}
 	};
 	
 	ege_setpattern_lineargradient(Background_2_x - Ulength * 100 , Background_2_y + Ulength * 66, EGEARGB(0X60, 0X50, 0X50, 0X50),
@@ -531,8 +531,8 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	ege_point ploynums_4[4] = {
 		{Background_2_x - Ulength * 144 , Background_2_y + Ulength * 68},
 		{Background_2_x - Ulength * 140 , Background_2_y + Ulength * 79},
-		{Background_2_x + Ulength * 750 , Background_2_y + Ulength * 79},
-		{Background_2_x + Ulength * 756 , Background_2_y + Ulength * 68}
+		{Background_2_x + Ulength * 773 , Background_2_y + Ulength * 79},
+		{Background_2_x + Ulength * 779 , Background_2_y + Ulength * 68}
 	};
 	
 	setfillcolor(EGEARGB(0XFF, 0X18, 0X19, 0X1B));
@@ -549,6 +549,16 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	
 	setfillcolor(EGEARGB(0XFF, 0X10, 0X10, 0X10));
 	ege_fillpoly(num_5, ploynums_5);
+	int num_11 = 4;
+	ege_point ploynums_11[4]={
+		{Background_2_x + Ulength * 773 , Background_2_y + Ulength * 79},
+		{Background_2_x + Ulength * 778 , Background_2_y + Ulength * 130},
+		{Background_2_x + Ulength * 495 , Background_2_y + Ulength * 130},
+		{Background_2_x + Ulength * 490 , Background_2_y + Ulength * 79},
+		
+	};
+	setfillcolor(EGEARGB(0XFF, 0X10, 0X10, 0X10));
+	ege_fillpoly(num_11, ploynums_11);
 	setcolor(BLACK);
 	ege_line(Background_2_x + Ulength * 387 , Background_2_y + Ulength * 60,
 		Background_2_x + Ulength * 387 , Background_2_y - Ulength * 117);
