@@ -981,6 +981,12 @@ void draw_getImage() {
 	getimage(pimg26, "./res/右上面的杠.png");
 	pimg27 = newimage();
 	getimage(pimg27, "./res/右门.png");
+	pimg28 = newimage();
+	getimage(pimg28, "./res/6.png");
+	pimg29 = newimage();
+	getimage(pimg29, "./res/11.png");
+	pimg30 = newimage();
+	getimage(pimg30, "./res/09.png");
 	
 	
 	pimg1sta = newimage();
@@ -1037,6 +1043,12 @@ void draw_getImage() {
 	getimage(pimg26sta, "./res/右上面的杠.png");
 	pimg27sta = newimage();
 	getimage(pimg27sta, "./res/右门.png");
+	pimg28sta = newimage();
+	getimage(pimg28sta, "./res/6.png");
+	pimg29sta = newimage();
+	getimage(pimg29sta, "./res/11.png");
+	pimg30sta = newimage();
+	getimage(pimg30sta, "./res/09.png");
 	
 }
 
@@ -1068,6 +1080,9 @@ void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side) {
 	getZoomImage(pimg25, pimg25sta, PFD_side * 3.36, PFD_side * 1.4);
 	getZoomImage(pimg26, pimg26sta, PFD_side * 7.5, PFD_side * 1.1);
 	getZoomImage(pimg27, pimg27sta, PFD_side * 6.2, PFD_side * 6.82);
+	getZoomImage(pimg28, pimg28sta, PFD_side * 2.1, PFD_side * 0.32);
+	getZoomImage(pimg29, pimg29sta, PFD_side * 0.735, PFD_side * 0.49);
+	getZoomImage(pimg30, pimg30sta, PFD_side * 0.735, PFD_side * 0.49);
 	
 }
 
@@ -1079,7 +1094,7 @@ void draw_BACKPICTURE(double PFD_x, double PFD_y, double PFD_side){
 	
 	putimage_withalpha(NULL, pimg12, PFD_x - 5.35 * PFD_side, PFD_y - 4.72 * PFD_side);
 	putimage_withalpha(NULL, pimg27, PFD_x + 7.7 * PFD_side, PFD_y - 4.33 * PFD_side);
-//	putimage_withalpha(NULL, pimg13, PFD_x - 4.15 * PFD_side, PFD_y - 4.62 * PFD_side);
+
 	
 }
 void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side) {
@@ -1104,7 +1119,12 @@ void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side)
 	putimage_withalpha(NULL, pimg22, PFD_x + 3.98 * PFD_side, PFD_y - 1.11 * PFD_side);
 	putimage_withalpha(NULL, pimg23, PFD_x + 4.06 * PFD_side, PFD_y - 0.95 * PFD_side);
 	putimage_withalpha(NULL, pimg24, PFD_x + 6.76 * PFD_side, PFD_y + 0.2 * PFD_side);
-	putimage_withalpha(NULL, pimg25, PFD_x + 5.65 * PFD_side, PFD_y - 1.9 * PFD_side);
+	putimage_withalpha(NULL, pimg25, PFD_x + 5.65 * PFD_side, PFD_y - 1.88 * PFD_side);
+	putimage_withalpha(NULL, pimg28, PFD_x + 3.65 * PFD_side, PFD_y - 1.87 * PFD_side);
+	putimage_withalpha(NULL, pimg29, PFD_x + 5.1 * PFD_side, PFD_y + 0.80 * PFD_side);
+	putimage_withalpha(NULL, pimg30, PFD_x + 5.87 * PFD_side, PFD_y + 0.80 * PFD_side);
+	putimage_withalpha(NULL, pimg8, PFD_x + 7.2 * PFD_side, PFD_y + 0.85 * PFD_side);
+	putimage_withalpha(NULL, pimg10, PFD_x + 6.65 * PFD_side, PFD_y + 0.82 * PFD_side);
 }
 
 void  draw_delImage() {
@@ -1135,8 +1155,10 @@ void  draw_delImage() {
 	delimage(pimg25);
 	delimage(pimg26);
 	delimage(pimg27);
+	delimage(pimg28);
+	delimage(pimg29);
+	delimage(pimg30);
 }
-
 void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height)
 {
 //	if (pimg == NULL)
