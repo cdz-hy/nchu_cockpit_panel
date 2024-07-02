@@ -229,8 +229,31 @@ void draw_panels(){
 		
 		//PFD
 		double PFD_side = 15 * unit_side1;
-		double PFD_x = center_x1 + PFD_move_x * unit_side1;
-		double PFD_y = center_y1 + PFD_move_y * unit_side1;
+		double PFD_x;
+		if(PFD_move_x<15&&PFD_move_x>0){
+			PFD_x= center_x1 + PFD_move_x * unit_side1;
+		}else if(PFD_move_x>=15){
+			PFD_move_x = 15;
+			PFD_x= center_x1 + PFD_move_x * unit_side1;
+		}else if(PFD_move_x<=0&&PFD_move_x>=-80){
+			PFD_x= center_x1 + PFD_move_x * unit_side1;
+		}else{
+			PFD_move_x = -80;
+			PFD_x= center_x1 + PFD_move_x * unit_side1;
+		}
+		
+		double PFD_y;
+		if(PFD_move_y<20&&PFD_move_y>1){
+			PFD_y = center_y1 + PFD_move_y * unit_side1;
+		}else if(PFD_move_y>=20){
+			PFD_move_y = 20;
+			PFD_y = center_y1 + PFD_move_y * unit_side1;
+		}else if(PFD_move_y>=0&&PFD_move_y<=1){
+			PFD_y = center_y1 + PFD_move_y * unit_side1;
+		}else{
+			PFD_move_y = 1;
+			PFD_y = center_y1 + PFD_move_y * unit_side1;
+		}
 		
 //		//ND
 //		double ND_side = 15 * unit_side;
@@ -1078,7 +1101,7 @@ void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side) {
 	getZoomImage(pimg23, pimg23sta, PFD_side*0.15, PFD_side*0.15);
 	getZoomImage(pimg24, pimg24sta, PFD_side * 0.5, PFD_side * 0.18);
 	getZoomImage(pimg25, pimg25sta, PFD_side * 3.36, PFD_side * 1.4);
-	getZoomImage(pimg26, pimg26sta, PFD_side * 7.5, PFD_side * 1.1);
+	getZoomImage(pimg26, pimg26sta, PFD_side * 7.5, PFD_side * 1.65);
 	getZoomImage(pimg27, pimg27sta, PFD_side * 6.2, PFD_side * 6.82);
 	getZoomImage(pimg28, pimg28sta, PFD_side * 2.1, PFD_side * 0.32);
 	getZoomImage(pimg29, pimg29sta, PFD_side * 0.735, PFD_side * 0.49);
@@ -1088,8 +1111,9 @@ void draw_resizeImage(double PFD_x, double PFD_y, double PFD_side) {
 
 void draw_BACKPICTURE(double PFD_x, double PFD_y, double PFD_side){
 	putimage_withalpha(NULL, pimg9, 0 , 0 );
+	putimage_withalpha(NULL, pimg26, PFD_x + 2.6 * PFD_side, PFD_y - 4.87 * PFD_side);
 	putimage_withalpha(NULL, pimg13, PFD_x - 5.05 * PFD_side, PFD_y - 4.35 * PFD_side);
-	putimage_withalpha(NULL, pimg26, PFD_x + 3.05 * PFD_side, PFD_y - 4.35 * PFD_side);
+
 	putimage_withalpha(NULL, pimg11, PFD_x + 2.7 * PFD_side, PFD_y - 4.22 * PFD_side);
 	
 	putimage_withalpha(NULL, pimg12, PFD_x - 5.35 * PFD_side, PFD_y - 4.72 * PFD_side);
