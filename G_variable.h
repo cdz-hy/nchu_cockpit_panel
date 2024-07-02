@@ -176,8 +176,24 @@ extern int is_showbk;
 //默认不开启UDP通信
 extern int UDP_transmission;
 
+// 子进程ege窗口的大小
+extern int egeWidth;
+extern int egeHeight;
+
 //是否显示地图
 extern int showMap;
+
+//是否显示pfd
+extern int showPFDJudge;
+
+//是都显示nd
+extern int showNDJudge;
+
+//是否显示EICAS
+extern int showEICASJudge;
+
+//是否显示EICAS2
+extern int showEICAS2Judge;
 
 //地图更新状态
 extern int renewMap;
