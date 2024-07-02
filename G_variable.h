@@ -254,6 +254,9 @@ extern PIMAGE pimg24;
 extern PIMAGE pimg25;
 extern PIMAGE pimg26;
 extern PIMAGE pimg27;
+extern PIMAGE pimg28;
+extern PIMAGE pimg29;
+extern PIMAGE pimg30;
 
 extern PIMAGE pimg1sta;
 extern PIMAGE pimg2sta;
@@ -282,6 +285,9 @@ extern PIMAGE pimg24sta;
 extern PIMAGE pimg25sta;
 extern PIMAGE pimg26sta;
 extern PIMAGE pimg27sta;
+extern PIMAGE pimg28sta;
+extern PIMAGE pimg29sta;
+extern PIMAGE pimg30sta;
 //==================================//
 
 //==========以下为警告信息==========//
