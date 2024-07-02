@@ -186,8 +186,24 @@ int UDP_transmission = 0;
 char *IP_address = "192.168.0.0";
 int UDP_port = 49001;
 
+// 子进程ege窗口的大小
+int egeWidth = 400;
+int egeHeight = 400;
+
 //是否显示地图
 int showMap = 0;
+
+//是否显示pfd
+int showPFDJudge = 0;
+
+//是否显示nd 
+int showNDJudge = 0;
+
+//是否显示EICAS
+int showEICASJudge = 0;
+
+//是否显示EICAS2
+int showEICAS2Judge = 0;
 
 //地图更新状态
 int renewMap = 1;
