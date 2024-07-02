@@ -17,6 +17,10 @@ using namespace std;
 #include "ReadFiles.h"
 #include "NewWindows.h"
 #include "ShowMap.h"
+#include "ShowPFD.h"
+#include "ShowND.h"
+#include "ShowEICAS.h"
+#include "ShowEICAS2.h"
 
 int main() {
 	
@@ -57,6 +61,10 @@ int main() {
 	thread newWindows(create_new_windows);
 	thread showMap(show_map);
 	thread routeWay(read_routeWays);
+	thread showPFD(show_pfd);
+	thread showND(show_nd);
+	thread showEICAS(show_eicas);
+	thread showEICAS2(show_eicas2);
 	
 	panels.join();
 	datas.join();
@@ -65,6 +73,10 @@ int main() {
 	newWindows.join();
 	showMap.join();
 	routeWay.join();
+	showPFD.join();
+	showND.join();
+	showEICAS.join();
+	showEICAS2.join();
 	
 	closegraph();
 	return 0;
