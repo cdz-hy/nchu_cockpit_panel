@@ -878,6 +878,24 @@ void draw_ndpoint1(double center_x, double center_y, double side)
 	ege_line(center_x - r * 0.02, center_y - r * 3 / 4, center_x + r * 0.02, center_y - r * 3 / 4);
 }
 
+void draw_ND_DashedCircle(double center_x, double center_y, double r)
+{
+	//参数说明 x,y都是中心点的坐标，r要传2/3的三角形的高
+	setfillcolor(EGEARGB(150, 177, 177, 178));
+	double angle = 0;
+	for (int i = 0; i < 360; i+= 30) {
+		angle = i *1.0/ 180 * PI;
+		double circlex = center_x + r * cos(angle);
+		double circley = center_y - r * sin(angle);
+		if (i==0 || i == 90 || i == 180 || i == 270) {
+			ege_fillellipse(circlex - 5.0/2, circley-5.0/2, 5, 5);
+		}
+		else {
+			ege_fillellipse(circlex - 3.0/2, circley-3.0/2, 3, 3);
+		}
+	}
+}
+
 //画表中间的一个三角形
 void draw_ndcenterangle(double center_x, double center_y, double side)
 {
@@ -902,6 +920,8 @@ void draw_ndcenterangle(double center_x, double center_y, double side)
 	centerangle[3].y = center_y;
 	
 	ege_drawpoly(4, centerangle);
+	
+	draw_ND_DashedCircle(center_x, center_y, 0.666667 * side * 8 / 104);
 }
 
 //画顶部会移动的三角形
@@ -1085,6 +1105,7 @@ void draw_ndcourse(double compass_x, double compass_y, double side)
 		ege_bezier(22, graphics);
 	}
 }
+
 
 //画MAP模式下的NP表
 void draw_ND_map(double center_x, double center_y, double side)
