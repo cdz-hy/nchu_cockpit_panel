@@ -917,6 +917,12 @@ void draw_panels(){
 			}
 		}
 		
+		//f键 控制FMC表显示
+		if(GetAsyncKeyState(0x46) & 0x0001){
+			if(showFMCJudge == 0){
+				showFMCJudge = 1;
+			}
+		}
 		
 		//实现窗口关闭
 		mousepos(&mouse_x, &mouse_y);
