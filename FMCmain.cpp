@@ -11,6 +11,7 @@
 #include "FMCviewIndex7.h"
 #include "FMCviewIndex8.h"
 #include "FMCviewIndex9.h"
+#include "G_variable.h"
 
 void draw_RouteTable_up(double center_x, double center_y, double side);
 void draw_RouteTable_down(double center_x, double center_y, double side);
@@ -39,6 +40,10 @@ double FMC_origin_center_y_up;
 char inputment[64];
 char FMC_button_mode = 0;
 extern int MainPanelLight;
+
+char FMC_routepoints[12][7];
+
+char FMC_lastroutepoints[12][7];
 
 struct FMC_buttoninformation {
 	double FMC_button_x;
@@ -1140,7 +1145,15 @@ void draw_RouteTable_down2(double center_x, double center_y, double side) {
 void draw_RouteTable_down2_circle(double center_x, double center_y, double side) {
 	setfillcolor(BLACK);
 	ege_fillellipse(center_x - side, center_y - side, side * 2, side * 2);
+	
+	if (FMC_mouse_real_x >= center_x - side / 2 && FMC_mouse_real_x <= center_x + side / 2 && FMC_mouse_real_y >= center_y - side / 2 && FMC_mouse_real_y <= center_y + side / 2)
+	{
+		setcolor(WHITE);
+		setlinewidth(1.5);
+		ege_ellipse(center_x - side, center_y - side, side * 2 + side * 0.01, side * 2 + side * 0.01);
+	}
 }
+
 
 // 下半部分的最下一层的正方形
 void draw_RouteTable_down2_square(double center_x, double center_y, double side) {
@@ -1189,15 +1202,15 @@ void FMC_Scanner(FMC_buttoninformation *FMC_letterbutton, double side)
 	mousepos(&FMC_mouse_x, &FMC_mouse_y);
 	FMC_mouse_real_x = FMC_mouse_x;
 	FMC_mouse_real_y = FMC_mouse_y;
-
-	for (int i = 0; i < 30; i++)
+	
+	for (int i = 0; i < 42; i++)
 	{
 		double button_x = FMC_letterbutton[i].FMC_button_x;
 		double button_y = FMC_letterbutton[i].FMC_button_y;
 		//ege_rectangle(button_x - single / 2, button_y - single / 2, single, single);
 		if (FMC_mouse_real_x >= button_x - single / 2 && FMC_mouse_real_x <= button_x + single / 2 && FMC_mouse_real_y >= button_y - single / 2 && FMC_mouse_real_y <= button_y + single / 2)
 		{
-			if ((i <= 16 || (i >= 18 && i <= 28)) && GetAsyncKeyState(0x02) & 0x0001)
+			if ((i <= 16 || (i >= 18 && i <= 28) || (i >= 30 && i <= 42)) && GetAsyncKeyState(0x02) & 0x0001)
 			{
 				strcat_s(inputment, 64, FMC_letterbutton[i].FMC_button_information);
 			}
@@ -1226,6 +1239,7 @@ void FMC_Scanner(FMC_buttoninformation *FMC_letterbutton, double side)
 	//ege_drawtext(inputment, 400, 400);
 }
 
+
 void draw_FMC(double center_x, double center_y, double side) {
 	FMC_origin_center_x_down1 = center_x;
 	FMC_origin_center_y_down1 = center_y - side / 3.5;
@@ -1234,7 +1248,7 @@ void draw_FMC(double center_x, double center_y, double side) {
 	FMC_origin_center_x_up = center_x;
 	FMC_origin_center_y_up = center_y - side * 1.055;
 	double single = side / 67;
-	FMC_buttoninformation FMC_letterbutton[30] = {
+	FMC_buttoninformation FMC_letterbutton[42] = {
 		{center_x - single * 4.8, center_y - single * 13, "A"},//(1,1)
 		{center_x - single * 4.8, center_y - single * 4.1, "F"},//(1,2)
 		{center_x - single * 4.8, center_y + single * 4.7, "K"},//(1,3)
@@ -1265,7 +1279,20 @@ void draw_FMC(double center_x, double center_y, double side) {
 		{center_x + single * 34.4, center_y + single * 14, "T"},//(5,4)
 		{center_x + single * 34.4, center_y + single * 23, "Y"},//(5,5)
 		{center_x + single * 34.4, center_y + single * 32, "CLR"},//(5,6)
+		{center_x - single * 33.7, center_y + single * 5, "1"},//(1,1)
+		{center_x - single * 33.7, center_y + single * 14, "4"},//(1,2)
+		{center_x - single * 33.7, center_y + single * 23, "7" },//(1,3)
+		{center_x - single * 33.7, center_y + single * 32, "."},//(1,4)
+		{center_x - single * 24.6, center_y + single * 5, "2" },//(2,1)
+		{center_x - single * 24.6, center_y + single * 14, "5" },//(2,2)
+		{center_x - single * 24.6, center_y + single * 23, "8" },//(2,3)
+		{center_x - single * 24.6, center_y + single * 32, "0" },//(2,4)
+		{center_x - single * 15.5, center_y + single * 5, "3" },//(3,1)
+		{center_x - single * 15.5, center_y + single * 14, "6" },//(3,2)
+		{center_x - single * 15.5, center_y + single * 23, "9" },//(3,3)
+		{center_x - single * 15.5, center_y + single * 32, "+" },//(3,4)
 	};
+
 	//side是宽，中心点的坐标是对于下半部分而言的
 	if (FMC_mode == 0) 
 	{
@@ -1308,5 +1335,67 @@ void draw_FMC(double center_x, double center_y, double side) {
 	draw_RouteTable_down(center_x, center_y, side);
 
 	FMC_Scanner(FMC_letterbutton, side);
+	
+	for (int i = 0; i < 12; i++) {
+		if (i > 0 && i < 11) {
+			strcpy(FMC_routepoints[i], FMC_getpointsinformation().rountpoints[i - 1]);
+		}
+		else if (i == 0){
+			strcpy(FMC_routepoints[i], getorigin());
+		}
+		else if (i == 11) {
+			strcpy(FMC_routepoints[i], getdest());
+		}
+		//strcpy(FMC_routepoints[i], FMC_getpointsinformation().rountpoints[i]);
+//		printf("%s ",FMC_routepoints[i]);
+	}
+//	printf("\n");
+	
+	
+	extern vector<WAYPOINT> route;
+	
+	for (int i = 0; i < 12; i++) {
+		if (strcmp(FMC_lastroutepoints[i],FMC_routepoints[i]) != 0) {
+			
+			route.clear();
+			
+			for(int i = 0;i < 12;i ++){
+				if(strlen(FMC_routepoints[i]) > 2){
+					
+					for(auto it : airports){
+						if(!strcmp(it.name, FMC_routepoints[i])){
+							route.push_back(it);
+							break;
+						}
+					}
+					
+					for(auto it : VORs){
+						if(!strcmp(it.name, FMC_routepoints[i])){
+							route.push_back(it);
+							break;
+						}
+					}
+					
+					for(auto it : waypoints){
+						if(!strcmp(it.name, FMC_routepoints[i])){
+							route.push_back(it);
+							break;
+						}
+					}
+					
+				}
+			}
+			
+			
+			break;
+		}
+	}
+	
+	for (int i = 0; i < 12; i++) {
+		strcpy(FMC_lastroutepoints[i], FMC_routepoints[i]);
+	}
+
+	
+	
 }
 

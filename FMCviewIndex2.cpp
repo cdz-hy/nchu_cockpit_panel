@@ -37,7 +37,7 @@ void draw_topic_2(double side, double center_x, double center_y) {
 	FMC_font.lfWeight = side * 3;
 	setfont(&FMC_font);
 	ege_drawtext("ACT FPLN", x, y);
-
+	
 	x = center_x + side * 0.3;
 	ege_drawtext("1/1", x, y);
 }
@@ -55,7 +55,7 @@ void draw_line1_upper(double side, double center_x, double center_y) {
 	FMC_font.lfWeight = side * 3;
 	setfont(&FMC_font);
 	ege_drawtext("O R I G I N", x, y);
-
+	
 	x += single * 8.2;
 	ege_drawtext("D E S T", x, y);
 }
@@ -65,7 +65,7 @@ void draw_line1(double side, double center_x, double center_y, char str1[], char
 	setlinewidth(side * 0.001);
 	setbkmode(true);
 	double single = side / 67.0;
-
+	
 	double wide = side * 0.035 * 1.5 / 2;
 	double height = side * 0.035 * 1.5 * 0.8;
 	double y = center_y - single * 14.6;
@@ -96,7 +96,7 @@ void draw_line1(double side, double center_x, double center_y, char str1[], char
 			outtextxy(x + wide * i, y, dest[i]);
 		}
 	}
-
+	
 }
 
 void draw_line2_upper(double side, double center_x, double center_y) {
@@ -121,13 +121,13 @@ void draw_line2(double side, double center_x, double center_y) {
 	double height = side * 0.035 * 1.5 * 0.8;
 	double y = center_y - single * 7.6 - height / 2;
 	double x = center_x - single * 24.4 - 2 * wide;
-
+	
 	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	LOGFONTW FMC_font;
 	getfont(&FMC_font);
 	FMC_font.lfWeight = side * 3;
 	setfont(&FMC_font);
-
+	
 	if (strlen(co_route) == 0) {
 		y = center_y - single * 7.6;
 		x = x + wide * 4;
@@ -172,20 +172,20 @@ void draw_line3(double side, double center_x, double center_y) {
 	getfont(&FMC_font);
 	FMC_font.lfWeight = side * 3;
 	setfont(&FMC_font);
-
-
+	
+	
 	if (strlen(fly_no) == 0) {
 		y = center_y - single * 0.7;
 		x = center_x + single * 21;
 		ege_drawtext("—————", x, y);
 	}
 	else {
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			height = side * 0.035 * 1.5 * 0.8;
 			wide = side * 0.035 * 1.5 / 2;
 			y = center_y - single * 0.7;
 			x = center_x + single * 21;
-
+			
 			setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 			outtextxy(x + wide * i, y, fly_no[i]);
 			//ege_drawtext("—————", x, y);
@@ -220,7 +220,7 @@ void draw_line4(double side, double center_x, double center_y) {
 	getfont(&FMC_font);
 	FMC_font.lfWeight = side * 3;
 	setfont(&FMC_font);
-
+	
 	//ege_drawtext("<STATUS", x, y);
 	x = center_x + single * 21;
 	//ege_drawtext("ROUTE MENU>", x, y);
@@ -239,7 +239,7 @@ void draw_line5_upper(double side, double center_x, double center_y) {
 	FMC_font.lfWeight = side * 3;
 	setfont(&FMC_font);
 	ege_drawtext("V I A", x, y);
-
+	
 	x = center_x + single * 4.3;
 	ege_drawtext("T O", x, y);
 }
@@ -251,14 +251,14 @@ void draw_line5(double side, double center_x, double center_y) {
 	double x = center_x - single * 22.3;
 	double height = side * 0.035 * 1.5;
 	double wide = side * 0.035 * 1.5;
-
+	
 	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	LOGFONTW FMC_font;
 	getfont(&FMC_font);
 	FMC_font.lfWeight = side * 3;
 	setfont(&FMC_font);
 	//ege_drawtext("ARR DATA>", x, y);
-
+	
 	if (strlen(via) == 0) {
 		for (int i = 0; i < 4; i++) {
 			ege_drawtext("—————", x, y);
@@ -271,13 +271,13 @@ void draw_line5(double side, double center_x, double center_y) {
 		x = center_x - single * 21 - wide * 4;
 		setcolor(EGEARGB(0xff, 0xFD, 0x00, 0xFD));
 		setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
-
+		
 		for (int i = 0; i < strlen(via); i++) {
 			outtextxy(x + wide * i, y, via[i]);
 		}
 		setcolor(WHITE);
 	}
-
+	
 	x = center_x + single * 21 + single * 1.8;
 	if (strlen(to) == 0) {
 		for (int i = 0; i < 4; i++) {
@@ -292,7 +292,7 @@ void draw_line5(double side, double center_x, double center_y) {
 			x = center_x + single * 21;
 			setcolor(EGEARGB(0xff, 0xFD, 0x00, 0xFD));
 			setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
-
+			
 			for (int i = 0; i < strlen(to); i++) {
 				outtextxy(x + wide * i, y, to[i]);
 			}
@@ -323,7 +323,7 @@ void draw_line6(double side, double center_x, double center_y) {
 	double x = center_x - single * 20.3;
 	double height = side * 0.035 * 1.5;
 	double wide = side * 0.035 * 1.5;
-
+	
 	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	LOGFONTW FMC_font;
 	getfont(&FMC_font);
@@ -332,7 +332,7 @@ void draw_line6(double side, double center_x, double center_y) {
 	ege_drawtext("<ROUTE MENU", x, y);
 	x = center_x + single * 24.8;
 	ege_drawtext("VNAV>", x, y);
-
+	
 }
 
 void draw_inputBox(double side, double center_x, double center_y) {
@@ -351,7 +351,7 @@ void draw_inputBox(double side, double center_x, double center_y) {
 	setfont(&FMC_font);
 	ege_drawtext("[", x1, y);
 	ege_drawtext("]", x2, y);
-
+	
 	setcolor(WHITE);
 	//绘制输入框的输入值
 	if (!button_clicked) {
@@ -412,6 +412,15 @@ boolean is_empty_2()
 	else
 		return false;
 }
+
+char* getorigin() {
+	return origin;
+}
+
+char* getdest() {
+	return dest;
+}
+
 
 void draw_INDEX_panel_2(double side, double center_x, double center_y) {
 	double gap = side * 30 / 685;

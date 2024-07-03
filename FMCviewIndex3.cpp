@@ -22,7 +22,7 @@ void draw_topic_3(double side, double center_x, double center_y) {
 	double x = center_x - single * 3;
 	double y = center_y - side * 210 / 685;
 	setcolor(EGEARGB(255, 32, 220, 224));
-	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//璁惧畾瀛椾綋
+	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	LOGFONTW FMC_font;
 	getfont(&FMC_font);
 	FMC_font.lfWeight = side * 3;
@@ -37,7 +37,7 @@ void draw_line1_upper_3(double side, double center_x, double center_y) {
 	double x = center_x - single * 4;
 	double y = center_y - side * 210 / 685 + single * 0.7;
 	setcolor(EGEARGB(255, 32, 220, 224));
-	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//璁惧畾瀛椾綋
+	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	LOGFONTW FMC_font;
 	getfont(&FMC_font);
 	FMC_font.lfWeight = side * 3;
@@ -54,7 +54,7 @@ void draw_line1_3(double side, double center_x, double center_y) {
 	double height = side * 0.035 * 1.5;
 	double y = center_y - single * 14.6;
 	double x = center_x - single * 24.4;
-	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//璁惧畾瀛椾綋
+	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	LOGFONTW FMC_font;
 	getfont(&FMC_font);
 	FMC_font.lfWeight = side * 3;
@@ -73,7 +73,7 @@ void draw_line2_3(double side, double center_x, double center_y) {
 	double y = center_y - single * 7.6;
 	double x = center_x - single * 24.4;
 
-	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//璁惧畾瀛椾綋
+	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	LOGFONTW FMC_font;
 	getfont(&FMC_font);
 	FMC_font.lfWeight = side * 3;
@@ -93,7 +93,7 @@ void draw_inputBox_3(double side, double center_x, double center_y) {
 	double x2 = center_x + single * 24.4;
 	double height = side * 0.035 * 1.8;
 	double wide = side * 0.035 * 1.8;
-	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//璁惧畾瀛椾綋
+	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
 	LOGFONTW FMC_font;
 	getfont(&FMC_font);
 	FMC_font.lfWeight = side * 3;
