@@ -190,6 +190,10 @@ int UDP_port = 49001;
 int egeWidth = 400;
 int egeHeight = 400;
 
+// 子进程egeFMC窗口大小
+int egeFMCWidth = 600;
+int egeFMCHeight = 800;
+
 //是否显示地图
 int showMap = 0;
 
@@ -204,6 +208,9 @@ int showEICASJudge = 0;
 
 //是否显示EICAS2
 int showEICAS2Judge = 0;
+
+// 是否显示FMC
+int showFMCJudge = 0;
 
 //地图更新状态
 int renewMap = 1;
