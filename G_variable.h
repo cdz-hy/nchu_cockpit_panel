@@ -180,6 +180,10 @@ extern int UDP_transmission;
 extern int egeWidth;
 extern int egeHeight;
 
+// 子进程egeFMC窗口的大小
+extern int egeFMCWidth;
+extern int egeFMCHeight;
+
 //是否显示地图
 extern int showMap;
 
@@ -194,6 +198,9 @@ extern int showEICASJudge;
 
 //是否显示EICAS2
 extern int showEICAS2Judge;
+
+//是否显示FMC
+extern int showFMCJudge;
 
 //地图更新状态
 extern int renewMap;
