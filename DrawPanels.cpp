@@ -27,6 +27,7 @@
 #include "DrawLightControl.h"
 #include "DrawFMC.h"
 #include "DrawAutoControl.h"
+#include "DrawSteeringWheel.h"
 
 
 void getZoomImage(PIMAGE& pimg, PIMAGE& pimgStatic, int width, int height);
@@ -759,6 +760,7 @@ void draw_panels(){
 			
 			//画FMC
 			draw_FMC(PFD_x + PFD_side * 1.99, PFD_y + 1.67 * PFD_side, PFD_side * 0.63);
+            draw_FMC_2(PFD_x + PFD_side * 4.245, PFD_y + 1.67 * PFD_side, PFD_side * 0.63);
 			
 			//画自动驾驶控制板
 			draw_auto_control(PFD_x + PFD_side * 3.41, PFD_y - 1.4 * PFD_side, PFD_side*3);
@@ -767,6 +769,9 @@ void draw_panels(){
 			draw_PFD(PFD_x + 6 * PFD_side, PFD_y, PFD_side);
 			
 			draw_electricPanel_backgrounds(PFD_x, PFD_y , PFD_side);
+
+            //画方向舵显示器
+			draw_SteeringWeel(PFD_x + 2.2 * PFD_side, PFD_y - 0.9 * PFD_side, PFD_side / 5);
 			
 			
 //			//直接显示的地图（暂时不用）
