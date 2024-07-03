@@ -457,6 +457,7 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	setlinewidth(linewidth / 2);
 	setcolor(BLACK);
 	
+	
 	setfillcolor(EGEARGB(0xff, 0x3B, 0x39, 0X38));
 	int num_7 = 4;
 	ege_point polynums_7[4] = {
@@ -466,6 +467,42 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		{Background_2_x - Ulength * 175 , Background_2_y + Ulength * 248},
 	};
 	ege_fillpoly(num_7,polynums_7);
+	
+	int num_12 = 5;
+	ege_point ploynums_12[5]={
+		{Background_2_x - Ulength * 140 , Background_2_y - Ulength * 69},
+		
+		{Background_2_x - Ulength * 150 , Background_2_y + Ulength * 69},
+		{Background_2_x - Ulength * 144 , Background_2_y + Ulength * 69},
+		{Background_2_x - Ulength * 140 , Background_2_y + Ulength * 60},
+		{Background_2_x - Ulength * 130 , Background_2_y - Ulength * 69}
+		
+	};
+	setfillcolor(EGEARGB(0XFF, 0X17, 0X17, 0X17));
+	ege_fillpoly(num_12, ploynums_12);
+	int num_13 = 4;
+	ege_point ploynums_13[4]={
+		
+		{Background_2_x - Ulength * 150 , Background_2_y + Ulength * 69},
+		{Background_2_x - Ulength * 144 , Background_2_y + Ulength * 69},
+	    {Background_2_x - Ulength * 130 , Background_2_y + Ulength * 100},
+		{Background_2_x - Ulength * 145 , Background_2_y + Ulength * 130},
+		
+	};
+	setfillcolor(EGEARGB(0XFF, 0X17, 0X17, 0X17));
+	ege_fillpoly(num_13, ploynums_13);
+	
+	int num_14 = 4;
+	ege_point ploynums_14[4]={
+		
+		{Background_2_x - Ulength * 150 , Background_2_y + Ulength * 69},
+		{Background_2_x + Ulength * 774 , Background_2_y + Ulength * 69},
+		{Background_2_x + Ulength * 770 , Background_2_y + Ulength * 200},
+		{Background_2_x - Ulength * 145 , Background_2_y + Ulength * 200},
+		
+	};
+	setfillcolor(EGEARGB(0XFF, 0X17, 0X17, 0X17));
+	ege_fillpoly(num_14, ploynums_14);
 	
 	setfillcolor(EGEARGB(0xff, 0x14, 0x17, 0x19));
 	int num_6 = 6;
@@ -499,6 +536,8 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		Background_2_x - Ulength * 100 , Background_2_y + Ulength * 64, EGEARGB(0XFF, 0X20, 0X20, 0X20));
 	ege_fillpoly(num_1, ploynums_1);
 	ege_setpattern_none();
+	
+	
 	
 	int num_2 = 4;
 	ege_point ploynums_2[4] = {
@@ -543,8 +582,8 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	ege_point ploynums_5[4] = {
 		{Background_2_x - Ulength * 140 , Background_2_y + Ulength * 79},
 		{Background_2_x - Ulength * 150 , Background_2_y + Ulength * 130},
-		{Background_2_x + Ulength * 143 , Background_2_y + Ulength * 130},
-		{Background_2_x + Ulength * 145 , Background_2_y + Ulength * 79}
+		{Background_2_x + Ulength * 155 , Background_2_y + Ulength * 130},
+		{Background_2_x + Ulength * 155 , Background_2_y + Ulength * 79}
 	};
 	
 	setfillcolor(EGEARGB(0XFF, 0X10, 0X10, 0X10));
@@ -553,12 +592,14 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	ege_point ploynums_11[4]={
 		{Background_2_x + Ulength * 773 , Background_2_y + Ulength * 79},
 		{Background_2_x + Ulength * 778 , Background_2_y + Ulength * 130},
-		{Background_2_x + Ulength * 495 , Background_2_y + Ulength * 130},
-		{Background_2_x + Ulength * 490 , Background_2_y + Ulength * 79},
+		{Background_2_x + Ulength * 460 , Background_2_y + Ulength * 130},
+		{Background_2_x + Ulength * 460 , Background_2_y + Ulength * 79},
 		
 	};
 	setfillcolor(EGEARGB(0XFF, 0X10, 0X10, 0X10));
 	ege_fillpoly(num_11, ploynums_11);
+	
+	
 	setcolor(BLACK);
 	ege_line(Background_2_x + Ulength * 387 , Background_2_y + Ulength * 60,
 		Background_2_x + Ulength * 387 , Background_2_y - Ulength * 117);
