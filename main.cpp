@@ -21,6 +21,7 @@ using namespace std;
 #include "ShowND.h"
 #include "ShowEICAS.h"
 #include "ShowEICAS2.h"
+#include "ShowFMC.h"
 
 int main() {
 	
@@ -65,6 +66,7 @@ int main() {
 	thread showND(show_nd);
 	thread showEICAS(show_eicas);
 	thread showEICAS2(show_eicas2);
+	thread showFMC(show_fmc);
 	
 	panels.join();
 	datas.join();
@@ -77,6 +79,7 @@ int main() {
 	showND.join();
 	showEICAS.join();
 	showEICAS2.join();
+	showFMC.join();
 	
 	closegraph();
 	return 0;
