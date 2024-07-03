@@ -384,3 +384,9 @@ extern int CMDA ;
 extern int CWSA ;
 extern int CWSB ;
 extern int CMDB ;
+
+//方向舵
+extern double SteeringWeelLevel;
+extern double SteeringWeelVertical;
+extern double SteeringWeelFootPedals;
+extern int choiceSteeringWeel;
