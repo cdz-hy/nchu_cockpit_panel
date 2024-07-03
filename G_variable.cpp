@@ -388,3 +388,9 @@ int CMDA = 0;
 int CWSA = 0;
 int CWSB = 0;
 int CMDB = 0;
+
+//方向舵
+double SteeringWeelLevel = 0;
+double SteeringWeelVertical = 0 ;
+double SteeringWeelFootPedals = 0;
+int choiceSteeringWeel = 0;
