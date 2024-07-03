@@ -372,3 +372,31 @@ void draw_screw3(double screw_x, double screw_y, double screw_r, double angle) {
 	ege_fillpoly(5, polypoints5);
 }
 
+void draw_screw4(double screw_x, double screw_y, double screw_r, double angle) {
+	
+	setfillcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
+	ege_fillellipse(screw_x - screw_r, screw_y - screw_r, 2 * screw_r, 2 * screw_r);
+	
+	setcolor(BLACK);
+	setlinewidth(screw_r / 7.5);
+	ege_ellipse(screw_x - screw_r/1.2, screw_y - screw_r/1.2, 1.6 * screw_r, 1.6 * screw_r);
+	
+	// 绘制中间螺丝
+	angle = -angle;
+	angle = angle * PI / 180;
+	
+	double x01 = -screw_r * 0.8, y01 = -screw_r * 0.15;
+	double x02 = -screw_r * 0.8, y02 = +screw_r * 0.15;
+	double x03 = +screw_r * 0.8, y03 = +screw_r * 0.15;
+	double x04 = +screw_r * 0.8, y04 = -screw_r * 0.15;
+	
+	setfillcolor(BLACK);
+	ege_point polypoints1[4] = {
+		{x01 * cos(angle) - y01 * sin(angle) + screw_x,x01 * sin(angle) + y01 * cos(angle) + screw_y},// 左上
+		{x02 * cos(angle) - y02 * sin(angle) + screw_x,x02 * sin(angle) + y02 * cos(angle) + screw_y},// 右上
+		{x03 * cos(angle) - y03 * sin(angle) + screw_x,x03 * sin(angle) + y03 * cos(angle) + screw_y},// 右下
+		{x04 * cos(angle) - y04 * sin(angle) + screw_x,x04 * sin(angle) + y04 * cos(angle) + screw_y} // 左下
+	};
+	ege_fillpoly(4, polypoints1);
+}
+
