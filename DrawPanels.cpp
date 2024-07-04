@@ -771,7 +771,7 @@ void draw_panels(){
 			draw_electricPanel_backgrounds(PFD_x, PFD_y , PFD_side);
 
             //画方向舵显示器
-			draw_SteeringWeel(PFD_x + 2.2 * PFD_side, PFD_y - 0.9 * PFD_side, PFD_side / 5);
+				draw_SteeringWeel(PFD_x + 2.25 * PFD_side, PFD_y - 0.84 * PFD_side, PFD_side / 5);
 			
 			
 //			//直接显示的地图（暂时不用）
