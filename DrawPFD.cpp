@@ -610,7 +610,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		}
 		
 		// 绘制粉色指示速度标
-		setcolor(EGEARGB(0x99, 255, 51, 255));
+		setcolor(EGEARGB(150, 255, 51, 255));
 		setlinewidth(side / 250);
 		int pointSpeed = (int)(airSpeed_instruction - 30);
 		int one_digit, ten_digit, hundred_digit, new_number;
@@ -816,7 +816,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	ege_drawpoly(8, points4);
 	
 	// 绿色指针显示
-	setcolor(EGEARGB(0x99, 76, 153, 0));
+	setcolor(EGEARGB(0x99, 96, 194, 0));
 	setlinewidth(side / 200);
 	
 	double futureAirspeed = airSpeed_acceleration * 10;
@@ -1001,7 +1001,7 @@ void draw_PFD_alt_STD(double side, double center_x, double center_y) {
 	
 	settextjustify(LEFT_TEXT, TOP_TEXT);
 	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
-	setcolor(GREEN);
+	setcolor(EGEARGB(0x99, 96, 194, 0));
 	for (int i = 0; i < 3;i++) {
 		outtextxy(xSTD + i * side * 0.025, ySTD, STD[i]);
 	}
