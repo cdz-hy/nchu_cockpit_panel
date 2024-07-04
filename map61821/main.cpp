@@ -41,6 +41,8 @@ typedef struct {
 	char mapWinddirection[64];
 	char mapWindpower[64];
 	char mapHumidity[64];
+	char mapTownship[64];
+	char mapStreet[64];
 	
 } SharedData;
 
@@ -77,6 +79,8 @@ char mapTemperature[64];
 char mapWinddirection[64];
 char mapWindpower[64];
 char mapHumidity[64];
+char mapTownship[64];
+char mapStreet[64];
 
 //地图中心点坐标
 //WAYPOINT map_center = {0, "", 28.877, 115.91,};
@@ -197,6 +201,8 @@ int main()
 		strcpy(mapWinddirection, pData->mapWinddirection);
 		strcpy(mapWindpower, pData->mapWindpower);
 		strcpy(mapHumidity, pData->mapHumidity);
+		strcpy(mapTownship,pData->mapTownship);
+		strcpy(mapStreet,pData->mapStreet);
 		
 		//对更新信号进行更新 2是更新完成，1是需要更新，0保持不变
 		if(pData->renewMap == 2){
@@ -359,9 +365,10 @@ int main()
 		
 		setfont(18, 0, "黑体");
 		setcolor(EGEARGB(0xff, 177, 177, 178));
-		ege_drawtext(mapProvince,606,135);
-		ege_drawtext(mapCity,606,167);
-		ege_drawtext(mapAdcode,606,199);
+		ege_drawtext(mapProvince,570,135);
+		ege_drawtext(mapCity,636,135);
+		ege_drawtext(mapTownship,606,167);
+		ege_drawtext(mapStreet,606,199);
 		
 		ege_drawtext(mapWindpower,606,296);
 		ege_drawtext(mapWinddirection,606,328);
