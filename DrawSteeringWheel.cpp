@@ -26,6 +26,9 @@ void draw_SteeringWeel(double center_x,double center_y,double side) {
 		}
 		
 	}
+	else{
+		choiceSteeringWeel = 0;
+	}
 	
 	if (x >= center_x - side && x <= center_x + side && y >= center_y - side && y < center_y + side) {
 		if (choiceSteeringWeel == 1) {
@@ -39,9 +42,20 @@ void draw_SteeringWeel(double center_x,double center_y,double side) {
 			SteeringWeelLevel = -((center_x - x) / side);
 			SteeringWeelVertical = -((center_y - y) / side);
 			SteeringWeelFootPedals = -((center_x - x) / side / 5.0);
+		}else{
+			double x1 = SteeringWeelLevel * side + center_x;
+			double y1 = SteeringWeelVertical * side + center_y;
+			setcolor(EGEARGB(0X30, 0X80, 0X80, 0X80));
+			ege_ellipse(x1 - Ulength * 2, y1 - Ulength * 2, Ulength * 4, Ulength * 4);
 		}
 		
 		
+	}else{
+		double x2 = SteeringWeelLevel * side + center_x;
+		double y2 = SteeringWeelVertical * side + center_y;
+		setcolor(EGEARGB(0X30, 0X80, 0X80, 0X80));
+		ege_ellipse(x2 - Ulength * 2, y2 - Ulength * 2, Ulength * 4, Ulength * 4);
+		
 	}
-
+	
 }
