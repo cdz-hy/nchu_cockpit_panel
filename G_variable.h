@@ -245,7 +245,6 @@ extern double changecolor;
 extern int MainPanelLight;
 
 
-
 extern PIMAGE pimg1;
 extern PIMAGE pimg2;
 extern PIMAGE pimg3;
@@ -277,6 +276,8 @@ extern PIMAGE pimg28;
 extern PIMAGE pimg29;
 extern PIMAGE pimg30;
 
+extern PIMAGE pimg32;
+
 extern PIMAGE pimg1sta;
 extern PIMAGE pimg2sta;
 extern PIMAGE pimg3sta;
@@ -307,6 +308,8 @@ extern PIMAGE pimg27sta;
 extern PIMAGE pimg28sta;
 extern PIMAGE pimg29sta;
 extern PIMAGE pimg30sta;
+
+extern PIMAGE pimg32sta;
 //==================================//
 
 //==========以下为警告信息==========//
@@ -328,6 +331,10 @@ extern double baroKnob;
 extern double baroUnit;
 extern double EHISMode;
 extern double mapDistance;
+extern int gearCTR;//A
+extern int  gearCTR_1;//B
+extern int gearTFC;//A
+extern int gearTFC_1;//B
 extern int FPV;
 extern int MTRS;
 extern int RST;
