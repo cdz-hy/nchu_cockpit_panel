@@ -394,3 +394,4 @@ double SteeringWeelLevel = 0;
 double SteeringWeelVertical = 0 ;
 double SteeringWeelFootPedals = 0;
 int choiceSteeringWeel = 0;
+int transformSteeringWeel = 0;
