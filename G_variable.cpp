@@ -274,6 +274,8 @@ PIMAGE pimg28;
 PIMAGE pimg29;
 PIMAGE pimg30;
 
+PIMAGE pimg32;
+
 PIMAGE pimg1sta;
 PIMAGE pimg2sta;
 PIMAGE pimg3sta;
@@ -305,6 +307,8 @@ PIMAGE pimg28sta;
 PIMAGE pimg29sta;
 PIMAGE pimg30sta;
 
+PIMAGE pimg32sta;
+
 //==================================//
 
 //==========以下为警告信息==========//
@@ -327,7 +331,11 @@ double MINSRef = 125;
 double baroKnob = 0;
 double baroUnit = 125;
 double EHISMode = 135;
+int gearCTR = 0;//A
+int gearCTR_1 = 0;//B
 double mapDistance = 0;
+int gearTFC = 0;//A
+int gearTFC_1 = 0;//B
 int RST = 0;
 int STD = 0;
 int CTR = 1;
