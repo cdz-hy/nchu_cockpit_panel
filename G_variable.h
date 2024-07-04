@@ -193,6 +193,8 @@ extern char mapTemperature[64];
 extern char mapWinddirection[64];
 extern char mapWindpower[64];
 extern char mapHumidity[64];
+extern char mapTownship[64];
+extern char mapStreet[64];
 
 //是否显示地图
 extern int showMap;
