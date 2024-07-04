@@ -8,6 +8,7 @@ extern double SteeringWeelVertical;
 extern double SteeringWeelFootPedals;
 extern int choiceSteeringWeel;
 extern int transformSteeringWeel;
+unsigned long long a = 0;
 void draw_SteeringWeel(double center_x,double center_y,double side) {
 	double Ulength = side / 100;
 	setcolor(EGEARGB(0X30, 0X80, 0X80, 0X80));
@@ -17,8 +18,11 @@ void draw_SteeringWeel(double center_x,double center_y,double side) {
 	int x, y;
 	mousepos(&x, &y);
 	if(transformSteeringWeel==1){
-		setfillcolor(EGEARGB(0XFF, 0XFF, 0X00, 0X00));{
-			ege_fillellipse(center_x - side + Ulength * 4 , center_y - side + Ulength * 4 , Ulength * 2,Ulength * 2);
+		a++;
+		if(a%10==0){
+			setfillcolor(EGEARGB(0XFF, 0XFF, 0X00, 0X00));{
+				ege_fillellipse(center_x - side + Ulength * 5 , center_y - side + Ulength * 5 , Ulength * 4,Ulength * 4);
+			}	
 		}
 	}
 	if (x >= center_x - side && x <= center_x + side && y >= center_y - side && y < center_y + side) {
