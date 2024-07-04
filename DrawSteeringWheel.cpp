@@ -27,7 +27,7 @@ void draw_SteeringWeel(double center_x,double center_y,double side) {
 	}
 	if (x >= center_x - side && x <= center_x + side && y >= center_y - side && y < center_y + side) {
 		
-		if (GetAsyncKeyState(0x04) & 0x0001) {
+		if (GetAsyncKeyState(0x43) & 0x0001) {
 			if (transformSteeringWeel == 1) {
 				transformSteeringWeel = 0;
 			}
