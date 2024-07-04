@@ -390,3 +390,4 @@ extern double SteeringWeelLevel;
 extern double SteeringWeelVertical;
 extern double SteeringWeelFootPedals;
 extern int choiceSteeringWeel;
+extern int transformSteeringWeel;
