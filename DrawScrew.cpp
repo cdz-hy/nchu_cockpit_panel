@@ -204,8 +204,8 @@ void draw_screw2(double screw_x, double screw_y, double screw_r, double angle) {
 		);
 	
 	ege_setpattern_lineargradient(// 最上面一层
-		screw_x - 0.83 * screw_r, screw_y - 0.83 * screw_r, EGEARGB(0XFF, 0X1F, 0X23, 0X2C),
-		screw_x + 0.83 * screw_r, screw_y + 0.83 * screw_r, EGEARGB(0XFF, 0X17, 0X1A, 0X24)
+		screw_x - 0.83 * screw_r, screw_y - 0.83 * screw_r, EGEARGB(0XFF, 0X12, 0X12, 0X12),
+		screw_x + 0.83 * screw_r, screw_y + 0.83 * screw_r, EGEARGB(0XFF, 0X12, 0X12, 0X12)
 		);
 	ege_fillellipse(
 		screw_x - 0.83 * screw_r, screw_y - 0.83 * screw_r, 1.66 * screw_r, 1.66 * screw_r
