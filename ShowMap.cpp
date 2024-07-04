@@ -27,6 +27,8 @@ typedef struct {
 	char mapWinddirection[64];
 	char mapWindpower[64];
 	char mapHumidity[64];
+	char mapTownship[64];
+	char mapStreet[64];
 	
 } SharedData;
 
@@ -161,6 +163,8 @@ int show_map() {
 				strcpy(pData->mapWinddirection,mapWinddirection);
 				strcpy(pData->mapWindpower,mapWindpower);
 				strcpy(pData->mapHumidity,mapHumidity);
+				strcpy(pData->mapTownship,mapTownship);
+				strcpy(pData->mapStreet,mapStreet);
 				
 //				printf("g:%d ",renewMap);
 //				printf("pData:%d \n",pData->renewMap);
