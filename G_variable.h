@@ -184,6 +184,16 @@ extern int egeHeight;
 extern int egeFMCWidth;
 extern int egeFMCHeight;
 
+// map上打印的数据
+extern char mapProvince[64];
+extern char mapCity[64];
+extern char mapAdcode[64];
+extern char mapWeather[64];
+extern char mapTemperature[64];
+extern char mapWinddirection[64];
+extern char mapWindpower[64];
+extern char mapHumidity[64];
+
 //是否显示地图
 extern int showMap;
 
