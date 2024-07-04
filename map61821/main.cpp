@@ -33,6 +33,15 @@ typedef struct {
 	
 	double rotationangle;
 	
+	char mapProvince[64];
+	char mapCity[64];
+	char mapAdcode[64];
+	char mapWeather[64];
+	char mapTemperature[64];
+	char mapWinddirection[64];
+	char mapWindpower[64];
+	char mapHumidity[64];
+	
 } SharedData;
 
 void change_size(PIMAGE& pimg, int width, int height);
@@ -59,6 +68,15 @@ int mouse_x = 0;
 int mouse_y = 0;
 int mouse_x_cur = 0;
 int mouse_y_cur = 0;
+
+char mapProvince[64];
+char mapCity[64];
+char mapAdcode[64];
+char mapWeather[64];
+char mapTemperature[64];
+char mapWinddirection[64];
+char mapWindpower[64];
+char mapHumidity[64];
 
 //地图中心点坐标
 //WAYPOINT map_center = {0, "", 28.877, 115.91,};
@@ -125,8 +143,11 @@ int main()
 //	// 子进程中声明事件句柄
 //	HANDLE hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
 	
-	initgraph( 480, 480, INIT_RENDERMANUAL);
-	setbkcolor(WHITE);
+//	initgraph( 480, 480, INIT_RENDERMANUAL);
+//	setbkcolor(WHITE);
+	initgraph(720, 545, INIT_RENDERMANUAL);
+	setbkcolor(EGEARGB(0XFF, 46,69,93));
+	
 	ege_enable_aa(true);
 	
 	//设置窗口最顶层
@@ -156,6 +177,26 @@ int main()
 	{
 		
 		cleardevice();
+		
+		//--------------------------------------//
+		setfillcolor(EGEARGB(0XFF, 38,50,64));
+		ege_fillrect(0,0,720,40);
+		
+		setbkmode(TRANSPARENT);
+		settextjustify(CENTER_TEXT, CENTER_TEXT);
+		setfont(35, 0, "黑体");
+		setcolor(EGEARGB(150, 177, 177, 178));
+		ege_drawtext("MAP", 360,24);
+		//--------------------------------------//
+		
+		strcpy(mapProvince, pData->mapProvince);
+		strcpy(mapCity, pData->mapCity);
+		strcpy(mapAdcode, pData->mapAdcode);
+		strcpy(mapWeather, pData->mapWeather);
+		strcpy(mapTemperature, pData->mapTemperature);
+		strcpy(mapWinddirection, pData->mapWinddirection);
+		strcpy(mapWindpower, pData->mapWindpower);
+		strcpy(mapHumidity, pData->mapHumidity);
 		
 		//对更新信号进行更新 2是更新完成，1是需要更新，0保持不变
 		if(pData->renewMap == 2){
@@ -191,8 +232,12 @@ int main()
 		change_size(show, 480, 480);
 		
 		//显示图片
-		putimage_withalpha(NULL, show, 0, 0);
-			
+//		putimage_withalpha(NULL, show, 0, 0);
+		//--------------------------------------//
+		
+		putimage_withalpha(NULL, show, 12, 38+15);
+		
+		//--------------------------------------//
 			
 		
 		//实现移动
@@ -274,8 +319,10 @@ int main()
 //		xyprintf(50,140,tmp);
 			
 				
-		double plane_x = 480 / 2 - pos_x_move * (500.0 / side);
-		double plane_y = 480 / 2 - pos_y_move * (500.0 / side);
+//		double plane_x = 480 / 2 - pos_x_move * (500.0 / side);
+//		double plane_y = 480 / 2 - pos_y_move * (500.0 / side);
+		double plane_x = 480 / 2 - pos_x_move * (500.0 / side) + 12;
+		double plane_y = 480 / 2 - pos_y_move * (500.0 / side) + 38 + 15;
 		
 //		setfillcolor(EGEARGB(0x90, 0x00, 0x00, 0x00));
 //		ege_fillellipse(plane_x - 10 , plane_y - 10, 20, 20);
@@ -283,6 +330,45 @@ int main()
 //		setcolor(BLACK);
 //		ege_ellipse(plane_x - 10 , plane_y - 10, 20, 20);
 		
+		
+		//--------------------------------------//
+		setfillcolor(EGEARGB(0x90, 0x00, 0x00, 0x00));
+		ege_fillellipse(plane_x - 10 , plane_y - 10, 20, 20);
+		setlinewidth(3);
+		setcolor(BLACK);
+		ege_ellipse(plane_x - 10 , plane_y - 10, 20, 20);
+		
+		
+		setfont(24, 0, "黑体");
+		setcolor(WHITE);
+		ege_drawtext("位置",606,100);
+		ege_drawtext("风速风向",606,262);
+		ege_drawtext("天气温度湿度",610,392);
+		
+		setfillcolor(BLACK);
+		ege_fillrect(510,120,200,25);
+		ege_fillrect(510,152,200,25);
+		ege_fillrect(510,184,200,25);
+		
+		ege_fillrect(510,282,200,25);
+		ege_fillrect(510,314,200,25);
+		
+		ege_fillrect(510,412,200,25);
+		ege_fillrect(510,444,200,25);
+		ege_fillrect(510,476,200,25);
+		
+		setfont(18, 0, "黑体");
+		setcolor(EGEARGB(0xff, 177, 177, 178));
+		ege_drawtext(mapProvince,606,135);
+		ege_drawtext(mapCity,606,167);
+		ege_drawtext(mapAdcode,606,199);
+		
+		ege_drawtext(mapWindpower,606,296);
+		ege_drawtext(mapWinddirection,606,328);
+		
+		ege_drawtext(mapWeather,606,426);
+		ege_drawtext(mapTemperature,606,459);
+		ege_drawtext(mapHumidity,606,490);
 		
 		//更新航线
 		fullRoute.clear();
