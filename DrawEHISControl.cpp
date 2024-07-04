@@ -28,11 +28,59 @@ extern int MainPanelLight;
 int MainPanel_mouse_x = 0, MainPanel_mouse_y = 0;
 int MainPanel_speed_is_down = 0;
 int MainPanel_mouse_y_cur = 0, MainPanel_mouse_x_cur = 0;
+extern int gearCTR;//A
+extern int gearCTR_1;//B
+extern int gearTFC;//A
+extern int gearTFC_1;//B
 
 void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) {
 	
 	int x, y;
 	mousepos(&x, &y);
+	if(gearCTR+gearCTR_1>4){
+		gearCTR_1 = 4 - (gearCTR+gearCTR_1);
+	}
+	if(gearTFC + gearTFC_1 > 6){
+		gearCTR_1 = 6 - (gearTFC + gearTFC_1);
+	}
+	
+	if(gearCTR+gearCTR_1 == 0){
+		EHISMode = 55;
+	}else if(gearCTR + gearCTR_1 == 1 ){
+		EHISMode = 80;
+	}else if(gearCTR + gearCTR_1==2){
+		EHISMode = 110;
+	}else if(gearCTR + gearCTR_1 == 4){
+		EHISMode = 135;
+	}
+	
+	if(gearTFC + gearTFC_1==0){
+		mapDistance = 30;
+	}else if(gearTFC + gearTFC_1 == 1){
+		mapDistance = 60;
+	}else if(gearTFC + gearTFC_1 == 2){
+		mapDistance = 90;
+	}else if(gearTFC + gearTFC_1 == 3){
+		mapDistance = 120;
+	}else if(gearTFC + gearTFC_1 == 4){
+		mapDistance = 150;
+	}else if(gearTFC + gearTFC_1 == 5){
+		mapDistance = 180;
+	}else if(gearTFC + gearTFC_1 == 6){
+		mapDistance = 210;
+	}
+	
+	
+//	if(EHISMode ==55){
+//		gearCTR_1 = 0 - gearCTR;
+//	}else if(EHISMode==80){
+//		gearCTR_1 = 1 - gearCTR;
+//	}else if(EHISMode==110){
+//		gearCTR_1 = 2 - gearCTR;
+//	}else if(EHISMode==135){
+//		gearCTR_1 = 4 - gearCTR;
+//	}
+	
 	
 	
 	double Ulength = side / 140;
@@ -653,9 +701,13 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 		if (GetAsyncKeyState(0x02) & 0x0001) {
 			if (EHISMode == 110) {
 				EHISMode -= 30;
-			}
-			else if(EHISMode>55){
+				gearCTR_1-=1;
+			}else if(EHISMode == 135){
 				EHISMode -= 25;
+				gearCTR_1-=2;
+			}else if(EHISMode>55){
+				EHISMode -= 25;
+				gearCTR_1-=1;
 			}
 			
 		}
@@ -665,9 +717,14 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 		if (GetAsyncKeyState(0x02) & 0x0001) {
 			if (EHISMode == 80) {
 				EHISMode += 30;
+				gearCTR_1+=1;
+			}else if(EHISMode==110){
+				EHISMode+=25;
+				gearCTR_1+=2;
 			}
 			else if (EHISMode < 135) {
 				EHISMode += 25;
+				gearCTR_1+=1;
 			}
 			
 		}
@@ -888,8 +945,9 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	if (x > EHIScontrol_x + 17.5 * Ulength - Lowknob_R1 && x< EHIScontrol_x + 17.5 * Ulength - Lowknob_R4 && y > EHIScontrol_y + 11 * Ulength - Lowknob_R1 && y < EHIScontrol_y + 11 * Ulength + Lowknob_R1) {
 		
 		if (GetAsyncKeyState(0x02) & 0x0001) {
-			if (mapDistance > 0) {
+			if (mapDistance > 30) {
 				mapDistance -= 30;
+				gearTFC_1-=1;
 			}
 		}
 	}
@@ -898,6 +956,7 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 		if (GetAsyncKeyState(0x02) & 0x0001) {
 			if (mapDistance < 210) {
 				mapDistance += 30;
+				gearTFC_1+=1;
 			}
 			
 		}
@@ -1626,4 +1685,3 @@ void draw_EHIS_control(double EHIScontrol_x, double EHIScontrol_y, double side) 
 	
 	
 }
-
