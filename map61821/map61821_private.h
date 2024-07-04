@@ -1,8 +1,8 @@
 /* THIS FILE WILL BE OVERWRITTEN BY Red Panda C++ */
 /* DO NOT EDIT ! */
 
-#ifndef MAP61821_PRIVATE_H
-#define MAP61821_PRIVATE_H
+#ifndef map61821_private_rc
+#define map61821_private_rc
 
 /* VERSION DEFINITIONS */
 #define VER_STRING	"1.0.0.0"
@@ -20,4 +20,4 @@
 #define PRODUCT_NAME	"map61821"
 #define PRODUCT_VERSION	"0.1.1.1"
 
-#endif /*MAP61821_PRIVATE_H*/
+#endif /*map61821_private_rc*/

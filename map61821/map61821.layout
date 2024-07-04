@@ -1,12 +1,12 @@
 [
     {
-        "caretX": 3,
-        "caretY": 365,
-        "filename": "D:/Git/sls/map61821/main.cpp",
+        "caretX": 20,
+        "caretY": 10,
+        "filename": "D:/小熊猫C++/Program/B737-800,B727-200F仪表模拟/map61821/main.cpp",
         "focused": true,
         "isOpen": true,
-        "left": 0,
+        "leftChar": 1,
         "order": 0,
-        "top": 12744
+        "topLine": 337
     }
 ]

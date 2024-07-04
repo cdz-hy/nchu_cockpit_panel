@@ -126,8 +126,8 @@ int show_map() {
 				si.cb = sizeof(si);
 			}
 			
-			WCHAR commandLineW[] = L"D:/Git/sls/map61821/map61821.exe";
-			//WCHAR commandLineW[] = L"D:/小熊猫C++/Program/CurlTestFinal/map61821/map61821.exe";
+			
+			WCHAR commandLineW[] = L"D:/小熊猫C++/Program/B737-800,B727-200F仪表模拟/map61821/map61821.exe";
 			WCHAR currentDirectoryW[] = L".";
 			
 			char*  commandLineA = WideCharToString(commandLineW);
@@ -190,7 +190,7 @@ int show_map() {
 				
 				pData->routeNum = fullRoute.size();
 				
-				printf("%d",pData->routeNum);
+//				printf("%d",pData->routeNum);
 				
 				//		pData->fullRoute = fullRoute;//共享内存不能传vector!内存分配机制不同！
 				//		printf("%d",pData->renewMap);

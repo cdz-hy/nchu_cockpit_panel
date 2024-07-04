@@ -338,11 +338,11 @@ int main()
 		
 		
 		//--------------------------------------//
-		setfillcolor(EGEARGB(0x90, 0x00, 0x00, 0x00));
-		ege_fillellipse(plane_x - 10 , plane_y - 10, 20, 20);
-		setlinewidth(3);
-		setcolor(BLACK);
-		ege_ellipse(plane_x - 10 , plane_y - 10, 20, 20);
+//		setfillcolor(EGEARGB(0x90, 0x00, 0x00, 0x00));
+//		ege_fillellipse(plane_x - 10 , plane_y - 10, 20, 20);
+//		setlinewidth(3);
+//		setcolor(BLACK);
+//		ege_ellipse(plane_x - 10 , plane_y - 10, 20, 20);
 		
 		
 		setfont(24, 0, "黑体");

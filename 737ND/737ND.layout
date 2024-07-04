@@ -1,21 +1,12 @@
 [
     {
-        "caretX": 1,
-        "caretY": 1,
-        "filename": "D:/Git/sls/737ND/DrawFrame.cpp",
-        "focused": false,
-        "isOpen": false,
-        "left": 0,
-        "top": 0
-    },
-    {
-        "caretX": 1,
-        "caretY": 78,
-        "filename": "D:/Git/sls/737ND/main.cpp",
+        "caretX": 21,
+        "caretY": 14,
+        "filename": "D:/小熊猫C++/Program/B737-800,B727-200F仪表模拟/737ND/main.cpp",
         "focused": true,
         "isOpen": true,
-        "left": 0,
+        "leftChar": 1,
         "order": 0,
-        "top": 2628
+        "topLine": 211
     }
 ]

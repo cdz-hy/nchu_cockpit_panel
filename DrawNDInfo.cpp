@@ -171,6 +171,7 @@ void draw_VORs(WAYPOINT nowPos, double dir, double ratio,double x, double y, dou
 
 extern vector<WAYPOINT> route;
 extern vector<WAYPOINT> routePassed;
+extern int nowPos;
 
 void draw_route(WAYPOINT wp, double dir, double ratio,double x, double y, double side){
 	
@@ -206,15 +207,16 @@ void draw_route(WAYPOINT wp, double dir, double ratio,double x, double y, double
 			
 			//先判断这段路线是不是接下来的一段，从而设置不同颜色
 			//警告：这里一旦尝试读取没有内容的vector的迭代器会导致程序直接闪退
-			if(routePassed.size() > 0 && !strcmp((*(routePassed.end() - 1)).name, wp1.name)){
+//			if(routePassed.size() > 0 && !strcmp((*(routePassed.end() - 1)).name, wp1.name)){
+			if(nowPos > 0 && !strcmp(routePassed[nowPos - 1].name,wp1.name)){
 				
-				setcolor(EGEARGB(0x99,0xa8,0x05,0xa8));
+				setcolor(EGEARGB(0xff,0xa8,0x05,0xa8));
 				
 			}
 			else{
 				
 //			setcolor(WHITE);
-				setcolor(EGEARGB(0x66,0xff,0xff,0xff));
+				setcolor(EGEARGB(0xFF,0xff,0xff,0xff));
 			}
 			
 			//先判断两点是不是都在范围内，如果都在，直接链接即可
@@ -288,8 +290,8 @@ void draw_route(WAYPOINT wp, double dir, double ratio,double x, double y, double
 				
 			}
 			//两个点都不在时
-			else if(( rx < x - d / 2 || rx > x + d / 2 || ry < y - d / 2 || ry > y + d / 2 ) && (rx2 < x - d / 2 || rx2 > x + d / 2 || ry2 < y - d / 2 || ry2 > y + d / 2 )){
-				
+//			else if(( rx < x - d / 2 || rx > x + d / 2 || ry < y - d / 2 || ry > y + d / 2 ) && (rx2 < x - d / 2 || rx2 > x + d / 2 || ry2 < y - d / 2 || ry2 > y + d / 2 )){
+			else{
 				double a[2][3] = {{-(ry2 - ry) / (rx2 - rx) , 1, -(ry2 - ry) / (rx2 - rx) * rx + ry} , {}};
 				
 				//b的每一行是边缘方程的矩阵表示
@@ -363,7 +365,8 @@ void draw_route(WAYPOINT wp, double dir, double ratio,double x, double y, double
 					{rx,ry - rhigh / 3},
 				};
 				
-				if(cot > 0 && routePassed.size() > 0 && !strcmp((*(routePassed.end() - 1)).name, (*(route.begin() + cot - 1)).name)){
+//				if(cot > 0 && routePassed.size() > 0 && !strcmp((*(routePassed.end() - 1)).name, (*(route.begin() + cot - 1)).name)){
+				if(!strcmp(route[nowPos].name,wpTmp.name)){
 					setfillcolor(EGEARGB(0xbb,0xa8,0x05,0xa8));
 					setcolor(RED);
 				}
@@ -604,9 +607,9 @@ void draw_route_map(WAYPOINT wp, double dir, double ratio,double x, double y, do
 				
 			}
 			//两个点都不在时
-			else if((ry < y - side * (71.0 / 104) || ry > y + side * 16 / 104 / 3 || rx > x + side * 48 / 104 || rx < x - side * 48 / 104)
-				&& (ry2 < y - side * (71.0 / 104) || ry2 > y + side * 16 / 104 / 3 || rx2 > x + side * 48 / 104 || rx2 < x - side * 48 / 104)){
-				
+//			else if((ry < y - side * (71.0 / 104) || ry > y + side * 16 / 104 / 3 || rx > x + side * 48 / 104 || rx < x - side * 48 / 104)
+//				&& (ry2 < y - side * (71.0 / 104) || ry2 > y + side * 16 / 104 / 3 || rx2 > x + side * 48 / 104 || rx2 < x - side * 48 / 104)){
+			else{	
 				double a[2][3] = {{-(ry2 - ry) / (rx2 - rx) , 1, -(ry2 - ry) / (rx2 - rx) * rx + ry} , {}};
 				
 				//b的每一行是边缘方程的矩阵表示

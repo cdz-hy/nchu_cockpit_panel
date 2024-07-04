@@ -10,6 +10,7 @@ using namespace std;
 
 #include "DrawPanels.h"
 #include "DataReceive.h"
+#include "DataReceive2.h"
 #include "MapReceive.h"
 #include "G_variable.h"
 #include "G_structs.h"
@@ -36,10 +37,10 @@ int main() {
 	setbkcolor(EGEARGB(0xff, 0x37, 0x37, 0x3d));
 	setbkcolor(EGEARGB(0xff, 0x14, 0x17, 0x19));
 	ege_enable_aa(true);
-
+	
 //	egeHDC = getHDC();
 	egeHWND = getHWnd();
-
+	
 	DWORD dwLength = GetModuleFileNameW(NULL, path, MAX_PATH);
 	
 //	//设置窗口无边框
@@ -56,9 +57,11 @@ int main() {
 	//创建读取文件和绘制表盘(带按钮操作)两个线程
 	
 	thread panels(draw_panels);
-	thread datas(data_receive);		
+	thread datas(data_receive);	
+	thread datas2(data_receive2);	
 //	thread control(get_keymsg);	
 	thread maps(map_receive);
+	thread info(info_receive);
 	thread newWindows(create_new_windows);
 	thread showMap(show_map);
 	thread routeWay(read_routeWays);
@@ -70,8 +73,10 @@ int main() {
 	
 	panels.join();
 	datas.join();
+	datas2.join();
 //	control.join();
 	maps.join();
+	info.join();
 	newWindows.join();
 	showMap.join();
 	routeWay.join();
@@ -85,3 +90,4 @@ int main() {
 	return 0;
 	
 }
+

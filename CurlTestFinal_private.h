@@ -1,8 +1,8 @@
 /* THIS FILE WILL BE OVERWRITTEN BY Red Panda C++ */
 /* DO NOT EDIT ! */
 
-#ifndef 737ND_private_rc
-#define 737ND_private_rc
+#ifndef CurlTestFinal_private_rc
+#define CurlTestFinal_private_rc
 
 /* VERSION DEFINITIONS */
 #define VER_STRING	"1.0.0.0"
@@ -16,8 +16,8 @@
 #define INTERNAL_NAME	""
 #define LEGAL_COPYRIGHT	""
 #define LEGAL_TRADEMARKS	""
-#define ORIGINAL_FILENAME	"737ND.exe"
-#define PRODUCT_NAME	"737ND"
+#define ORIGINAL_FILENAME	"CurlTestFinal.exe"
+#define PRODUCT_NAME	"CurlTestFinal"
 #define PRODUCT_VERSION	"0.1.1.1"
 
-#endif /*737ND_private_rc*/
+#endif /*CurlTestFinal_private_rc*/

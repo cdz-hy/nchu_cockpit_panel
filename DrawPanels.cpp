@@ -231,30 +231,32 @@ void draw_panels(){
 		//PFD
 		double PFD_side = 15 * unit_side1;
 		double PFD_x;
-		if(PFD_move_x<15&&PFD_move_x>0){
-			PFD_x= center_x1 + PFD_move_x * unit_side1;
-		}else if(PFD_move_x>=15){
-			PFD_move_x = 15;
-			PFD_x= center_x1 + PFD_move_x * unit_side1;
-		}else if(PFD_move_x<=0&&PFD_move_x>=-80){
-			PFD_x= center_x1 + PFD_move_x * unit_side1;
-		}else{
-			PFD_move_x = -80;
-			PFD_x= center_x1 + PFD_move_x * unit_side1;
-		}
+		PFD_x = center_x1 + PFD_move_x * unit_side1;
+//		if(PFD_move_x<15&&PFD_move_x>0){
+//			PFD_x= center_x1 + PFD_move_x * unit_side1;
+//		}else if(PFD_move_x>=15){
+//			PFD_move_x = 15;
+//			PFD_x= center_x1 + PFD_move_x * unit_side1;
+//		}else if(PFD_move_x<=0&&PFD_move_x>=-80){
+//			PFD_x= center_x1 + PFD_move_x * unit_side1;
+//		}else{
+//			PFD_move_x = -80;
+//			PFD_x= center_x1 + PFD_move_x * unit_side1;
+//		}
 		
 		double PFD_y;
-		if(PFD_move_y<20&&PFD_move_y>1){
-			PFD_y = center_y1 + PFD_move_y * unit_side1;
-		}else if(PFD_move_y>=20){
-			PFD_move_y = 20;
-			PFD_y = center_y1 + PFD_move_y * unit_side1;
-		}else if(PFD_move_y>=0&&PFD_move_y<=1){
-			PFD_y = center_y1 + PFD_move_y * unit_side1;
-		}else{
-			PFD_move_y = 1;
-			PFD_y = center_y1 + PFD_move_y * unit_side1;
-		}
+		PFD_y = center_y1 + PFD_move_y * unit_side1;
+//		if(PFD_move_y<20&&PFD_move_y>1){
+//			PFD_y = center_y1 + PFD_move_y * unit_side1;
+//		}else if(PFD_move_y>=20){
+//			PFD_move_y = 20;
+//			PFD_y = center_y1 + PFD_move_y * unit_side1;
+//		}else if(PFD_move_y>=0&&PFD_move_y<=1){
+//			PFD_y = center_y1 + PFD_move_y * unit_side1;
+//		}else{
+//			PFD_move_y = 1;
+//			PFD_y = center_y1 + PFD_move_y * unit_side1;
+//		}
 		
 //		//ND
 //		double ND_side = 15 * unit_side;
@@ -760,7 +762,7 @@ void draw_panels(){
 			
 			//画FMC
 			draw_FMC(PFD_x + PFD_side * 1.99, PFD_y + 1.67 * PFD_side, PFD_side * 0.63);
-            draw_FMC_2(PFD_x + PFD_side * 4.245, PFD_y + 1.67 * PFD_side, PFD_side * 0.63);
+			draw_FMC_2(PFD_x + PFD_side * 4.245, PFD_y + 1.67 * PFD_side, PFD_side * 0.63);
 			
 			//画自动驾驶控制板
 			draw_auto_control(PFD_x + PFD_side * 3.41, PFD_y - 1.4 * PFD_side, PFD_side*3);
@@ -769,9 +771,9 @@ void draw_panels(){
 			draw_PFD(PFD_x + 6 * PFD_side, PFD_y, PFD_side);
 			
 			draw_electricPanel_backgrounds(PFD_x, PFD_y , PFD_side);
-
-            //画方向舵显示器
-				draw_SteeringWeel(PFD_x + 2.25 * PFD_side, PFD_y - 0.84 * PFD_side, PFD_side / 5);
+			
+			//画方向舵显示器
+			draw_SteeringWeel(PFD_x + 2.25 * PFD_side, PFD_y - 0.84 * PFD_side, PFD_side / 5);
 			
 			
 //			//直接显示的地图（暂时不用）
@@ -810,6 +812,7 @@ void draw_panels(){
 					mousepos(&mouse_x, &mouse_y);
 					PFD_move_x = (mouse_x - mouse_x_cur) / unit_side1;
 					PFD_move_y = (mouse_y - mouse_y_cur) / unit_side1;
+					
 					PFD_move_x += PFD_move_x_tmp;
 					PFD_move_y += PFD_move_y_tmp;
 				}
@@ -1124,12 +1127,12 @@ void draw_BACKPICTURE(double PFD_x, double PFD_y, double PFD_side){
 	putimage_withalpha(NULL, pimg9, 0 , 0 );
 	putimage_withalpha(NULL, pimg26, PFD_x + 2.6 * PFD_side, PFD_y - 4.87 * PFD_side);
 	putimage_withalpha(NULL, pimg13, PFD_x - 5.05 * PFD_side, PFD_y - 4.35 * PFD_side);
-
+	
 	putimage_withalpha(NULL, pimg11, PFD_x + 2.7 * PFD_side, PFD_y - 4.22 * PFD_side);
 	
 	putimage_withalpha(NULL, pimg12, PFD_x - 5.35 * PFD_side, PFD_y - 4.72 * PFD_side);
 	putimage_withalpha(NULL, pimg27, PFD_x + 7.7 * PFD_side, PFD_y - 4.33 * PFD_side);
-
+	
 	
 }
 void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side) {
@@ -1509,3 +1512,4 @@ void draw_map(){
 	}
 	
 }
+

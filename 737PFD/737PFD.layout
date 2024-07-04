@@ -1,12 +1,12 @@
 [
     {
-        "caretX": 4,
-        "caretY": 1008,
-        "filename": "D:/Git/sls/737PFD/main.cpp",
+        "caretX": 14,
+        "caretY": 13,
+        "filename": "D:/小熊猫C++/Program/B737-800,B727-200F仪表模拟/737PFD/main.cpp",
         "focused": true,
         "isOpen": true,
-        "left": 0,
+        "leftChar": 1,
         "order": 0,
-        "top": 35748
+        "topLine": 64
     }
 ]

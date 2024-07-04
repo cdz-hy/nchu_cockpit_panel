@@ -1,8 +1,8 @@
 /* THIS FILE WILL BE OVERWRITTEN BY Red Panda C++ */
 /* DO NOT EDIT ! */
 
-#ifndef PROJECT_737PFD_PRIVATE_H
-#define PROJECT_737PFD_PRIVATE_H
+#ifndef 737PFD_private_rc
+#define 737PFD_private_rc
 
 /* VERSION DEFINITIONS */
 #define VER_STRING	"1.0.0.0"
@@ -20,4 +20,4 @@
 #define PRODUCT_NAME	"737PFD"
 #define PRODUCT_VERSION	"0.1.1.1"
 
-#endif /*PROJECT_737PFD_PRIVATE_H*/
+#endif /*737PFD_private_rc*/

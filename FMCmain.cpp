@@ -57,7 +57,7 @@ void draw_RouteTable_up(double center_x, double center_y, double side) {//side�
 	double single = side / 67;
 	double length = single * 92;//横长
 	double width = single * 67;// 竖宽
-
+	
 	ege_enable_aa(false);// 关闭抗锯齿
 	setcolor(EGEARGB(0xff, 0x1b, 0x20, 0x25));//接下来画外框1的线条
 	setlinewidth(4);
@@ -69,48 +69,48 @@ void draw_RouteTable_up(double center_x, double center_y, double side) {//side�
 		center_x - length / 2,center_y - width / 2//左上
 	};
 	ege_drawpoly(5, points1);
-
+	
 	setcolor(EGEARGB(0xff, 0x1b, 0x20, 0x25));//接下来画外框2的线条
 	setlinewidth(4);
 	ege_point points2[22] = {
-
+		
 		center_x - single * 33,center_y - single * 28.5,//1
-
+		
 		//加入曲线拟合点——左上角弧线点
 		center_x - single * 35.9,center_y - single * 27.5,
 		center_x - single * 36.5,center_y - single * 26,
 		center_x - single * 37,center_y - single * 25,
-
+		
 		center_x - single * 38,center_y - single * 24.5,//2
 		center_x - single * 38,center_y + single * 26.5,//3
-
+		
 		//加入曲线拟合点——左下角弧线点
 		center_x - single * 36,center_y + single * 27.5,
 		center_x - single * 35.5,center_y + single * 28.5,
 		center_x - single * 35.4,center_y + single * 29,
-
+		
 		center_x - single * 33,center_y + single * 30.5,//4
 		center_x + single * 33,center_y + single * 30.5,//5
-
+		
 		//加入曲线拟合点——右下角弧线点
 		center_x + single * 35,center_y + single * 30.5,
 		center_x + single * 36,center_y + single * 28.5,
 		center_x + single * 37.5,center_y + single * 27,
-
+		
 		center_x + single * 38,center_y + single * 26.5,//6
 		center_x + single * 38,center_y - single * 24.5,//7
-
+		
 		//加入曲线拟合点——右上角弧线点
 		center_x + single * 37.6,center_y - single * 25.6,
 		center_x + single * 36.5,center_y - single * 27,
 		center_x + single * 33.4,center_y - single * 28,
-
+		
 		center_x + single * 33,center_y - single * 28.5,//8
 		center_x - single * 33,center_y - single * 28.5,//1
 		center_x - single * 33,center_y - single * 28.5//1
 	};
 	ege_bezier(22, points2);
-
+	
 	setfillcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
 	floodfill(center_x - single * 33, center_y - single * 30.5, EGEARGB(0xff, 0x1b, 0x20, 0x25));//1定位点向上的点
 	floodfill(center_x - single * 42, center_y - single * 24.5, EGEARGB(0xff, 0x1b, 0x20, 0x25));//2定位点向左的点
@@ -118,50 +118,50 @@ void draw_RouteTable_up(double center_x, double center_y, double side) {//side�
 	floodfill(center_x + single * 42, center_y + single * 26.5, EGEARGB(0xff, 0x1b, 0x20, 0x25));//6定位点向右的点
 	floodfill(center_x + single * 42, center_y - single * 24.5, EGEARGB(0xff, 0x1b, 0x20, 0x25));//7定位点向右的点
 	floodfill(center_x + single * 33, center_y - single * 30.5, EGEARGB(0xff, 0x1b, 0x20, 0x25));//8定位点向上的点
-
-
+	
+	
 	setcolor(EGEARGB(0xff, 0x1b, 0x20, 0x25));//接下来画外框3的线条
 	setlinewidth(4);
 	ege_point points3[22] = {
-
+		
 		center_x - single * 27,center_y - single * 24.5,//1
-
+		
 		//加入曲线拟合点——左上角弧线点
 		center_x - single * 29.5,center_y - single * 24.5,
 		center_x - single * 30.5,center_y - single * 23,
 		center_x - single * 31.5,center_y - single * 22,
-
+		
 		center_x - single * 32,center_y - single * 21.5,//2
 		center_x - single * 32,center_y + single * 23.5,//3
-
+		
 		//加入曲线拟合点——左下角弧线点
 		center_x - single * 30.5,center_y + single * 24,
 		center_x - single * 29.5,center_y + single * 25.5,
 		center_x - single * 28,center_y + single * 26,
-
+		
 		center_x - single * 27,center_y + single * 26.5,//4
 		center_x + single * 27,center_y + single * 26.5,//5
-
+		
 		//加入曲线拟合点——右下角弧线点
 		center_x + single * 28,center_y + single * 26,
 		center_x + single * 29.5,center_y + single * 25,
 		center_x + single * 31,center_y + single * 24,
-
+		
 		center_x + single * 32,center_y + single * 23.5,//6
 		center_x + single * 32,center_y - single * 21.5,//7
-
+		
 		//加入曲线拟合点——右上角弧线点
 		center_x + single * 31.5,center_y - single * 22.6,
 		center_x + single * 29,center_y - single * 23.8,
 		center_x + single * 27.2,center_y - single * 24,
-
+		
 		center_x + single * 27,center_y - single * 24.5,//8
 		center_x - single * 27,center_y - single * 24.5,//1
 		center_x - single * 27,center_y - single * 24.5//1
-
+		
 	};
 	ege_bezier(22, points3);
-
+	
 	setfillcolor(EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
 	floodfill(center_x - single * 26, center_y - single * 26.5, EGEARGB(0xff, 0x1b, 0x20, 0x25));//1定位点向上的点
 	//floodfill(center_x - single * 34.5, center_y - single * 21.5, EGEARGB(0xff, 0x1b, 0x20, 0x25));//2定位点向左的点
@@ -171,14 +171,14 @@ void draw_RouteTable_up(double center_x, double center_y, double side) {//side�
 	//floodfill(center_x + single * 34.5, center_y + single * 23.5, EGEARGB(0xff, 0x1b, 0x20, 0x25));//6定位点向右的点
 	//floodfill(center_x + single * 34.5, center_y - single * 23.5, EGEARGB(0xff, 0x1b, 0x20, 0x25));//7定位点向右的点
 	floodfill(center_x + single * 26, center_y - single * 26.5, EGEARGB(0xff, 0x1b, 0x20, 0x25));//8定位点向上的点
-
+	
 	ege_enable_aa(true);
 	setlinewidth(6);
 	setcolor(EGEARGB(0xff, 0x1b, 0x20, 0x25));//接下来画外框1的线条
 	ege_bezier(22, points2);
 	setcolor(EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
 	ege_bezier(22, points3);
-
+	
 	// 左上角小螺丝
 	draw_RouteTable_smallScrew(center_x - single * 43, center_y - single * 31, side / 46.1538461538, 0);
 	// 左上角大螺丝
@@ -191,7 +191,7 @@ void draw_RouteTable_up(double center_x, double center_y, double side) {//side�
 	draw_RouteTable_bigScrew(center_x + single * 43.5, center_y - single * 25, side / 30, 90);
 	// 右下角小螺丝
 	draw_RouteTable_smallScrew(center_x + single * 43.5, center_y + single * 28, side / 46.1538461538, 0);
-
+	
 	// 左边小按钮
 	draw_RouteTable_Side_Button(center_x - single * 42, center_y - single * 15, side / 13.33333333);
 	draw_RouteTable_Side_Button(center_x - single * 42, center_y - single * 8, side / 13.33333333);
@@ -213,7 +213,7 @@ void draw_RouteTable_up(double center_x, double center_y, double side) {//side�
 	ege_line(center_x - single * 37, center_y + single * 13, center_x - single * 31.6, center_y + single * 13.2);
 	ege_line(center_x - single * 38.5, center_y + single * 20, center_x - single * 37, center_y + single * 20);//6
 	ege_line(center_x - single * 37, center_y + single * 20, center_x - single * 31.6, center_y + single * 20.2);
-
+	
 	setcolor(EGEARGB(MainPanelLight, 124, 124, 128));
 	setlinewidth(side / 200);
 	ege_line(center_x - single * 38.5, center_y - single * 15, center_x - single * 37, center_y - single * 15);//1
@@ -228,7 +228,7 @@ void draw_RouteTable_up(double center_x, double center_y, double side) {//side�
 	ege_line(center_x - single * 37, center_y + single * 13, center_x - single * 31.6, center_y + single * 13.2);
 	ege_line(center_x - single * 38.5, center_y + single * 20, center_x - single * 37, center_y + single * 20);//6
 	ege_line(center_x - single * 37, center_y + single * 20, center_x - single * 31.6, center_y + single * 20.2);
-
+	
 	// 右边小按钮
 	draw_RouteTable_Side_Button(center_x + single * 42, center_y - single * 15, side / 13.33333333);
 	draw_RouteTable_Side_Button(center_x + single * 42, center_y - single * 8, side / 13.33333333);
@@ -236,7 +236,7 @@ void draw_RouteTable_up(double center_x, double center_y, double side) {//side�
 	draw_RouteTable_Side_Button(center_x + single * 42, center_y + single * 6, side / 13.33333333);
 	draw_RouteTable_Side_Button(center_x + single * 42, center_y + single * 13, side / 13.33333333);
 	draw_RouteTable_Side_Button(center_x + single * 42, center_y + single * 20, side / 13.33333333);
-
+	
 	setcolor(EGEARGB(0XFF,0X50,0X50,0X50));
 	setlinewidth(side / 200);
 	ege_line(center_x + single * 38.5, center_y - single * 15, center_x + single * 37, center_y - single * 15);//1
@@ -276,23 +276,23 @@ void draw_RouteTable_down(double center_x, double center_y, double side) {//side
 
 // 表上的十字旋钮
 void draw_RouteTable_smallScrew(double screw_x, double screw_y, double screw_r, double angle) {
-
+	
 	setfillcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
 	ege_fillellipse(screw_x - screw_r, screw_y - screw_r, 2 * screw_r, 2 * screw_r);
-
+	
 	setcolor(BLACK);
 	setlinewidth(screw_r / 7.5);
 	ege_ellipse(screw_x - screw_r, screw_y - screw_r, 2 * screw_r, 2 * screw_r);
-
+	
 	// 绘制中间螺丝
 	angle = -angle;
 	angle = angle * PI / 180;
-
+	
 	double x01 = -screw_r * 0.7, y01 = -screw_r * 0.15;
 	double x02 = -screw_r * 0.7, y02 = +screw_r * 0.15;
 	double x03 = +screw_r * 0.7, y03 = +screw_r * 0.15;
 	double x04 = +screw_r * 0.7, y04 = -screw_r * 0.15;
-
+	
 	setfillcolor(BLACK);
 	ege_point polypoints1[4] = {
 		{x01 * cos(angle) - y01 * sin(angle) + screw_x,x01 * sin(angle) + y01 * cos(angle) + screw_y},// 左上
@@ -301,13 +301,13 @@ void draw_RouteTable_smallScrew(double screw_x, double screw_y, double screw_r, 
 		{x04 * cos(angle) - y04 * sin(angle) + screw_x,x04 * sin(angle) + y04 * cos(angle) + screw_y} // 左下
 	};
 	ege_fillpoly(4, polypoints1);
-
-
+	
+	
 	double x11 = -screw_r * 0.15, y11 = -screw_r * 0.7;
 	double x12 = -screw_r * 0.15, y12 = +screw_r * 0.7;
 	double x13 = +screw_r * 0.15, y13 = +screw_r * 0.7;
 	double x14 = +screw_r * 0.15, y14 = -screw_r * 0.7;
-
+	
 	ege_point polypoints2[4] = {
 		{x11 * cos(angle) - y11 * sin(angle) + screw_x,x11 * sin(angle) + y11 * cos(angle) + screw_y},// 左上
 		{x12 * cos(angle) - y12 * sin(angle) + screw_x,x12 * sin(angle) + y12 * cos(angle) + screw_y},// 右上
@@ -315,8 +315,8 @@ void draw_RouteTable_smallScrew(double screw_x, double screw_y, double screw_r, 
 		{x14 * cos(angle) - y14 * sin(angle) + screw_x,x14 * sin(angle) + y14 * cos(angle) + screw_y} // 左下
 	};
 	ege_fillpoly(4, polypoints2);
-
-
+	
+	
 	// 螺丝中间菱形
 	double x21 = -screw_r * 0.4, y21 = 0;
 	double x22 = 0, y22 = +screw_r * 0.4;
@@ -332,29 +332,29 @@ void draw_RouteTable_smallScrew(double screw_x, double screw_y, double screw_r, 
 		{x21 * cos(angle) - y21 * sin(angle) + screw_x,x21 * sin(angle) + y21 * cos(angle) + screw_y}
 	};
 	ege_fillpoly(5, polypoints5);
-
-
+	
+	
 }
 
 // 表上的一字旋钮
 void draw_RouteTable_bigScrew(double screw_x, double screw_y, double screw_r, double angle) {
-
+	
 	setfillcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
 	ege_fillellipse(screw_x - screw_r, screw_y - screw_r, 2 * screw_r, 2 * screw_r);
-
+	
 	setcolor(BLACK);
 	setlinewidth(screw_r / 7.5);
 	ege_ellipse(screw_x - screw_r, screw_y - screw_r, 2 * screw_r, 2 * screw_r);
-
+	
 	// 绘制中间螺丝
 	angle = -angle;
 	angle = angle * PI / 180;
-
+	
 	double x01 = -screw_r * 1, y01 = -screw_r * 0.15;
 	double x02 = -screw_r * 1, y02 = +screw_r * 0.15;
 	double x03 = +screw_r * 1, y03 = +screw_r * 0.15;
 	double x04 = +screw_r * 1, y04 = -screw_r * 0.15;
-
+	
 	setfillcolor(BLACK);
 	ege_point polypoints1[4] = {
 		{x01 * cos(angle) - y01 * sin(angle) + screw_x,x01 * sin(angle) + y01 * cos(angle) + screw_y},// 左上
@@ -363,28 +363,28 @@ void draw_RouteTable_bigScrew(double screw_x, double screw_y, double screw_r, do
 		{x04 * cos(angle) - y04 * sin(angle) + screw_x,x04 * sin(angle) + y04 * cos(angle) + screw_y} // 左下
 	};
 	ege_fillpoly(4, polypoints1);
-
+	
 }
 
 // 表上的一字旋钮——靠下的
 void draw_RouteTable_bigScrew2(double screw_x, double screw_y, double screw_r, double angle) {
-
+	
 	setfillcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
 	ege_fillellipse(screw_x - screw_r, screw_y - screw_r, 2 * screw_r, 2 * screw_r);
-
+	
 	setcolor(BLACK);
 	setlinewidth(screw_r / 7.5);
 	ege_ellipse(screw_x - screw_r / 1.2, screw_y - screw_r / 1.2, 1.6 * screw_r, 1.6 * screw_r);
-
+	
 	// 绘制中间螺丝
 	angle = -angle;
 	angle = angle * PI / 180;
-
+	
 	double x01 = -screw_r * 0.8, y01 = -screw_r * 0.15;
 	double x02 = -screw_r * 0.8, y02 = +screw_r * 0.15;
 	double x03 = +screw_r * 0.8, y03 = +screw_r * 0.15;
 	double x04 = +screw_r * 0.8, y04 = -screw_r * 0.15;
-
+	
 	setfillcolor(BLACK);
 	ege_point polypoints1[4] = {
 		{x01 * cos(angle) - y01 * sin(angle) + screw_x,x01 * sin(angle) + y01 * cos(angle) + screw_y},// 左上
@@ -393,7 +393,7 @@ void draw_RouteTable_bigScrew2(double screw_x, double screw_y, double screw_r, d
 		{x04 * cos(angle) - y04 * sin(angle) + screw_x,x04 * sin(angle) + y04 * cos(angle) + screw_y} // 左下
 	};
 	ege_fillpoly(4, polypoints1);
-
+	
 }
 
 extern char FMCFileName[20];
@@ -414,7 +414,7 @@ void draw_RouteTable_Side_Button(double center_x, double center_y, double side) 
 	ege_line(center_x - single * 2, center_y, center_x + single * 2, center_y);
 	setcolor(EGEARGB(MainPanelLight, 136, 97, 67));//橙色
 	ege_line(center_x - single * 2, center_y, center_x + single * 2, center_y);
-
+	
 	if (FMC_mouse_real_x >= center_x - length / 2 && FMC_mouse_real_x <= center_x + length / 2 && FMC_mouse_real_y >= center_y - width / 2 && FMC_mouse_real_y <= center_y + width / 2) {
 		if (GetAsyncKeyState(0x02) & 0x0001) 
 		{
@@ -631,21 +631,21 @@ void draw_RouteTable_Side_Button(double center_x, double center_y, double side) 
 				}
 			}
 			/*draw_RouteTable_Side_Button(center_x - single * 42, center_y - single * 15, side / 13.33333333);
-				draw_RouteTable_Side_Button(center_x - single * 42, center_y - single * 8, side / 13.33333333);
-				draw_RouteTable_Side_Button(center_x - single * 42, center_y - single * 1, side / 13.33333333);
-				draw_RouteTable_Side_Button(center_x - single * 42, center_y + single * 6, side / 13.33333333);
-				draw_RouteTable_Side_Button(center_x - single * 42, center_y + single * 13, side / 13.33333333);
-				draw_RouteTable_Side_Button(center_x - single * 42, center_y + single * 20, side / 13.33333333);*/
-				//ege_rectangle(FMC_origin_center_x_up - single * 4.5 * 13.33333333 / 67 * 42 - length / 2, FMC_origin_center_y_up - single * 4.5 * 13.33333333 / 67 * 15 - width / 2, length, width);
-				/*draw_RouteTable_Side_Button(center_x + single * 42, center_y - single * 15, side / 13.33333333);
-				draw_RouteTable_Side_Button(center_x + single * 42, center_y - single * 8, side / 13.33333333);
-				draw_RouteTable_Side_Button(center_x + single * 42, center_y - single * 1, side / 13.33333333);
-				draw_RouteTable_Side_Button(center_x + single * 42, center_y + single * 6, side / 13.33333333);
-				draw_RouteTable_Side_Button(center_x + single * 42, center_y + single * 13, side / 13.33333333);
-				draw_RouteTable_Side_Button(center_x + single * 42, center_y + single * 20, side / 13.33333333);*/
+			draw_RouteTable_Side_Button(center_x - single * 42, center_y - single * 8, side / 13.33333333);
+			draw_RouteTable_Side_Button(center_x - single * 42, center_y - single * 1, side / 13.33333333);
+			draw_RouteTable_Side_Button(center_x - single * 42, center_y + single * 6, side / 13.33333333);
+			draw_RouteTable_Side_Button(center_x - single * 42, center_y + single * 13, side / 13.33333333);
+			draw_RouteTable_Side_Button(center_x - single * 42, center_y + single * 20, side / 13.33333333);*/
+			//ege_rectangle(FMC_origin_center_x_up - single * 4.5 * 13.33333333 / 67 * 42 - length / 2, FMC_origin_center_y_up - single * 4.5 * 13.33333333 / 67 * 15 - width / 2, length, width);
+			/*draw_RouteTable_Side_Button(center_x + single * 42, center_y - single * 15, side / 13.33333333);
+			draw_RouteTable_Side_Button(center_x + single * 42, center_y - single * 8, side / 13.33333333);
+			draw_RouteTable_Side_Button(center_x + single * 42, center_y - single * 1, side / 13.33333333);
+			draw_RouteTable_Side_Button(center_x + single * 42, center_y + single * 6, side / 13.33333333);
+			draw_RouteTable_Side_Button(center_x + single * 42, center_y + single * 13, side / 13.33333333);
+			draw_RouteTable_Side_Button(center_x + single * 42, center_y + single * 20, side / 13.33333333);*/
 		}
 	}
-
+	
 	if (FMC_mouse_real_x >= center_x - length / 2 && FMC_mouse_real_x <= center_x + length / 2 && FMC_mouse_real_y >= center_y - width / 2 && FMC_mouse_real_y <= center_y + width / 2) {
 		setcolor(WHITE);
 		setlinewidth(1.5);
@@ -655,10 +655,10 @@ void draw_RouteTable_Side_Button(double center_x, double center_y, double side) 
 
 // 下半部分的最上一层
 void draw_RouteTable_down1(double center_x, double center_y, double side) {
-
+	
 	// 这里的center是这个表盘部件的中心
 	double single = side / 67;
-
+	
 	setfillcolor(EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
 	setcolor(EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
 	ege_point points1[14] = {
@@ -679,7 +679,7 @@ void draw_RouteTable_down1(double center_x, double center_y, double side) {
 	};
 	ege_fillpoly(14, points1);
 	ege_drawpoly(14, points1);
-
+	
 	// 这是对这块部分的四周的圆滑处理
 	ege_fillellipse(center_x - single * 38.4, center_y - single * 19.4, single * 7.4, single * 7.4);
 	ege_fillellipse(center_x - single * 38.2, center_y + single * 12, single * 7, single * 7);
@@ -694,7 +694,7 @@ void draw_RouteTable_down1(double center_x, double center_y, double side) {
 		center_x - single * 7,center_y + single * 0.5//9点
 	};
 	ege_bezier(4, points2);
-
+	
 	// 下面的坐标的坐标系是以右为x的正半轴，下为y的正半轴
 	draw_RouteTable_down1_button(center_x - single * 31, center_y - single * 13.5, single * 70);//(1,1)
 	draw_RouteTable_down1_button(center_x - single * 31, center_y - single * 4.9, single * 70);//(1,2)
@@ -738,7 +738,7 @@ void draw_RouteTable_down1(double center_x, double center_y, double side) {
 	ege_fillrect(center_x + single * 28, center_y - single * 9, single * 6, single);
 	setfillcolor(BLACK);
 	ege_fillellipse(center_x + single * 31, center_y - single * 16, single * 4, single * 4);
-
+	
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	setfont(single * 3, 0, "黑体");
@@ -796,22 +796,22 @@ void draw_RouteTable_down1(double center_x, double center_y, double side) {
 	ege_drawtext("B", center_x + single * 25, center_y - single * 17);
 	ege_drawtext("R", center_x + single * 25, center_y - single * 15);
 	ege_drawtext("T", center_x + single * 25, center_y - single * 13);
-
-
-
+	
+	
+	
 }
 
 // 下半部分的最上一层的按钮
 void draw_RouteTable_down1_button(double center_x, double center_y, double side) {
-
+	
 	double single = side / 67;
 	double length = single * 10;
 	double width = single * 7;
-
+	
 	mousepos(&FMC_mouse_x, &FMC_mouse_y);
 	FMC_mouse_real_x = FMC_mouse_x;
 	FMC_mouse_real_y = FMC_mouse_y;
-
+	
 	if (FMC_mouse_real_x >= center_x - length / 2 && FMC_mouse_real_x <= center_x + length / 2 && FMC_mouse_real_y >= center_y - width / 2 && FMC_mouse_real_y <= center_y + width / 2)
 	{
 		if (GetAsyncKeyState(0x02) & 0x0001)
@@ -834,30 +834,30 @@ void draw_RouteTable_down1_button(double center_x, double center_y, double side)
 			}
 		}
 	}
-
-
+	
+	
 	if (FMC_mouse_real_x >= center_x - length / 2 && FMC_mouse_real_x <= center_x + length / 2 && FMC_mouse_real_y >= center_y - width / 2 && FMC_mouse_real_y <= center_y + width / 2)
 	{
 		setcolor(WHITE);
 		setlinewidth(1.5);
 		ege_rectangle(center_x - length / 2 - side * 0.005, center_y - width / 2 - side * 0.005, length + side * 0.01, width + side * 0.01);
 	}
-
+	
 	setfillcolor(BLACK);
 	ege_fillrect(center_x - length / 2, center_y - width / 2, length, width);
 }
 
 // 下半部分的最下一层
 void draw_RouteTable_down2(double center_x, double center_y, double side) {
-
+	
 	double single = side / 67;
-
+	
 	setfillcolor(EGEARGB(0XFF, 0X15, 0X1A, 0X1D));
 	ege_fillrect(center_x - single * 46, center_y + single * 28, single * 92, single * 10);
-
+	
 	setfillcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
 	setcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
-
+	
 	ege_point points1[25] = {//40,38.5
 		center_x - single * 37, center_y - single * 38.5,//1
 		center_x - single * 40,center_y - single * 35.5,//2
@@ -871,7 +871,7 @@ void draw_RouteTable_down2(double center_x, double center_y, double side) {
 		center_x - single * 40,center_y + single * 28.5,//10
 		center_x - single * 40,center_y + single * 36.5,//11
 		center_x - single * 38,center_y + single * 38.5,//12
-
+		
 		center_x + single * 38,center_y + single * 38.5,//13
 		center_x + single * 40,center_y + single * 36.5,//14
 		center_x + single * 40,center_y + single * 28.5,//15
@@ -884,12 +884,12 @@ void draw_RouteTable_down2(double center_x, double center_y, double side) {
 		center_x + single * 40,center_y - single * 17.5,//22
 		center_x + single * 40,center_y - single * 35.5,//23
 		center_x + single * 37, center_y - single * 38.5,//24
-
+		
 		center_x - single * 37, center_y - single * 38.5//1
 	};
 	ege_fillpoly(25, points1);
 	ege_drawpoly(25, points1);
-
+	
 	// 这是对这块部分的四周的圆滑处理
 	ege_fillellipse(center_x - single * 40, center_y - single * 38.5, single * 5.2, single * 5.2);//左上角圆
 	ege_fillellipse(center_x + single * 35, center_y - single * 38.5, single * 5, single * 5);//左上角圆
@@ -914,7 +914,7 @@ void draw_RouteTable_down2(double center_x, double center_y, double side) {
 		center_x + single * 43,center_y - single * 14//5
 	};
 	ege_bezier(4, points3);
-
+	
 	draw_RouteTable_down2_circle(center_x - single * 33.7, center_y + single * 5, single * 3.6);//(1,1)
 	draw_RouteTable_down2_circle(center_x - single * 33.7, center_y + single * 14, single * 3.6);//(1,2)
 	draw_RouteTable_down2_circle(center_x - single * 33.7, center_y + single * 23, single * 3.6);//(1,3)
@@ -927,7 +927,7 @@ void draw_RouteTable_down2(double center_x, double center_y, double side) {
 	draw_RouteTable_down2_circle(center_x - single * 15.5, center_y + single * 14, single * 3.6);//(3,2)
 	draw_RouteTable_down2_circle(center_x - single * 15.5, center_y + single * 23, single * 3.6);//(3,3)
 	draw_RouteTable_down2_circle(center_x - single * 15.5, center_y + single * 32, single * 3.6);//(3,4)
-
+	
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	setfont(single * 5, 0, "黑体");
@@ -965,7 +965,7 @@ void draw_RouteTable_down2(double center_x, double center_y, double side) {
 	ege_drawtext("+", center_x - single * 16.3, center_y + single * 31.5);
 	ege_drawtext("/", center_x - single * 15, center_y + single * 32.4);
 	ege_drawtext("-", center_x - single * 14, center_y + single * 33.4);
-
+	
 	draw_RouteTable_down2_square(center_x - single * 4.8, center_y - single * 13, single * 7);//(1,1)
 	draw_RouteTable_down2_square(center_x - single * 4.8, center_y - single * 4.1, single * 7);//(1,2)
 	draw_RouteTable_down2_square(center_x - single * 4.8, center_y + single * 4.7, single * 7);//(1,3)
@@ -996,7 +996,7 @@ void draw_RouteTable_down2(double center_x, double center_y, double side) {
 	draw_RouteTable_down2_square(center_x + single * 34.4, center_y + single * 14, single * 7);//(5,4)
 	draw_RouteTable_down2_square(center_x + single * 34.4, center_y + single * 23, single * 7);//(5,5)
 	draw_RouteTable_down2_square(center_x + single * 34.4, center_y + single * 32, single * 7);//(5,6)
-
+	
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
@@ -1074,7 +1074,7 @@ void draw_RouteTable_down2(double center_x, double center_y, double side) {
 	draw_RouteTable_down2_square_poly(center_x + single * 24.8, center_y + single * 4.7, single * 2.5);
 	draw_RouteTable_down2_square_poly(center_x + single * 24.8, center_y + single * 14, single * 2.5);
 	draw_RouteTable_down2_square_poly(center_x + single * 34.4, center_y - single * 13, single * 2.5);
-
+	
 	setfillcolor(EGEARGB(0xff, 25, 22, 12));
 	ege_fillellipse(center_x - single * 42.5, center_y - single * 13, single * 3, single * 3);
 	ege_fillellipse(center_x + single * 40, center_y - single * 13, single * 3, single * 3);
@@ -1083,28 +1083,28 @@ void draw_RouteTable_down2(double center_x, double center_y, double side) {
 	ege_fillellipse(center_x + single * 40, center_y + single * 19, single * 3, single * 3);
 	ege_fillrect(center_x - single * 42.2, center_y - single * 8, single * 2.5, single * 24);
 	ege_fillrect(center_x + single * 40, center_y - single * 8, single * 2.5, single * 24);
-
+	
 	setcolor(EGEARGB(50, 177, 177, 179));
 	setfont(single * 2.5, 0, "黑体");
 	ege_drawtext("D", center_x - single * 41, center_y - single * 6);
 	ege_drawtext("S", center_x - single * 41, center_y - single * 3.5);
 	ege_drawtext("P", center_x - single * 41, center_y - single * 1);
 	ege_drawtext("Y", center_x - single * 41, center_y + single * 1.5);
-
+	
 	ege_drawtext("F", center_x - single * 41, center_y + single * 6);
 	ege_drawtext("A", center_x - single * 41, center_y + single * 8.5);
 	ege_drawtext("I", center_x - single * 41, center_y + single * 11);
 	ege_drawtext("L", center_x - single * 41, center_y + single * 13.5);
-
+	
 	ege_drawtext("M", center_x + single * 41.4, center_y - single * 5);
 	ege_drawtext("S", center_x + single * 41.4, center_y - single * 2.5);
 	ege_drawtext("G", center_x + single * 41.4, center_y);
-
+	
 	ege_drawtext("O", center_x + single * 41.4, center_y + single * 5);
 	ege_drawtext("F", center_x + single * 41.4, center_y + single * 7.5);
 	ege_drawtext("S", center_x + single * 41.4, center_y + single * 10);
 	ege_drawtext("T", center_x + single * 41.4, center_y + single * 12.5);
-
+	
 	setfillcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
 	double left_x = center_x - single * 46.5, left_y = center_y - single * 31;
 	ege_point points4[7] = {
@@ -1117,7 +1117,7 @@ void draw_RouteTable_down2(double center_x, double center_y, double side) {
 		left_x,left_y
 	};
 	ege_fillpoly(7, points4);
-
+	
 	double right_x = center_x + single * 46.5, right_y = center_y - single * 31;
 	ege_point points5[7] = {
 		right_x, right_y,//1
@@ -1129,14 +1129,14 @@ void draw_RouteTable_down2(double center_x, double center_y, double side) {
 		right_x, right_y
 	};
 	ege_fillpoly(7, points5);
-
+	
 	draw_RouteTable_bigScrew2(center_x - single * 43.4, center_y - single * 34, single * 2.5, 90);
 	draw_RouteTable_bigScrew2(center_x + single * 43.4, center_y - single * 34, single * 2.5, 90);
-
+	
 	setfillcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
 	ege_fillrect(center_x - single * 46, center_y - single * 26, single * 1.6, single * 48);
 	ege_fillrect(center_x + single * 44.5, center_y - single * 26, single * 1.6, single * 48);
-
+	
 	draw_RouteTable_bigScrew2(center_x - single * 43.8, center_y + single * 28, single * 3, 90);
 	draw_RouteTable_bigScrew2(center_x + single * 43.8, center_y + single * 28, single * 3, 90);
 }
@@ -1159,11 +1159,11 @@ void draw_RouteTable_down2_circle(double center_x, double center_y, double side)
 void draw_RouteTable_down2_square(double center_x, double center_y, double side) {
 	setfillcolor(BLACK);
 	ege_fillrect(center_x - side / 2, center_y - side / 2, side, side);
-
+	
 	mousepos(&FMC_mouse_x, &FMC_mouse_y);
 	FMC_mouse_real_x = FMC_mouse_x;
 	FMC_mouse_real_y = FMC_mouse_y;
-
+	
 	if (FMC_mouse_real_x >= center_x - side / 2 && FMC_mouse_real_x <= center_x + side / 2 && FMC_mouse_real_y >= center_y - side / 2 && FMC_mouse_real_y <= center_y + side / 2)
 	{
 		setcolor(WHITE);
@@ -1292,7 +1292,7 @@ void draw_FMC(double center_x, double center_y, double side) {
 		{center_x - single * 15.5, center_y + single * 23, "9" },//(3,3)
 		{center_x - single * 15.5, center_y + single * 32, "+" },//(3,4)
 	};
-
+	
 	//side是宽，中心点的坐标是对于下半部分而言的
 	if (FMC_mode == 0) 
 	{
@@ -1333,7 +1333,7 @@ void draw_FMC(double center_x, double center_y, double side) {
 	draw_RouteTable_up(center_x, center_y - side * 1.055, side);
 	
 	draw_RouteTable_down(center_x, center_y, side);
-
+	
 	FMC_Scanner(FMC_letterbutton, side);
 	
 	for (int i = 0; i < 12; i++) {
@@ -1394,8 +1394,9 @@ void draw_FMC(double center_x, double center_y, double side) {
 	for (int i = 0; i < 12; i++) {
 		strcpy(FMC_lastroutepoints[i], FMC_routepoints[i]);
 	}
-
+	
 	
 	
 }
+
 

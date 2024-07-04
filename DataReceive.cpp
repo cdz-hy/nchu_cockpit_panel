@@ -2,19 +2,30 @@
 #include <graphics.h>
 #include <windows.h>
 #include <math.h>
+#include <mutex>
 
 #include "G_variable.h"
 #include "xplaneConnect.h"
 
 double getDis(double latitude1, double longitude1, double latitude2, double longitude2);
 
+double SteeringWeelLevelTmp = 0;
+double SteeringWeelVerticalTmp = 0 ;
+double SteeringWeelFootPedalsTmp = 0;
+
+std::mutex dataMtx;
+
 void data_receive(){
+
+	dataMtx.lock();
 	
 	XPCSocket sock = aopenUDP("", UDP_port, UDP_port);
 	
+	dataMtx.unlock();
+	
 //	XPCSocket sock2 = aopenUDP(IP_address, 49007, 49007);
 	
-	XPCSocket sock2 = openUDP("10.83.9.99");
+//	XPCSocket sock2 = openUDP("10.86.80.226");
 	
 	for(;is_run();api_sleep(16)){
 		
@@ -195,8 +206,96 @@ void data_receive(){
 			
 			//回传数据
 			
-			const int rows2 = 1;
-			float dataBack[rows2][9] = {0, };
+			//回传方向舵控制信息
+			
+//			if(choiceSteeringWeel){
+//				
+////				if(SteeringWeelLevelTmp != SteeringWeelLevel){
+//				
+//				{
+//					const char* dref = "sim/joystick/FC_ptch";
+//					float gear = SteeringWeelVertical;
+//					int size = 1;
+//					sendDREF(sock2, dref, &gear, 1);
+//				}
+//					
+////				}
+//				
+////				if(SteeringWeelVerticalTmp != SteeringWeelVertical){
+//				
+//				
+//				{
+//					const char* dref = "sim/joystick/FC_roll";
+//					float gear = SteeringWeelLevel;
+//					int size = 1;
+//					sendDREF(sock2, dref, &gear, 1); 
+//					
+//					
+//					dref = "sim/joystick/FC_hdng";
+//					gear = 0.5 * SteeringWeelFootPedals;
+//					sendDREF(sock2, dref, &gear, 1); 
+//				}
+//					
+////				}
+//				
+////				if(SteeringWeelFootPedalsTmp != SteeringWeelFootPedals){
+////					
+////				}
+//				
+//				SteeringWeelLevelTmp = SteeringWeelLevel;
+//				SteeringWeelVerticalTmp = SteeringWeelVertical ;
+//				SteeringWeelFootPedalsTmp = SteeringWeelFootPedals;
+//				
+////				const char* dref = "sim/joystick/FC_ptch"; // Gear handle data reference
+////				float gear = 1; // Stow gear
+////				int size = 1;
+////				sendDREF(sock2, dref, &gear, 1); // Set gear to stow
+//////				getDREF(sock2, dref, &gear, &size);
+////				printf("%.3f",gear);
+//				
+//				//===========================//
+////				
+////				const int rowTmp = 1;
+////				float dataBack[rowTmp][9] = {0,};
+//////				dataBack[0][0] = 8;
+//////				dataBack[0][1] = (float)SteeringWeelLevel;
+//////				dataBack[0][2] = (float)SteeringWeelVertical;
+//////				dataBack[0][3] = (float)SteeringWeelFootPedals;
+//////				dataBack[1][0] = 20;
+//////				for(int i = 1;i <9;i ++ ){
+//////					dataBack[1][i] = data[7][i];
+//////				}
+//////				dataBack[1][6] = 8000.0F;
+////				
+////				for (int i = 0; i < 1; i++)
+////				{
+////					for (int j = 0; j < 9; j++)
+////					{
+////						data[i][j] = -998;
+////					}
+////				}
+////				
+////				
+////				dataBack[0][0] = 8;
+////				dataBack[0][1] = 0.5;
+////				dataBack[0][2] = 0.5;
+////				dataBack[0][3] = 0.1;
+//////				printf("%.2f\n%.2f\n%.2f",dataBack[0][1],dataBack[0][2],dataBack[0][3]);
+//////				dataBack[0][4] = -998;
+//////				dataBack[0][5] = -998;
+//////				dataBack[0][6] = -998;
+//////				dataBack[0][7] = -998;
+//////				dataBack[0][8] = -998;
+////				sendDATA(sock2, dataBack, rowTmp);
+////				
+////				
+//				//=========================//
+//			}
+			
+			
+			
+//			const int rows2 = 1;
+//			float dataBack[rows2][9] = {0, };
 			
 //			if(CO_2_change){
 //				dataBack[0][0] = 118;
@@ -210,9 +309,21 @@ void data_receive(){
 ////				sendDATA(sock2, dataBack, rows2);
 //				
 //			}
-			dataBack[0][0] = 118;
-			dataBack[0][1] = 200;
-			sendDATA(sock2, dataBack, rows2);
+//			dataBack[0][0] = 118;
+//			dataBack[0][1] = 200;
+//			dataBack[0][2] = 299;
+//			dataBack[0][3] = 250;
+//			dataBack[0][4] = 20000;
+//			dataBack[0][5] = 0;
+//			dataBack[0][6] = 0;
+//			dataBack[0][7] = 0.3;
+//			sendDATA(sock2, dataBack, rows2);
+			
+			
+//			if(fclock() < 0.1){
+//				float dataBack[rows2][9] = {20,88.88F,11.9F,151.79F,0.281F,1.00F,190900.79F,2800.50F,116.00F};
+//				sendDATA(sock2, dataBack, rows2);
+//			}
 			
 //			const char* dref = "sim/cockpit/autopilot/current_altitude";
 //			if(ALTITUDE_change){
@@ -243,7 +354,7 @@ void data_receive(){
 		
 	}
 	
-	closeUDP(sock2);	
+//	closeUDP(sock2);	
 	closeUDP(sock);
 
 }

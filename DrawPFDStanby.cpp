@@ -13,7 +13,7 @@ void draw_standy_airSpeed(double center_x, double center_y, double side);
 //void draw_PFD_standby_else();
 void draw_smallpfd_frame(double center_x, double center_y, double side);
 void draw_PFD_standby_Compass(double center_x, double center_y, double side);
-void drwa_ND_atmosphericPressure(double center_x,double center_y,double side);
+void drwa_ND_atmosphericPressure(double center_x, double center_y, double side);
 
 //引用全局变量
 extern double pitchAngle;
@@ -29,13 +29,13 @@ extern double INGH_data;
 //935 655 575
 
 //注意，这里的side并不是真正的边长，而只是PFD的高，PFD并非严格正方形
-void draw_PFD_standby(double PFD_x, double PFD_y, double PFD_side){
+void draw_PFD_standby(double PFD_x, double PFD_y, double PFD_side) {
 	
 	//绘制备用PFD姿态仪
-	draw_PFD_standby_AI(PFD_x+PFD_side/30, PFD_y+PFD_side/30, PFD_side*1.1);
-//	
-//	//绘制备用PFD罗盘
-	draw_PFD_standby_Compass(PFD_x+PFD_side/40, PFD_y + 2.22 * PFD_side, PFD_side * 3.4);
+	draw_PFD_standby_AI(PFD_x + PFD_side / 30, PFD_y + PFD_side / 30, PFD_side * 1.1);
+	//	
+	//	//绘制备用PFD罗盘
+	draw_PFD_standby_Compass(PFD_x + PFD_side / 40, PFD_y + 2.22 * PFD_side, PFD_side * 3.4);
 	
 	//绘制备用PFD高度
 	draw_standy_alt(PFD_x + 0.94 * PFD_side, PFD_y + 0.02 * PFD_side, PFD_side / 1.7);
@@ -45,13 +45,13 @@ void draw_PFD_standby(double PFD_x, double PFD_y, double PFD_side){
 	
 	//灯光遮盖效果
 	setfillcolor(EGEARGB(0x23, 0x00, 0x00, 0x00));
-	ege_fillrect(PFD_x - PFD_side * 1.2, PFD_y - PFD_side * 1.1,2.4 * PFD_side ,2.3 * PFD_side);
+	ege_fillrect(PFD_x - PFD_side * 1.2, PFD_y - PFD_side * 1.1, 2.4 * PFD_side, 2.3 * PFD_side);
 	
 	//绘制PFD边框
-	draw_smallpfd_frame(PFD_x + PFD_side/20, PFD_y +PFD_side/20, PFD_side*2.3);
+	draw_smallpfd_frame(PFD_x + PFD_side / 20, PFD_y + PFD_side / 20, PFD_side * 2.3);
 	
 	//绘制pfd右上角的气压指示
-	drwa_ND_atmosphericPressure(PFD_x,PFD_y,PFD_side);
+	drwa_ND_atmosphericPressure(PFD_x, PFD_y, PFD_side);
 	
 }
 
@@ -66,7 +66,7 @@ void draw_PFD_standby(double PFD_x, double PFD_y, double PFD_side){
 //10度160; 1度16;
 //1度16/655（即0.02442745 * AIhigh（高））（也即0.0488549 * AIside（一半高）（但是稍大，所以下面都按0.48处理））
 
-void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side){
+void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side) {
 	
 	double AI_x = PFD_x;
 	double AI_y = PFD_y;
@@ -76,46 +76,46 @@ void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side){
 	double AI_r = sqrt(2) * AI_side;
 	
 	//通过坐标系变换和遮盖实现圆角矩形的指示
-	if(pitchAngle >= 0){
+	if (pitchAngle >= 0) {
 		
 		//画天空
-		setfillcolor(EGEARGB(0xff,0x03,0xb2,0xe3));
-		ege_fillellipse(AI_x - AI_r,AI_y - AI_r,2 * AI_r,2 * AI_r);
+		setfillcolor(EGEARGB(0xff, 0x03, 0xb2, 0xe3));
+		ege_fillellipse(AI_x - AI_r, AI_y - AI_r, 2 * AI_r, 2 * AI_r);
 		
 		//画地面
 		ege_transform_matrix m;
 		ege_get_transform(&m);
-		ege_transform_translate(AI_x,AI_y);
+		ege_transform_translate(AI_x, AI_y);
 		ege_transform_rotate(360 * rollAngle / 2 / PI);
-		setfillcolor(EGEARGB(0xff,0xa3,0x6e,0x3e));
+		setfillcolor(EGEARGB(0xff, 0xa3, 0x6e, 0x3e));
 		setcolor(WHITE);
 		setlinewidth(0.012 * AI_r);
-		if(2 * AI_side - 2 * (360 * pitchAngle / 2 / PI * 0.02 * AI_r) > 0){
-			ege_fillpie(-AI_r + 0.38 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side) ,-AI_r + 2 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side),2 * AI_r - 0.76 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side),2 * AI_r - 2 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side),0,180);
+		if (2 * AI_side - 2 * (360 * pitchAngle / 2 / PI * 0.02 * AI_r) > 0) {
+			ege_fillpie(-AI_r + 0.38 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), -AI_r + 2 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), 2 * AI_r - 0.76 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), 2 * AI_r - 2 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), 0, 180);
 			//天地中间的白线
-			ege_pie(-AI_r + 0.38 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), -AI_r + 2 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side),2 * AI_r - 0.76 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side),2 * AI_r - 2 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side),0,180);
+			ege_pie(-AI_r + 0.38 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), -AI_r + 2 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), 2 * AI_r - 0.76 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), 2 * AI_r - 2 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), 0, 180);
 		}
 		ege_set_transform(&m);
 		
 	}
-	else{
+	else {
 		
 		//画地面
-		setfillcolor(EGEARGB(0xff,0xa3,0x6e,0x3e));
-		ege_fillellipse(AI_x - AI_r,AI_y - AI_r,2 * AI_r,2 * AI_r);
+		setfillcolor(EGEARGB(0xff, 0xa3, 0x6e, 0x3e));
+		ege_fillellipse(AI_x - AI_r, AI_y - AI_r, 2 * AI_r, 2 * AI_r);
 		
 		//画天空
 		ege_transform_matrix m;
 		ege_get_transform(&m);
-		ege_transform_translate(AI_x,AI_y);
+		ege_transform_translate(AI_x, AI_y);
 		ege_transform_rotate(360 * rollAngle / 2 / PI);
-		setfillcolor(EGEARGB(0xff,0x03,0xb2,0xe3));
+		setfillcolor(EGEARGB(0xff, 0x03, 0xb2, 0xe3));
 		setcolor(WHITE);
 		setlinewidth(0.012 * AI_r);
-		if(2 * AI_side - 2 * (360 * pitchAngle / 2 / PI * 0.02 * AI_r) > 0){
-			ege_fillpie(-AI_r - 0.38 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), -AI_r,2 * AI_r + 0.76 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side),2 * AI_r + 2 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side),-180,180);
+		if (2 * AI_side - 2 * (360 * pitchAngle / 2 / PI * 0.02 * AI_r) > 0) {
+			ege_fillpie(-AI_r - 0.38 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), -AI_r, 2 * AI_r + 0.76 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), 2 * AI_r + 2 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), -180, 180);
 			//天地中间的白线
-			ege_pie(-AI_r - 0.38 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), -AI_r,2 * AI_r + 0.76 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side),2 * AI_r + 2 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side),-180,180);
+			ege_pie(-AI_r - 0.38 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), -AI_r, 2 * AI_r + 0.76 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), 2 * AI_r + 2 * (360 * pitchAngle / 2 / PI * 0.048 * AI_side), -180, 180);
 		}
 		ege_set_transform(&m);
 		
@@ -139,7 +139,7 @@ void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side){
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
 	LOGFONTW AI_font;
-	setfont(0.20 * AI_side,0.08 * AI_side,"黑体");
+	setfont(0.20 * AI_side, 0.08 * AI_side, "黑体");
 	getfont(&AI_font);
 	AI_font.lfEscapement = -10 * 360 * rollAngle / 2 / PI;
 	AI_font.lfWeight = 2.2 * AI_side;
@@ -147,63 +147,63 @@ void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side){
 	double AI_gear_x;
 	double AI_gear_y;
 	
-	for(double i= -90;i <= 90;i += 2.5){
-		if(i == 0){
+	for (double i = -90; i <= 90; i += 2.5) {
+		if (i == 0) {
 			
 		}
-		else if(fabs(fmod(i,10)) <= 0.001){
-//			//旋转前原坐标
-//			AI_line_lx = AI_x - 0.43 * AI_side;
-//			AI_line_ly = AI_y - 0.048 * i * AI_side;
-//			AI_line_rx = AI_x + 0.43 * AI_side;
-//			AI_line_ry = AI_y - 0.048 * i * AI_side;
+		else if (fabs(fmod(i, 10)) <= 0.001) {
+			//			//旋转前原坐标
+			//			AI_line_lx = AI_x - 0.43 * AI_side;
+			//			AI_line_ly = AI_y - 0.048 * i * AI_side;
+			//			AI_line_rx = AI_x + 0.43 * AI_side;
+			//			AI_line_ry = AI_y - 0.048 * i * AI_side;
 			
-			AI_line_lx = (AI_x - (AI_x - 0.35 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side) - AI_y) * sin(rollAngle) + AI_x;
-			AI_line_ly = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x - 0.35 * AI_side)) * sin(rollAngle) + AI_y;
-			AI_line_rx = (AI_x - (AI_x + 0.35 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side) - AI_y) * sin(rollAngle) + AI_x;
-			AI_line_ry = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x + 0.35 * AI_side)) * sin(rollAngle) + AI_y;
+			AI_line_lx = (AI_x - (AI_x - 0.35 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side) - AI_y) * sin(rollAngle) + AI_x;
+			AI_line_ly = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x - 0.35 * AI_side)) * sin(rollAngle) + AI_y;
+			AI_line_rx = (AI_x - (AI_x + 0.35 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side) - AI_y) * sin(rollAngle) + AI_x;
+			AI_line_ry = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x + 0.35 * AI_side)) * sin(rollAngle) + AI_y;
 			
-			if((AI_x - AI_line_lx) * (AI_x - AI_line_lx) + (AI_y - AI_line_ly) * (AI_y - AI_line_ly) <= 1.5 * AI_side * 1.5 * AI_side)
+			if ((AI_x - AI_line_lx) * (AI_x - AI_line_lx) + (AI_y - AI_line_ly) * (AI_y - AI_line_ly) <= 1.5 * AI_side * 1.5 * AI_side)
 				ege_line(AI_line_lx, AI_line_ly, AI_line_rx, AI_line_ry);
 			
 			
 			//刻度示数
-			AI_gear_x = (AI_x - (AI_x + 0.495 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side + 0.015 * AI_side) - AI_y) * sin(rollAngle) + AI_x;
-			AI_gear_y = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side + 0.015 * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x + 0.495 * AI_side)) * sin(rollAngle) + AI_y;
-			if(sqrt((AI_gear_x - AI_x) * (AI_gear_x - AI_x) + (AI_gear_y - AI_y) * (AI_gear_y - AI_y)) <= 1.5 * AI_side){
+			AI_gear_x = (AI_x - (AI_x + 0.495 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side + 0.015 * AI_side) - AI_y) * sin(rollAngle) + AI_x;
+			AI_gear_y = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side + 0.015 * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x + 0.495 * AI_side)) * sin(rollAngle) + AI_y;
+			if (sqrt((AI_gear_x - AI_x) * (AI_gear_x - AI_x) + (AI_gear_y - AI_y) * (AI_gear_y - AI_y)) <= 1.5 * AI_side) {
 				char tmp[3];
-				sprintf(tmp,"%d",abs((int)i));
+				sprintf(tmp, "%d", abs((int)i));
 				ege_drawtext(tmp, AI_gear_x, AI_gear_y);
 			}
 			
 			
 		}
-		else if(fabs(fmod(i,5)) <= 0.001){
-//			AI_line_lx = AI_x - 0.21 * AI_side;
-//			AI_line_ly = AI_y - 0.048 * i * AI_side;
-//			AI_line_rx = AI_x + 0.21 * AI_side;
-//			AI_line_ry = AI_y - 0.048 * i * AI_side;
+		else if (fabs(fmod(i, 5)) <= 0.001) {
+			//			AI_line_lx = AI_x - 0.21 * AI_side;
+			//			AI_line_ly = AI_y - 0.048 * i * AI_side;
+			//			AI_line_rx = AI_x + 0.21 * AI_side;
+			//			AI_line_ry = AI_y - 0.048 * i * AI_side;
 			
-			AI_line_lx = (AI_x - (AI_x - 0.21 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side) - AI_y) * sin(rollAngle) + AI_x;
-			AI_line_ly = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x - 0.21 * AI_side)) * sin(rollAngle) + AI_y;
-			AI_line_rx = (AI_x - (AI_x + 0.21 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side) - AI_y) * sin(rollAngle) + AI_x;
-			AI_line_ry = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x + 0.21 * AI_side)) * sin(rollAngle) + AI_y;
+			AI_line_lx = (AI_x - (AI_x - 0.21 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side) - AI_y) * sin(rollAngle) + AI_x;
+			AI_line_ly = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x - 0.21 * AI_side)) * sin(rollAngle) + AI_y;
+			AI_line_rx = (AI_x - (AI_x + 0.21 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side) - AI_y) * sin(rollAngle) + AI_x;
+			AI_line_ry = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x + 0.21 * AI_side)) * sin(rollAngle) + AI_y;
 			
-			if((AI_x - AI_line_lx) * (AI_x - AI_line_lx) + (AI_y - AI_line_ly) * (AI_y - AI_line_ly) <= 1.5 * AI_side * 1.5 * AI_side)
+			if ((AI_x - AI_line_lx) * (AI_x - AI_line_lx) + (AI_y - AI_line_ly) * (AI_y - AI_line_ly) <= 1.5 * AI_side * 1.5 * AI_side)
 				ege_line(AI_line_lx, AI_line_ly, AI_line_rx, AI_line_ry);
 		}
-		else if(fabs(fmod(i,2.5)) <= 0.001){
-//			AI_line_lx = AI_x - 0.12 * AI_side;
-//			AI_line_ly = AI_y + (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side;
-//			AI_line_rx = AI_x + 0.12 * AI_side;
-//			AI_line_ry = AI_y + (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side;
+		else if (fabs(fmod(i, 2.5)) <= 0.001) {
+			//			AI_line_lx = AI_x - 0.12 * AI_side;
+			//			AI_line_ly = AI_y + (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side;
+			//			AI_line_rx = AI_x + 0.12 * AI_side;
+			//			AI_line_ry = AI_y + (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side;
 			
-			AI_line_lx = (AI_x - (AI_x - 0.12 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side) - AI_y) * sin(rollAngle) + AI_x;
-			AI_line_ly = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x - 0.12 * AI_side)) * sin(rollAngle) + AI_y;
-			AI_line_rx = (AI_x - (AI_x + 0.12 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side) - AI_y) * sin(rollAngle) + AI_x;
-			AI_line_ry = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048  * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x + 0.12 * AI_side)) * sin(rollAngle) + AI_y;
+			AI_line_lx = (AI_x - (AI_x - 0.12 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side) - AI_y) * sin(rollAngle) + AI_x;
+			AI_line_ly = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x - 0.12 * AI_side)) * sin(rollAngle) + AI_y;
+			AI_line_rx = (AI_x - (AI_x + 0.12 * AI_side)) * cos(rollAngle) - ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side) - AI_y) * sin(rollAngle) + AI_x;
+			AI_line_ry = ((AI_y - (i - (360 * pitchAngle / 2 / PI)) * 0.048 * AI_side) - AI_y) * cos(rollAngle) + (AI_x - (AI_x + 0.12 * AI_side)) * sin(rollAngle) + AI_y;
 			
-			if((AI_x - AI_line_lx) * (AI_x - AI_line_lx) + (AI_y - AI_line_ly) * (AI_y - AI_line_ly) <= 1.5 * AI_side * 1.5 * AI_side)
+			if ((AI_x - AI_line_lx) * (AI_x - AI_line_lx) + (AI_y - AI_line_ly) * (AI_y - AI_line_ly) <= 1.5 * AI_side * 1.5 * AI_side)
 				ege_line(AI_line_lx, AI_line_ly, AI_line_rx, AI_line_ry);
 			
 			
@@ -215,10 +215,10 @@ void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side){
 	
 	//中间方框
 	setfillcolor(BLACK);
-	ege_fillrect(AI_x - 0.03 * AI_side, AI_y - 0.04 * AI_side , 0.06 * AI_side, 0.08 * AI_side);
+	ege_fillrect(AI_x - 0.03 * AI_side, AI_y - 0.04 * AI_side, 0.06 * AI_side, 0.08 * AI_side);
 	setcolor(WHITE);
 	setlinewidth(0.011 * AI_side);
-	ege_rectangle(AI_x - 0.03 * AI_side, AI_y - 0.04 * AI_side , 0.06 * AI_side, 0.08 * AI_side);
+	ege_rectangle(AI_x - 0.03 * AI_side, AI_y - 0.04 * AI_side, 0.06 * AI_side, 0.08 * AI_side);
 	
 	
 	//右侧
@@ -260,15 +260,15 @@ void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side){
 	
 	
 	//绘制上方固定的蓝色遮挡
-	setcolor(EGEARGB(0xff,0x03,0xb2,0xe3));
+	setcolor(EGEARGB(0xff, 0x03, 0xb2, 0xe3));
 	setlinewidth(0.05 * AI_side);
 	//原本两个椭圆弧模拟的，因为边缘的角度问题用不了
 //	ege_arc(AI_x - 1.23 * AI_side, AI_y - 1 * AI_side, 2.46 * AI_side, 2.3 * AI_side, -150, 120);
 //	ege_arc(AI_x - 1.23 * AI_side, AI_y - 1.2 * AI_side, 2.46 * AI_side, 2.3 * AI_side, -150, 120);
 	//新版循环画多个细的椭圆弧
-	for(double i = 0.5;i >= 0;i -= 0.02){
+	for (double i = 0.5; i >= 0; i -= 0.02) {
 		ege_arc(AI_x - (1.05 + i) * AI_side, AI_y - (0.90 + i) * AI_side, (2.1 + 2 * i) * AI_side, (1.8 + 2 * i) * AI_side, -150, 120);
-	}	
+	}
 	
 	//蓝色遮挡上表示横滚角的刻度
 	setcolor(WHITE);
@@ -280,11 +280,11 @@ void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side){
 	double AI_pointTmp2_x = AI_x;
 	double AI_pointTmp2_y = AI_y - 1.05 * AI_side;
 	
-	for(int i = -60; i <= 60; i += 5){
-		if(i == 10 || i == -10 || i == 20 || i == -20 || i == 45 || i == -45){
-			AI_pointTmp1_x = - (AI_y - 0.92 * AI_side - AI_y) * sin(1.0 * i / 360 * 2 * PI) + AI_x;
+	for (int i = -60; i <= 60; i += 5) {
+		if (i == 10 || i == -10 || i == 20 || i == -20 || i == 45 || i == -45) {
+			AI_pointTmp1_x = -(AI_y - 0.92 * AI_side - AI_y) * sin(1.0 * i / 360 * 2 * PI) + AI_x;
 			AI_pointTmp1_y = (AI_y - 0.92 * AI_side - AI_y) * cos(1.0 * i / 360 * 2 * PI) + AI_y;
-			AI_pointTmp2_x = - (AI_y - 1 * AI_side - AI_y) * sin(1.0 * i / 360 * 2 * PI) + AI_x;
+			AI_pointTmp2_x = -(AI_y - 1 * AI_side - AI_y) * sin(1.0 * i / 360 * 2 * PI) + AI_x;
 			AI_pointTmp2_y = (AI_y - 1 * AI_side - AI_y) * cos(1.0 * i / 360 * 2 * PI) + AI_y;
 			ege_line(AI_pointTmp1_x, AI_pointTmp1_y, AI_pointTmp2_x, AI_pointTmp2_y);
 		}
@@ -292,14 +292,14 @@ void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side){
 	}
 	
 	//+-30度稍长的线
-	AI_pointTmp1_x = - (AI_y - 0.90 * AI_side - AI_y) * sin(1.0 * 30 / 360 * 2 * PI) + AI_x;
+	AI_pointTmp1_x = -(AI_y - 0.90 * AI_side - AI_y) * sin(1.0 * 30 / 360 * 2 * PI) + AI_x;
 	AI_pointTmp1_y = (AI_y - 0.90 * AI_side - AI_y) * cos(1.0 * 30 / 360 * 2 * PI) + AI_y;
-	AI_pointTmp2_x = - (AI_y - 1.04 * AI_side - AI_y) * sin(1.0 * 30 / 360 * 2 * PI) + AI_x;
+	AI_pointTmp2_x = -(AI_y - 1.04 * AI_side - AI_y) * sin(1.0 * 30 / 360 * 2 * PI) + AI_x;
 	AI_pointTmp2_y = (AI_y - 1.04 * AI_side - AI_y) * cos(1.0 * 30 / 360 * 2 * PI) + AI_y;
 	ege_line(AI_pointTmp1_x, AI_pointTmp1_y, AI_pointTmp2_x, AI_pointTmp2_y);
-	AI_pointTmp1_x = - (AI_y - 0.90 * AI_side - AI_y) * sin(1.0 * -30 / 360 * 2 * PI) + AI_x;
+	AI_pointTmp1_x = -(AI_y - 0.90 * AI_side - AI_y) * sin(1.0 * -30 / 360 * 2 * PI) + AI_x;
 	AI_pointTmp1_y = (AI_y - 0.90 * AI_side - AI_y) * cos(1.0 * -30 / 360 * 2 * PI) + AI_y;
-	AI_pointTmp2_x = - (AI_y - 1.04 * AI_side - AI_y) * sin(1.0 * -30 / 360 * 2 * PI) + AI_x;
+	AI_pointTmp2_x = -(AI_y - 1.04 * AI_side - AI_y) * sin(1.0 * -30 / 360 * 2 * PI) + AI_x;
 	AI_pointTmp2_y = (AI_y - 1.04 * AI_side - AI_y) * cos(1.0 * -30 / 360 * 2 * PI) + AI_y;
 	ege_line(AI_pointTmp1_x, AI_pointTmp1_y, AI_pointTmp2_x, AI_pointTmp2_y);
 	
@@ -311,20 +311,20 @@ void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side){
 		{AI_x - 0.06 * AI_side, AI_y - AI_side},
 		{AI_x + 0.06 * AI_side, AI_y - AI_side},
 	};
-	ege_fillpoly(3,AI_point1);
+	ege_fillpoly(3, AI_point1);
 	
 	
 	
 	//绘制横滚角指针
 	//三角形每个点的原坐标
-	double AI_pointTmp3_x = AI_x ;
-	double AI_pointTmp3_y = AI_y - 0.95 * AI_side ;
-	double AI_pointTmp4_x = AI_x - 0.08 * AI_side ;
-	double AI_pointTmp4_y = AI_y - 0.85 * AI_side ;
-	double AI_pointTmp5_x = AI_x + 0.08 * AI_side ;
-	double AI_pointTmp5_y = AI_y - 0.85 * AI_side ;
+	double AI_pointTmp3_x = AI_x;
+	double AI_pointTmp3_y = AI_y - 0.95 * AI_side;
+	double AI_pointTmp4_x = AI_x - 0.08 * AI_side;
+	double AI_pointTmp4_y = AI_y - 0.85 * AI_side;
+	double AI_pointTmp5_x = AI_x + 0.08 * AI_side;
+	double AI_pointTmp5_y = AI_y - 0.85 * AI_side;
 	
-	AI_pointTmp3_x = - (AI_y - 0.95 * AI_side - AI_y) * sin(rollAngle) + AI_x;
+	AI_pointTmp3_x = -(AI_y - 0.95 * AI_side - AI_y) * sin(rollAngle) + AI_x;
 	AI_pointTmp3_y = (AI_y - 0.95 * AI_side - AI_y) * cos(rollAngle) + AI_y;
 	AI_pointTmp4_x = (AI_x - 0.04 * AI_side - AI_x) * cos(rollAngle) - (AI_y - 0.88 * AI_side - AI_y) * sin(rollAngle) + AI_x;
 	AI_pointTmp4_y = (AI_y - 0.88 * AI_side - AI_y) * cos(rollAngle) + (AI_x - 0.04 * AI_side - AI_x) * sin(rollAngle) + AI_y;
@@ -344,14 +344,14 @@ void draw_PFD_standby_AI(double PFD_x, double PFD_y, double PFD_side){
 		{AI_pointTmp5_x, AI_pointTmp5_y},
 	};
 	setfillcolor(BLACK);
-	ege_fillpoly(3,AI_stb_points);
+	ege_fillpoly(3, AI_stb_points);
 	
 	//利用四个矩形遮盖为矩形(正常遮盖)
 	setfillcolor(BLACK);
 	ege_fillrect(AI_x - 1.2 * AI_r, AI_y - 1.2 * AI_r, 2.4 * AI_r, 1.2 * AI_r - AI_side);
 	ege_fillrect(AI_x - 1.2 * AI_r, AI_y + 0.92 * AI_side, 2.4 * AI_r, 1.2 * AI_r - AI_side);
-	ege_fillrect(AI_x - 1.2 * AI_r, AI_y - 1.2 * AI_r, 1.32 * AI_r - AI_side , 2.4 * AI_r);
-	ege_fillrect(AI_x + 0.88 * AI_side, AI_y - 1.2 * AI_r, 1.32 * AI_r - AI_side , 2.4 * AI_r);
+	ege_fillrect(AI_x - 1.2 * AI_r, AI_y - 1.2 * AI_r, 1.32 * AI_r - AI_side, 2.4 * AI_r);
+	ege_fillrect(AI_x + 0.88 * AI_side, AI_y - 1.2 * AI_r, 1.32 * AI_r - AI_side, 2.4 * AI_r);
 	
 	
 }
@@ -373,7 +373,7 @@ void draw_PFD_Compass_frame(double center_x, double center_y, double side)
 {
 	double r = side * 51.2 / 126;//罗盘的半径
 	
-	setlinewidth(2.5);
+	setlinewidth(r * 0.05);
 	
 	setfillcolor(EGEARGB(0xff, 0x3A, 0x3A, 0x38));
 	//ege_fillrect(center_x - r + side * 23 / 126, center_y - r - side / 126, 56 * side / 126, 10 * side / 126);
@@ -479,7 +479,7 @@ void draw_PFD_compass_text(double compass_x, double compass_y, double side)
 		//ege_fillrect(compass_x - compass_r, compass_y - compass_r * cos(33 * PI / 180), compass_r * 2, compass_r * cos(33 * PI / 180) - compass_r * cos(44 * PI / 180));//遮盖部分
 	}
 	
-	for (int i = 0; i < 360; i += 10) 
+	for (int i = 0; i < 360; i += 10)
 	{
 		if (i % 30 != 0)
 		{
@@ -567,7 +567,7 @@ void draw_black_sign1(double x, double y, double single) {
 		x - (16) * single,y - (6) * single,//1
 		x - (17) * single, y - (5) * single,//2
 		x - (17) * single, y + (5) * single,//3
-		x - (16) * single,y +(6) * single,//4
+		x - (16) * single,y + (6) * single,//4
 		x + (16) * single,y + (6) * single,//5
 		x + (17) * single, y + (5) * single,//6
 		x + (17) * single, y - (5) * single,//7
@@ -594,13 +594,13 @@ void draw_black_sign2(double x, double y, double single) {
 }
 
 void draw_smallpfd_frame(double center_x, double center_y, double side) {
-// 设置相关参数
+	// 设置相关参数
 	double single = side / 126;// side传的是黑边的长度，把除以单位一，取其单位长度，方便计算比例
 	double width = single * 130;
 	double length = single * 126;
 	
 	
-	setlinewidth(side/100);// 这里是对于表盘上部阴影的处理
+	setlinewidth(side / 100);// 这里是对于表盘上部阴影的处理
 	setcolor(EGEARGB(0Xff, 13, 15, 17));
 	ege_line(center_x - 63 * single, center_y - (63 + 21) * single,//1
 		center_x - (65 + 7 + 15) * single, center_y - (60) * single);//2
@@ -612,7 +612,7 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 	ege_enable_aa(false);// 关闭抗锯齿
 	
 	setcolor(EGEARGB(0xff, 0x1b, 0x20, 0x25));//接下来画外框1的线条
-	setlinewidth(4);
+	setlinewidth(side * 4 / 126);
 	ege_point points1[9] = {
 		center_x - 63 * single,center_y - (63 + 21) * single,//1
 		center_x - (65 + 7 + 15) * single,center_y - (60) * single,//2
@@ -624,10 +624,10 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 		center_x + 63 * single,center_y - (63 + 21) * single,//8
 		center_x - 63 * single,center_y - (63 + 21) * single//1
 	};
-	ege_drawpoly(9,points1);
+	ege_drawpoly(9, points1);
 	
 	setcolor(EGEARGB(0xff, 0x1b, 0x20, 0x25));//接下来画外框2的线条
-	setlinewidth(4);
+	setlinewidth(side * 4 / 126);
 	ege_point points2[22] = {
 		center_x - 63 * single,center_y - (63 + 5) * single,//1
 		
@@ -657,8 +657,8 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 		
 		// 加入曲线拟合点——右上角弧线点
 		center_x + (63 + 9) * single,center_y - (60) * single,
-		center_x + (63 + 6) * single,center_y - (60 +5) * single,
-		center_x +  (63+1.2) * single,center_y - (60 + 6) * single,
+		center_x + (63 + 6) * single,center_y - (60 + 5) * single,
+		center_x + (63 + 1.2) * single,center_y - (60 + 6) * single,
 		
 		center_x + 63 * single,center_y - (63 + 5) * single,//8
 		
@@ -668,18 +668,18 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 	ege_bezier(22, points2);
 	
 	setfillcolor(EGEARGB(0XFF, 0X1A, 0X1F, 0X23));
-	floodfill(center_x - 63 * single, center_y - (63 + 21 - 10) * single,EGEARGB(0xff, 0x1b, 0x20, 0x25));//1定位点向下的点
+	floodfill(center_x - 63 * single, center_y - (63 + 21 - 10) * single, EGEARGB(0xff, 0x1b, 0x20, 0x25));//1定位点向下的点
 	floodfill(center_x - (65 + 7 + 15 - 10) * single, center_y - (60) * single, EGEARGB(0xff, 0x1b, 0x20, 0x25));//2定位点向右的点
 	floodfill(center_x - (65 + 7 + 15 - 10) * single, center_y + (60) * single, EGEARGB(0xff, 0x1b, 0x20, 0x25));//3定位点向右的点
 	floodfill(center_x - 63 * single, center_y + (63 + 21 - 10) * single, EGEARGB(0xff, 0x1b, 0x20, 0x25));//4定位点向上的点
 	floodfill(center_x + 63 * single, center_y + (63 + 21 - 10) * single, EGEARGB(0xff, 0x1b, 0x20, 0x25));//5定位点向上的点
-	floodfill(center_x + (65 + 7 + 15 -10) * single, center_y + (60) * single, EGEARGB(0xff, 0x1b, 0x20, 0x25));//6定位点向左的点
+	floodfill(center_x + (65 + 7 + 15 - 10) * single, center_y + (60) * single, EGEARGB(0xff, 0x1b, 0x20, 0x25));//6定位点向左的点
 	floodfill(center_x + (65 + 7 + 15 - 10) * single, center_y - (60) * single, EGEARGB(0xff, 0x1b, 0x20, 0x25));//7定位点向左的点
 	floodfill(center_x + 63 * single, center_y - (63 + 21 - 10) * single, EGEARGB(0xff, 0x1b, 0x20, 0x25));//8定位点向下的点
 	
 	
 	setcolor(EGEARGB(0xff, 0x1b, 0x20, 0x25));//接下来画外框3的线条
-	setlinewidth(4);
+	setlinewidth(side * 4 / 126);
 	ege_point points3[22] = {
 		center_x - 58 * single,center_y - (63) * single,//1
 		
@@ -708,15 +708,15 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 		center_x + (65) * single, center_y - (56) * single,//7
 		
 		//加入曲线拟合点——右上角弧线点
-		center_x + (58 + 6) * single,center_y - (56+2.5) * single,
+		center_x + (58 + 6) * single,center_y - (56 + 2.5) * single,
 		center_x + (58 + 5) * single,center_y - (56 + 3.5) * single,
-		center_x + (58+2) * single,center_y - (56 + 6) * single,
+		center_x + (58 + 2) * single,center_y - (56 + 6) * single,
 		
 		center_x + 58 * single,center_y - (63) * single,//8
 		center_x - 58 * single,center_y - (63) * single,//1
 		center_x - 58 * single,center_y - (63) * single//1
 	};
-	ege_bezier(22,points3);
+	ege_bezier(22, points3);
 	
 	setfillcolor(EGEARGB(0Xff, 32, 37, 41));
 	floodfill(center_x - 63 * single, center_y - (63 + 5 - 4) * single, EGEARGB(0xff, 0x1b, 0x20, 0x25));//1定位点向下的点
@@ -731,7 +731,7 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 	
 	ege_enable_aa(true);
 	setcolor(EGEARGB(0xff, 0x1b, 0x20, 0x25));//接下来画外框1的线条
-	setlinewidth(6);
+	setlinewidth(side * 6 / 126);
 	ege_bezier(22, points2);
 	ege_bezier(22, points3);
 	
@@ -801,7 +801,7 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 		);
 	
 	// 这是绘制旋钮的部分
-	setfillcolor(EGEARGB(0XFF, 46,47,48));
+	setfillcolor(EGEARGB(0XFF, 46, 47, 48));
 	for (double i = 0; i < single * 2.2; i = i + single / 5) {
 		ege_fillellipse(
 			center_x + (40) * single, center_y + (40 + i) * single,
@@ -834,20 +834,20 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 	draw_black_sign2(center_x - 80 * single, center_y + (29) * single, single);
 	draw_black_sign2(center_x - 80 * single, center_y - (29) * single, single);
 	
-//	// 文字显示
-//	// 因为在小熊猫上会字体偏移所以改正
-//	setbkmode(TRANSPARENT);
-//	settextjustify(CENTER_TEXT, CENTER_TEXT);
-//	setfont(single * 9, 0, "黑体");
-//	setcolor(EGEARGB(0xff, 136, 97, 67));
-//	ege_drawtext("APP", center_x - 38 * single, center_y - (80) * single);
-//	ege_drawtext("HP/IN", center_x + 16 * single, center_y - (80) * single);
-//	ege_drawtext("-", center_x - 84 * single, center_y + (25) * single);
-//	ege_drawtext("+", center_x - 84 * single, center_y - (32) * single);
-//	ege_drawtext("RST", center_x - 38 * single, center_y + (72) * single);
-//	setfont(single * 8, 0, "黑体");
-//	ege_drawtext("ATT", center_x - 63 * single, center_y + (71) * single);
-//	ege_drawtext("RARO", center_x + 24 * single, center_y + (71) * single);
+	//	// 文字显示
+	//	// 因为在小熊猫上会字体偏移所以改正
+	//	setbkmode(TRANSPARENT);
+	//	settextjustify(CENTER_TEXT, CENTER_TEXT);
+	//	setfont(single * 9, 0, "黑体");
+	//	setcolor(EGEARGB(0xff, 136, 97, 67));
+	//	ege_drawtext("APP", center_x - 38 * single, center_y - (80) * single);
+	//	ege_drawtext("HP/IN", center_x + 16 * single, center_y - (80) * single);
+	//	ege_drawtext("-", center_x - 84 * single, center_y + (25) * single);
+	//	ege_drawtext("+", center_x - 84 * single, center_y - (32) * single);
+	//	ege_drawtext("RST", center_x - 38 * single, center_y + (72) * single);
+	//	setfont(single * 8, 0, "黑体");
+	//	ege_drawtext("ATT", center_x - 63 * single, center_y + (71) * single);
+	//	ege_drawtext("RARO", center_x + 24 * single, center_y + (71) * single);
 	
 	// 文字显示
 	setbkmode(TRANSPARENT);
@@ -868,16 +868,16 @@ void draw_smallpfd_frame(double center_x, double center_y, double side) {
 }
 
 // 绘制表盘右上角的气压指示
-void drwa_ND_atmosphericPressure(double center_x,double center_y,double side){
+void drwa_ND_atmosphericPressure(double center_x, double center_y, double side) {
 	
 	setbkmode(TRANSPARENT);
 	settextjustify(CENTER_TEXT, CENTER_TEXT);
-	setfont(side/6, 0, "黑体");
+	setfont(side / 6, 0, "黑体");
 	setcolor(EGEARGB(250, 76, 153, 0));
 	char str[100];
 	sprintf_s(str, "%.2f", INGH_data);
-	ege_drawtext(str,center_x + side / 3.3,center_y - side / 1.1);
-	ege_drawtext("IN",center_x + side / 1.66,center_y - side / 1.1);
+	ege_drawtext(str, center_x + side / 3.3, center_y - side / 1.1);
+	ege_drawtext("IN", center_x + side / 1.66, center_y - side / 1.1);
 }
 
 
@@ -1003,11 +1003,11 @@ void draw_alt_else(double center_x, double center_y, double side, double height)
 
 //画十位和个位
 
-void draw_alt_10(double center_x,double center_y,double side,double height) {
+void draw_alt_10(double center_x, double center_y, double side, double height) {
 	setcolor(EGEARGB(200, 177, 177, 178));
 	double y = center_y - side * 0.17;
 	double x = center_x;
-	double number_height = side  * 2.5 / 96.0 * 2 * 6.5;
+	double number_height = side * 2.5 / 96.0 * 2 * 6.5;
 	double number_width = side * 2.5 / 96.0 * 5;
 	
 	
@@ -1047,21 +1047,21 @@ void draw_alt_10(double center_x,double center_y,double side,double height) {
 	//将区间进一步分段
 	double judge = fmod(height, 20);
 	if (judge >= 0 && judge < 7) {
-		for (int i = 0;i < 3;i++) {
+		for (int i = 0; i < 3; i++) {
 			outtextxy(x + 7.0 / 96.0 * side, y_100 + number_height * 0.6 * -(i - 1), nums[i + 1]);
 			outtextxy(x + 7.0 / 96.0 * side + number_width, y_100 + number_height * 0.6 * -(i - 1), zeros[i + 1]);
 		}
 	}
-	else if(judge >= 7 && judge <= 15)
+	else if (judge >= 7 && judge <= 15)
 	{
-		for (int i = 0;i < 4;i++) {
+		for (int i = 0; i < 4; i++) {
 			outtextxy(x + 7.0 / 96.0 * side, y_100 + number_height * 0.6 * -(i - 1), nums[i + 1]);
 			outtextxy(x + 7.0 / 96.0 * side + number_width, y_100 + number_height * 0.6 * -(i - 1), zeros[i]);
 		}
 	}
 	else
 	{
-		for (int i = 0;i < 3;i++) {
+		for (int i = 0; i < 3; i++) {
 			outtextxy(x + 7.0 / 96.0 * side, y_100 + number_height * 0.6 * -(i), nums[i + 2]);
 			outtextxy(x + 7.0 / 96.0 * side + number_width, y_100 + number_height * 0.6 * -(i), zeros[i]);
 		}
@@ -1089,7 +1089,7 @@ void draw_alt_lines(double center_x, double center_y, double side) {
 	double data5 = altitude - ten;
 	
 	//计算出来了每条线的数据
-	for (int i = 0;i < 11;i++) {
+	for (int i = 0; i < 11; i++) {
 		datas[i] = (int)data5 + 100 * (i - 5);
 	}
 	
@@ -1097,7 +1097,7 @@ void draw_alt_lines(double center_x, double center_y, double side) {
 	double x1 = center_x - 31.0 / 96 * side;
 	double x2 = center_x - 31.5 / 96 * side + side * 9.5 / 96;
 	
-	for (int i = 0;i < 11;i++) {
+	for (int i = 0; i < 11; i++) {
 		double y = center_y - 165.5 / 96 * side + ten / 100 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
 		if (fmod(datas[10 - i] - 100, 200) == 0) {
 			setlinewidth(side * 0.015);
@@ -1114,7 +1114,7 @@ void draw_alt_lines(double center_x, double center_y, double side) {
 	getfont(&FMC_font);
 	FMC_font.lfWeight = side * 3;
 	setfont(&FMC_font);
-	for (int i = 0;i < 11;i++) {
+	for (int i = 0; i < 11; i++) {
 		double y = center_y - 165.5 / 96 * side + ten / 100 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
 		double x = center_x + 11.0 / 96 * side;
 		int h = datas[i] / 100;
@@ -1123,13 +1123,13 @@ void draw_alt_lines(double center_x, double center_y, double side) {
 			ege_drawtext("000", x1, y);
 		}
 		else if (fmod(datas[10 - i], 200) == 0)
-		{	
+		{
 			if (datas[10 - i] < 1000 && datas[10 - i] > -1000) {
 				char str[64];
 				snprintf(str, sizeof(str), "%.0f", (float)datas[10 - i]);
 				ege_drawtext(str, x, y);
 			}
-			else if (datas[10 - i] >= 1000 && datas[10 - i] <  10000)
+			else if (datas[10 - i] >= 1000 && datas[10 - i] < 10000)
 			{
 				double x1 = center_x + 8.0 / 96 * side;
 				char str[64];
@@ -1197,7 +1197,7 @@ void draw_standy_alt(double center_x, double center_y, double side) {
 	
 	draw_alt_lines(center_x, center_y, side);//绘制下层表的所有刻度线
 	draw_alt_standy_wireframe(center_x, center_y, side);//线框和线框下的底色
-	draw_alt_10(center_x, center_y, side,height);//十位及个位
+	draw_alt_10(center_x, center_y, side, height);//十位及个位
 	draw_alt_else(center_x, center_y, side, height);//其他位
 	draw_alt_NumShadow(center_x, center_y, side);//数字的遮盖
 	draw_alt_Standy_shadow(center_x, center_y, side);//数字显示的上下的小阴影
@@ -1260,7 +1260,7 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 	double data5 = airSpeed - ten;
 	
 	//计算出来了每条线的数据
-	for (int i = 0;i < 11;i++) {
+	for (int i = 0; i < 11; i++) {
 		datas[i] = (int)data5 + 10 * (i - 5);
 	}
 	
@@ -1272,7 +1272,7 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 	double number_height = side * 2.5 / 96.0 * 2 * 6.5;
 	double number_width = side * 2.5 / 96.0 * 5;
 	if (datas[5] >= 30) {
-		for (int i = 0;i < 11;i++) {
+		for (int i = 0; i < 11; i++) {
 			double y = center_y - 165.5 / 96 * side + ten / 10 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
 			if (datas[10 - i] >= 30) {
 				if (fmod(datas[10 - i] - 100, 20) == 0) {
@@ -1286,7 +1286,7 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 				}
 			}
 			
-			for (int i = 0;i < 11;i++) {
+			for (int i = 0; i < 11; i++) {
 				double y = center_y - 165.5 / 96 * side + ten / 10 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
 				double x = center_x - 5.0 / 96 * side;
 				int h = datas[i] / 100;
@@ -1327,10 +1327,10 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 	}
 	else
 	{
-		for (int i = 0;i < 11;i++) {
+		for (int i = 0; i < 11; i++) {
 			datas[i] = 30 + 10 * (i - 5);
 		}
-		for (int i = 0;i < 11;i++) {
+		for (int i = 0; i < 11; i++) {
 			double y = center_y - 165.5 / 96 * side + 0 / 10 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
 			if (datas[10 - i] >= 30) {
 				if (fmod(datas[10 - i] - 100, 20) == 0) {
@@ -1348,7 +1348,7 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 			getfont(&FMC_font);
 			FMC_font.lfWeight = side * 3;
 			setfont(&FMC_font);
-			for (int i = 0;i < 11;i++) {
+			for (int i = 0; i < 11; i++) {
 				double y = center_y - 165.5 / 96 * side + 0 / 10 * gap + i * gap;//底部坐标 + 偏移坐标 + 循环坐标
 				double x = center_x - 5.0 / 96 * side;
 				int h = datas[i] / 100;
@@ -1389,7 +1389,7 @@ void draw_standy_airSpeed_lines(double center_x, double center_y, double side) {
 	setfont(&FMC_font);
 }
 
-void draw_airSpeed_10(double center_x, double center_y, double side,double speed) {
+void draw_airSpeed_10(double center_x, double center_y, double side, double speed) {
 	setcolor(EGEARGB(200, 177, 177, 178));
 	double y = center_y - side * 0.17;
 	double x = center_x;
@@ -1397,13 +1397,13 @@ void draw_airSpeed_10(double center_x, double center_y, double side,double speed
 	double number_width = side * 2.5 / 96.0 * 5;
 	
 	
-	char num[] = { '9','0','1','2','3','4','5','6','7','8','9','0'};
+	char num[] = { '9','0','1','2','3','4','5','6','7','8','9','0' };
 	char zeros[] = { '0','0','0','0','0','0','0','0','0' };
 	double usefulHeight10 = fmod(speed, 10);//得到 （十 + 个）
 	double uesfulHeight1 = fmod(speed, 1);//得到个位
 	
 	
-	int num2 = usefulHeight10 / 1 ;//准确的十位;
+	int num2 = usefulHeight10 / 1;//准确的十位;
 	int num1 = num2 - 1;//百位数 - 1；
 	int num3 = num2 + 1;//百位数 + 1；
 	int num0 = num2 - 2;
@@ -1433,19 +1433,19 @@ void draw_airSpeed_10(double center_x, double center_y, double side,double speed
 	//将区间进一步分段
 	double judge = fmod(speed, 1);
 	if (judge >= 0 && judge < 0.35) {
-		for (int i = 0;i < 3;i++) {
+		for (int i = 0; i < 3; i++) {
 			outtextxy(x + 10.0 / 96.0 * side, y_100 + number_height * 0.6 * -(i - 1), nums[i + 1]);
 		}
 	}
 	else if (judge >= 0.35 && judge <= 0.75)
 	{
-		for (int i = 0;i < 4;i++) {
+		for (int i = 0; i < 4; i++) {
 			outtextxy(x + 10.0 / 96.0 * side, y_100 + number_height * 0.6 * -(i - 1), nums[i + 1]);
 		}
 	}
 	else
 	{
-		for (int i = 0;i < 3;i++) {
+		for (int i = 0; i < 3; i++) {
 			outtextxy(x + 10.0 / 96.0 * side, y_100 + number_height * 0.6 * -(i), nums[i + 2]);
 		}
 	}
@@ -1466,7 +1466,7 @@ void draw_airSpeed_else(double center_x, double center_y, double side, double sp
 	int ten = speed / 10;
 	ten = ten % 10;
 	if (speed >= 100) {
-		outtextxy(center_x - number_width * 1.7, y - number_height * 0.025,num[hun + 1]);
+		outtextxy(center_x - number_width * 1.7, y - number_height * 0.025, num[hun + 1]);
 		outtextxy(center_x - number_width * 0.5, y - number_height * 0.025, num[ten + 1]);
 	}
 	else {

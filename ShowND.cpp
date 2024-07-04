@@ -88,7 +88,7 @@ int show_nd() {
 			ZeroMemory(&si, sizeof(si));
 			si.cb = sizeof(si);
 			
-			WCHAR commandLineNDW[] = L"D:/Git/sls/737ND/737ND.exe";
+			WCHAR commandLineNDW[] = L"D:/小熊猫C++/Program/B737-800,B727-200F仪表模拟/737ND/737ND.exe";
 			WCHAR currentDirectoryNDW[] = L".";
 			
 			char*  commandLineNDA = WideCharToStringND(commandLineNDW);

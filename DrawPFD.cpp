@@ -52,7 +52,7 @@ void draw_PFD(double PFD_x, double PFD_y, double PFD_side){
 	draw_screw3(PFD_x + PFD_side / 1.79, PFD_y +  PFD_side / 1.668,PFD_side / 22, 45);
 	setfillcolor(EGEARGB(0xff,79,79,75));
 	ege_fillellipse(PFD_x - PFD_side / 2.80 - PFD_side / 22 / 2,PFD_y +  PFD_side / 1.72 - PFD_side / 22 / 2,PFD_side / 22,PFD_side / 22);
-
+	
 }
 //==========================================================================================//
 
@@ -610,7 +610,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		}
 		
 		// 绘制粉色指示速度标
-		setcolor(EGEARGB(150, 255, 51, 255));
+		setcolor(EGEARGB(0x99, 255, 51, 255));
 		setlinewidth(side / 250);
 		int pointSpeed = (int)(airSpeed_instruction - 30);
 		int one_digit, ten_digit, hundred_digit, new_number;
@@ -815,11 +815,19 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 	};
 	ege_drawpoly(8, points4);
 	
+//	char t[10];
+//	sprintf(t,"%.2f",airSpeed_acceleration);
+//	xyprintf(100,100,t);
+	
 	// 绿色指针显示
-	setcolor(EGEARGB(0x99, 96, 194, 0));
+	setcolor(EGEARGB(0x99, 76, 153, 0));
 	setlinewidth(side / 200);
 	
 	double futureAirspeed = airSpeed_acceleration * 10;
+	
+	if(fabs(futureAirspeed) <= 2.5){
+		futureAirspeed = 0;
+	}
 	
 	if (airspeed0 <= 45 && futureAirspeed >=0) {
 		futureAirspeed = futureAirspeed - 45;
@@ -832,6 +840,7 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		futureAirspeed = -57;
 	}
 	
+	
 	double greenDistace = length / 2 / 60 * futureAirspeed;
 	
 	ege_line(center_x + width / 11.5 * (9.5 - 5.75),
@@ -840,30 +849,41 @@ void draw_PFD_airspeed(double center_x, double center_y, double side)
 		center_y - greenDistace);
 	
 	if (greenDistace >= 0) {
-		ege_point points5[4] = {
-			center_x + width / 11.5 * 2.7,// 左下
-			center_y - greenDistace,
-			center_x + width / 11.5 * 4.5,// 右下
-			center_y - greenDistace,
-			center_x + width / 11.5 * 3.75,// 上部定位点
-			center_y - greenDistace - side / 60,
-			center_x + width / 11.5 * 2.7,
-			center_y - greenDistace
-		};
-		ege_drawpoly(4, points5);
+		
+		if(fabs(futureAirspeed) >= 2.5){
+			
+			ege_point points5[4] = {
+				center_x + width / 11.5 * 2.7,// 左下
+				center_y - greenDistace,
+				center_x + width / 11.5 * 4.5,// 右下
+				center_y - greenDistace,
+				center_x + width / 11.5 * 3.75,// 上部定位点
+				center_y - greenDistace - side / 60,
+				center_x + width / 11.5 * 2.7,
+				center_y - greenDistace
+			};
+			ege_drawpoly(4, points5);
+			
+		}
+		
 	}
 	else {
-		ege_point points5[4] = {
-			center_x + width / 11.5 * 2.7,// 左上
-			center_y - greenDistace ,
-			center_x + width / 11.5 * 4.5,// 右上
-			center_y - greenDistace ,
-			center_x + width / 11.5 * 3.75,// 下部定位点
-			center_y - greenDistace + side / 60 ,
-			center_x + width / 11.5 * 2.7,
-			center_y - greenDistace
-		};
-		ege_drawpoly(4, points5);
+		
+		if(fabs(futureAirspeed) >= 2.5){
+		
+			ege_point points5[4] = {
+				center_x + width / 11.5 * 2.7,// 左上
+				center_y - greenDistace ,
+				center_x + width / 11.5 * 4.5,// 右上
+				center_y - greenDistace ,
+				center_x + width / 11.5 * 3.75,// 下部定位点
+				center_y - greenDistace + side / 60 ,
+				center_x + width / 11.5 * 2.7,
+				center_y - greenDistace
+			};
+			ege_drawpoly(4, points5);
+			
+		}
 	}
 	
 	
@@ -1001,7 +1021,7 @@ void draw_PFD_alt_STD(double side, double center_x, double center_y) {
 	
 	settextjustify(LEFT_TEXT, TOP_TEXT);
 	setfont(height, wide, "Calibri", 0, 0, 0, 0, 0, 0);//设定字体
-	setcolor(EGEARGB(0x99, 96, 194, 0));
+	setcolor(GREEN);
 	for (int i = 0; i < 3;i++) {
 		outtextxy(xSTD + i * side * 0.025, ySTD, STD[i]);
 	}

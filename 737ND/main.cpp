@@ -4,6 +4,10 @@
 #include <math.h>
 #include <mutex>
 #include "DrawFrame.h"
+#include <vector>
+#include <fstream>
+#include <string>
+using namespace std;
 
 typedef struct {
 	//放置nd需要接受的数据
@@ -37,6 +41,24 @@ typedef struct {
 	int egeHeight;
 	
 } SharedDataND;
+
+
+typedef struct waypoint{
+	
+	int num;	//表示塔台类型，这是自己加的，便于区分是VOR还是普通航点 1/2/3	航点/VOR/机场
+	char code[20];	// 编号（3/12表示是NDB/VOR?）
+	double lat;		// 纬度
+	double lon;		// 经度
+	char name[20];	// 塔台名称
+	char type[20]; 	// 塔台类型（是否航路上都能用（ENRT））
+	char freq[20];	// 频率
+	double range;	// 接收范围
+	char devi[20];	// 磁偏差
+	char FIRName[20];	// 情报区代码
+	char fullName[20];	// 名称（更长）
+	char fullType[20];	// 塔台类型（更全）
+	
+}WAYPOINT;
 
 
 //函数声明
@@ -227,6 +249,168 @@ double ndtoprotationangle =  0;//顶部三角形的偏转角度
 
 //==================================以下为绘制总表部分========================================//
 void draw_ND(double ND_x, double ND_y, double ND_side)  {
+	
+	
+	
+	//读取航路点文件
+	
+	vector<WAYPOINT> waypoints;
+	string inputTmp;
+	ifstream inputFile("earth_fix.dat");
+	
+	if (inputFile.is_open()) {
+		while (getline(inputFile,inputTmp)) {
+			
+			WAYPOINT wpTmp;
+			istringstream issTmp(inputTmp);
+			
+			string stringTmp[10];
+			
+			issTmp >> wpTmp.lat >> wpTmp.lon >> stringTmp[0] >> stringTmp[1] >> stringTmp[2] >> stringTmp[3];
+			
+			strcpy(wpTmp.name, stringTmp[0].c_str());
+			strcpy(wpTmp.type, stringTmp[1].c_str());
+			strcpy(wpTmp.FIRName, stringTmp[2].c_str());
+			strcpy(wpTmp.fullType, stringTmp[3].c_str());
+			wpTmp.num = 1;
+			wpTmp.range = 130;
+			
+			waypoints.push_back(wpTmp);
+			
+		}
+	}
+	
+	inputFile.close();
+	
+	
+	//读取航路文件
+	
+	vector<WAYPOINT> route;
+	ifstream inputFile2("ZSCNZSSS.fms");
+	
+	if (inputFile2.is_open()) {
+		while (getline(inputFile2,inputTmp)) {
+			
+			WAYPOINT wpTmp;
+			istringstream issTmp(inputTmp);
+			
+			string stringTmp[10];
+			
+			if(issTmp >> stringTmp[0] >> stringTmp[1] >> stringTmp[2] >> wpTmp.lat >> wpTmp.lon ){
+				
+				strcpy(wpTmp.code, stringTmp[0].c_str());
+				strcpy(wpTmp.name, stringTmp[1].c_str());
+				strcpy(wpTmp.fullName, stringTmp[1].c_str());
+				
+				if(stringTmp[1].length() == 3){
+					wpTmp.num = 2;//VOR
+				}
+				else if(stringTmp[1].length() == 5){
+					wpTmp.num = 1;//waypoint
+				}
+				else if(stringTmp[1].length() == 4){
+					wpTmp.num = 3;//airport
+				}
+				
+				route.push_back(wpTmp);
+				
+			}
+			else{
+				continue;
+			}
+			
+		}
+	}
+	
+	inputFile2.close();
+	
+	route.clear();
+	
+	
+	vector<WAYPOINT> airports;
+	FILE* file1;
+	int linenum = 1;
+	char line[1024];
+	
+	// 打开文件，以只读模式（"r"）  
+	file1 = fopen("arpt.dat", "r");
+	if (file1 == NULL) {
+		// 如果文件打开失败，打印错误消息  
+		perror("Error opening file");
+		return; // 如果文件打开失败，返回并退出程序  
+	}
+	
+	WAYPOINT wpTmp1;
+	
+	// 逐行读取文件内容  
+	while (fgets(line, sizeof(line), file1) != NULL) {
+		if (linenum % 8 == 2)//读取经度信息
+		{
+			char str[64];
+			if (sscanf(line, "%14c %lf", str, &wpTmp1.lat))
+			{
+				
+			}
+		}
+		else if (linenum % 8 == 3)//读取纬度信息
+		{
+			char str[64];
+			if (sscanf(line, "%14c %lf", str, &wpTmp1.lon))
+			{
+				
+			}
+		}
+		else if (linenum % 8 == 7)//读取机场名
+		{
+			char str[64];
+			if (sscanf(line, "%14c %s", str, wpTmp1.name))
+			{
+				airports.push_back(wpTmp1);
+			}
+		}
+		linenum ++;
+	}
+	// 关闭文件  
+	fclose(file1);
+	
+	
+	
+	
+	//读取VOR塔台文件
+	
+	extern vector<WAYPOINT> VORs;
+	ifstream inputFile4("earth_nav.dat");
+	
+	if (inputFile4.is_open()) {
+		while (getline(inputFile4,inputTmp)) {
+			
+			WAYPOINT wpTmp;
+			istringstream issTmp(inputTmp);
+			
+			string stringTmp[20];
+			
+			if(issTmp >> stringTmp[0] >> wpTmp.lat >> wpTmp.lon >> stringTmp[1] >> stringTmp[2] >> wpTmp.range >> stringTmp[4] >> stringTmp[5] >> stringTmp[6] >> stringTmp[7] >> stringTmp[8] >> stringTmp[9]){
+				
+				strcpy(wpTmp.code, stringTmp[0].c_str());
+				strcpy(wpTmp.name, stringTmp[5].c_str());
+				strcpy(wpTmp.fullName, stringTmp[5].c_str());
+				
+				wpTmp.num = 3;
+				
+				VORs.push_back(wpTmp);
+				
+			}
+			else{
+				continue;
+			}
+			
+		}
+	}
+	
+	inputFile4.close();
+	
+	
+	
 	
 	
 	int ratio = 5;

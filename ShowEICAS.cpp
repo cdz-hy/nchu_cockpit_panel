@@ -79,7 +79,7 @@ int show_eicas() {
 			ZeroMemory(&si, sizeof(si));
 			si.cb = sizeof(si);
 			
-			WCHAR commandLineEICASW[] = L"D:/Git/sls/737EICAS/737EICAS.exe";
+			WCHAR commandLineEICASW[] = L"D:/小熊猫C++/Program/B737-800,B727-200F仪表模拟/737EICAS/MFD1.exe";
 			WCHAR currentDirectoryEICASW[] = L".";
 			
 			char*  commandLineEICASA = WideCharToStringEICAS(commandLineEICASW);

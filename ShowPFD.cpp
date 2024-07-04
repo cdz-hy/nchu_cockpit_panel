@@ -84,7 +84,7 @@ int show_pfd() {
 			ZeroMemory(&si, sizeof(si));
 			si.cb = sizeof(si);
 
-			WCHAR commandLinePFDW[] = L"D:/Git/sls/737PFD/737PFD.exe";
+			WCHAR commandLinePFDW[] = L"D:/小熊猫C++/Program/B737-800,B727-200F仪表模拟/737PFD/PFD.exe";
 			WCHAR currentDirectoryPFDW[] = L".";
 
 			char*  commandLinePFDA = WideCharToStringPFD(commandLinePFDW);
