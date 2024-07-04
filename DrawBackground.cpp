@@ -497,8 +497,8 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		
 		{Background_2_x - Ulength * 150 , Background_2_y + Ulength * 69},
 		{Background_2_x + Ulength * 774 , Background_2_y + Ulength * 69},
-		{Background_2_x + Ulength * 770 , Background_2_y + Ulength * 200},
-		{Background_2_x - Ulength * 145 , Background_2_y + Ulength * 200},
+		{Background_2_x + Ulength * 770 , Background_2_y + Ulength * 250},
+		{Background_2_x - Ulength * 145 , Background_2_y + Ulength * 250},
 		
 	};
 	setfillcolor(EGEARGB(0XFF, 0X17, 0X17, 0X17));
@@ -668,5 +668,59 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	draw_screw2(Background_2_x + Ulength * 588 , Background_2_y + Ulength * 125,Ulength * 3,0);
 	draw_screw2(Background_2_x + Ulength * 508 , Background_2_y + Ulength * 85,Ulength * 3,0);
 	draw_screw2(Background_2_x + Ulength * 508 , Background_2_y + Ulength * 125,Ulength * 3,0);
+	
+	
+	
+	int num_21 = 4;
+	ege_point ploynums_21[4] = {
+		{Background_2_x - Ulength * 150 , Background_2_y + Ulength * 130},
+		{Background_2_x - Ulength * 153 , Background_2_y + Ulength * 134},
+		{Background_2_x + Ulength * 783 , Background_2_y + Ulength * 134},
+		{Background_2_x + Ulength * 778 , Background_2_y + Ulength * 130}
+	};
+	ege_setpattern_lineargradient(Background_2_x - Ulength * 100 , Background_2_y + Ulength * 130, EGEARGB(0XFF, 0X00, 0X00, 0X00),
+		Background_2_x - Ulength * 100 , Background_2_y + Ulength * 134, EGEARGB(0XFF, 0X20, 0X20, 0X20));
+	ege_fillpoly(num_21, ploynums_21);
+	ege_setpattern_none();
+	
+	
+	
+	int num_22 = 4;
+	ege_point ploynums_22[4] = {
+		{Background_2_x - Ulength * 153 , Background_2_y + Ulength * 134},
+		{Background_2_x - Ulength * 154 , Background_2_y + Ulength * 136},
+		{Background_2_x + Ulength * 785 , Background_2_y + Ulength * 136},
+		{Background_2_x + Ulength * 783 , Background_2_y + Ulength * 134}
+	};
+	//setfillcolor(EGEARGB(0X60,0X60,0X60,0X60));
+	ege_setpattern_lineargradient(Background_2_x - Ulength * 100 , Background_2_y + Ulength * 134, EGEARGB(0XFF, 0X20, 0X20, 0X20),
+		Background_2_x - Ulength * 100 , Background_2_y + Ulength * 136, EGEARGB(0X60, 0X50, 0X50, 0X50));
+	ege_fillpoly(num_22, ploynums_22);
+	ege_setpattern_none();
+	
+	int num_23 = 4;
+	ege_point ploynums_23[4] = {
+		{Background_2_x - Ulength * 154 , Background_2_y + Ulength * 136},
+		{Background_2_x - Ulength * 154 , Background_2_y + Ulength * 138},
+		{Background_2_x + Ulength * 784 , Background_2_y + Ulength * 138},
+		{Background_2_x + Ulength * 785 , Background_2_y + Ulength * 136}
+	};
+	
+	ege_setpattern_lineargradient(Background_2_x - Ulength * 100 , Background_2_y + Ulength * 136, EGEARGB(0X60, 0X50, 0X50, 0X50),
+		Background_2_x - Ulength * 100 , Background_2_y + Ulength * 138, EGEARGB(0XFF, 0X19, 0X1A, 0X1E));
+	ege_fillpoly(num_23, ploynums_23);
+	ege_setpattern_none();
+	
+	
+	int num_24 = 4;
+	ege_point ploynums_24[4] = {
+		{Background_2_x - Ulength * 154 , Background_2_y + Ulength * 138},
+		{Background_2_x - Ulength * 150 , Background_2_y + Ulength * 149},
+		{Background_2_x + Ulength * 778 , Background_2_y + Ulength * 149},
+		{Background_2_x + Ulength * 784 , Background_2_y + Ulength * 138}
+	};
+	
+	setfillcolor(EGEARGB(0XFF, 0X18, 0X19, 0X1B));
+	ege_fillpoly(num_24, ploynums_24);
 	
 }
