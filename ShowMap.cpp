@@ -19,6 +19,15 @@ typedef struct {
 	
 	double rotationangle;
 	
+	char mapProvince[64];
+	char mapCity[64];
+	char mapAdcode[64];
+	char mapWeather[64];
+	char mapTemperature[64];
+	char mapWinddirection[64];
+	char mapWindpower[64];
+	char mapHumidity[64];
+	
 } SharedData;
 
 
@@ -115,8 +124,8 @@ int show_map() {
 				si.cb = sizeof(si);
 			}
 			
-			
-			WCHAR commandLineW[] = L"D:/小熊猫C++/Program/CurlTestFinal/map61821/map61821.exe";
+			WCHAR commandLineW[] = L"D:/Git/sls/map61821/map61821.exe";
+			//WCHAR commandLineW[] = L"D:/小熊猫C++/Program/CurlTestFinal/map61821/map61821.exe";
 			WCHAR currentDirectoryW[] = L".";
 			
 			char*  commandLineA = WideCharToString(commandLineW);
@@ -143,6 +152,15 @@ int show_map() {
 			
 			
 			while(is_run()){
+				
+				strcpy(pData->mapProvince,mapProvince);
+				strcpy(pData->mapCity,mapCity);
+				strcpy(pData->mapAdcode,mapAdcode);
+				strcpy(pData->mapWeather,mapWeather);
+				strcpy(pData->mapTemperature,mapTemperature);
+				strcpy(pData->mapWinddirection,mapWinddirection);
+				strcpy(pData->mapWindpower,mapWindpower);
+				strcpy(pData->mapHumidity,mapHumidity);
 				
 //				printf("g:%d ",renewMap);
 //				printf("pData:%d \n",pData->renewMap);
