@@ -194,6 +194,16 @@ int egeHeight = 400;
 int egeFMCWidth = 600;
 int egeFMCHeight = 800;
 
+//map上打印的数据
+char mapProvince[64] = "安徽省";
+char mapCity[64] = "合肥市";
+char mapAdcode[64] =  "合肥工业大学";
+char mapWeather[64] = "晴朗";
+char mapTemperature[64] = "30";
+char mapWinddirection[64] = "西北风";
+char mapWindpower[64] = "2";
+char mapHumidity[64] = "潮湿";
+
 //是否显示地图
 int showMap = 0;
 
