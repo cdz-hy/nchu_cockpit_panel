@@ -338,12 +338,12 @@ void draw_back(double center_x, double center_y, double unitLength) {
 	
 	
 	
-	draw_screw(center_x + unitLength * 8.7, center_y - unitLength * 12.6 - unitLength / 20 * 4, unitLength / 3, 0);
-	draw_screw(center_x + unitLength * 8.7, center_y - unitLength * 9 - unitLength / 20 * 4, unitLength / 3, 0);
-	draw_screw(center_x + unitLength * 14, center_y - unitLength * 12.6 - unitLength / 20 * 4, unitLength / 3, 0);
-	draw_screw(center_x + unitLength * 14, center_y - unitLength * 9 - unitLength / 20 * 4, unitLength / 3, 0);
-	draw_screw(center_x - unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 11 + unitLength / 20 * 3, unitLength / 4, 0);
-	draw_screw(center_x - unitLength * 2.3 + unitLength / 20 * 3.2 + unitLength * 2.16 / 2.2 * 6, center_y - unitLength * 11 + unitLength / 20 * 3, unitLength / 4, 0);
+	draw_screw2(center_x + unitLength * 8.7, center_y - unitLength * 12.6 - unitLength / 20 * 4, unitLength / 3, 0);
+	draw_screw2(center_x + unitLength * 8.7, center_y - unitLength * 9 - unitLength / 20 * 4, unitLength / 3, 0);
+	draw_screw2(center_x + unitLength * 14, center_y - unitLength * 12.6 - unitLength / 20 * 4, unitLength / 3, 0);
+	draw_screw2(center_x + unitLength * 14, center_y - unitLength * 9 - unitLength / 20 * 4, unitLength / 3, 0);
+	draw_screw2(center_x - unitLength * 4 + unitLength / 20 * 2, center_y - unitLength * 11 + unitLength / 20 * 3, unitLength / 4, 0);
+	draw_screw2(center_x - unitLength * 2.3 + unitLength / 20 * 3.2 + unitLength * 2.16 / 2.2 * 6, center_y - unitLength * 11 + unitLength / 20 * 3, unitLength / 4, 0);
 	
 	
 	setfillcolor(EGEARGB(0XFF, 0X60, 0X60, 0X60));
@@ -611,4 +611,62 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		Background_2_x + Ulength * 671 , Background_2_y - Ulength * 102);
 	ege_line(Background_2_x + Ulength * 750 , Background_2_y + Ulength * 60,
 		Background_2_x + Ulength * 742 , Background_2_y - Ulength * 88);
+	
+	
+	draw_screw2(Background_2_x - Ulength * 130 , Background_2_y + Ulength * 56,Ulength * 3.5,0);
+	draw_screw2(Background_2_x - Ulength * 64 , Background_2_y + Ulength * 56,Ulength * 3.5,0);
+	draw_screw2(Background_2_x - Ulength * 64 , Background_2_y - Ulength * 85,Ulength * 3.5,0);
+	draw_screw2(Background_2_x - Ulength * 63 , Background_2_y - Ulength * 50,Ulength * 2.5,0);
+	draw_screw2(Background_2_x - Ulength * 63 , Background_2_y - Ulength * 8,Ulength * 2.5,0);
+	draw_screw2(Background_2_x - Ulength * 107 , Background_2_y - Ulength * 50,Ulength * 2.5,0);
+	draw_screw2(Background_2_x - Ulength * 107 , Background_2_y - Ulength * 8,Ulength * 2.5,0);
+	draw_screw2(Background_2_x - Ulength * 54 , Background_2_y - Ulength * 67,Ulength * 3.5,0);
+	draw_screw2(Background_2_x + Ulength * 20 , Background_2_y - Ulength * 95,Ulength * 3.5,0);
+	draw_screw2(Background_2_x + Ulength * 125 , Background_2_y - Ulength * 85,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 125 , Background_2_y - Ulength * 105,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 190 , Background_2_y - Ulength * 70,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 200 , Background_2_y - Ulength * 55,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 252 , Background_2_y - Ulength * 55,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 200 , Background_2_y - Ulength * 3,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 252 , Background_2_y - Ulength * 3,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 200 , Background_2_y + Ulength * 55,Ulength * 3.5,0);
+	draw_screw2(Background_2_x + Ulength * 252 , Background_2_y + Ulength * 55,Ulength * 3.5,0);
+	draw_screw2(Background_2_x + Ulength * 262 , Background_2_y - Ulength * 65,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 332 , Background_2_y - Ulength * 65,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 347 , Background_2_y - Ulength * 77,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 380 , Background_2_y - Ulength * 110,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 433 , Background_2_y - Ulength * 68,Ulength * 3.5,0);
+	draw_screw2(Background_2_x + Ulength * 428 , Background_2_y - Ulength * 85,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 465 , Background_2_y - Ulength * 80,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 465 , Background_2_y - Ulength * 102,Ulength * 2.5,0);
+	draw_screw2(Background_2_x - Ulength * 135 , Background_2_y + Ulength * 90,Ulength * 3.5,0);
+	draw_screw2(Background_2_x - Ulength * 142 , Background_2_y + Ulength * 125,Ulength * 3.5,0);
+	draw_screw2(Background_2_x - Ulength * 19 , Background_2_y + Ulength * 85,Ulength * 3,0);
+	draw_screw2(Background_2_x - Ulength * 19 , Background_2_y + Ulength * 122,Ulength * 3,0);
+	draw_screw2(Background_2_x - Ulength * 26 , Background_2_y + Ulength * 85,Ulength * 3,0);
+	draw_screw2(Background_2_x - Ulength * 26 , Background_2_y + Ulength * 122,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 48 , Background_2_y + Ulength * 85,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 48 , Background_2_y + Ulength * 122,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 54 , Background_2_y + Ulength * 85,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 54 , Background_2_y + Ulength * 122,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 122 , Background_2_y + Ulength * 85,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 122 , Background_2_y + Ulength * 122,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 745 , Background_2_y + Ulength * 56,Ulength * 3.5,0);
+	draw_screw2(Background_2_x + Ulength * 680 , Background_2_y + Ulength * 56,Ulength * 3.5,0);
+	draw_screw2(Background_2_x + Ulength * 735 , Background_2_y - Ulength * 80,Ulength * 3.5,0);
+	draw_screw2(Background_2_x + Ulength * 680 , Background_2_y - Ulength * 95,Ulength * 3.5,0);
+	draw_screw2(Background_2_x + Ulength * 660 , Background_2_y - Ulength * 75,Ulength * 3.5,0);
+	draw_screw2(Background_2_x + Ulength * 603 , Background_2_y - Ulength * 98,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 603 , Background_2_y - Ulength * 68,Ulength * 2.5,0);
+	draw_screw2(Background_2_x + Ulength * 716 , Background_2_y + Ulength * 85,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 660 , Background_2_y + Ulength * 85,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 716 , Background_2_y + Ulength * 125,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 660 , Background_2_y + Ulength * 125,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 582 , Background_2_y + Ulength * 85,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 582 , Background_2_y + Ulength * 125,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 588 , Background_2_y + Ulength * 85,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 588 , Background_2_y + Ulength * 125,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 508 , Background_2_y + Ulength * 85,Ulength * 3,0);
+	draw_screw2(Background_2_x + Ulength * 508 , Background_2_y + Ulength * 125,Ulength * 3,0);
+	
 }
