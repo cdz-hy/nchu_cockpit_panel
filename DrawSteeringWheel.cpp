@@ -16,13 +16,18 @@ void draw_SteeringWeel(double center_x,double center_y,double side) {
 	ege_line(center_x, center_y - side / 5, center_x, center_y + side / 5);
 	int x, y;
 	mousepos(&x, &y);
+	if(transformSteeringWeel==1){
+		setfillcolor(EGEARGB(0XFF, 0XFF, 0X00, 0X00));{
+			ege_fillellipse(center_x - side + Ulength * 4 , center_y - side + Ulength * 4 , Ulength * 2,Ulength * 2);
+		}
+	}
 	if (x >= center_x - side && x <= center_x + side && y >= center_y - side && y < center_y + side) {
 		
 		if (GetAsyncKeyState(0x04) & 0x0001) {
 			if (transformSteeringWeel == 1) {
 				transformSteeringWeel = 0;
 			}
-			else if (transformSteeringWeel == 0) {
+			else {
 				transformSteeringWeel = 1;
 			}
 		}
@@ -30,7 +35,7 @@ void draw_SteeringWeel(double center_x,double center_y,double side) {
 			if (choiceSteeringWeel == 1) {
 				choiceSteeringWeel = 0;
 			}
-			else if (choiceSteeringWeel == 0) {
+			else {
 				choiceSteeringWeel = 1;
 			}
 		}
