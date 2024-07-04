@@ -7,6 +7,7 @@ extern double SteeringWeelLevel;
 extern double SteeringWeelVertical;
 extern double SteeringWeelFootPedals;
 extern int choiceSteeringWeel;
+extern int transformSteeringWeel;
 void draw_SteeringWeel(double center_x,double center_y,double side) {
 	double Ulength = side / 100;
 	setcolor(EGEARGB(0X30, 0X80, 0X80, 0X80));
@@ -16,6 +17,15 @@ void draw_SteeringWeel(double center_x,double center_y,double side) {
 	int x, y;
 	mousepos(&x, &y);
 	if (x >= center_x - side && x <= center_x + side && y >= center_y - side && y < center_y + side) {
+		
+		if (GetAsyncKeyState(0x04) & 0x0001) {
+			if (transformSteeringWeel == 1) {
+				transformSteeringWeel = 0;
+			}
+			else if (transformSteeringWeel == 0) {
+				transformSteeringWeel = 1;
+			}
+		}
 		if (GetAsyncKeyState(0x02) & 0x0001) {
 			if (choiceSteeringWeel == 1) {
 				choiceSteeringWeel = 0;
