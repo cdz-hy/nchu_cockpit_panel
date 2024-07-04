@@ -789,25 +789,25 @@ void draw_auto_control(double center_x, double center_y, double side) {
 		longPanel_speed_is_down = 0;
 	}
 	if(CO == 0){
-		if(CO_2 + CO_2_change<392&&CO_2 + CO_2_change>0){
+		if(CO_2 + CO_2_change<392&&CO_2 + CO_2_change>=0){
 			CO_2_change = (int)(INSMACHangle / 2);
 			CO_1_change = (int)((CO_2 + CO_2_change)/392.0 * 61) - CO_1;
 		}else if(CO_2 + CO_2_change>=392){
 			CO_2_change = 392 - CO_2;
 			INSMACHangle = CO_2_change * 2;
-		}else if(CO_2 + CO_2_change<=0){
+		}else if(CO_2 + CO_2_change<0){
 			CO_2_change = -CO_2;
 			INSMACHangle = CO_2_change * 2;
 		}
 	}
 	if(CO == 1){
-		if(CO_2 + CO_2_change<538&&CO_2 + CO_2_change>0){
+		if(CO_2 + CO_2_change<538&&CO_2 + CO_2_change>=0){
 			CO_2_change = (int)(INSMACHangle / 2);
 			CO_1_change = (int)((CO_2 + CO_2_change)/538.0 * 84) - CO_1;
 		}else if(CO_2 + CO_2_change>=538){
 			CO_2_change = 538 - CO_2;
 			INSMACHangle = CO_2_change * 2;
-		}else if(CO_2 + CO_2_change<=0){
+		}else if(CO_2 + CO_2_change<0){
 			CO_2_change = -CO_2;
 			INSMACHangle = CO_2_change * 2;
 		}
