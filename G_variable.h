@@ -275,7 +275,7 @@ extern PIMAGE pimg27;
 extern PIMAGE pimg28;
 extern PIMAGE pimg29;
 extern PIMAGE pimg30;
-
+extern PIMAGE pimg31;
 extern PIMAGE pimg32;
 
 extern PIMAGE pimg1sta;
@@ -308,7 +308,7 @@ extern PIMAGE pimg27sta;
 extern PIMAGE pimg28sta;
 extern PIMAGE pimg29sta;
 extern PIMAGE pimg30sta;
-
+extern PIMAGE pimg31sta;
 extern PIMAGE pimg32sta;
 //==================================//
 
