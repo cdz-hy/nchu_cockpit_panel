@@ -3,63 +3,7 @@
 #include <math.h>
 
 
-extern int MainPanelLight;
-extern double COURSE_1;//angle左
-extern double COURSE_2;//angle右
-int FD_1 = 1;
-int FD_2 = 1;
-extern int COURSE_1NUM;//左边course示数//A
-extern int change_COURSE_1NUM;//B
-extern int COURSE_2NUM;//右边course示数//A
-extern int change_COURSE_2NUM;//B
-extern int AT;
-extern int N1;
-int SPEED;
-extern int LVLCHG;
-extern int VNAV;
-extern int LNAV;
-extern int VORLOC;
-extern int APP;
-int HDGSEL;
-extern int CO;//1为左，0为右
-extern int CO_1;//左边显示//A
-extern int CO_1_change;//B
-extern int CO_2;//右边显示//A
-extern int CO_2_change;//B
-extern int SPDINTV;
-extern double INSMACHangle;
-extern int HEADING;//A
-extern double HEADING_1;
-extern int HEADING_1_change;//B
-extern double HEADING_2;
-int ALTHLD;
-int VS;
-extern double ALTITUDEangle;
-extern int ALTITUDE;//A
-extern int ALTITUDE_change;//B
-extern double VERTSPEEDangle;
-extern int VERTSPEED;//A
-extern int VERTSPEED_change;//B
-extern int ALTINTV;
-
-int CMDA;
-int CWSA;
-int CWSB;
-int CMDB;
-
-int SPEED_1;
-int FD_1_1;
-int HDGSEL_1;
-int ALTHLD_1;
-int VS_1;
-int CMDA_1;
-extern double autopilot_mode;
-extern double altitude_mode;
-extern double flight_director_mode;
-extern double autopilot_bk_mode;
-extern double altitude_bk_mode;
-extern double flight_director_bk_mode;
-extern int choicetransfromAUTO;
+#include "G_variable.h"
 
 int longPanel_mouse_x = 0, longPanel_mouse_y = 0;
 int longPanel_speed_is_down = 0;
@@ -658,7 +602,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	setfont(Ulength * 10, Ulength * 2.5, "DigifaceWide");
 	char nums_1[64];//左上上
-	sprintf_s(nums_1, "%d", COURSE_1NUM + change_COURSE_1NUM);
+	sprintf_s(nums_1, "%03d", COURSE_1NUM + change_COURSE_1NUM);
 	ege_drawtext(nums_1, center_x - Ulength * 154, center_y - 16 * Ulength);
 
 	setlinewidth(Linewidth / 7 * 4);
@@ -1268,7 +1212,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	setfont(Ulength * 10, Ulength * 2.5, "DigifaceWide");
 	char nums_3[64];//左上上
-	sprintf_s(nums_3, "%d", HEADING + HEADING_1_change);
+	sprintf_s(nums_3, "%03d", HEADING + HEADING_1_change);
 	ege_drawtext(nums_3, center_x - Ulength * 37, center_y - 16 * Ulength);
 
 
@@ -2018,7 +1962,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	setfont(Ulength * 10, Ulength * 2.5, "DigifaceWide");
 	char nums_7[64];//左上上
-	sprintf_s(nums_7, "%d", COURSE_2NUM + change_COURSE_2NUM);
+	sprintf_s(nums_7, "%03d", COURSE_2NUM + change_COURSE_2NUM);
 	ege_drawtext(nums_7, center_x + Ulength * 156, center_y - 16 * Ulength);
 
 
