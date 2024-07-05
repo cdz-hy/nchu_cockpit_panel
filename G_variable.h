@@ -442,3 +442,7 @@ extern int statebrake ;//刹车
 extern double accelerator;//油门
 extern double accelerator_change;//油门变化
 extern int statebrake_change;//刹车操作
+
+//襟翼
+extern double gearFlaps;
+extern double Flapschange;
