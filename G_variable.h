@@ -404,6 +404,11 @@ extern int CWSA ;
 extern int CWSB ;
 extern int CMDB ;
 
+extern int CMDA_1 ;
+extern int CWSA_1 ;
+extern int CWSB_1 ;
+extern int CMDB_1 ;
+
 extern int SPEED_1;
 extern int FD_1_1;
 extern int HDGSEL_1 ;
