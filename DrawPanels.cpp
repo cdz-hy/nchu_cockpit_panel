@@ -954,15 +954,15 @@ void draw_panels(){
 		}
 		/*数字键盘+键油门,accelerator接收数据,accelerator_change!=0,传回并
 		将accelerator_change的值赋为0*/
-		if(GetAsyncKeyState(0x6B) & 0x0004){
+		if(GetAsyncKeyState(0x6B) & 0x8000){
 			if(accelerator_change+accelerator<1){
-				accelerator_change+=0.002;	
+				accelerator_change+=0.0002;	
 			}
 			
 		}
-		if(GetAsyncKeyState(0x6D) & 0x0004){
+		if(GetAsyncKeyState(0x6D) & 0x8000){
 			if(accelerator_change+accelerator>0){
-				accelerator_change-=0.002;	
+				accelerator_change-=0.0002;	
 			}
 			
 		}
