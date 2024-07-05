@@ -722,5 +722,21 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	
 	setfillcolor(EGEARGB(0XFF, 0X18, 0X19, 0X1B));
 	ege_fillpoly(num_24, ploynums_24);
+
+    setcolor(EGEARGB(0XF0, 0X00, 0X00, 0X00));
+	setlinewidth(Ulength * 10);
+	ege_line(Background_2_x + Ulength * 110 , Background_2_y - Ulength * 173,
+		Background_2_x - Ulength * 220 , Background_2_y - Ulength * 126);
+	
+		setlinewidth(Ulength * 2);
+	ege_line(Background_2_x + Ulength * 108 , Background_2_y - Ulength * 174.8,
+		Background_2_x + Ulength * 130 , Background_2_y - Ulength * 177.3);
+	ege_line(Background_2_x - Ulength * 316 , Background_2_y - Ulength * 365,
+		Background_2_x - Ulength * 212 , Background_2_y - Ulength * 126);
+	setlinewidth(Ulength * 3);
+	ege_line(Background_2_x + Ulength * 518 , Background_2_y - Ulength * 176.7,
+		Background_2_x + Ulength * 130 , Background_2_y - Ulength * 176.9);
+	ege_line(Background_2_x + Ulength * 518 , Background_2_y - Ulength * 176.7,
+		Background_2_x + Ulength * 575 , Background_2_y - Ulength * 169.5);
 	
 }
