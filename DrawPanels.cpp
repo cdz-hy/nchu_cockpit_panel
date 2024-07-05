@@ -967,6 +967,20 @@ void draw_panels(){
 			
 		}
 
+        //襟翼，当Flapschange!=0时，传回gearFlaps + Flapschange，同时给Flapschange值赋为0
+		//gearFlaps为接收的数据，
+		if(GetAsyncKeyState(0x61) & 0x0001){//按1襟翼升
+			if(gearFlaps + Flapschange < 1){
+				Flapschange+=0.125;
+			}
+			
+		}
+		if(GetAsyncKeyState(0x62) & 0x0001){//按2襟翼降
+			if(gearFlaps + Flapschange>0){
+				Flapschange-=0.125;
+			}
+		}
+
 
 		
 		//实现窗口关闭
