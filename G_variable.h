@@ -418,3 +418,6 @@ extern double SteeringWeelVertical;
 extern double SteeringWeelFootPedals;
 extern int choiceSteeringWeel;
 extern int transformSteeringWeel;
+
+//起落架
+extern int stateLandingGear;
