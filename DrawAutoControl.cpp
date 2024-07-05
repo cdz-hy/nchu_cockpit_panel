@@ -485,7 +485,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	setfont(Ulength * 10, Ulength * 2.5, "DigifaceWide");
 	char nums_1[64];//左上上
-	sprintf_s(nums_1, "%d", COURSE_1NUM + change_COURSE_1NUM);
+	sprintf_s(nums_1, "%03d", COURSE_1NUM + change_COURSE_1NUM);
 	ege_drawtext(nums_1, center_x - Ulength * 154, center_y - 16 * Ulength);
 	
 	setlinewidth(Linewidth / 7 * 4);
@@ -1074,7 +1074,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	setfont(Ulength * 10, Ulength * 2.5, "DigifaceWide");
 	char nums_3[64];//左上上
-	sprintf_s(nums_3, "%d", HEADING + HEADING_1_change);
+	sprintf_s(nums_3, "%03d", HEADING + HEADING_1_change);
 	ege_drawtext(nums_3, center_x - Ulength * 37, center_y - 16 * Ulength);
 	
 	
@@ -1809,7 +1809,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	setfont(Ulength * 10, Ulength * 2.5, "DigifaceWide");
 	char nums_7[64];//左上上
-	sprintf_s(nums_7, "%d", COURSE_2NUM + change_COURSE_2NUM);
+	sprintf_s(nums_7, "%03d", COURSE_2NUM + change_COURSE_2NUM);
 	ege_drawtext(nums_7, center_x + Ulength * 156, center_y - 16 * Ulength);
 	
 	
