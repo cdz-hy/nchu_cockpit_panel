@@ -944,7 +944,28 @@ void draw_panels(){
 				stateLandingGear = 0;
 			}
 		}
-		
+			//数字键盘*键刹车
+		if(GetAsyncKeyState(0x6A) & 0x0001){
+			if(statebrake==1){
+				statebrake_change = 0;
+			}else if(statebrake==0){
+				statebrake_change = 1;
+			}
+		}
+		/*数字键盘+键油门,accelerator接收数据,accelerator_change!=0,传回并
+		将accelerator_change的值赋为0*/
+		if(GetAsyncKeyState(0x6B) & 0x0004){
+			if(accelerator_change+accelerator<1){
+				accelerator_change+=0.002;	
+			}
+			
+		}
+		if(GetAsyncKeyState(0x6D) & 0x0004){
+			if(accelerator_change+accelerator>0){
+				accelerator_change-=0.002;	
+			}
+			
+		}
 
 
 		
