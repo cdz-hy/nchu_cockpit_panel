@@ -445,3 +445,7 @@ int statebrake =0;//刹车接收
 int statebrake_change =0;//刹车操作
 double accelerator = 0;//油门
 double accelerator_change = 0;//油门变化
+
+//襟翼
+double gearFlaps = 0;//襟翼接收A
+double Flapschange = 0;//襟翼改变B
