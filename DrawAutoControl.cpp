@@ -338,11 +338,28 @@ void draw_auto_control(double center_x, double center_y, double side) {
 				if (longPanel_mouse_y > longPanel_mouse_y_cur) {
 					
 					COURSE_1 += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
+					if(COURSE_1NUM + change_COURSE_1NUM<360&&COURSE_1NUM + change_COURSE_1NUM>0 ){
+						change_COURSE_1NUM += (int)((longPanel_mouse_y - longPanel_mouse_y_cur) / 70);
+					}else if(COURSE_1NUM + change_COURSE_1NUM>=360){
+						change_COURSE_1NUM = 1-COURSE_1NUM;
+						
+					}else if(COURSE_1NUM + change_COURSE_1NUM<=0){
+						change_COURSE_1NUM = 359 -	COURSE_1NUM;
 					
+					}
 				
 				}
 				else {
 					COURSE_1 += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
+					if(COURSE_1NUM + change_COURSE_1NUM<360&&COURSE_1NUM + change_COURSE_1NUM>0 ){
+						change_COURSE_1NUM += (int)((longPanel_mouse_y - longPanel_mouse_y_cur) / 70);
+					}else if(COURSE_1NUM + change_COURSE_1NUM>=360){
+						change_COURSE_1NUM = 1-COURSE_1NUM;
+						
+					}else if(COURSE_1NUM + change_COURSE_1NUM<=0){
+						change_COURSE_1NUM = 359 -	COURSE_1NUM;
+						
+					}
 				}
 			}
 		}
@@ -351,24 +368,8 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	else if (longPanel_speed_is_down == 1) {
 		longPanel_speed_is_down = 0;
 	}
-	if(COURSE_1NUM + change_COURSE_1NUM<360&&COURSE_1NUM + change_COURSE_1NUM>0 ){
-		change_COURSE_1NUM = (int)(COURSE_1 / 360 * 90);
-	}else if(COURSE_1NUM + change_COURSE_1NUM>=360){
-		change_COURSE_1NUM = 1-COURSE_1NUM;
-		COURSE_1 = change_COURSE_1NUM / 90.0 * 360;
-	}else if(COURSE_1NUM + change_COURSE_1NUM<=0){
-		change_COURSE_1NUM = 359 -	COURSE_1NUM;
-		COURSE_1 = change_COURSE_1NUM / 90.0 * 360;
-	}
-	if(COURSE_2NUM + change_COURSE_2NUM<360&&COURSE_2NUM + change_COURSE_2NUM>0 ){
-		change_COURSE_2NUM = (int)(COURSE_2 / 360 * 90);
-	}else if(COURSE_2NUM + change_COURSE_2NUM>=360){
-		change_COURSE_2NUM = 1-COURSE_2NUM;
-		COURSE_2 = change_COURSE_2NUM / 90.0 * 360;
-	}else if(COURSE_2NUM + change_COURSE_2NUM<=0){
-		change_COURSE_2NUM = 359 -	COURSE_2NUM;
-		COURSE_2 = change_COURSE_2NUM / 90.0 * 360;
-	}
+
+	
 	
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	ege_rectangle(center_x - 149 * Ulength , center_y + 10 * Ulength , Ulength * 7 , Ulength * 11);
@@ -784,12 +785,58 @@ void draw_auto_control(double center_x, double center_y, double side) {
 				if (longPanel_mouse_y > longPanel_mouse_y_cur) {
 					
 					INSMACHangle += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
-					
+					if(CO == 0){
+						if(CO_2 + CO_2_change<392&&CO_2 + CO_2_change>=0){
+							CO_2_change += (int)((longPanel_mouse_y - longPanel_mouse_y_cur) / 70);
+							CO_1_change = (int)((CO_2 + CO_2_change)/392.0 * 61) - CO_1;
+						}else if(CO_2 + CO_2_change>=392){
+							CO_2_change = 392 - CO_2;
+						
+						}else if(CO_2 + CO_2_change<0){
+							CO_2_change = -CO_2;
+						
+						}
+					}
+					if(CO == 1){
+						if(CO_2 + CO_2_change<538&&CO_2 + CO_2_change>=0){
+							CO_2_change += (int)((longPanel_mouse_y - longPanel_mouse_y_cur) / 70);
+							CO_1_change = (int)((CO_2 + CO_2_change)/538.0 * 84) - CO_1;
+						}else if(CO_2 + CO_2_change>=538){
+							CO_2_change = 538 - CO_2;
+						
+						}else if(CO_2 + CO_2_change<0){
+							CO_2_change = -CO_2;
+							
+						}
+					}
 					
 				}
 				else {
 					INSMACHangle += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
-					
+					if(CO == 0){
+						if(CO_2 + CO_2_change<392&&CO_2 + CO_2_change>=0){
+							CO_2_change += (int)((longPanel_mouse_y - longPanel_mouse_y_cur) / 70);
+							CO_1_change = (int)((CO_2 + CO_2_change)/392.0 * 61) - CO_1;
+						}else if(CO_2 + CO_2_change>=392){
+							CO_2_change = 392 - CO_2;
+							
+						}else if(CO_2 + CO_2_change<0){
+							CO_2_change = -CO_2;
+							
+						}
+					}
+					if(CO == 1){
+						if(CO_2 + CO_2_change<538&&CO_2 + CO_2_change>=0){
+							CO_2_change += (int)((longPanel_mouse_y - longPanel_mouse_y_cur) / 70);
+							CO_1_change = (int)((CO_2 + CO_2_change)/538.0 * 84) - CO_1;
+						}else if(CO_2 + CO_2_change>=538){
+							CO_2_change = 538 - CO_2;
+							
+						}else if(CO_2 + CO_2_change<0){
+							CO_2_change = -CO_2;
+							
+						}
+					}
 				}
 			}
 		}
@@ -798,30 +845,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	else if (longPanel_speed_is_down == 1) {
 		longPanel_speed_is_down = 0;
 	}
-	if(CO == 0){
-		if(CO_2 + CO_2_change<392&&CO_2 + CO_2_change>=0){
-			CO_2_change = (int)(INSMACHangle / 2);
-			CO_1_change = (int)((CO_2 + CO_2_change)/392.0 * 61) - CO_1;
-		}else if(CO_2 + CO_2_change>=392){
-			CO_2_change = 392 - CO_2;
-			INSMACHangle = CO_2_change * 2;
-		}else if(CO_2 + CO_2_change<0){
-			CO_2_change = -CO_2;
-			INSMACHangle = CO_2_change * 2;
-		}
-	}
-	if(CO == 1){
-		if(CO_2 + CO_2_change<538&&CO_2 + CO_2_change>=0){
-			CO_2_change = (int)(INSMACHangle / 2);
-			CO_1_change = (int)((CO_2 + CO_2_change)/538.0 * 84) - CO_1;
-		}else if(CO_2 + CO_2_change>=538){
-			CO_2_change = 538 - CO_2;
-			INSMACHangle = CO_2_change * 2;
-		}else if(CO_2 + CO_2_change<0){
-			CO_2_change = -CO_2;
-			INSMACHangle = CO_2_change * 2;
-		}
-	}
+
 	
 	
 	setfillcolor(BLACK);
@@ -1449,16 +1473,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	ege_drawtext(nums_4, center_x + Ulength * 26, center_y - 16 * Ulength);
 	
 	
-	
-	if(VERTSPEED + VERTSPEED_change<=5000&&VERTSPEED + VERTSPEED_change>=-5000){
-		VERTSPEED_change = (int)(VERTSPEEDangle * 100);
-	}else if(VERTSPEED + VERTSPEED_change>5000){
-		VERTSPEED_change = 5000 - VERTSPEED;
-		VERTSPEEDangle = VERTSPEED_change / 100.0;
-	}else if(VERTSPEED + VERTSPEED_change<-5000){
-		VERTSPEED_change = -5000 - VERTSPEED;
-		VERTSPEEDangle = VERTSPEED_change / 100.0;
-	}
+
 	
 	char nums_5[64];//VERTSPEED
 	sprintf_s(nums_5, "%d", VERTSPEED + VERTSPEED_change);
@@ -1651,12 +1666,28 @@ void draw_auto_control(double center_x, double center_y, double side) {
 				if (longPanel_mouse_y > longPanel_mouse_y_cur) {
 					
 					COURSE_2 += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
+					if(COURSE_2NUM + change_COURSE_2NUM<360&&COURSE_2NUM + change_COURSE_2NUM>0 ){
+						change_COURSE_2NUM += (int)((longPanel_mouse_y - longPanel_mouse_y_cur) / 70);
+					}else if(COURSE_2NUM + change_COURSE_2NUM>=360){
+						change_COURSE_2NUM = 1-COURSE_2NUM;
 					
+					}else if(COURSE_2NUM + change_COURSE_2NUM<=0){
+						change_COURSE_2NUM = 359 -	COURSE_2NUM;
+						
+					}
 					
 				}
 				else {
 					COURSE_2 += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
-					
+					if(COURSE_2NUM + change_COURSE_2NUM<360&&COURSE_2NUM + change_COURSE_2NUM>0 ){
+						change_COURSE_2NUM += (int)((longPanel_mouse_y - longPanel_mouse_y_cur) / 70);
+					}else if(COURSE_2NUM + change_COURSE_2NUM>=360){
+						change_COURSE_2NUM = 1-COURSE_2NUM;
+						
+					}else if(COURSE_2NUM + change_COURSE_2NUM<=0){
+						change_COURSE_2NUM = 359 -	COURSE_2NUM;
+						
+					}
 				}
 			}
 		}
@@ -1874,12 +1905,28 @@ void draw_auto_control(double center_x, double center_y, double side) {
 				if (longPanel_mouse_y > longPanel_mouse_y_cur) {
 					
 					VERTSPEEDangle += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
+					if(VERTSPEED + VERTSPEED_change<=5000&&VERTSPEED + VERTSPEED_change>=-5000){
+						VERTSPEED_change += ((int)((longPanel_mouse_y - longPanel_mouse_y_cur) / 70)) * 100;
+					}else if(VERTSPEED + VERTSPEED_change>5000){
+						VERTSPEED_change = 5000 - VERTSPEED;
 					
+					}else if(VERTSPEED + VERTSPEED_change<-5000){
+						VERTSPEED_change = -5000 - VERTSPEED;
+					
+					}
 					
 				}
 				else {
 					VERTSPEEDangle += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
-					
+					if(VERTSPEED + VERTSPEED_change<=5000&&VERTSPEED + VERTSPEED_change>=-5000){
+						VERTSPEED_change += ((int)((longPanel_mouse_y - longPanel_mouse_y_cur) / 70)) * 100;
+					}else if(VERTSPEED + VERTSPEED_change>5000){
+						VERTSPEED_change = 5000 - VERTSPEED;
+						
+					}else if(VERTSPEED + VERTSPEED_change<-5000){
+						VERTSPEED_change = -5000 - VERTSPEED;
+						
+					}
 				}
 			}
 		}
