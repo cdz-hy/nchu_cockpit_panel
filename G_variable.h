@@ -414,7 +414,11 @@ extern int choicetransfromAUTO;
 
 //自动驾驶控制相关
 extern double autopilot_mode;
-extern double flight_director_mode ;
+extern double altitude_mode;
+extern double flight_director_mode;
+extern double autopilot_bk_mode;
+extern double altitude_bk_mode;
+extern double flight_director_bk_mode;
 
 
 //方向舵
