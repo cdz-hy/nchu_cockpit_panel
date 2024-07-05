@@ -47,6 +47,13 @@ extern int CWSA ;
 extern int CWSB ;
 extern int CMDB ;
 
+extern int SPEED_1;
+extern int FD_1_1;
+extern int HDGSEL_1 ;
+extern int ALTHLD_1 ;
+extern int VS_1 ;
+extern int choicetransfromAUTO;
+
 
 int longPanel_mouse_x = 0, longPanel_mouse_y = 0;
 int longPanel_speed_is_down = 0;
