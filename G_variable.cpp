@@ -429,3 +429,9 @@ int transformSteeringWeel = 0;
 
 //起落架
 int stateLandingGear = 0;
+
+//油门和刹车
+int statebrake =0;//刹车接收
+int statebrake_change =0;//刹车操作
+double accelerator = 0;//油门
+double accelerator_change = 0;//油门变化
