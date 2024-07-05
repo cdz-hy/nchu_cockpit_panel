@@ -409,6 +409,13 @@ int CWSA = 0;
 int CWSB = 0;
 int CMDB = 0;
 
+int SPEED_1 = 0;
+int FD_1_1 =0;
+int HDGSEL_1 = 0;
+int ALTHLD_1 = 0;
+int VS_1 = 0;
+int choicetransfromAUTO = 0;
+
 //方向舵
 double SteeringWeelLevel = 0;
 double SteeringWeelVertical = 0 ;
