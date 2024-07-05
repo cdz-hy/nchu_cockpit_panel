@@ -54,7 +54,6 @@ extern int ALTHLD_1 ;
 extern int VS_1 ;
 extern int choicetransfromAUTO;
 
-
 int longPanel_mouse_x = 0, longPanel_mouse_y = 0;
 int longPanel_speed_is_down = 0;
 int longPanel_mouse_y_cur = 0, longPanel_mouse_x_cur = 0;
@@ -70,7 +69,11 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	double Topknob_R2 = Ulength * 6.5;
 	
 	
-	
+	SPEED_1 = SPEED;
+	FD_1_1 = FD_1;
+	HDGSEL_1 = HDGSEL;
+	ALTHLD_1 = ALTHLD;
+	VS_1 = VS;
 	
 	
 	
@@ -441,7 +444,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 		ege_rectangle(center_x - Ulength * 147, center_y + 12 * Ulength, Ulength * 4, Ulength * 3);
 		
 		if (GetAsyncKeyState(0x02) & 0x0001 && FD_1 > 0) {
-			FD_1--;
+			FD_1_1--;
 			
 		}
 	}
@@ -449,7 +452,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 		ege_rectangle(center_x - Ulength * 147, center_y + 15 * Ulength, Ulength * 4, Ulength * 4);
 		
 		if (GetAsyncKeyState(0x02) & 0x0001 && FD_1 < 1) {
-			FD_1++;
+			FD_1_1++;
 			
 		}
 	}
@@ -592,10 +595,10 @@ void draw_auto_control(double center_x, double center_y, double side) {
 			ege_fillrect(center_x - Ulength * 118, center_y + 11.5 * Ulength, Ulength * 14, Ulength * 14);
 			
 			if (SPEED == 0) {
-				SPEED = 1;
+				SPEED_1 = 1;
 			}
 			else if (SPEED == 1) {
-				SPEED = 0;
+				SPEED_1 = 0;
 			}
 		}
 		
@@ -869,10 +872,10 @@ void draw_auto_control(double center_x, double center_y, double side) {
 			ege_fillrect(center_x + Ulength * 15.5, center_y + 11 * Ulength, Ulength * 15, Ulength * 15);
 			
 			if (ALTHLD == 0) {
-				ALTHLD = 1;
+				ALTHLD_1 = 1;
 			}
 			else if (ALTHLD == 1) {
-				ALTHLD = 0;
+				ALTHLD_1 = 0;
 			}
 		}
 	}
@@ -883,10 +886,10 @@ void draw_auto_control(double center_x, double center_y, double side) {
 			ege_fillrect(center_x + Ulength * 35.5, center_y + 11 * Ulength, Ulength * 15, Ulength * 15);
 			
 			if (VS == 0) {
-				VS = 1;
+				VS_1 = 1;
 			}
 			else if (VS == 1) {
-				VS = 0;
+				VS_1 = 0;
 			}
 		}
 	}
@@ -955,10 +958,10 @@ void draw_auto_control(double center_x, double center_y, double side) {
 			ege_fillrect(center_x - Ulength * 45.5, center_y + 10.5 * Ulength, Ulength * 17, Ulength * 17);
 			
 			if (HDGSEL == 0) {
-				HDGSEL = 1;
+				HDGSEL_1 = 1;
 			}
 			else if (HDGSEL == 1) {
-				HDGSEL = 0;
+				HDGSEL_1 = 0;
 			}
 		}
 	}
@@ -1227,12 +1230,26 @@ void draw_auto_control(double center_x, double center_y, double side) {
 				if (longPanel_mouse_y > longPanel_mouse_y_cur) {
 					
 					HEADING_1 += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
-					
+					if(HEADING + HEADING_1_change<360&&HEADING + HEADING_1_change>0 ){
+						HEADING_1_change += (int)((longPanel_mouse_y - longPanel_mouse_y_cur) / 70);
+					}else if(HEADING + HEADING_1_change>=360){
+						HEADING_1_change = 1-HEADING;
+						HEADING_1 = HEADING_1_change * 2;
+					}else if(HEADING + HEADING_1_change<=0){
+						HEADING_1_change = 359 - HEADING;
+						HEADING_1 = HEADING_1_change * 2;
+					}
 					
 				}
 				else {
 					HEADING_1 += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
-					
+					if(HEADING + HEADING_1_change<360&&HEADING + HEADING_1_change>0 ){
+						HEADING_1_change += (int)((longPanel_mouse_y - longPanel_mouse_y_cur) / 70);
+					}else if(HEADING + HEADING_1_change>=360){
+						HEADING_1_change = 1-HEADING;
+					}else if(HEADING + HEADING_1_change<=0){
+						HEADING_1_change = 359 - HEADING;
+					}
 				}
 			}
 		}
@@ -1242,15 +1259,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 		longPanel_speed_is_down = 0;
 	}
 	
-	if(HEADING + HEADING_1_change<360&&HEADING + HEADING_1_change>0 ){
-		HEADING_1_change = (int)(HEADING_1 / 2.0);
-	}else if(HEADING + HEADING_1_change>=360){
-		HEADING_1_change = 1-HEADING;
-		HEADING_1 = HEADING_1_change * 2;
-	}else if(HEADING + HEADING_1_change<=0){
-		HEADING_1_change = 359 - HEADING;
-		HEADING_1 = HEADING_1_change * 2;
-	}
+	
 	
 	setfillcolor(EGEARGB(0XFF, 0X26, 0X2B, 0X2C));
 	ege_fillrect(center_x + Ulength * 3, center_y - 24 * Ulength, Ulength * 43, Ulength * 13);
@@ -1402,12 +1411,28 @@ void draw_auto_control(double center_x, double center_y, double side) {
 				if (longPanel_mouse_y > longPanel_mouse_y_cur) {
 					
 					ALTITUDEangle += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
-					
+					if(ALTITUDE + ALTITUDE_change<=100000&&ALTITUDE + ALTITUDE_change>=-1000){
+						ALTITUDE_change += ((int)(((longPanel_mouse_y - longPanel_mouse_y_cur) / 70)))*100;
+					}else if(ALTITUDE + ALTITUDE_change>100000){
+						ALTITUDE_change = 100000 - ALTITUDE;
+						
+					}else if(ALTITUDE + ALTITUDE_change<-1000){
+						ALTITUDE_change = -1000 - ALTITUDE;
+				
+					}
 					
 				}
 				else {
 					ALTITUDEangle += (longPanel_mouse_y - longPanel_mouse_y_cur) / 70;
-					
+					if(ALTITUDE + ALTITUDE_change<=100000&&ALTITUDE + ALTITUDE_change>=-1000){
+						ALTITUDE_change += ((int)(((longPanel_mouse_y - longPanel_mouse_y_cur) / 70)))*100;
+					}else if(ALTITUDE + ALTITUDE_change>100000){
+						ALTITUDE_change = 100000 - ALTITUDE;
+						
+					}else if(ALTITUDE + ALTITUDE_change<-1000){
+						ALTITUDE_change = -1000 - ALTITUDE;
+						
+					}
 				}
 			}
 		}
@@ -1416,15 +1441,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	else if (longPanel_speed_is_down == 1) {
 		longPanel_speed_is_down = 0;
 	}
-	if(ALTITUDE + ALTITUDE_change<=100000&&ALTITUDE + ALTITUDE_change>=-1000){
-		ALTITUDE_change = (int)(ALTITUDEangle * 100);
-	}else if(ALTITUDE + ALTITUDE_change>100000){
-		ALTITUDE_change = 100000 - ALTITUDE;
-		ALTITUDEangle = ALTITUDE_change / 100.0;
-	}else if(ALTITUDE + ALTITUDE_change<-1000){
-		ALTITUDE_change = -1000 - ALTITUDE;
-		ALTITUDEangle = ALTITUDE_change / 100.0;
-	}
+	
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	setfont(Ulength * 10, Ulength * 2.5, "DigifaceWide");
 	char nums_4[64];//ALTITUDE
@@ -1870,6 +1887,13 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	}
 	else if (longPanel_speed_is_down == 1) {
 		longPanel_speed_is_down = 0;
+	}
+	
+	
+	if(VS_1!=VS||SPEED_1!=SPEED||HDGSEL_1!=HDGSEL||ALTHLD_1!=ALTHLD||FD_1!=FD_1_1){
+		choicetransfromAUTO = 1;
+	}else{
+		choicetransfromAUTO = 0;
 	}
 	
 }
