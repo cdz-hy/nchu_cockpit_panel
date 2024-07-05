@@ -428,6 +428,7 @@ double altitude_mode = 0;
 double autopilot_bk_mode=0;
 double altitude_bk_mode=0;
 double flight_director_bk_mode=0;
+int choicetransformAT = 0;
 
 //方向舵
 double SteeringWeelLevel = 0;
