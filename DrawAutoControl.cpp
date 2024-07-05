@@ -4,6 +4,8 @@
 
 
 #include "G_variable.h"
+int AT_1 = 0;
+extern int choicetransformAT;
 
 int longPanel_mouse_x = 0, longPanel_mouse_y = 0;
 int longPanel_speed_is_down = 0;
@@ -625,9 +627,9 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	ege_arc(center_x - Ulength * 136, center_y - 15 * Ulength, Ulength * 13, Ulength * 13, 305, 110);
 
 
-	if (AT == 0)
+	if (AT == 0&&AT_1==0)
 		setfillcolor(EGEARGB(0XFF, 0X00, 0X00, 0X00));
-	else if (AT == 1)
+	else if (AT == 1||AT_1==1)
 		setfillcolor(GREEN);
 
 	ege_fillellipse(center_x - Ulength * 133, center_y - 20 * Ulength, Ulength * 6, Ulength * 2);
@@ -662,7 +664,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 		ege_rectangle(center_x - Ulength * 132.5, center_y - 14 * Ulength, Ulength * 6, Ulength * 5);
 
 		if (GetAsyncKeyState(0x02) & 0x0001 && AT < 1) {
-			AT++;
+			AT_1++;
 
 		}
 	}
@@ -670,7 +672,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 		ege_rectangle(center_x - Ulength * 132.5, center_y - 9 * Ulength, Ulength * 6, Ulength * 5);
 
 		if (GetAsyncKeyState(0x02) & 0x0001 && AT > 0) {
-			AT--;
+			AT_1--;
 
 		}
 	}
