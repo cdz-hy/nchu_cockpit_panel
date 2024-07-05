@@ -931,6 +931,17 @@ void draw_panels(){
 				showFMCJudge = 1;
 			}
 		}
+        //q键 控制起落架
+		if(GetAsyncKeyState(0x51) & 0x0001){
+			if(stateLandingGear==0){
+				stateLandingGear = 1;
+			}else if(stateLandingGear==1){
+				stateLandingGear = 0;
+			}
+		}
+		
+
+
 		
 		//实现窗口关闭
 		mousepos(&mouse_x, &mouse_y);
