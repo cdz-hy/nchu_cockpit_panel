@@ -409,6 +409,11 @@ int CWSA = 0;
 int CWSB = 0;
 int CMDB = 0;
 
+int CMDA_1 = 0 ;
+int CWSA_1 = 0;
+int CWSB_1 = 0 ;
+int CMDB_1  = 0;
+
 int SPEED_1 = 0;
 int FD_1_1 =0;
 int HDGSEL_1 = 0;
