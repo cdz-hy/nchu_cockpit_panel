@@ -426,3 +426,9 @@ extern int transformSteeringWeel;
 
 //起落架
 extern int stateLandingGear;
+
+//油门和刹车
+extern int statebrake ;//刹车
+extern double accelerator;//油门
+extern double accelerator_change;//油门变化
+extern int statebrake_change;//刹车操作
