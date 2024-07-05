@@ -417,8 +417,12 @@ int VS_1 = 0;
 int choicetransfromAUTO = 0;
 
 //自动驾驶控制相关
-double autopilot_mode = 16387;
-double flight_director_mode = 2;
+double autopilot_mode = 0;
+double flight_director_mode = 0;
+double altitude_mode = 0;
+double autopilot_bk_mode=0;
+double altitude_bk_mode=0;
+double flight_director_bk_mode=0;
 
 //方向舵
 double SteeringWeelLevel = 0;
