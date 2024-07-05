@@ -1161,17 +1161,17 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	ege_drawtext("ALTITUDE", center_x + Ulength * 24, center_y - 25 * Ulength);
 	ege_drawtext("VERT SPEED", center_x + Ulength * 76, center_y - 25 * Ulength);
 	ege_drawtext("V/S", center_x + Ulength * 43, center_y + 16.5 * Ulength);
-	if (VS == 1) {
+	if (VS == 1 || VS_1 == 1) {
 		button_green_light(center_x + 43 * Ulength, center_y + 22 * Ulength, side * 0.16);
 	}
 	setfont(Ulength * 3.5, Ulength * 2.5, "Bahnschrift");
 	ege_drawtext("VOR LOC", center_x - Ulength * 12, center_y - 3.5 * Ulength);
 	ege_drawtext("HDG SEL", center_x - Ulength * 37, center_y + 16.5 * Ulength);
-	if (HDGSEL == 1) {
+	if (HDGSEL == 1 || HDGSEL_1 == 1) {
 		button_green_light(center_x - Ulength * 37, center_y + 22 * Ulength, side * 0.16);
 	}
 	ege_drawtext("ALT HLD", center_x + Ulength * 23, center_y + 16.5 * Ulength);
-	if (ALTHLD == 1) {
+	if (ALTHLD == 1 || ALTHLD_1 == 1) {
 		button_green_light(center_x + 23 * Ulength, center_y + 22 * Ulength, side * 0.16);
 	}
 	setfont(Ulength * 4, Ulength * 2.5, "Bahnschrift");
@@ -1717,7 +1717,7 @@ void draw_auto_control(double center_x, double center_y, double side) {
 
 	setcolor(EGEARGB(0XFF, 0X50, 0X50, 0X50));
 	ege_drawtext("CMD", center_x + Ulength * 110, center_y - 18 * Ulength);
-	if (CMDA == 1) {
+	if (CMDA == 1 || CMDA_1 == 1) {
 		button_green_light(center_x + 110 * Ulength, center_y - 11.5 * Ulength, side * 0.16);
 	}
 	ege_drawtext("CMD", center_x + Ulength * 131, center_y - 18 * Ulength);
