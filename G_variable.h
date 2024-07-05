@@ -424,6 +424,7 @@ extern double flight_director_mode;
 extern double autopilot_bk_mode;
 extern double altitude_bk_mode;
 extern double flight_director_bk_mode;
+extern int choicetransformAT;
 
 
 //方向舵
