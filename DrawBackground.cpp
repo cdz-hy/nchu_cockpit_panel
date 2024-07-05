@@ -738,5 +738,20 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		Background_2_x + Ulength * 130 , Background_2_y - Ulength * 176.9);
 	ege_line(Background_2_x + Ulength * 518 , Background_2_y - Ulength * 176.7,
 		Background_2_x + Ulength * 575 , Background_2_y - Ulength * 169.5);
+
+        setcolor(EGEARGB(0XF0, 0X62, 0X64, 0X56));
+	ege_line(Background_2_x + Ulength * 289 , Background_2_y - Ulength * 352,
+		Background_2_x + Ulength * 297 , Background_2_y - Ulength * 178);
+	
+	
+	ege_line(Background_2_x + Ulength * 372 , Background_2_y - Ulength * 352,
+		Background_2_x + Ulength * 362 , Background_2_y - Ulength * 178);
+	
+	setcolor(EGEARGB(0XF0, 0X30, 0X30, 0X30));
+	setlinewidth(Ulength * 4);
+	ege_line(Background_2_x + Ulength * 282 , Background_2_y - Ulength * 418,
+		Background_2_x + Ulength * 283 , Background_2_y - Ulength * 354);
+	ege_line(Background_2_x + Ulength * 385 , Background_2_y - Ulength * 418,
+		Background_2_x + Ulength * 385 , Background_2_y - Ulength * 354);
 	
 }
