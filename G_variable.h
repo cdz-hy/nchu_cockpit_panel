@@ -412,6 +412,11 @@ extern int VS_1 ;
 extern int choicetransfromAUTO;
 
 
+//自动驾驶控制相关
+extern double autopilot_mode;
+extern double flight_director_mode ;
+
+
 //方向舵
 extern double SteeringWeelLevel;
 extern double SteeringWeelVertical;
