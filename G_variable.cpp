@@ -422,3 +422,6 @@ double SteeringWeelVertical = 0 ;
 double SteeringWeelFootPedals = 0;
 int choiceSteeringWeel = 0;
 int transformSteeringWeel = 0;
+
+//起落架
+int stateLandingGear = 0;
