@@ -16,37 +16,37 @@ void datatransform_back() {
 	else if (AT == 0) {
 		altitude_bk_mode = 0;
 	}
-	if (FD_1_1 == 1 && SPEED_1 == 0 && HDGSEL_1 == 0 && ALTHLD == 0 && VS == 0) {
+	if (FD_1_1 == 1 && SPEED_1 == 0 && HDGSEL_1 == 0 && ALTHLD_1 == 0 && VS_1 == 0) {
 		autopilot_bk_mode = 132;
 	}
-	else if (FD_1_1 == 0 && SPEED_1 == 0 && HDGSEL_1 == 0 && ALTHLD == 0 && VS == 0) {
+	else if (FD_1_1 == 0 && SPEED_1 == 0 && HDGSEL_1 == 0 && ALTHLD_1 == 0 && VS_1 == 0) {
 		autopilot_bk_mode = 164;
 	}
-	else if (FD_1_1 == 0 && SPEED_1 == 1 && HDGSEL_1 == 0 && ALTHLD == 0 && VS == 0) {
+	else if (FD_1_1 == 0 && SPEED_1 == 1 && HDGSEL_1 == 0 && ALTHLD_1 == 0 && VS_1 == 0) {
 		autopilot_bk_mode = 165;
 	}
-	else if (FD_1_1 == 0 && SPEED_1 == 0 && HDGSEL_1 == 1 && ALTHLD == 0 && VS == 0) {
+	else if (FD_1_1 == 0 && SPEED_1 == 0 && HDGSEL_1 == 1 && ALTHLD_1 == 0 && VS_1 == 0) {
 		autopilot_bk_mode = 162;
 	}
-	else if (FD_1_1 == 0 && SPEED_1 == 0 && HDGSEL_1 == 0 && ALTHLD == 1 && VS == 0) {
+	else if (FD_1_1 == 0 && SPEED_1 == 0 && HDGSEL_1 == 0 && ALTHLD_1 == 1 && VS_1 == 0) {
 		autopilot_bk_mode = 16388;
 	}
-	else if (FD_1_1 == 0 && SPEED_1 == 0 && HDGSEL_1 == 0 && ALTHLD == 0 && VS == 1) {
+	else if (FD_1_1 == 0 && SPEED_1 == 0 && HDGSEL_1 == 0 && ALTHLD_1 == 0 && VS_1 == 1) {
 		autopilot_bk_mode = 52;
 	}
-	else if (FD_1_1 == 0 && SPEED_1 == 1 && HDGSEL_1 == 1 && ALTHLD == 0 && VS == 0) {
+	else if (FD_1_1 == 0 && SPEED_1 == 1 && HDGSEL_1 == 1 && ALTHLD_1 == 0 && VS_1 == 0) {
 		autopilot_bk_mode = 163;
 	}
-	else if (FD_1_1 == 0 && SPEED_1 == 0 && HDGSEL_1 == 1 && ALTHLD == 1 && VS == 0) {
+	else if (FD_1_1 == 0 && SPEED_1 == 0 && HDGSEL_1 == 1 && ALTHLD_1 == 1 && VS_1 == 0) {
 		autopilot_bk_mode = 16386;
 	}
-	else if (FD_1_1 == 0 && SPEED_1 == 1 && HDGSEL_1 == 0 && ALTHLD == 1 && VS == 0) {
+	else if (FD_1_1 == 0 && SPEED_1 == 1 && HDGSEL_1 == 0 && ALTHLD_1 == 1 && VS_1 == 0) {
 		autopilot_bk_mode = 16389;
 	}
-	else if (FD_1_1 == 0 && SPEED_1 == 1 && HDGSEL_1 == 1 && ALTHLD == 1 && VS == 0) {
+	else if (FD_1_1 == 0 && SPEED_1 == 1 && HDGSEL_1 == 1 && ALTHLD_1 == 1 && VS_1 == 0) {
 		autopilot_bk_mode = 16387;
 	}
-	else if (FD_1_1 == 0 && SPEED_1 == 1 && HDGSEL_1 == 1 && ALTHLD == 0 && VS == 1) {
+	else if (FD_1_1 == 0 && SPEED_1 == 1 && HDGSEL_1 == 1 && ALTHLD_1 == 0 && VS_1 == 1) {
 		autopilot_bk_mode = 51;
 	}
 
