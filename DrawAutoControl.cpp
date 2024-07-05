@@ -12,10 +12,10 @@ int longPanel_speed_is_down = 0;
 int longPanel_mouse_y_cur = 0, longPanel_mouse_x_cur = 0;
 
 void datatransform_back() {
-	if (AT == 1) {
+	if (AT_1 == 1) {
 		altitude_bk_mode = 1;
 	} 
-	else if (AT == 0) {
+	else if (AT_1 == 0) {
 		altitude_bk_mode = 0;
 	}
 	if (FD_1_1 == 1 && SPEED_1 == 0 && HDGSEL_1 == 0 && ALTHLD_1 == 0 && VS_1 == 0) {
@@ -179,6 +179,7 @@ void button_green_light(double center_x, double center_y, double side) {
 void draw_auto_control(double center_x, double center_y, double side) {
 	datatransform();
 
+    AT_1 = AT;
 	SPEED_1 = SPEED;
 	FD_1_1 = FD_1;
 	HDGSEL_1 = HDGSEL;
@@ -2094,6 +2095,11 @@ void draw_auto_control(double center_x, double center_y, double side) {
 	else if (longPanel_speed_is_down == 1) {
 		longPanel_speed_is_down = 0;
 	}
+    if(AT_1!=AT){
+        choicetransformAT = 1
+    }else{
+        choicetransformAT = 0;
+    }
 
 	if (VS_1 != VS || SPEED_1 != SPEED || HDGSEL_1 != HDGSEL || ALTHLD_1 != ALTHLD || FD_1 != FD_1_1) {
 		choicetransfromAUTO = 1;
