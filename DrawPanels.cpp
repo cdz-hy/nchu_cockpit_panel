@@ -1226,7 +1226,7 @@ void draw_electricPanel_backgrounds(double PFD_x, double PFD_y, double PFD_side)
 	putimage_withalpha(NULL, pimg30, PFD_x + 5.87 * PFD_side, PFD_y + 0.80 * PFD_side);
 	putimage_withalpha(NULL, pimg8, PFD_x + 7.2 * PFD_side, PFD_y + 0.85 * PFD_side);
 	putimage_withalpha(NULL, pimg10, PFD_x + 6.65 * PFD_side, PFD_y + 0.82 * PFD_side);
-	putimage_withalpha(NULL, pimg32, PFD_x - 0.35 * PFD_side, PFD_y - 0.77 * PFD_side);
+	putimage_withalpha(NULL, pimg32, PFD_x - 0.43 * PFD_side, PFD_y - 0.77 * PFD_side);
 
 }
 
