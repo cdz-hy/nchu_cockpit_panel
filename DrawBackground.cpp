@@ -766,11 +766,11 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	}
 	if(showsomedata==1){
 		setcolor(EGEARGB(0XFF, 0XBF, 0XBF, 0XBF));
-		setfont(Ulength * 6, Ulength * 2.5, "DigifaceWide");
+		setfont(Ulength * 6, Ulength * 2.5, "微软雅黑");
 		char nums_20[64];//起落架在第一个
 		sprintf_s(nums_20, "%d", stateLandingGear);
 		ege_drawtext("LandingGear:",Background_2_x - Ulength * 20 , Background_2_y - Ulength * 90);
-		ege_drawtext(nums_20, Background_2_x + Ulength * 10 , Background_2_y - Ulength * 90);
+		ege_drawtext(nums_20, Background_2_x + Ulength * 13 , Background_2_y - Ulength * 90);
 		char nums_21[64];//刹车在第二个
 		sprintf_s(nums_21, "%d", statebrake);
 		ege_drawtext("brake:",Background_2_x - Ulength * 20 , Background_2_y - Ulength * 85);
@@ -782,7 +782,7 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		char nums_23[64];//襟翼
 		sprintf_s(nums_23, "%.3f", gearFlaps + Flapschange);
 		ege_drawtext("FlapsGear:",Background_2_x - Ulength * 20 , Background_2_y - Ulength * 75);
-		ege_drawtext(nums_23, Background_2_x + Ulength * 5 , Background_2_y - Ulength * 75);
+		ege_drawtext(nums_23, Background_2_x + Ulength * 6 , Background_2_y - Ulength * 75);
 	}
 	
 	
