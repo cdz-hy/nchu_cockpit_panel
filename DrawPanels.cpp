@@ -940,8 +940,10 @@ void draw_panels(){
 		if(GetAsyncKeyState(0x51) & 0x0001){
 			if(stateLandingGear==0){
 				stateLandingGear = 1;
+				statebrake_change=1;
 			}else if(stateLandingGear==1){
 				stateLandingGear = 0;
+				statebrake_change=1;
 			}
 		}
 			//数字键盘*键刹车
