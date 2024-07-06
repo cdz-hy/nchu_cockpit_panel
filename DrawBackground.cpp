@@ -3,6 +3,7 @@
 #include<math.h>
 #include<Windows.h>
 #include "DrawScrew.h"
+#include "G_variable.h"
 
 
 extern int alert_pullup;
@@ -10,6 +11,8 @@ extern int alert_beloGS;
 extern int alert_ALT;
 extern int alert_MDA;
 extern int alert_autoPilot;
+
+int showsomedata = 0;
 
 
 void draw_back(double center_x, double center_y, double unitLength) {
@@ -722,8 +725,7 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	
 	setfillcolor(EGEARGB(0XFF, 0X18, 0X19, 0X1B));
 	ege_fillpoly(num_24, ploynums_24);
-
-    setcolor(EGEARGB(0XF0, 0X00, 0X00, 0X00));
+	setcolor(EGEARGB(0XF0, 0X00, 0X00, 0X00));
 	setlinewidth(Ulength * 10);
 	ege_line(Background_2_x + Ulength * 110 , Background_2_y - Ulength * 173,
 		Background_2_x - Ulength * 220 , Background_2_y - Ulength * 126);
@@ -738,8 +740,9 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		Background_2_x + Ulength * 130 , Background_2_y - Ulength * 176.9);
 	ege_line(Background_2_x + Ulength * 518 , Background_2_y - Ulength * 176.7,
 		Background_2_x + Ulength * 575 , Background_2_y - Ulength * 169.5);
-
-        setcolor(EGEARGB(0XF0, 0X62, 0X64, 0X56));
+	
+	
+	setcolor(EGEARGB(0XF0, 0X62, 0X64, 0X56));
 	ege_line(Background_2_x + Ulength * 289 , Background_2_y - Ulength * 352,
 		Background_2_x + Ulength * 297 , Background_2_y - Ulength * 178);
 	
@@ -753,5 +756,34 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		Background_2_x + Ulength * 283 , Background_2_y - Ulength * 354);
 	ege_line(Background_2_x + Ulength * 385 , Background_2_y - Ulength * 418,
 		Background_2_x + Ulength * 385 , Background_2_y - Ulength * 354);
+	
+	if(GetAsyncKeyState(0x65) & 0x0001){
+		if(showsomedata==0){
+			showsomedata = 1;
+		}else if(showsomedata==1){
+			showsomedata = 0;
+		}
+	}
+	if(showsomedata==1){
+		setcolor(EGEARGB(0XFF, 0XBF, 0XBF, 0XBF));
+		setfont(Ulength * 6, Ulength * 2.5, "DigifaceWide");
+		char nums_20[64];//起落架在第一个
+		sprintf_s(nums_20, "%d", stateLandingGear);
+		ege_drawtext("LandingGear:",Background_2_x - Ulength * 20 , Background_2_y - Ulength * 90);
+		ege_drawtext(nums_20, Background_2_x + Ulength * 10 , Background_2_y - Ulength * 90);
+		char nums_21[64];//刹车在第二个
+		sprintf_s(nums_21, "%d", statebrake);
+		ege_drawtext("brake:",Background_2_x - Ulength * 20 , Background_2_y - Ulength * 85);
+		ege_drawtext(nums_21, Background_2_x - Ulength * 4 , Background_2_y - Ulength * 85);
+		char nums_22[64];//油门
+		sprintf_s(nums_22, "%.2f", accelerator_change+accelerator);
+		ege_drawtext("accelerator:",Background_2_x - Ulength * 20 , Background_2_y - Ulength * 80);
+		ege_drawtext(nums_22, Background_2_x + Ulength * 10 , Background_2_y - Ulength * 80);
+		char nums_23[64];//襟翼
+		sprintf_s(nums_23, "%.3f", gearFlaps + Flapschange);
+		ege_drawtext("FlapsGear:",Background_2_x - Ulength * 20 , Background_2_y - Ulength * 75);
+		ege_drawtext(nums_23, Background_2_x + Ulength * 5 , Background_2_y - Ulength * 75);
+	}
+	
 	
 }
