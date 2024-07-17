@@ -5,14 +5,13 @@
 #include "DrawScrew.h"
 #include "G_variable.h"
 
+int showsomedata= 0;
 
 extern int alert_pullup;
 extern int alert_beloGS;
 extern int alert_ALT;
 extern int alert_MDA;
 extern int alert_autoPilot;
-
-int showsomedata = 0;
 
 
 void draw_back(double center_x, double center_y, double unitLength) {
@@ -481,18 +480,18 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		{Background_2_x - Ulength * 130 , Background_2_y - Ulength * 69}
 		
 	};
-	setfillcolor(EGEARGB(0XFF, 0X17, 0X17, 0X17));
+	setfillcolor(EGEARGB(0XFF, 0X22, 0X22, 0X22));
 	ege_fillpoly(num_12, ploynums_12);
 	int num_13 = 4;
 	ege_point ploynums_13[4]={
 		
 		{Background_2_x - Ulength * 150 , Background_2_y + Ulength * 69},
 		{Background_2_x - Ulength * 144 , Background_2_y + Ulength * 69},
-	    {Background_2_x - Ulength * 130 , Background_2_y + Ulength * 100},
+		{Background_2_x - Ulength * 130 , Background_2_y + Ulength * 100},
 		{Background_2_x - Ulength * 145 , Background_2_y + Ulength * 130},
 		
 	};
-	setfillcolor(EGEARGB(0XFF, 0X17, 0X17, 0X17));
+	setfillcolor(EGEARGB(0XFF, 0X22, 0X22, 0X22));
 	ege_fillpoly(num_13, ploynums_13);
 	
 	int num_14 = 4;
@@ -504,10 +503,10 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		{Background_2_x - Ulength * 145 , Background_2_y + Ulength * 250},
 		
 	};
-	setfillcolor(EGEARGB(0XFF, 0X17, 0X17, 0X17));
+	setfillcolor(EGEARGB(0XFF, 0X22, 0X22, 0X22));
 	ege_fillpoly(num_14, ploynums_14);
 	
-	setfillcolor(EGEARGB(0xff, 0x14, 0x17, 0x19));
+	setfillcolor(EGEARGB(0xff, 0x24, 0x27, 0x29));
 	int num_6 = 6;
 	ege_point ploynums_6[6] = {
 		{Background_2_x - Ulength * 140 , Background_2_y + Ulength * 60},
@@ -589,7 +588,7 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		{Background_2_x + Ulength * 155 , Background_2_y + Ulength * 79}
 	};
 	
-	setfillcolor(EGEARGB(0XFF, 0X10, 0X10, 0X10));
+	setfillcolor(EGEARGB(0XFF, 0X15, 0X15, 0X15));
 	ege_fillpoly(num_5, ploynums_5);
 	int num_11 = 4;
 	ege_point ploynums_11[4]={
@@ -599,7 +598,7 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		{Background_2_x + Ulength * 460 , Background_2_y + Ulength * 79},
 		
 	};
-	setfillcolor(EGEARGB(0XFF, 0X10, 0X10, 0X10));
+	setfillcolor(EGEARGB(0XFF, 0X15, 0X15, 0X15));
 	ege_fillpoly(num_11, ploynums_11);
 	
 	
@@ -725,12 +724,13 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 	
 	setfillcolor(EGEARGB(0XFF, 0X18, 0X19, 0X1B));
 	ege_fillpoly(num_24, ploynums_24);
+	
 	setcolor(EGEARGB(0XF0, 0X00, 0X00, 0X00));
 	setlinewidth(Ulength * 10);
 	ege_line(Background_2_x + Ulength * 110 , Background_2_y - Ulength * 173,
 		Background_2_x - Ulength * 220 , Background_2_y - Ulength * 126);
 	
-		setlinewidth(Ulength * 2);
+	setlinewidth(Ulength * 2);
 	ege_line(Background_2_x + Ulength * 108 , Background_2_y - Ulength * 174.8,
 		Background_2_x + Ulength * 130 , Background_2_y - Ulength * 177.3);
 	ege_line(Background_2_x - Ulength * 316 , Background_2_y - Ulength * 365,
@@ -740,7 +740,6 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		Background_2_x + Ulength * 130 , Background_2_y - Ulength * 176.9);
 	ege_line(Background_2_x + Ulength * 518 , Background_2_y - Ulength * 176.7,
 		Background_2_x + Ulength * 575 , Background_2_y - Ulength * 169.5);
-	
 	
 	setcolor(EGEARGB(0XF0, 0X62, 0X64, 0X56));
 	ege_line(Background_2_x + Ulength * 289 , Background_2_y - Ulength * 352,
@@ -756,6 +755,10 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		Background_2_x + Ulength * 283 , Background_2_y - Ulength * 354);
 	ege_line(Background_2_x + Ulength * 385 , Background_2_y - Ulength * 418,
 		Background_2_x + Ulength * 385 , Background_2_y - Ulength * 354);
+
+	
+	
+	
 	
 	if(GetAsyncKeyState(0x65) & 0x0001){
 		if(showsomedata==0){
@@ -765,25 +768,29 @@ void draw_Background_2(double Background_2_x , double Background_2_y , double si
 		}
 	}
 	if(showsomedata==1){
+		
 		setcolor(EGEARGB(0XFF, 0XBF, 0XBF, 0XBF));
 		setfont(Ulength * 6, Ulength * 2.5, "微软雅黑");
 		char nums_20[64];//起落架在第一个
-		sprintf_s(nums_20, "%d", stateLandingGear);
+		sprintf(nums_20, "%d", stateLandingGear);
 		ege_drawtext("LandingGear:",Background_2_x - Ulength * 20 , Background_2_y - Ulength * 90);
 		ege_drawtext(nums_20, Background_2_x + Ulength * 13 , Background_2_y - Ulength * 90);
 		char nums_21[64];//刹车在第二个
-		sprintf_s(nums_21, "%d", statebrake);
+		sprintf(nums_21, "%d", statebrake);
 		ege_drawtext("brake:",Background_2_x - Ulength * 20 , Background_2_y - Ulength * 85);
 		ege_drawtext(nums_21, Background_2_x - Ulength * 4 , Background_2_y - Ulength * 85);
 		char nums_22[64];//油门
-		sprintf_s(nums_22, "%.2f", accelerator_change+accelerator);
+		sprintf(nums_22, "%.2f", accelerator_change+accelerator);
 		ege_drawtext("accelerator:",Background_2_x - Ulength * 20 , Background_2_y - Ulength * 80);
 		ege_drawtext(nums_22, Background_2_x + Ulength * 10 , Background_2_y - Ulength * 80);
 		char nums_23[64];//襟翼
-		sprintf_s(nums_23, "%.3f", gearFlaps + Flapschange);
+		sprintf(nums_23, "%.3f", gearFlaps + Flapschange);
 		ege_drawtext("FlapsGear:",Background_2_x - Ulength * 20 , Background_2_y - Ulength * 75);
 		ege_drawtext(nums_23, Background_2_x + Ulength * 6 , Background_2_y - Ulength * 75);
 	}
+	
+
+	
 	
 	
 }
