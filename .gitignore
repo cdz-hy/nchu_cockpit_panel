@@ -1,0 +1,31 @@
+# Build output
+build/
+*.exe
+*.o
+*.obj
+*.res
+*.a
+*.lib
+*.dll
+
+# IDE files
+*.dev
+*.layout
+*.bookmarks
+*.debug
+*.cbp
+*.depend
+
+# Generated files
+map.png
+data.json
+jsonRead.txt
+
+# Font files
+*.ttf
+*.ttc
+
+# Archives
+*.7z
+*.zip
+*.rar
