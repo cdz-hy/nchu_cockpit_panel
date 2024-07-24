@@ -29,3 +29,12 @@ jsonRead.txt
 *.7z
 *.zip
 *.rar
+
+# Compiled binaries
+*.exe
+*.dll
+
+# cURL data output
+data.json
+jsonRead.txt
+map.png
