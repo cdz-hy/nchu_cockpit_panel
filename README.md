@@ -13,6 +13,10 @@
 - **双向通信**：读取 X-Plane 飞行数据，回传操纵杆/油门/起落架/襟翼等控制指令
 - **地图集成**：高德卫星地图 + 逆地理编码 + 实时天气信息
 - **多进程架构**：PFD / ND / EICAS / FMC / Map 各自独立子进程，通过共享内存通信
+<img width="600" alt="8102c980424630198eb11a0fa3cf7393" src="https://github.com/user-attachments/assets/bda5839e-9135-4ae8-83a8-8fd5ba52c2b9" />
+<img width="600" alt="e818554c972833ea0750cb4877b4f646" src="https://github.com/user-attachments/assets/9dcf5bb0-4b5c-478b-90ed-d3c67940126d" />
+
+
 
 ## 项目结构
 
